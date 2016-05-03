@@ -11,6 +11,8 @@ angular.module('starter.controllers', [])
 
   // Form data for the login modal
   $scope.loginData = {};
+  
+  
 
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -50,7 +52,21 @@ angular.module('starter.controllers', [])
     { title: 'Rap', id: 5 },
     { title: 'Cowbell', id: 6 }
   ];
+  
 })
+
+.controller('CategoriasCtrl', function($scope){
+	$scope.categorias = [
+    { title: 'Vinos', id: 1 },
+    { title: 'Cervezas', id: 2 },
+    { title: 'Licores', id: 3 },
+    { title: 'Whiskeys', id: 4 }
+  ];
+	})
+
+.controller('ListadoProductosCtrl', function($scope, $categoriaId){
+	$scope.cate = categoriaId;
+	})
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 });
