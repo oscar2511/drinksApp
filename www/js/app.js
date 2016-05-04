@@ -68,7 +68,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     }
   })
-	
+
   .state('app.categorias', {
       url: '/categorias',
       views: {
@@ -78,17 +78,77 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
-    
+
+    .state('app.h', {
+      url: '/home',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/home.html',
+          controller: 'HomeCtrl'
+        }
+      }
+    })
+
   .state('app.listado', {
-    url: '/categorias/:categoriaId',
+    url: '/categorias/:categoria',
     views: {
       'menuContent': {
         templateUrl: 'templates/listadoProductos.html',
         controller: 'ListadoProductosCtrl'
       }
     }
-  });
-  
+  })
+
+    .state('app.promociones', {
+      url: '/promociones',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/promociones.html',
+          controller: 'PromocionesCtrl'
+        }
+      }
+    })
+
+    .state('app.contacto', {
+      url: '/contacto',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/contacto.html',
+          controller: 'ContactoCtrl'
+        }
+      }
+    })
+
+    .state('app.salir', {
+      url: '/salir',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/salir.html',
+          controller: 'SalirCtrl'
+        }
+      }
+    })
+
+    .state('app.miPedido', {
+      url: '/mi-pedido',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/mi-pedido.html',
+          controller: 'MiPedidoCtrl'
+        }
+      }
+    })
+
+    .state('app.producto', {
+      url: '/producto/:productoId',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/producto.html',
+          controller: 'ProductoCtrl'
+        }
+      }
+    });
+
   // if none of the above states are matched, use this as the fallback
   //$urlRouterProvider.otherwise('/app/playlists');
   $urlRouterProvider.otherwise('/app/categorias');

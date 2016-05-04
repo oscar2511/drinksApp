@@ -11,8 +11,13 @@ angular.module('starter.controllers', [])
 
   // Form data for the login modal
   $scope.loginData = {};
-  
-  
+
+   $scope.mostrarHome = function(){
+     console.log("aca");
+     alert("aca");
+   };
+
+
 
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -52,21 +57,41 @@ angular.module('starter.controllers', [])
     { title: 'Rap', id: 5 },
     { title: 'Cowbell', id: 6 }
   ];
-  
+
 })
 
 .controller('CategoriasCtrl', function($scope){
 	$scope.categorias = [
-    { title: 'Vinos', id: 1 },
-    { title: 'Cervezas', id: 2 },
-    { title: 'Licores', id: 3 },
-    { title: 'Whiskeys', id: 4 }
+    { nombre: 'Vinos', id: 1 },
+    { nombre: 'Cervezas', id: 2 },
+    { nombre: 'Licores', id: 3 },
+    { nombre: 'Whiskeys', id: 4 }
   ];
 	})
 
-.controller('ListadoProductosCtrl', function($scope, $categoriaId){
-	$scope.cate = categoriaId;
+.controller('ListadoProductosCtrl', function($scope, $stateParams){
+  console.log(angular.fromJson($stateParams.categoria));
+    console.log($stateParams.categoria);
+	$scope.cate = angular.fromJson($stateParams.categoria);
 	})
+
+.controller('HomeCtrl', function($scope) {
+})
+
+.controller('PromocionesCtrl', function($scope) {
+})
+
+.controller('ContactoCtrl', function($scope) {
+})
+
+.controller('SalirCtrl', function($scope) {
+})
+
+.controller('MiPedidoCtrl', function($scope) {
+})
+
+.controller('ProductoCtrl', function($scope, $stateParams) {
+})
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 });
