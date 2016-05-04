@@ -60,7 +60,8 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('CategoriasCtrl', function($scope){
+.controller('CategoriasCtrl', function($scope, $http){
+	$http.post
 	$scope.categorias = [
     { nombre: 'Vinos', id: 1 },
     { nombre: 'Cervezas', id: 2 },
