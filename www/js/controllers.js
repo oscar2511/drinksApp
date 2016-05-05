@@ -55,7 +55,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('CategoriasCtrl', function($scope, $http, $sce){
-    var url = "http://localhost/appDrinks/appDrinks.php";
+    var url = 'http://localhost/appDrinks/appDrinks.php';
     var postUrl = $sce.trustAsResourceUrl(url);
 
     console.log(postUrl);
