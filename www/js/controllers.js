@@ -2,12 +2,6 @@ angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
 
   // Form data for the login modal
   $scope.loginData = {};
@@ -60,13 +54,22 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('CategoriasCtrl', function($scope, $http){
-	$http.post
-	$scope.categorias = [
-    { nombre: 'Vinos', id: 1 },
-    { nombre: 'Cervezas', id: 2 },
-    { nombre: 'Licores', id: 3 },
-    { nombre: 'Whiskeys', id: 4 }
+.controller('CategoriasCtrl', function($scope, $http, $sce){
+    var url = "http://localhost/appDrinks/appDrinks.php";
+    var postUrl = $sce.trustAsResourceUrl(url);
+
+    console.log(postUrl);
+
+   $http.post(postUrl)
+     .then(function(response){
+       console.log(response);
+     });
+
+    $scope.categorias = [
+      { nombre: 'Vinos', id: 1 },
+      { nombre: 'Cervezas', id: 2 },
+      { nombre: 'Licores', id: 3 },
+      { nombre: 'Whiskeys', id: 4 }
   ];
 	})
 
