@@ -55,14 +55,14 @@ angular.module('starter.controllers', [])
 })
 
 .controller('CategoriasCtrl', function($scope, $http, $sce){
-    var url = 'http://localhost/appDrinks/appDrinks.php';
+    var url = 'http://oscarnr.16mb.com/appDrinks/appDrinks.php';
     var postUrl = $sce.trustAsResourceUrl(url);
 
-    console.log(postUrl);
+    console.log(url);
 
-   $http.post(postUrl)
-     .then(function(response){
-       console.log(response);
+   $http.get(url)
+     .then(function(data){
+       console.log(data);
      });
 
     $scope.categorias = [
