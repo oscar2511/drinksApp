@@ -1,7 +1,7 @@
 
 angular.module('starter')
   .controller('categoriasCtrl', function($scope, $http, $sce){
-    var url = 'http://oscarnr.16mb.com/appDrinks/appDrinks.php';
+    var url = 'http://oscarnr.16mb.com/appDrinks/categorias/getCategorias.php';
     var postUrl = $sce.trustAsResourceUrl(url);
 
     console.log(url);
@@ -25,10 +25,4 @@ angular.module('starter')
 
       });
 
-   /* $scope.categorias = [
-      { nombre: 'Vinos', id: 1 },
-      { nombre: 'Cervezas', id: 2 },
-      { nombre: 'Licores', id: 3 },
-      { nombre: 'Whiskeys', id: 4 }
-    ];*/
   });
