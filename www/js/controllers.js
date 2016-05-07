@@ -2,16 +2,8 @@ angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 
-
   // Form data for the login modal
   $scope.loginData = {};
-
-   $scope.mostrarHome = function(){
-     console.log("aca");
-     alert("aca");
-   };
-
-
 
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -40,62 +32,6 @@ angular.module('starter.controllers', [])
       $scope.closeLogin();
     }, 1000);
   };
-})
 
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
-
-})
-
-.controller('CategoriasCtrl', function($scope, $http, $sce){
-    var url = 'http://oscarnr.16mb.com/appDrinks/appDrinks.php';
-    var postUrl = $sce.trustAsResourceUrl(url);
-
-    console.log(url);
-
-   $http.get(url)
-     .then(function(data){
-       console.log(data);
-     });
-
-    $scope.categorias = [
-      { nombre: 'Vinos', id: 1 },
-      { nombre: 'Cervezas', id: 2 },
-      { nombre: 'Licores', id: 3 },
-      { nombre: 'Whiskeys', id: 4 }
-  ];
-	})
-
-.controller('ListadoProductosCtrl', function($scope, $stateParams){
-  console.log(angular.fromJson($stateParams.categoria));
-    console.log($stateParams.categoria);
-	$scope.cate = angular.fromJson($stateParams.categoria);
-	})
-
-.controller('HomeCtrl', function($scope) {
-})
-
-.controller('PromocionesCtrl', function($scope) {
-})
-
-.controller('ContactoCtrl', function($scope) {
-})
-
-.controller('SalirCtrl', function($scope) {
-})
-
-.controller('MiPedidoCtrl', function($scope) {
-})
-
-.controller('ProductoCtrl', function($scope, $stateParams) {
-})
-
-.controller('PlaylistCtrl', function($scope, $stateParams) {
 });
+

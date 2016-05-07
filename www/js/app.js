@@ -59,22 +59,12 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     })
 
-  .state('app.single', {
-    url: '/playlists/:playlistId',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/playlist.html',
-        controller: 'PlaylistCtrl'
-      }
-    }
-  })
-
   .state('app.categorias', {
       url: '/categorias',
       views: {
         'menuContent': {
           templateUrl: 'templates/categorias.html',
-          controller: 'CategoriasCtrl'
+          controller: 'categoriasCtrl'
         }
       }
     })
@@ -84,7 +74,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       views: {
         'menuContent': {
           templateUrl: 'templates/home.html',
-          controller: 'HomeCtrl'
+          controller: 'homeCtrl'
         }
       }
     })
@@ -94,7 +84,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     views: {
       'menuContent': {
         templateUrl: 'templates/listadoProductos.html',
-        controller: 'ListadoProductosCtrl'
+        controller: 'listadoProductosCtrl'
       }
     }
   })
@@ -104,7 +94,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       views: {
         'menuContent': {
           templateUrl: 'templates/promociones.html',
-          controller: 'PromocionesCtrl'
+          controller: 'promocionesCtrl'
         }
       }
     })
@@ -114,7 +104,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       views: {
         'menuContent': {
           templateUrl: 'templates/contacto.html',
-          controller: 'ContactoCtrl'
+          controller: 'contactoCtrl'
         }
       }
     })
@@ -124,17 +114,17 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       views: {
         'menuContent': {
           templateUrl: 'templates/salir.html',
-          controller: 'SalirCtrl'
+          controller: 'salirCtrl'
         }
       }
     })
 
-    .state('app.miPedido', {
+    .state('app.pedido', {
       url: '/mi-pedido',
       views: {
         'menuContent': {
           templateUrl: 'templates/mi-pedido.html',
-          controller: 'MiPedidoCtrl'
+          controller: 'pedidoCtrl'
         }
       }
     })
@@ -144,7 +134,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       views: {
         'menuContent': {
           templateUrl: 'templates/producto.html',
-          controller: 'ProductoCtrl'
+          controller: 'productoCtrl'
         }
       }
     });
