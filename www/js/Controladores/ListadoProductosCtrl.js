@@ -1,21 +1,28 @@
 
 angular.module('starter')
   .controller('listadoProductosCtrl', function($scope, $stateParams, $http) {
-    //console.log(angular.fromJson($stateParams.categoria));
+    
     var url = 'http://oscarnr.16mb.com/appDrinks/listadoProductos/listarProductos.php';
 
-    //console.log(angular.fromJson($stateParams.categoria));
-
     var categoria = angular.fromJson($stateParams.categoria);
-    //console.log(categoria.id);
+
     $http.post(url, categoria, {headers: { 'Content-Type': 'application/json'}})
       .then(function (data){
-        //console.log((data.data));
+        console.log(angular.fromJson(data.data));
         angular.forEach(data.data, function(value, key) {
-          console.log(value);
-          //$scope.dataCruda = value;
+          //console.log(value.id);
+          $scope.dataCruda = value;
         });
-        console.log($scope.dataCruda);
+        $scope.productos =[];
+          angular.forEach($scope.dataCruda, function(valor, key) {
+            //console.log(valor.id);
+            $scope.productos.push({
+              id    :valor.id,
+              precio: valor.precio,
+              nombre: valor.nombre
+            });
+          });
+        
         $scope.cate = angular.fromJson($stateParams.categoria);
       });
   });

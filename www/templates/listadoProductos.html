@@ -1,6 +1,9 @@
 <ion-view view-title="{{cate.nombre}}">
   <ion-content>
-    <h1>Listado de Productos</h1>
-    {{cate.nombre}}
+    <ion-list>
+      <ion-item ng-repeat="producto in productos" href="#">
+        {{producto.nombre}}
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>

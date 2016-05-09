@@ -8,9 +8,9 @@ angular.module('starter')
 
     $http.get(url)
       .then(function(data){
-       // console.log(angular.toJson(data.data));
+        console.log(data.data);
         angular.forEach(data.data, function(value, key) {
-          console.log(value);
+       //   console.log(value);
           $scope.dataCruda = value;
         });
         $scope.categorias =[];
