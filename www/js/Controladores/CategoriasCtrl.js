@@ -8,20 +8,20 @@ angular.module('starter')
 
     $http.get(url)
       .then(function(data){
-        //console.log(angular.toJson(data.data));
+       // console.log(angular.toJson(data.data));
         angular.forEach(data.data, function(value, key) {
-
+          console.log(value);
           $scope.dataCruda = value;
         });
         $scope.categorias =[];
           angular.forEach($scope.dataCruda, function(valor, key) {
-            console.log(valor.id);
+            //console.log(valor.id);
             $scope.categorias.push({
               id    :valor.id,
               nombre: valor.nombre
             });
           });
-        console.log($scope.categorias);
+        //  console.log($scope.categorias);
 
       });
 
