@@ -1,8 +1,8 @@
 <ion-view view-title="{{cate.nombre}}">
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="producto in productos" href="#">
-        {{producto.nombre}}
+      <ion-item ng-repeat="producto in productos" href="#/app/producto/producto-detalle/{{producto}}">
+        {{producto.nombre}} ${{producto.precio}}
       </ion-item>
     </ion-list>
   </ion-content>

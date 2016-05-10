@@ -1,7 +1,6 @@
-
 angular.module('starter')
   .controller('listadoProductosCtrl', function($scope, $stateParams, $http) {
-    
+
     var url = 'http://oscarnr.16mb.com/appDrinks/listadoProductos/listarProductos.php';
 
     var categoria = angular.fromJson($stateParams.categoria);
@@ -19,10 +18,10 @@ angular.module('starter')
             $scope.productos.push({
               id    :valor.id,
               precio: valor.precio,
+              descripcion: valor.descripcion,
               nombre: valor.nombre
             });
           });
-        
-        $scope.cate = angular.fromJson($stateParams.categoria);
+        //console.log($scope.productos);
       });
   });

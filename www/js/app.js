@@ -130,10 +130,10 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     })
 
     .state('app.producto', {
-      url: '/producto/:productoId',
+      url: '/producto/producto-detalle/:producto',
       views: {
         'menuContent': {
-          templateUrl: 'templates/producto.html',
+          templateUrl: 'templates/producto/detalleProducto.html',
           controller: 'productoCtrl'
         }
       }
