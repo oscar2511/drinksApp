@@ -16,6 +16,9 @@ angular.module('starter')
         $scope.categorias =[];
           angular.forEach($scope.dataCruda, function(valor, key) {
             //console.log(valor.id);
+            if(valor.id==2){
+              $scope.imgCategoria = "img/categorias/cerveza.jpg";
+            }
             $scope.categorias.push({
               id    :valor.id,
               nombre: valor.nombre

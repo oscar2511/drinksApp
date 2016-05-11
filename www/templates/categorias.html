@@ -1,9 +1,12 @@
 <ion-view view-title="Categorias">
   <ion-content>
-    <ion-list>
-      <ion-item ng-repeat="categoria in categorias" href="#/app/categorias/{{categoria}}">
-        {{categoria.nombre}}
-      </ion-item>
-    </ion-list>
+    <div class="list">
+      <a class="item item-thumbnail-left" ng-repeat="categoria in categorias" href="#/app/categorias/{{categoria}}">
+        <img src="img/categorias/cerveza.jpg">
+        <h2>{{categoria.nombre}}</h2>
+        <p>Lleva nuestras cervezas</p>
+      </a>
+    </div>
   </ion-content>
+
 </ion-view>
