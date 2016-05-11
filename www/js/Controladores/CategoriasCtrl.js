@@ -20,9 +20,9 @@ angular.module('starter')
               $scope.imgCategoria = "img/categorias/cerveza.jpg";
             }
             $scope.categorias.push({
-              id    :valor.id,
-              nombre: valor.nombre,
-              urlImg: valor.urlImg
+              id      : valor.id,
+              nombre  : valor.nombre,
+              urlImg  : 's/as' //todo la barra de la url hace que no funque
             });
           });
          console.log($scope.categorias);
