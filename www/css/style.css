@@ -4,3 +4,7 @@
 background: #ececee;
 }
 
+.img-categoria {
+  -webkit-user-drag: none;
+  width: 100%;
+}

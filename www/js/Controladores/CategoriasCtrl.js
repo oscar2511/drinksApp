@@ -21,10 +21,11 @@ angular.module('starter')
             }
             $scope.categorias.push({
               id    :valor.id,
-              nombre: valor.nombre
+              nombre: valor.nombre,
+              urlImg: valor.urlImg
             });
           });
-        //  console.log($scope.categorias);
+         console.log($scope.categorias);
 
       });
 
