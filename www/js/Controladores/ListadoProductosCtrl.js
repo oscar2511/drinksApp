@@ -1,5 +1,9 @@
 angular.module('starter')
-  .controller('listadoProductosCtrl', function($scope, $stateParams, $http) {
+  .controller('listadoProductosCtrl', function($scope, $stateParams, $http, $ionicLoading) {
+
+    $ionicLoading.show({
+      template: 'Ten paciencia ;)'
+    });
 
     var url = 'http://oscarnr.16mb.com/appDrinks/listadoProductos/listarProductos.php';
 
@@ -23,5 +27,6 @@ angular.module('starter')
             });
           });
         //console.log($scope.productos);
+        $ionicLoading.hide();
       });
   });

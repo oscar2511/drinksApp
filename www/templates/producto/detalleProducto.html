@@ -1,26 +1,19 @@
 <ion-view view-title="Detalle producto">
   <ion-content>
-    <ion-card>
-
-      <ion-card-header>
-        Producto
-      </ion-card-header>
-      <ion-card-content>
+    <div class="list card">
+      <div class="item item-avatar">
+        <img src="../img/categorias/vinos.jpg">
         <h2>{{producto.nombre}}</h2>
-        <p>{{producto.descripcion}}</p>
-      </ion-card-content>
-    </ion-card>
+        <p>$ {{producto.precio}}</p>
+      </div>
 
-
-    <div class="list">
-      <div class="item item-input-inset">
-        <label class="item item-input-wrapper">
-          <input type="text" placeholder="Ingrese cantidad">
-        </label>
-        <button class="button">button</button>
+      <div class="item item-body">
+        <img class="full-image" src="../img/categorias/vinos.jpg">
+        <h3>
+          {{producto.descripcion}}
+        </h3>
+        <button class="button icon-center ion-plus-circled button-positive"> Agregar</button>
       </div>
     </div>
-
-
   </ion-content>
 </ion-view>
