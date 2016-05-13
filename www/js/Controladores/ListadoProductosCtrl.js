@@ -29,4 +29,9 @@ console.log("aca");
         //console.log($scope.productos);
         $ionicLoading.hide();
       });
+
+    $scope.detalleProducto = function(){
+
+    };
+
   });

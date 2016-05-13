@@ -6,5 +6,10 @@ background: #ececee;
 
 .img_categoria{
   width: 100% !important;
-  height: 250px;
+  height: 220px;!important;
+}
+
+
+.bar-stable bar bar-header{
+
 }
