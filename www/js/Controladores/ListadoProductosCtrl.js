@@ -1,8 +1,14 @@
 angular.module('starter')
-  .controller('listadoProductosCtrl', function($scope, $stateParams, $http, $ionicLoading) {
+  .controller('listadoProductosCtrl', function(
+    $scope,
+    $stateParams,
+    $http,
+    $ionicLoading,
+    $ionicPopup
+  ){
 
     $ionicLoading.show({
-      template: 'Ten paciencia ;)'
+      template: 'Cargando, espere por favor...'
     });
 
     var url = 'http://oscarnr.16mb.com/appDrinks/listadoProductos/listarProductos.php';
@@ -13,12 +19,10 @@ angular.module('starter')
       .then(function (data){
         console.log(angular.fromJson(data.data));
         angular.forEach(data.data, function(value, key) {
-          //console.log(value.id);
           $scope.dataCruda = value;
         });
         $scope.productos =[];
           angular.forEach($scope.dataCruda, function(valor, key) {
-            //console.log(valor.id);
             $scope.productos.push({
               id    :valor.id,
               precio: valor.precio,
@@ -26,12 +30,10 @@ angular.module('starter')
               nombre: valor.nombre
             });
           });
-        //console.log($scope.productos);
         $ionicLoading.hide();
       });
+///////////////////////////////////////////////////////////////////////////////////////////
 
-    $scope.detalleProducto = function(){
-
-    };
+    /////////////////////////////////////////////////////////////////
 
   });
