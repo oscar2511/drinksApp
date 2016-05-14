@@ -12,23 +12,37 @@
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>
 
-  <ion-side-menu side="left">
-    <ion-header-bar class="bar-stable">
-      <h1 class="title">Left</h1>
+  <ion-side-menu side="left" >
+    <ion-header-bar>
+      <h1 class="title">Menu</h1>
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item menu-close ng-click="login()">
+        <!--<ion-item menu-close ng-click="login()">
           Login
+        </ion-item>-->
+        <ion-item menu-close href="#/app/home"  >
+					<i class="ion-home"></i>  Home
         </ion-item>
-        <ion-item menu-close href="#/app/search">
-          Search
+        <ion-item menu-close href="#/app/categorias">
+          <i class="ion-wineglass"></i>
+          Categorias
         </ion-item>
-        <ion-item menu-close href="#/app/browse">
-          Browse
+        <ion-item menu-close href="#/app/promociones">
+          <i class="ion-android-bar"></i>
+          Promociones
         </ion-item>
-        <ion-item menu-close href="#/app/playlists">
-          Playlists
+        <ion-item menu-close href="#/app/mi-pedido">
+          <i class="ion-ios-cart"></i>
+          Mi pedido
+        </ion-item>
+        <ion-item menu-close href="#/app/contacto">
+          <i class="ion-android-mail"></i>
+          Contacto
+        </ion-item>
+        <ion-item menu-close href="#/app/salir">
+          <i class="ion-close-circled"></i>
+          Salir
         </ion-item>
       </ion-list>
     </ion-content>

@@ -59,15 +59,99 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     })
 
-  .state('app.single', {
-    url: '/playlists/:playlistId',
+  .state('app.categorias', {
+      url: '/categorias',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/categorias.html',
+          controller: 'categoriasCtrl'
+        }
+      }
+    })
+
+    .state('app.h', {
+      url: '/home',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/home.html',
+          controller: 'homeCtrl'
+        }
+      }
+    })
+
+  .state('app.listado', {
+    url: '/categorias/:categoria',
     views: {
       'menuContent': {
-        templateUrl: 'templates/playlist.html',
-        controller: 'PlaylistCtrl'
+        templateUrl: 'templates/listadoProductos.html',
+        controller: 'listadoProductosCtrl'
       }
     }
-  });
+  })
+
+    .state('app.promociones', {
+      url: '/promociones',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/promociones.html',
+          controller: 'promocionesCtrl'
+        }
+      }
+    })
+
+    .state('app.contacto', {
+      url: '/contacto',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/contacto.html',
+          controller: 'contactoCtrl'
+        }
+      }
+    })
+
+    .state('app.salir', {
+      url: '/salir',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/salir.html',
+          controller: 'salirCtrl'
+        }
+      }
+    })
+
+    .state('app.pedido', {
+      url: '/mi-pedido',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/mi-pedido.html',
+          controller: 'pedidoCtrl'
+        }
+      }
+    })
+
+    .state('app.producto', {
+      url: '/producto/producto-detalle/:producto',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/producto/detalleProducto.html',
+          controller: 'productoCtrl'
+        }
+      }
+    });
+
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  //$urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/app/categorias');
 });
+
+
+
+
+
+
+
+
+
+
+
+

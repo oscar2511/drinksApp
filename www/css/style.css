@@ -1,1 +1,15 @@
 /* Empty. Add your own CSS if you like */
+
+.mi_estilo{
+background: #ececee;
+}
+
+.img_categoria{
+  width: 100% !important;
+  height: 220px;!important;
+}
+
+
+.bar-stable bar bar-header{
+
+}
