@@ -8,7 +8,7 @@ angular.module('starter')
     var url = 'http://oscarnr.16mb.com/appDrinks/listadoProductos/listarProductos.php';
 
     var categoria = angular.fromJson($stateParams.categoria);
-console.log("aca");
+
     $http.post(url, categoria, {headers: { 'Content-Type': 'application/json'}})
       .then(function (data){
         console.log(angular.fromJson(data.data));
