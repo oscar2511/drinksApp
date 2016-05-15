@@ -13,7 +13,11 @@ background: #ececee;
 }
 */
 .menu-header{
-  background-color: #3f4041 !important;
+  /*background-color: #ffffff !important;*/
+  /*height: 41%;*/
+  height: 320px;
+  width: 300px;
+  background-image:  url(../img/categorias/copaMenu.png);
 }
 
 /*custom is class added to ion-content*/
@@ -22,6 +26,7 @@ background: #ececee;
   background-color: #3f4041 !important; /* This sets the background color*/
   background-image: url(../img/categorias/imgMenu2.jpg);
   background-repeat: no-repeat;
+  margin-top: 100%;
 
 }
 
