@@ -142,12 +142,51 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   // if none of the above states are matched, use this as the fallback
   //$urlRouterProvider.otherwise('/app/playlists');
   $urlRouterProvider.otherwise('/app/categorias');
+})
+
+
+.factory('pedidoDrinks', function($q){
+
+    return {
+      Pedido : function(name, email) {
+        this.id     = id;
+        this.nombre = nombre;
+      },
+      addressBook : {
+        contacts: []
+      }
+    };
 });
 
 
 
 
+// lo uso en el controlador .controller('somethingCtrl', function($scope, model) {
+/* Add a contact to the address book
+model.addressBook.push(new model.Contact("foo", "foo@bar"));
+// Now model.addressBook contains a new model.Contact
+});
 
+otro ejemplo
+
+ .factory("descargasFactory", function(){
+ var descargasRealizadas = ["Manual de Javascript", "Manual de jQuery", "Manual de AngularJS"];
+
+ var interfaz = {
+ nombre: "Manolo",
+ getDescargas: function(){
+ return descargasRealizadas;
+ },
+ nuevaDescarga: function(descarga){
+ descargasRealizadas.push(descarga);
+ }
+ }
+ return interfaz;
+ })
+
+
+
+*/
 
 
 
