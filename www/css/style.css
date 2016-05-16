@@ -15,7 +15,7 @@ background: #ececee;
 .menu-header{
   /*background-color: #ffffff !important;*/
   /*height: 41%;*/
-  height: 320px;
+  height: 314px;
   width: 300px;
   background-image:  url(../img/categorias/copaMenu.png);
 }
@@ -26,7 +26,7 @@ background: #ececee;
   background-color: #3f4041 !important; /* This sets the background color*/
   background-image: url(../img/categorias/imgMenu2.jpg);
   background-repeat: no-repeat;
-  margin-top: 100%;
+  margin-top: 90%;
 
 }
 
@@ -34,15 +34,15 @@ background: #ececee;
 .custom .item {
   background-color: transparent;
   border:none;   /*Removes all borders*/
-  border-top: 1px solid;   /*Top Border for each menu item*/
-  border-bottom:2px solid;   /*Bottom border for each menu item*/
-  border-color: #666;   /*Sets colors for top and bottom border*/
+  /*border-top: 1px solid;*/   /*Top Border for each menu item*/
+  border-bottom:0.5px solid;   /*Bottom border for each menu item*/
+  border-color: #e7e2e6;   /*Sets colors for top and bottom border*/
   color: white;    /*Text color for each item*/
 }
 
 /*Changes the border for the last item*/
 .custom .item:last-child {
-  border-bottom: 1px solid #666;
+  border-bottom: 1px solid #e7e2e6;
 }
 
 .custom .item-complex .item-content, .dark .item-radio .item-content {
