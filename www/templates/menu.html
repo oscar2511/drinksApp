@@ -46,8 +46,8 @@
   </ion-side-menu>
 </ion-side-menus>
 -->
-<ion-side-menus enable-menu-with-back-views="false">
-  <ion-side-menu-content>
+<ion-side-menus enable-menu-with-back-views="true">
+  <ion-side-menu-content edge-drag-threshold="250" drag-content="true">
     <ion-nav-bar class="bar-assertive">
       <ion-nav-back-button>
       </ion-nav-back-button>
@@ -60,34 +60,35 @@
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>
 
-  <ion-side-menu side="left">
+  <ion-side-menu side="left" width="300">
     <ion-header-bar class="menu-header">
       <img src="../img/categorias/menuImg.png">
     </ion-header-bar>
     <ion-content class="custom">
       <ion-list>
         <ion-item menu-close href="#/app/home"  >
-          <i class="ion-home"></i>  Home
+          <i class="ion-home"></i>
+          &nbsp;&nbsp;&nbsp;&nbsp;  Home
         </ion-item>
         <ion-item menu-close href="#/app/categorias">
           <i class="ion-wineglass"></i>
-          Categorias
+          &nbsp;&nbsp;&nbsp;&nbsp;  Categorias
         </ion-item>
         <ion-item menu-close href="#/app/promociones">
           <i class="ion-android-bar"></i>
-          Promociones
+          &nbsp;&nbsp;&nbsp;&nbsp;Promociones
         </ion-item>
         <ion-item menu-close href="#/app/mi-pedido">
           <i class="ion-ios-cart"></i>
-          Mi pedido
+          &nbsp;&nbsp;&nbsp;&nbsp;Mi pedido
         </ion-item>
         <ion-item menu-close href="#/app/contacto">
           <i class="ion-android-mail"></i>
-          Contacto
+          &nbsp;&nbsp;&nbsp;&nbsp;Contacto
         </ion-item>
         <ion-item menu-close href="#/app/salir">
           <i class="ion-close-circled"></i>
-          Salir
+          &nbsp;&nbsp;&nbsp;&nbsp;Salir
         </ion-item>
       </ion-list>
     </ion-content>
