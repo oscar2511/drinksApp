@@ -5,7 +5,7 @@ angular.module('starter')
 
     var ped = new PedidoFactory.Pedido(1,'fecha');
 
-    console.log(PedidoFactory.agregarProducto());
+    PedidoFactory.agregarProducto(12345);
 
 
     $scope.producto = producto;

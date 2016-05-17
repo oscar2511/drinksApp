@@ -158,10 +158,11 @@ return {
       contacts: []
     },
     getPedidos: function(){
-      return 1;
+      return this.id;
     },
-    agregarProducto: function(){
-      return 2;
+    agregarProducto: function(param){
+      this.id = param;
+      return  this.id;
     }
   };
 });
