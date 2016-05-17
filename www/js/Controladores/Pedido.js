@@ -1,7 +1,8 @@
 
 angular.module('starter')
-  .controller('pedidoCtrl', function($scope, pedidoDrinks) {
+  .controller('pedidoCtrl', function($scope, PedidoFactory) {
 
-    console.log(pedidoDrinks.getPedido());
+$scope.test = PedidoFactory.getPedidos();
+    console.log(PedidoFactory.getPedidos());
 
   });

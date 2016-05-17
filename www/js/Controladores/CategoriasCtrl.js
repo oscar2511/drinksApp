@@ -1,10 +1,10 @@
-
 angular.module('starter')
   .controller('categoriasCtrl', function($scope, $http, $sce, $ionicLoading){
 
     $ionicLoading.show({
       template: 'Cargando, espere por favor...'
     });
+
     var url = 'http://oscarnr.16mb.com/appDrinks/categorias/getCategorias.php';
     var postUrl = $sce.trustAsResourceUrl(url);
 

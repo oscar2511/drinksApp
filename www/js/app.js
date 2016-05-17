@@ -6,6 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers'])
 
+
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -145,52 +146,22 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 })
 
 
-.factory('pedidoDrinks', function($q){
 
-    return {
-      Pedido : function(name, email) {
-        this.id     = id;
-        this.nombre = nombre;
-      },
-      addressBook : {
-        contacts: []
-      }
-    };
+.factory('PedidoFactory', function($q){
+
+return {
+    Pedido : function(id, fecha) {
+      this.id    = id;
+      this.fecha = fecha;
+    },
+    addressBook : {
+      contacts: []
+    },
+    getPedidos: function(){
+      return 1;
+    },
+    agregarProducto: function(){
+      return 2;
+    }
+  };
 });
-
-
-
-
-// lo uso en el controlador .controller('somethingCtrl', function($scope, model) {
-/* Add a contact to the address book
-model.addressBook.push(new model.Contact("foo", "foo@bar"));
-// Now model.addressBook contains a new model.Contact
-});
-
-otro ejemplo
-
- .factory("descargasFactory", function(){
- var descargasRealizadas = ["Manual de Javascript", "Manual de jQuery", "Manual de AngularJS"];
-
- var interfaz = {
- nombre: "Manolo",
- getDescargas: function(){
- return descargasRealizadas;
- },
- nuevaDescarga: function(descarga){
- descargasRealizadas.push(descarga);
- }
- }
- return interfaz;
- })
-
-
-
-*/
-
-
-
-
-
-
-

@@ -1,65 +1,38 @@
+//angular.module('starter', ['ionic'])
 /**
- * Stage factory
- *
- * @author Oscar Rodriguez <oscar.rodriguez@leadsius.com>
+ * The Projects factory handles saving and loading projects
+ * from local storage, and also lets us save and load the
+ * last active project index.
  */
-
-(function(){
-
-  'use strict';
-
-  angular.module('pedido.factory', [])
-    .factory('pedidoDrinks', [
-      '$q',
-      '$scope',
-      function($q,$scope) {
+var nameApp = angular.module('starter', ['ionic']);
 
 
-        function pedidoDrinks() {
-         $scope.test2=123;
+nameApp.factory('Projects', function($http) {
+
+  //.factory('Projects', function() {
+    return {
+      all: function() {
+        var projectString = window.localStorage['projects'];
+        if(projectString) {
+          return angular.fromJson(projectString);
         }
-        /*
-        *//**
-         * @param {number}  params.id
-         * @param {string}  params.name
-         * @param {number}  params.total
-         *
-         * @constructor
-         *//*
-        function pedidoDrinks(params) {
-          this.id           = parseInt(params.id);
-          this.name         = params.name;
-          this.total        = parseInt(params.total);
-        }
-
-        *//**
-         * Fetch all stages
-         *
-         * @returns {*}
-         *//*
-        LsStage.getAll = function() {
-          return api
-            .get('leadsius_stages_all')
-            .then(function(response){
-              if (response.status !== 200) return $q.reject();
-              return $q.resolve(response);
-            });
+        return [];
+      },
+      save: function(projects) {
+        window.localStorage['projects'] = angular.toJson(projects);
+      },
+      newProject: function(projectTitle) {
+        // Add a new project
+        return {
+          title: projectTitle,
+          tasks: []
         };
-
-        *//**
-         * Fetch a stage of a given id
-         *
-         * @param id
-         * @returns {*}
-         *//*
-        LsStage.withId = function(id) {
-          return api
-            .get('leadsius_stages_contacts', {stageId: id});
-        };
-         */
-
-        return pedidoDrinks;
-
-      }]);
-
-})();
+      },
+      getLastActiveIndex: function() {
+        return parseInt(window.localStorage['lastActiveProject']) || 0;
+      },
+      setLastActiveIndex: function(index) {
+        window.localStorage['lastActiveProject'] = index;
+      }
+    }
+  });
