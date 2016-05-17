@@ -3,9 +3,9 @@ angular.module('starter')
     var producto = angular.fromJson($stateParams.producto);
     console.log(producto.nombre);
 
-    var ped = new PedidoFactory.Pedido(1,'fecha');
+    var ped = new PedidoFactory(1);
 
-    PedidoFactory.agregarProducto(12345);
+    ped.agregarProducto(producto);
 
 
     $scope.producto = producto;

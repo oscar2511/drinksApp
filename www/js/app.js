@@ -146,23 +146,25 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 })
 
 
+  .factory('PedidoFactory', function($q){
 
-.factory('PedidoFactory', function($q){
-
-return {
-    Pedido : function(id, fecha) {
-      this.id    = id;
-      this.fecha = fecha;
-    },
-    addressBook : {
-      contacts: []
-    },
-    getPedidos: function(){
-      return this.id;
-    },
-    agregarProducto: function(param){
-      this.id = param;
-      return  this.id;
+    /**
+     *
+     * @param id
+     * @param fecha
+     * @constructor
+     */
+    function PedidoFactory(id, fecha) {
+      this.id       = id;
+      this.fecha    = fecha;
+      this.producto = [{}];
     }
-  };
-});
+
+    PedidoFactory.prototype.agregarProducto = function(param){
+      this.producto = param;
+      console.log(this.id);
+
+    };
+
+    return( PedidoFactory );
+  });
