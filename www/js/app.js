@@ -143,28 +143,6 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   // if none of the above states are matched, use this as the fallback
   //$urlRouterProvider.otherwise('/app/playlists');
   $urlRouterProvider.otherwise('/app/categorias');
-})
+});
 
 
-  .factory('PedidoFactory', function($q){
-
-    /**
-     *
-     * @param id
-     * @param fecha
-     * @constructor
-     */
-    function PedidoFactory(id, fecha) {
-      this.id       = id;
-      this.fecha    = fecha;
-      this.producto = [{}];
-    }
-
-    PedidoFactory.prototype.agregarProducto = function(param){
-      this.producto = param;
-      console.log(this.id);
-
-    };
-
-    return( PedidoFactory );
-  });
