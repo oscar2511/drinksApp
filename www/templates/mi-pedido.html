@@ -1,6 +1,10 @@
 <ion-view view-title="Mi Pedido">
   <ion-content>
     <h1>Mi pedido</h1>
-    {{ test }}
+
+    <div ng-repeat="producto in pedido.producto" href="#/app/producto/producto-detalle/{{producto}}">
+
+    {{ producto.nombre }}
+      </div>
   </ion-content>
 </ion-view>

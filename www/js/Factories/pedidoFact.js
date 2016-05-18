@@ -7,7 +7,25 @@ angular.module('starter')
    * @param fecha
    * @constructor
    */
-  function PedidoFactory(id, fecha) {
+    var pedido = {
+      fecha : 123,
+      detalle:[{
+        producto : {},
+        cantidad : 0
+      }]
+
+  };
+
+   // pedido.fecha = 123;
+   // pedido.producto = [{}];
+
+    pedido.addProducto = function(producto, cantidad){
+      pedido.detalle.push(producto);
+      pedido.detalle.push(cantidad);
+    };
+
+    return pedido;
+ /* function PedidoFactory(id, fecha) {
     this.id       = id;
     this.fecha    = fecha;
     this.producto = [{}];
@@ -19,5 +37,5 @@ angular.module('starter')
 
   };
 
-  return( PedidoFactory );
+  return( PedidoFactory );*/
 });

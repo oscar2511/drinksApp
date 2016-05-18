@@ -16,10 +16,10 @@
         </h3>
 
         <label class="item item-input">
-          <span class="input-label">Escriba cantidad</span>
-          <input type="number">
+          <span class="input-label">Cantidad</span>
+          <input type="number" ng-model="cantidad">
         </label>
-        <button class="button   button-block icon-center ion-plus-circled button-positive"> Agregar</button>
+        <button ng-click="addAlCarro(producto, cantidad)" class="button  button-block icon-center ion-plus-circled button-positive"> Agregar</button>
       </div>
     </div>
   </ion-content>
