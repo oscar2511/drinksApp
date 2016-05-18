@@ -4,6 +4,8 @@ angular.module('starter')
 
     $scope.pedido = PedidoFactory;
 
-    console.log($scope.pedido.producto);
+    $scope.pedidoActual = $scope.pedido.getPedido();
+
+    console.log($scope.pedidoActual);
 
   });

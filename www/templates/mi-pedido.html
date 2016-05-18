@@ -2,9 +2,9 @@
   <ion-content>
     <h1>Mi pedido</h1>
 
-    <div ng-repeat="producto in pedido.producto" href="#/app/producto/producto-detalle/{{producto}}">
+    <div ng-repeat="ped in pedidoActual.detalle">
 
-    {{ producto.nombre }}
+    {{ ped.producto.nombre }}    {{ ped.cantidad }}
       </div>
   </ion-content>
 </ion-view>

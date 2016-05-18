@@ -19,7 +19,7 @@
           <span class="input-label">Cantidad</span>
           <input type="number" ng-model="cantidad">
         </label>
-        <button ng-click="addAlCarro(producto, cantidad)" class="button  button-block icon-center ion-plus-circled button-positive"> Agregar</button>
+        <button ng-class="disable"  ng-click="addAlCarro(producto, cantidad)" class="button  button-block icon-center ion-plus-circled button-positive"> Agregar</button>
       </div>
     </div>
   </ion-content>

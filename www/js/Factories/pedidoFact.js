@@ -8,10 +8,10 @@ angular.module('starter')
    * @constructor
    */
     var pedido = {
-      fecha : 123,
-      detalle:[{
-        producto : {},
-        cantidad : 0
+      numero  : null,
+      fecha   : null,
+      detalle :[{
+        productoPedido : {}
       }]
 
   };
@@ -19,9 +19,12 @@ angular.module('starter')
    // pedido.fecha = 123;
    // pedido.producto = [{}];
 
-    pedido.addProducto = function(producto, cantidad){
-      pedido.detalle.push(producto);
-      pedido.detalle.push(cantidad);
+    pedido.addProducto = function(productoPedido){
+      pedido.detalle.push(productoPedido);
+    };
+
+    pedido.getPedido = function(){
+      return pedido;
     };
 
     return pedido;
