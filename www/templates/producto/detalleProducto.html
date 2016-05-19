@@ -15,11 +15,26 @@
           <h1>$ 39.40</h1>
         </h3>
 
-        <label class="item item-input">
-          <span class="input-label">Cantidad</span>
-          <input type="number" ng-model="cantidad">
-        </label>
-        <button ng-class="disable"  ng-click="addAlCarro(producto, cantidad)" class="button  button-block icon-center ion-plus-circled button-positive"> Agregar</button>
+        <form name="addPedido">
+          <label class="item item-input">
+            <span class="input-label">Cantidad</span>
+              <input ng-model="cantidad" name="cantidad" class="text-input ng-valid ng-dirty ng-touched"
+                     type="number"
+                     required
+                     min="1"
+                     max="100">
+          </label>
+          <span ng-show="addPedido.cantidad.$error.required">
+            <h3><font color="red"> Debes pedir al menos 1 producto</font></h3>
+          </span>
+          <span ng-show="addPedido.cantidad.$error.max">
+            <h3><font color="red"> La cantidad no puede exceder 100</font></h3>
+          </span>
+          <span ng-show="addPedido.cantidad.$error.min">
+            <h3><font color="red"> Debes pedir al menos 1 producto</font></h3>
+          </span>
+          <button ng-disabled="addPedido.$invalid"  ng-click="addAlCarro(producto, cantidad)" class="button  button-block icon-center ion-plus-circled button-positive"> Agregar</button>
+        </form>
       </div>
     </div>
   </ion-content>

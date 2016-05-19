@@ -2,18 +2,17 @@ angular.module('starter')
   .controller('productoCtrl', function($scope, $stateParams, $rootScope, PedidoFactory){
     var producto = angular.fromJson($stateParams.producto);
 
-    $scope.cantidad = 0;
+    $scope.cantidad = 1;
     $scope.pedido   = PedidoFactory;
 
-    if($scope.cantidad <= 0)
-      $scope.disable = 'disable';
-
-
-
+    /**
+     *  Agregar producto al carro
+     *
+     * @param producto
+     * @param cantidad
+     */
     $scope.addAlCarro = function(producto, cantidad){
-      if(cantidad <= 0)
-        alert('la cantidad debe ser 1 o +');
-
+      // Si no hay un pedido en curso se agrega el numero (eleatorio) y la fecha
       if($scope.pedido.numero)
         console.log('Existe un pedido en curso');
       else{
@@ -33,8 +32,6 @@ angular.module('starter')
       $scope.pedido.addProducto(productoPedido);
       console.log(PedidoFactory);
     };
-
-
 
 
     $scope.producto = producto;
