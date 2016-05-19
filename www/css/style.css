@@ -16,7 +16,7 @@ background: #ececee;
   /*background-color: #ffffff !important;*/
   /*height: 41%;*/
   height: 314px;
-  width: 300px;
+  width: 200px;
   background-image:  url(../img/categorias/copaMenu.png);
 }
 
@@ -55,4 +55,41 @@ background: #ececee;
 .custom p,
 .custom a {
   color: white;  /*Text color for each item, overrides the color property above*/
+}
+
+/* tamaño de iconos */
+
+.ion-home{
+  font-size: 20px!important;
+}
+
+
+.ion-wineglass{
+  font-size: 20px!important;
+}
+
+.ion-android-bar{
+  font-size: 20px!important;
+}
+
+.ion-ios-home-outline{
+  font-size: 20px!important;
+}
+
+.ion-ios-cart{
+  font-size: 20px!important;
+}
+
+.ion-android-mail{
+  font-size: 20px!important;
+}
+
+.ion-close-circled{
+  font-size: 20px!important;
+}
+
+/* hover botones menu */
+
+.ion-item:hover{
+  background-color: #007aff!important;
 }

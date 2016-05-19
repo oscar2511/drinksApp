@@ -10,21 +10,56 @@ angular.module('starter')
     var pedido = {
       numero  : null,
       fecha   : null,
-      detalle :[{
-        productoPedido : {}
-      }]
-
+      detalle :[{}]
   };
 
-   // pedido.fecha = 123;
-   // pedido.producto = [{}];
+    pedido.addProducto = function(producto, cantidad){
+      if(!pedido.numero){
+        pedido.numero = (Math.ceil(Math.random() * 999999999));
+        pedido.fecha = new Date();
+        console.log('nuevo pedido');
+      }
 
-    pedido.addProducto = function(productoPedido){
-      pedido.detalle.push(productoPedido);
+      if(pedido.checkExisteProducto(producto, cantidad) == false){
+        var productoPedido = {
+          producto: producto,
+          cantidad: cantidad
+        };
+        pedido.detalle.push(productoPedido);
+      }
+
+
+
+    };
+
+    /**
+     *
+     * Checkear si el producto esta en el pedido. si es asi, sumarle la cantidad ingresada
+     *
+     * @param producto
+     */
+    pedido.checkExisteProducto = function(producto, cantidad){
+      var productoEnPedido = false;
+      angular.forEach(pedido.detalle, function(value, key) {
+        if(value.producto) {
+          if (producto.id == value.producto.id) {
+            productoEnPedido = true;
+            value.cantidad = value.cantidad + cantidad;
+            console.log(value.cantidad);
+            pedido.addProductoCantidad(value);
+          }
+        }
+      });
+      return productoEnPedido;
+
     };
 
     pedido.getPedido = function(){
       return pedido;
+    };
+
+    pedido.addProductoCantidad = function(productoAsumarCantidad){
+
     };
 
     return pedido;
