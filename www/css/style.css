@@ -8,6 +8,12 @@ background: #ececee;
   width: 100% !important;
   height: 220px;!important;
 }
+
+.img_categoria .vinos{
+  background-image: url("../img/categorias/vinos.jpg");
+;
+}
+
 /*
 .img-menu{
 }
