@@ -1,13 +1,13 @@
-<ion-view view-title="{{cate.nombre}}">
+<ion-view view-title="Drinks delivery">
 
   <ion-content>
-    <img class="img_categoria" src="../img/categorias/cerveza.jpg">
+    <img class="img_categoria" src="../img/categorias/{{imgCategoria}}">
     <div class="list" ng-repeat="producto in productos" href="#/app/producto/producto-detalle/{{producto}}">
       <a class="item item-thumbnail-left" href="#/app/producto/producto-detalle/{{producto}}">
         <img src="../img/categorias/vinos.jpg">
         <h2> {{producto.nombre}}</h2>
         <p>$ {{producto.precio}}</p>
-        <button class="button button-small button-outline icon-center ion-record button-dark"> Stock</button>
+        <button class="button button-small button-outline icon-center ion-record button-dark"> {{producto.stock}}</button>
       </a>
     </div>
 

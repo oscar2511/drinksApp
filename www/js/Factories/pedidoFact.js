@@ -27,9 +27,6 @@ angular.module('starter')
         };
         pedido.detalle.push(productoPedido);
       }
-
-
-
     };
 
     /**
@@ -37,6 +34,7 @@ angular.module('starter')
      * Checkear si el producto esta en el pedido. si es asi, sumarle la cantidad ingresada
      *
      * @param producto
+     * @param cantidad
      */
     pedido.checkExisteProducto = function(producto, cantidad){
       var productoEnPedido = false;
@@ -60,6 +58,14 @@ angular.module('starter')
 
     pedido.addProductoCantidad = function(productoAsumarCantidad){
 
+    };
+
+
+    pedido.limpiarPedido = function(){
+      pedido.detalle = [{}];
+      pedido.numero  = null;
+      pedido.fecha   = null;
+      console.log(pedido);
     };
 
     return pedido;

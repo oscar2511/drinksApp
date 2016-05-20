@@ -6,8 +6,6 @@ angular.module('starter')
     });
 
     var url = 'http://oscarnr.16mb.com/appDrinks/categorias/getCategorias.php';
-    var postUrl = $sce.trustAsResourceUrl(url);
-
 
     $http.get(url)
       .then(function(data){
@@ -15,15 +13,15 @@ angular.module('starter')
           $scope.dataCruda = value;
         });
         $scope.categorias =[];
-          angular.forEach($scope.dataCruda, function(valor, key) {
 
-            $scope.categorias.push({
-              id      : valor.id,
-              nombre  : valor.nombre,
-              urlImg  : valor.urlImg
-            });
+        angular.forEach($scope.dataCruda, function(valor, key) {
+          $scope.categorias.push({
+            id      : valor.id,
+            nombre  : valor.nombre,
+            urlImg  : valor.urlImg
           });
-          console.log($scope.categorias);
+        });
+        console.log($scope.categorias);
         $ionicLoading.hide();
       });
 

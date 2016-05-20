@@ -6,6 +6,10 @@ angular.module('starter')
 
     $scope.pedidoActual = $scope.pedido.getPedido();
 
+    $scope.limpiarCarro = function(){
+      $scope.pedido.limpiarPedido();
+    };
+
     console.log($scope.pedidoActual);
 
   });
