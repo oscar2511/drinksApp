@@ -29,7 +29,7 @@
     </div>
 
     <div class="list" ng-repeat="ped in pedidoActual.detalle" ng-if="$index > 0">
-      <a class="item item-thumbnail-left" href="#">
+      <div class="item item-thumbnail-left">
         <img src="../img/categorias/vinos.jpg">
         <h2> {{ped.producto.nombre}}</h2>
         <div class="row">
@@ -38,11 +38,15 @@
           <div class="col"><strong>Subt. $ 12.98 </strong></div>
         </div>
         <div class="row">
-          <div class="col"><button class="button button-outline button-small ion-plus button-positive"></button> <button class="button button-outline button-small ion-minus button-assertive"></button></div>
-          <div class="col"></div>
-          <div class="col"><button class="button button-outline button-small ion-close button-assertive"></button></div>
+          <div class="col">
+            <button ng-click="addCantidad(ped)" class="button button-outline button-small ion-plus button-balanced"></button>
+            <button ng-click="restarCantidad(ped)" class="button button-outline button-small ion-minus button-assertive"></button>
+          </div>
+          <div class="col">
+          </div>
+          <div class="col"><button ng-click="eliminarProducto(ped)" class="button button-outline button-small ion-trash-b button-assertive"></button></div>
         </div>
-      </a>
+      </div>
     </div>
   </ion-content>
 </ion-view>

@@ -27,6 +27,7 @@ angular.module('starter')
         };
         pedido.detalle.push(productoPedido);
       }
+      console.log(pedido.detalle);
     };
 
     /**
@@ -42,9 +43,8 @@ angular.module('starter')
         if(value.producto) {
           if (producto.id == value.producto.id) {
             productoEnPedido = true;
-            value.cantidad = value.cantidad + cantidad;
-            console.log(value.cantidad);
-            pedido.addProductoCantidad(value);
+            if( value.cantidad + cantidad > 0)
+              value.cantidad = value.cantidad + cantidad;
           }
         }
       });
@@ -56,11 +56,43 @@ angular.module('starter')
       return pedido;
     };
 
-    pedido.addProductoCantidad = function(productoAsumarCantidad){
+    /**
+     * Agregar en 1 la cantidad de un producto de un pedido
+     * @param producto
+     * @param cantidad
+     */
+    pedido.addProductoCantidad = function(producto, cantidad){
+      pedido.checkExisteProducto(producto, cantidad);
+    };
 
+    /**
+     * Decrementar en 1 la cantidad de un producto de un pedido
+     *
+     * @param producto
+     * @param cantidad
+     */
+    pedido.decrementarProductoCantidad = function (producto, cantidad){
+      pedido.checkExisteProducto(producto, cantidad);
+    };
+
+    /**
+     * Eliminar un producto de un pedido
+     *
+     * @param producto
+     */
+    pedido.eliminarProductoPedido = function(producto){
+      angular.forEach(pedido.detalle, function(value, key) {
+        if(value.producto) {
+          if (producto.id == value.producto.id)
+            pedido.detalle.splice(key, 1);
+        }
+      });
     };
 
 
+    /**
+     *
+     */
     pedido.limpiarPedido = function(){
       pedido.detalle = [{}];
       pedido.numero  = null;
@@ -69,17 +101,5 @@ angular.module('starter')
     };
 
     return pedido;
- /* function PedidoFactory(id, fecha) {
-    this.id       = id;
-    this.fecha    = fecha;
-    this.producto = [{}];
-  }
 
-  PedidoFactory.prototype.agregarProducto = function(param){
-    this.producto = param;
-    console.log(this.producto);
-
-  };
-
-  return( PedidoFactory );*/
 });
