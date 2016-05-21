@@ -1,7 +1,7 @@
 <ion-view view-title="Drinks delivery">
 
   <ion-content>
-    <img class="img_categoria" src="../img/categorias/{{imgCategoria}}">
+    <img class="{{ catUrlImg }}">
     <div class="list" ng-repeat="producto in productos" href="#/app/producto/producto-detalle/{{producto}}">
       <a class="item item-thumbnail-left" href="#/app/producto/producto-detalle/{{producto}}">
         <img src="../img/categorias/vinos.jpg">

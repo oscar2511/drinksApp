@@ -15,6 +15,9 @@ angular.module('starter')
 
     var categoria = angular.fromJson($stateParams.categoria);
 
+    $scope.catUrlImg = categoria.urlImg;
+    console.log(categoria.urlImg);
+
     $http.post(url, categoria, {headers: { 'Content-Type': 'application/json'}})
       .then(function (data){
         angular.forEach(data.data, function(value, key) {

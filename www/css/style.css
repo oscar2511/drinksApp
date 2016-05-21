@@ -7,23 +7,80 @@ background: #ececee;
 .img_categoria{
   width: 100% !important;
   height: 220px;!important;
+  /*background-image: url("../img/categorias/vinos.jpg")!important;*/
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+
 }
 
-.img_categoria .vinos{
-  background-image: url("../img/categorias/vinos.jpg");
-;
+/* categorias *********************************************************************/
+.vinos{
+  width: 100% !important;
+  height: 220px!important;
+  background-image: url("../img/categorias/vinos.jpg")!important;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
+
+.cervezas{
+  width: 100% !important;
+  height: 220px!important;
+  background-image: url("../img/categorias/cerveza.jpg")!important;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.fernets{
+  width: 100% !important;
+  height: 220px!important;
+  background-image: url("../img/categorias/fernet.jpg")!important;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.whiskies{
+  width: 100% !important;
+  height: 220px!important;
+  background-image: url("../img/categorias/whiskies.jpg")!important;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.promociones{
+  width: 100% !important;
+  height: 250px!important;
+  background-image: url("../img/categorias/promociones.jpg")!important;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.vodkas{
+  width: 100% !important;
+  height: 220px!important;
+  background-image: url("../img/categorias/vodkas-licores.jpg")!important;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+/* /categorias *********************************************************************/
 
 /*
 .img-menu{
 }
 */
 .menu-header{
-  /*background-color: #ffffff !important;*/
-  /*height: 41%;*/
-  height: 314px;
-  width: 200px;
-  background-image:  url(../img/categorias/copaMenu.png);
+  background-image: url("../img/categorias/menuImg.png")!important;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height:39%;
+  width: 100%;
 }
 
 /*custom is class added to ion-content*/

@@ -2,7 +2,7 @@
   <ion-content>
     <div ng-repeat="categoria in categorias">
       <a href="#/app/categorias/{{categoria}}">
-        <img class="img_categoria" src="../img/categorias/{{categoria.urlImg}}">
+        <img class="{{categoria.urlImg}}">
       </a>
     </div>
   </ion-content>
@@ -12,11 +12,4 @@
     <a href="#/app/mi-pedido" class="button button-assertive pull-rigth"><i class="icon ion-ios-cart"></i></a>
   </div>
 
-<!-- para renderizar las imagenes
-<section ng-if="false">
-  <img src="../img/categorias/cerveza.jpg">
-  <img src="../img/categorias/vinos.jpg">
-  <img src="../img/categorias/fernet.jpg">
-  <img src="../img/categorias/whiskies.jpg">
-</section>-->
 </ion-view>
