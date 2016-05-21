@@ -1,4 +1,4 @@
-<ion-view view-title="Drinks delivery">
+<ion-view view-title="Pedido">
   <ion-content>
     <div class="card">
       <div class="item item-divider">
@@ -30,11 +30,10 @@
 
     <div class="list" ng-repeat="ped in pedidoActual.detalle" ng-if="$index > 0">
       <div class="item item-thumbnail-left">
-        <img src="../img/categorias/vinos.jpg">
+        <img class="{{ped.producto.urlImg}}">
         <h2> {{ped.producto.nombre}}</h2>
         <div class="row">
-          <div class="col">Cant. {{ped.cantidad}} </div>
-          <div class="col">c/u $ {{ped.producto.precio}}</div>
+          <div class="col"><strong> {{ped.cantidad}} | c/u $ {{ped.producto.precio}} </strong></div>
           <div class="col"><strong>Subt. $ 12.98 </strong></div>
         </div>
         <div class="row">
@@ -43,8 +42,8 @@
             <button ng-click="restarCantidad(ped)" class="button button-outline button-small ion-minus button-assertive"></button>
           </div>
           <div class="col">
+            <i ng-click="eliminarProducto(ped)" class="ion-trash-b assertive"></i>
           </div>
-          <div class="col"><button ng-click="eliminarProducto(ped)" class="button button-outline button-small ion-trash-b button-assertive"></button></div>
         </div>
       </div>
     </div>

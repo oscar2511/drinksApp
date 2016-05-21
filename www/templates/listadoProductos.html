@@ -1,10 +1,9 @@
-<ion-view view-title="Drinks delivery">
-
+<ion-view view-title="Listado de productos">
   <ion-content>
     <img class="{{ catUrlImg }}">
     <div class="list" ng-repeat="producto in productos" href="#/app/producto/producto-detalle/{{producto}}">
       <a class="item item-thumbnail-left" href="#/app/producto/producto-detalle/{{producto}}">
-        <img src="../img/categorias/vinos.jpg">
+        <img class="{{producto.urlImg}}">
         <h2> {{producto.nombre}}</h2>
         <p>$ {{producto.precio}}</p>
         <button class="button button-small button-outline icon-center ion-record button-dark"> {{producto.stock}}</button>
@@ -12,10 +11,4 @@
     </div>
 
   </ion-content>
-
-  <div class="bar bar-footer bar-clear" >
-    <a href="#/app/home" class="button button-assertive pull-left"><i class="icon ion-home"></i></a>
-
-    <a href="#/app/mi-pedido" class="button button-assertive pull-rigth"><i class="icon ion-ios-cart"></i></a>
-  </div>
 </ion-view>

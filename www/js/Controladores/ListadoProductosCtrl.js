@@ -32,12 +32,13 @@ angular.module('starter')
               descripcion:  valor.descripcion,
               nombre:       valor.nombre,
               stock:        valor.stock,
-              idCategoria:  valor.idCategoria
+              idCategoria:  valor.idCategoria,
+              urlImg  :     valor.urlImg
             });
           });
 
-        console.log($scope.idCategoria);
-        switch ($scope.idCategoria) {
+        console.log($scope.productos);
+        /*switch ($scope.idCategoria) {
           case '1':
             $scope.imgCategoria = "vinos.jpg";
             break;
@@ -50,8 +51,8 @@ angular.module('starter')
           default:
             $scope.imgCategoria = "vinos.jpg";
             break;
-        }
-
+        }*/
+        $ionicLoading.hide();
       });
-    $ionicLoading.hide();
+
   });
