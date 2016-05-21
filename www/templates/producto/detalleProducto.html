@@ -1,4 +1,5 @@
 <ion-view view-title="Detalle producto">
+
   <ion-content>
     <div class="list card">
       <div class="item item-avatar">
@@ -10,10 +11,39 @@
       <div class="item item-body">
         <img class="full-image" src="../img/categorias/vinos.jpg">
         <h3>
-          {{producto.descripcion}}
+          {{producto.descripcion}}. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          <h1>$ 39.40</h1>
         </h3>
-        <button class="button   button-block icon-center ion-plus-circled button-positive"> Agregar</button>
+
+        <form name="addPedido">
+          <label class="item item-input">
+            <span class="input-label">Cantidad</span>
+              <input ng-model="cantidad" name="cantidad" class="text-input ng-valid ng-dirty ng-touched"
+                     type="number"
+                     required
+                     min="1"
+                     max="100">
+          </label>
+          <span ng-show="addPedido.cantidad.$error.required">
+            <h3><font color="red"> Debes pedir al menos 1 producto</font></h3>
+          </span>
+          <span ng-show="addPedido.cantidad.$error.max">
+            <h3><font color="red"> La cantidad no puede exceder 100</font></h3>
+          </span>
+          <span ng-show="addPedido.cantidad.$error.min">
+            <h3><font color="red"> Debes pedir al menos 1 producto</font></h3>
+          </span>
+          <button ng-disabled="addPedido.$invalid"  ng-click="addAlCarro(producto, cantidad)" class="button  button-block icon-center ion-plus-circled button-positive">
+            Agregar
+          </button>
+        </form>
       </div>
     </div>
   </ion-content>
+
+  <div class="bar bar-footer bar-clear" >
+    <a href="#/app/home" class="button button-assertive pull-left"><i class="icon ion-home"></i></a>
+
+    <a href="#/app/mi-pedido" class="button button-assertive pull-rigth"><i class="icon ion-ios-cart"></i></a>
+  </div>
 </ion-view>

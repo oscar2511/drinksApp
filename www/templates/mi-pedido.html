@@ -1,5 +1,52 @@
-<ion-view view-title="Mi Pedido">
+<ion-view view-title="Drinks delivery">
   <ion-content>
-    <h1>Mi pedido</h1>
+    <div class="card">
+      <div class="item item-divider">
+        <div class="row">
+          <div class="col"><strong><i class="ion-android-cart"></i> Tu compra</strong></div>
+          <div class="col col-75"><br>
+            <button class="button button-positive">
+              Hacer pedido
+            </button>
+            <button ng-click="limpiarCarro()" class="button button-assertive">
+              Limpiar
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="item item-text-wrap">
+        <div class="row">
+          <div class="col col-75"><strong>Subtotal</strong></div>
+          <div class="col">$ 348.90</div>
+        </div>
+      </div>
+      <div class="item item-divider">
+        <div class="row">
+          <div class="col col-75"><strong>Total</strong></div>
+          <div class="col"><strong>$ 348.90</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="list" ng-repeat="ped in pedidoActual.detalle" ng-if="$index > 0">
+      <div class="item item-thumbnail-left">
+        <img src="../img/categorias/vinos.jpg">
+        <h2> {{ped.producto.nombre}}</h2>
+        <div class="row">
+          <div class="col">Cant. {{ped.cantidad}} </div>
+          <div class="col">c/u $ {{ped.producto.precio}}</div>
+          <div class="col"><strong>Subt. $ 12.98 </strong></div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button ng-click="addCantidad(ped)" class="button button-outline button-small ion-plus button-balanced"></button>
+            <button ng-click="restarCantidad(ped)" class="button button-outline button-small ion-minus button-assertive"></button>
+          </div>
+          <div class="col">
+          </div>
+          <div class="col"><button ng-click="eliminarProducto(ped)" class="button button-outline button-small ion-trash-b button-assertive"></button></div>
+        </div>
+      </div>
+    </div>
   </ion-content>
 </ion-view>

@@ -1,37 +1,57 @@
 angular.module('starter')
-  .controller('listadoProductosCtrl', function($scope, $stateParams, $http, $ionicLoading) {
+  .controller('listadoProductosCtrl', function(
+    $scope,
+    $stateParams,
+    $http,
+    $ionicLoading,
+    $ionicPopup
+  ){
 
     $ionicLoading.show({
-      template: 'Ten paciencia ;)'
+      template: 'Cargando, espere por favor...'
     });
-
+    $scope.imgCategoria = null;
     var url = 'http://oscarnr.16mb.com/appDrinks/listadoProductos/listarProductos.php';
 
     var categoria = angular.fromJson($stateParams.categoria);
-console.log("aca");
+
+    $scope.catUrlImg = categoria.urlImg;
+    console.log(categoria.urlImg);
+
     $http.post(url, categoria, {headers: { 'Content-Type': 'application/json'}})
       .then(function (data){
-        console.log(angular.fromJson(data.data));
         angular.forEach(data.data, function(value, key) {
-          //console.log(value.id);
           $scope.dataCruda = value;
         });
         $scope.productos =[];
           angular.forEach($scope.dataCruda, function(valor, key) {
-            //console.log(valor.id);
+            $scope.idCategoria = valor.idCategoria;
             $scope.productos.push({
-              id    :valor.id,
-              precio: valor.precio,
-              descripcion: valor.descripcion,
-              nombre: valor.nombre
+              id:           valor.id,
+              precio:       valor.precio,
+              descripcion:  valor.descripcion,
+              nombre:       valor.nombre,
+              stock:        valor.stock,
+              idCategoria:  valor.idCategoria
             });
           });
-        //console.log($scope.productos);
-        $ionicLoading.hide();
+
+        console.log($scope.idCategoria);
+        switch ($scope.idCategoria) {
+          case '1':
+            $scope.imgCategoria = "vinos.jpg";
+            break;
+          case '2':
+            $scope.imgCategoria = "cerveza.jpg";
+            break;
+          case '3':
+            $scope.imgCategoria = "cerveza.jpg";
+            break;
+          default:
+            $scope.imgCategoria = "vinos.jpg";
+            break;
+        }
+
       });
-
-    $scope.detalleProducto = function(){
-
-    };
-
+    $ionicLoading.hide();
   });

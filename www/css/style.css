@@ -7,9 +7,152 @@ background: #ececee;
 .img_categoria{
   width: 100% !important;
   height: 220px;!important;
+  /*background-image: url("../img/categorias/vinos.jpg")!important;*/
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+
+}
+
+/* categorias *********************************************************************/
+.vinos{
+  width: 100% !important;
+  height: 220px!important;
+  background-image: url("../img/categorias/vinos.jpg")!important;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.cervezas{
+  width: 100% !important;
+  height: 220px!important;
+  background-image: url("../img/categorias/cerveza.jpg")!important;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.fernets{
+  width: 100% !important;
+  height: 220px!important;
+  background-image: url("../img/categorias/fernet.jpg")!important;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.whiskies{
+  width: 100% !important;
+  height: 220px!important;
+  background-image: url("../img/categorias/whiskies.jpg")!important;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.promociones{
+  width: 100% !important;
+  height: 250px!important;
+  background-image: url("../img/categorias/promociones.jpg")!important;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.vodkas{
+  width: 100% !important;
+  height: 220px!important;
+  background-image: url("../img/categorias/vodkas-licores.jpg")!important;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+/* /categorias *********************************************************************/
+
+/*
+.img-menu{
+}
+*/
+.menu-header{
+  background-image: url("../img/categorias/menuImg.png")!important;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height:39%;
+  width: 100%;
+}
+
+/*custom is class added to ion-content*/
+
+.custom {
+  background-color: #3f4041 !important; /* This sets the background color*/
+  background-image: url(../img/categorias/imgMenu2.jpg);
+  background-repeat: no-repeat;
+  margin-top: 90%;
+
+}
+
+/*Set the background to transparent for ion-item*/
+.custom .item {
+  background-color: transparent;
+  border:none;   /*Removes all borders*/
+  /*border-top: 1px solid;*/   /*Top Border for each menu item*/
+  border-bottom: 0px solid;   /*Bottom border for each menu item*/
+  /*border-color: #ffc5d1;*/   /*Sets colors for top and bottom border*/
+  color: white;    /*Text color for each item*/
+}
+
+/*Changes the border for the last item*/
+.custom .item:last-child {
+  border-bottom: 0px solid #e7e2e6;
+}
+
+.custom .item-complex .item-content, .dark .item-radio .item-content {
+  background-color: transparent;
+}
+
+/*Just makes the type white*/
+.custom h2,
+.custom h3,
+.custom p,
+.custom a {
+  color: white;  /*Text color for each item, overrides the color property above*/
+}
+
+/* tamaño de iconos */
+
+.ion-home{
+  font-size: 20px!important;
 }
 
 
-.bar-stable bar bar-header{
+.ion-wineglass{
+  font-size: 20px!important;
+}
 
+.ion-android-bar{
+  font-size: 20px!important;
+}
+
+.ion-ios-home-outline{
+  font-size: 20px!important;
+}
+
+.ion-ios-cart{
+  font-size: 20px!important;
+}
+
+.ion-android-mail{
+  font-size: 20px!important;
+}
+
+.ion-close-circled{
+  font-size: 20px!important;
+}
+
+/* hover botones menu */
+
+.ion-item:hover{
+  background-color: #007aff!important;
 }
