@@ -11,8 +11,8 @@ angular.module('starter')
       numero  : null,
       fecha   : null,
       detalle :[{}],
-      total   : null,
-      subtotal: null
+      total   : 0,
+      subtotal: 0
   };
 
     $rootScope.totalProductos = 0;
@@ -28,14 +28,17 @@ angular.module('starter')
         pedido.fecha = new Date();
         console.log('nuevo pedido');
       }
-
-      if(pedido.checkExisteProducto(producto, cantidad) == false){
+      if(!pedido.checkExisteProducto(producto, cantidad)){
         var productoPedido = {
           producto: producto,
           cantidad: cantidad
         };
         pedido.detalle.push(productoPedido);
         $rootScope.totalProductos = parseInt($rootScope.totalProductos) + parseInt(cantidad);
+        pedido.total = 1;
+        pedido.subTotal = parseInt(cantidad) * parseInt(producto.precio);
+        console.log(parseInt(pedido.subTotal));
+        pedido.total = parseInt(pedido.total) + parseInt(pedido.subTotal);
       }
     };
 
@@ -71,6 +74,7 @@ angular.module('starter')
      * @returns {{numero: null, fecha: null, detalle: {}[]}}
      */
     pedido.getPedido = function(){
+      pedido.calcularTotal();
       return pedido;
     };
 
@@ -111,6 +115,20 @@ angular.module('starter')
       });
     };
 
+    /**
+     * //todo verificar el proceso de calculo del total del pedido, cuando entro al carro de compras
+     */
+    pedido.calcularTotal = function(){
+      angular.forEach(pedido.detalle, function(value, key) {
+        if(value.producto) {
+          pedido.total = 1;
+          console.log(isNaN(pedido.total) + value.producto.precio * value.cantidad);
+          pedido.total = isNaN(pedido.total) + isNaN(isNaN(value.producto.precio) * isNaN(value.cantidad));
+
+        }
+      });
+       //console.log(pedido.total);
+    };
 
     /**
      * Limpia el pedido

@@ -151,8 +151,9 @@ background: #ececee;
   font-size: 20px!important;
 }
 
-.ion-trash-b{
-  font-size: 30px!important;
+/* boton eliminar producto de pedido*/
+.ion-trash-a{
+  font-size: 20px!important;
 }
 
 /***************** productos *********************/
