@@ -1,5 +1,5 @@
 angular.module('starter')
-  .factory('PedidoFactory', function($q){
+  .factory('PedidoFactory', function($q, $rootScope){
 
   /**
    *
@@ -10,10 +10,12 @@ angular.module('starter')
     var pedido = {
       numero  : null,
       fecha   : null,
-      detalle :[{}]
+      detalle :[{}],
+      total   : null,
+      subtotal: null
   };
 
-    pedido.totalProductos = 0;
+    $rootScope.totalProductos = 0;
 
     /**
      *
@@ -33,10 +35,8 @@ angular.module('starter')
           cantidad: cantidad
         };
         pedido.detalle.push(productoPedido);
-        pedido.totalProductos = pedido.totalProductos + cantidad;
-        console.log(pedido.totalProductos + cantidad);
+        $rootScope.totalProductos = parseInt($rootScope.totalProductos) + parseInt(cantidad);
       }
-      console.log(pedido.detalle);
     };
 
     /**
@@ -54,8 +54,10 @@ angular.module('starter')
             productoEnPedido = true;
             if( value.cantidad + cantidad > 0) {
               value.cantidad = value.cantidad + cantidad;
-              pedido.totalProductos = pedido.totalProductos + cantidad;
-              console.log(pedido.totalProductos + cantidad);
+              if(cantidad < 0)
+                $rootScope.totalProductos = parseInt($rootScope.totalProductos) - 1;
+              else
+                $rootScope.totalProductos = parseInt($rootScope.totalProductos) + parseInt(cantidad);
             }
           }
         }
@@ -89,7 +91,6 @@ angular.module('starter')
      */
     pedido.decrementarProductoCantidad = function (producto, cantidad){
       pedido.checkExisteProducto(producto, cantidad);
-      pedido.totalProductos = pedido.totalProductos - cantidad;
     };
 
     /**
@@ -100,16 +101,19 @@ angular.module('starter')
     pedido.eliminarProductoPedido = function(producto){
       angular.forEach(pedido.detalle, function(value, key) {
         if(value.producto) {
-          if (producto.id == value.producto.id)
+          if (producto.id == value.producto.id){
             pedido.detalle.splice(key, 1);
-          pedido.totalProductos = pedido.totalProductos - value.cantidad;
+            console.log($rootScope.totalProductos);
+            console.log(value.cantidad);
+            $rootScope.totalProductos = parseInt($rootScope.totalProductos) - parseInt(value.cantidad);
+          }
         }
       });
     };
 
 
     /**
-     *
+     * Limpia el pedido
      */
     pedido.limpiarPedido = function(){
       pedido.detalle = [{}];

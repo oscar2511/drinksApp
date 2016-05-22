@@ -7,7 +7,7 @@ angular.module('starter.controllers', [])
 
   $scope.pedido = PedidoFactory;
 
-  $scope.totalProductos = PedidoFactory.totalProductos;
+  //$scope.totalProductos = $rootScope.totalProductos;
 
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
