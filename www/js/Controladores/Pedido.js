@@ -6,6 +6,8 @@ angular.module('starter')
 
     $scope.pedidoActual = $scope.pedido.getPedido();
 
+    console.log($scope.pedidoActual);
+
     /**
      *  Elimina todos los productos del pedido
      */

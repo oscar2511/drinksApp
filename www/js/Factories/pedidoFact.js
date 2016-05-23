@@ -12,10 +12,11 @@ angular.module('starter')
       fecha   : null,
       detalle :[{}],
       total   : 0,
-      subtotal: 0
+      subTotal: 0
   };
 
     $rootScope.totalProductos = 0;
+//    $rootScope.total = 0;
 
     /**
      *
@@ -35,10 +36,9 @@ angular.module('starter')
         };
         pedido.detalle.push(productoPedido);
         $rootScope.totalProductos = parseInt($rootScope.totalProductos) + parseInt(cantidad);
-        pedido.total = 1;
-        pedido.subTotal = parseInt(cantidad) * parseInt(producto.precio);
-        console.log(parseInt(pedido.subTotal));
-        pedido.total = parseInt(pedido.total) + parseInt(pedido.subTotal);
+        //pedido.subTotal           = parseInt(cantidad) * parseFloat(producto.precio);
+        //pedido.total              = parseFloat(pedido.total) + parseFloat(pedido.subTotal);
+        //console.log(parseFloat($rootScope.total));
       }
     };
 
@@ -74,8 +74,8 @@ angular.module('starter')
      * @returns {{numero: null, fecha: null, detalle: {}[]}}
      */
     pedido.getPedido = function(){
-      pedido.calcularTotal();
-      return pedido;
+      if(pedido.calcularTotal())
+        return pedido;
     };
 
     /**
@@ -120,14 +120,14 @@ angular.module('starter')
      */
     pedido.calcularTotal = function(){
       angular.forEach(pedido.detalle, function(value, key) {
+        pedido.total = 0;
+        pedido.subTotal = 0;
         if(value.producto) {
-          pedido.total = 1;
-          console.log(isNaN(pedido.total) + value.producto.precio * value.cantidad);
-          pedido.total = isNaN(pedido.total) + isNaN(isNaN(value.producto.precio) * isNaN(value.cantidad));
-
+          pedido.subTotal = parseInt(value.cantidad) * parseFloat(value.producto.precio);
+          pedido.total    = parseFloat(pedido.total) + parseFloat(pedido.subTotal);
         }
       });
-       //console.log(pedido.total);
+       return true;//console.log(pedido.total);
     };
 
     /**
@@ -138,6 +138,8 @@ angular.module('starter')
       pedido.numero  = null;
       pedido.fecha   = null;
       pedido.totalProductos = 0;
+      pedido.total = 0;
+      pedido.subTotal = 0;
       console.log(pedido);
     };
 
