@@ -122,6 +122,7 @@ angular.module('starter')
             console.log($rootScope.totalProductos);
             console.log(value.cantidad);
             $rootScope.totalProductos = parseInt($rootScope.totalProductos) - parseInt(value.cantidad);
+            pedido.calcularTotal();
           }
         }
       });
@@ -138,10 +139,11 @@ angular.module('starter')
           pedido.subTotal = parseInt(value.cantidad) * parseFloat(value.producto.precio);
           pedido.subTotal = parseFloat(pedido.subTotal).toFixed(2);
           pedido.total    = parseFloat(pedido.total) + parseFloat(pedido.subTotal);
-          pedido.total     = parseFloat(pedido.total).toFixed(2);
+          pedido.total    = parseFloat(pedido.total).toFixed(2);
+          pedido.subTotal = parseFloat(pedido.total).toFixed(2); //puesto porque no se usa por ahora el subtotal(pensado para recargos, etc)
         }
       });
-       return true;//console.log(pedido.total);
+       return true;
     };
 
     /**

@@ -1,7 +1,6 @@
 <ion-view view-title="">
   <ion-content>
     <div class="list list-inset">
-
       <div class="item" align="center">
         <i class="ion-android-cart"></i> Detalle de tu pedido
       </div>
@@ -9,18 +8,6 @@
     </div>
     <div class="card">
       <div class="item item-divider">
-        <div class="row">
-          <div class="col" align="center"><br>
-            <button class="button button-positive">
-              Hacer pedido
-            </button>
-            <button ng-click="limpiarCarro()" class="button button-assertive">
-              Limpiar
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="item item-text-wrap">
         <div class="row">
           <div class="col col-50">Subtotal</div>
           <div class="col">$ {{ pedido.subTotal}}</div>
@@ -30,6 +17,17 @@
           <div class="col"><strong>$ {{ pedido.total }}</strong></div>
         </div>
       </div>
+      <div class="item item-divider">
+        <div class="row">
+          <div class="col" align="center">
+            <button class="button button-full button-positive">Finalizar compra</button>
+            <button ng-click="limpiarCarro()" class="button button-small button-assertive">
+              Limpiar
+            </button>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <div class="list" ng-repeat="ped in pedidoActual.detalle" ng-if="$index > 0">
@@ -54,3 +52,10 @@
     </div>
   </ion-content>
 </ion-view>
+<!--<div class="bar bar-footer bar-light" >
+  <button ng-click="limpiarCarro()" class="button button-positive">
+    Finalizar la compra
+  </button>
+  Limpiar carro<a href="#/app/mi-pedido" class="button button-clear pull-rigth"><i class="icon ion-ios-cart"></i></a>
+</div>
+-->

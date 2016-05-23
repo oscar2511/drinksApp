@@ -1,6 +1,6 @@
 
 angular.module('starter')
-  .controller('pedidoCtrl', function($scope, PedidoFactory) {
+  .controller('pedidoCtrl', function($scope, PedidoFactory, $ionicPopup, $timeout) {
 
     $scope.pedido = PedidoFactory;
 
@@ -12,7 +12,23 @@ angular.module('starter')
      *  Elimina todos los productos del pedido
      */
     $scope.limpiarCarro = function(){
-      $scope.pedido.limpiarPedido();
+
+        var confirmPopup = $ionicPopup.confirm({
+          title: 'Confirmar acción',
+          template: 'Realmente quieres limpiar tu pedido?',
+          cancelText: 'Cancelar',
+          okText: 'Confirmar'
+        });
+
+        confirmPopup.then(function(res) {
+          if(res) {
+            $scope.pedido.limpiarPedido();
+          } else {
+            console.log('You are not sure');
+          }
+        });
+
+
     };
 
     /**
@@ -24,6 +40,15 @@ angular.module('starter')
       var producto = productoPedido.producto;
       var cantidad = 1;
       $scope.pedido.addProductoCantidad(producto, cantidad);
+      var alertPopup = $ionicPopup.alert({
+        title: 'Sumaste 1 unidad mas al producto',
+        buttons: null
+      });
+
+       $timeout(function() {
+        alertPopup.close(); //close the popup after 3 seconds for some reason
+       }, 1000);
+
     };
 
     /**
@@ -35,6 +60,15 @@ angular.module('starter')
      var producto = productoPedido.producto;
      var cantidad = -1;
      $scope.pedido.decrementarProductoCantidad(producto, cantidad);
+      var alertPopup = $ionicPopup.alert({
+        title: 'Quitaste 1 unidad al producto',
+        buttons: null
+      });
+
+      $timeout(function() {
+        alertPopup.close(); //close the popup after 3 seconds for some reason
+      }, 1000);
+
    };
 
     /**
@@ -43,8 +77,20 @@ angular.module('starter')
      * @param productoPedido
      */
     $scope.eliminarProducto = function(productoPedido){
-      var producto = productoPedido.producto;
-      $scope.pedido.eliminarProductoPedido(producto);
+      var confirmPopup = $ionicPopup.confirm({
+        title: 'Confirmar acción',
+        template: 'Realmente quieres quitar el producto de tu pedido?',
+        cancelText: 'Cancelar',
+        okText: 'Confirmar'
+      });
+
+      confirmPopup.then(function(res) {
+        if(res) {
+          var producto = productoPedido.producto;
+          $scope.pedido.eliminarProductoPedido(producto);
+        }
+      });
+
     };
 
   });
