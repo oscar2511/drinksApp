@@ -18,13 +18,11 @@ angular.module('starter')
       $scope.pedido.addProducto(producto, cantidad);
 
       var alertPopup = $ionicPopup.alert({
-        title: 'Producto añadido correctamente',
+        title:   'Producto añadido correctamente',
         buttons: [{
           text: 'Seguir comprando',
-          type: 'button button-dark'
+          type: 'button button-positive'
         }]
-
-        //template: 'Producto añadido correctamente'
       });
 
      /* $timeout(function() {

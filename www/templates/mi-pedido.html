@@ -17,6 +17,7 @@
           <div class="col"><strong>$ {{ pedido.total }}</strong></div>
         </div>
       </div>
+
       <div class="item item-divider">
         <div class="row">
           <div class="col" align="center">
@@ -35,15 +36,19 @@
         <img class="{{ped.producto.urlImg}}">
         <h2> {{ped.producto.nombre}}</h2>
         <div class="row">
-          <div class="col"><strong> {{ped.cantidad}}</strong> | <strong>c/u $ {{ped.producto.precio}} </strong></div>
-          <div class="col"><strong>Subt. $ {{ ped.subTotal }} </strong></div>
+          <div class="col">
+            <strong> {{ped.cantidad}}</strong> |&nbsp;&nbsp; c/u $ {{ped.producto.precio}}
+          </div>
+          <div class="col col-75">
+            <strong>&nbsp;&nbsp;Subt. $ {{ ped.subTotal }}</strong>
+          </div>
         </div>
         <div class="row">
           <div class="col">
             <button ng-click="addCantidad(ped)" class="button button-outline button-small ion-plus button-balanced"></button>
             <button ng-click="restarCantidad(ped)" class="button button-outline button-small ion-minus button-assertive"></button>
           </div>
-          <div class="col">
+          <div class="col col-75">
             <button ng-click="eliminarProducto(ped)" class="button button-small button-assertive ion-trash-a assertive">
             </button>
           </div>

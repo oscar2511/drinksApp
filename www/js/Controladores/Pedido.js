@@ -2,11 +2,8 @@
 angular.module('starter')
   .controller('pedidoCtrl', function($scope, PedidoFactory, $ionicPopup, $timeout) {
 
-    $scope.pedido = PedidoFactory;
-
+    $scope.pedido       = PedidoFactory;
     $scope.pedidoActual = $scope.pedido.getPedido();
-
-    console.log($scope.pedidoActual);
 
     /**
      *  Elimina todos los productos del pedido
@@ -14,21 +11,17 @@ angular.module('starter')
     $scope.limpiarCarro = function(){
 
         var confirmPopup = $ionicPopup.confirm({
-          title: 'Confirmar acción',
-          template: 'Realmente quieres limpiar tu pedido?',
+          title:      'Confirmar acción',
+          template:   'Realmente quieres limpiar tu pedido?',
           cancelText: 'Cancelar',
-          okText: 'Confirmar'
+          okText:     'Confirmar'
         });
 
         confirmPopup.then(function(res) {
           if(res) {
             $scope.pedido.limpiarPedido();
-          } else {
-            console.log('You are not sure');
           }
         });
-
-
     };
 
     /**
@@ -41,13 +34,13 @@ angular.module('starter')
       var cantidad = 1;
       $scope.pedido.addProductoCantidad(producto, cantidad);
       var alertPopup = $ionicPopup.alert({
-        title: 'Sumaste 1 unidad mas al producto',
+        title: 'Agregaste 1 unidad al producto',
         buttons: null
       });
 
        $timeout(function() {
-        alertPopup.close(); //close the popup after 3 seconds for some reason
-       }, 1000);
+        alertPopup.close();
+       }, 2000);
 
     };
 
@@ -66,8 +59,8 @@ angular.module('starter')
       });
 
       $timeout(function() {
-        alertPopup.close(); //close the popup after 3 seconds for some reason
-      }, 1000);
+        alertPopup.close();
+      }, 2000);
 
    };
 
@@ -78,10 +71,10 @@ angular.module('starter')
      */
     $scope.eliminarProducto = function(productoPedido){
       var confirmPopup = $ionicPopup.confirm({
-        title: 'Confirmar acción',
-        template: 'Realmente quieres quitar el producto de tu pedido?',
+        title:      'Confirmar acción',
+        template:   'Realmente quieres quitar el producto de tu pedido?',
         cancelText: 'Cancelar',
-        okText: 'Confirmar'
+        okText:     'Confirmar'
       });
 
       confirmPopup.then(function(res) {
@@ -90,23 +83,7 @@ angular.module('starter')
           $scope.pedido.eliminarProductoPedido(producto);
         }
       });
-
     };
 
+
   });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

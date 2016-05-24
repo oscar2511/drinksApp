@@ -68,7 +68,6 @@ angular.module('starter')
               pedido.total    =parseFloat(pedido.total).toFixed(2)
               pedido.subTotal = pedido.total ;
 
-
               if(cantidad < 0)
                 $rootScope.totalProductos = parseInt($rootScope.totalProductos) - 1;
               else
@@ -78,7 +77,6 @@ angular.module('starter')
         }
       });
       return productoEnPedido;
-
     };
 
     /**
@@ -119,8 +117,6 @@ angular.module('starter')
         if(value.producto) {
           if (producto.id == value.producto.id){
             pedido.detalle.splice(key, 1);
-            console.log($rootScope.totalProductos);
-            console.log(value.cantidad);
             $rootScope.totalProductos = parseInt($rootScope.totalProductos) - parseInt(value.cantidad);
             pedido.calcularTotal();
           }
@@ -157,7 +153,6 @@ angular.module('starter')
       pedido.total = 0;
       pedido.subTotal = 0;
       $rootScope.totalProductos = 0;
-      console.log(pedido);
     };
 
     return pedido;

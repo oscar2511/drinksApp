@@ -75,22 +75,22 @@ background: #ececee;
 }
 */
 .menu-header{
-  background-image: url("../img/categorias/menuImg.png")!important;
+  /*background-image: url("../img/categorias/menuImg.png")!important;*/
+  background-color: #111111;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  height:40%;
+  height:6%;
   width: 100%;
 }
 
 /*custom is class added to ion-content*/
 
-.custom {
+.custom{
   background-color: #3f4041 !important; /* This sets the background color*/
-  background-image: url(../img/categorias/imgMenu2.jpg);
+  background-image: url(../img/categorias/imgMenu4.jpg);
   background-repeat: no-repeat;
-  margin-top: 90%;
-
+  opacity: 0.9;
 }
 
 /*Set the background to transparent for ion-item*/
@@ -100,11 +100,21 @@ background: #ececee;
   /*border-top: 1px solid;*/   /*Top Border for each menu item*/
   border-bottom: 0px solid;   /*Bottom border for each menu item*/
   /*border-color: #ffc5d1;*/   /*Sets colors for top and bottom border*/
-  color: white;    /*Text color for each item*/
+  color: #ffffff;    /*Text color for each item*/
+}
+
+ion-item.item:hover a {
+  margin-top: 30px;
+  /*background-color: #050404 !important;*/
+  background-color: #050404 !important;
+  opacity: 0.5;
+  color: white;
+  font-size: 22px;
+  border-bottom: solid #050404 0px;
 }
 
 /*Changes the border for the last item*/
-.custom .item:last-child {
+.custom .item:last-child{
   border-bottom: 0px solid #e7e2e6;
 }
 
