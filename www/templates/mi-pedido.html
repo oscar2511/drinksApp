@@ -2,7 +2,7 @@
   <ion-content>
     <div class="list list-inset">
       <div class="item" align="center">
-        <i class="ion-android-cart"></i> Detalle de tu pedido
+        <i class="ion-android-cart"></i> <h2>Detalle de tu pedido</h2>
       </div>
 
     </div>
@@ -33,14 +33,17 @@
 
     <div class="list" ng-repeat="ped in pedidoActual.detalle" ng-if="$index > 0">
       <div class="item item-avatar">
-        <img class="{{ped.producto.urlImg}}">
+        <img src="http://oscarnr.16mb.com/appDrinks/img/productos/{{ped.producto.urlImg}}">
         <h2> {{ped.producto.nombre}}</h2>
         <div class="row">
-          <div class="col">
-            <strong> {{ped.cantidad}}</strong> |&nbsp;&nbsp; c/u $ {{ped.producto.precio}}
+          <div class="col" align="left">
+            <strong> {{ped.cantidad}}</strong>
           </div>
-          <div class="col col-75">
-            <strong>&nbsp;&nbsp;Subt. $ {{ ped.subTotal }}</strong>
+          <div class="col" align="left">
+            c/u $ {{ped.producto.precio}}
+          </div>
+          <div class="col col-75" align="left">
+           <!-- <strong>&nbsp;&nbsp;Subt. $ {{ ped.subTotal }}</strong>-->
           </div>
         </div>
         <div class="row">
@@ -51,6 +54,7 @@
           <div class="col col-75">
             <button ng-click="eliminarProducto(ped)" class="button button-small button-assertive ion-trash-a assertive">
             </button>
+            <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subt. $ {{ ped.subTotal }}</strong>
           </div>
         </div>
       </div>

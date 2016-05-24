@@ -3,7 +3,8 @@
     <img class="{{ catUrlImg }}">
     <div class="list" ng-repeat="producto in productos" href="#/app/producto/producto-detalle/{{producto}}">
       <a class="item item-thumbnail-left" href="#/app/producto/producto-detalle/{{producto}}">
-        <img class="{{producto.urlImg}}">
+        <!--<img class="{{producto.urlImg}}">-->
+        <img src="http://oscarnr.16mb.com/appDrinks/img/productos/{{producto.urlImg}}">
         <h2> {{producto.nombre}}</h2>
         <p>$ {{producto.precio}}</p>
         <button class="button button-small button-outline icon-center ion-record button-dark"> {{producto.stock}}</button>
