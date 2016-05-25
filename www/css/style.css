@@ -211,3 +211,16 @@ ion-item.item:hover a {
 .ion-item:hover{
   background-color: #007aff!important;
 }
+
+
+/********* mapa *************************/
+.scroll {
+    height: 100%;
+}
+
+#map {
+    width: 100%;
+    height: 40%;
+}
+
+/***************************************/

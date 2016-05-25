@@ -1,5 +1,6 @@
 <ion-view view-title="">
   <ion-content>
+    <div id="map" data-tap-disabled="true"></div>
     <div class="list list-inset">
       <div class="item" align="center">
         <i class="ion-android-cart"></i> <h2>Detalle de tu pedido</h2>
@@ -43,18 +44,20 @@
             c/u $ {{ped.producto.precio}}
           </div>
           <div class="col col-75" align="left">
-           <!-- <strong>&nbsp;&nbsp;Subt. $ {{ ped.subTotal }}</strong>-->
+
           </div>
         </div>
         <div class="row">
           <div class="col">
             <button ng-click="addCantidad(ped)" class="button button-outline button-small ion-plus button-balanced"></button>
+            </div>
+          <div class="col">
             <button ng-click="restarCantidad(ped)" class="button button-outline button-small ion-minus button-assertive"></button>
           </div>
           <div class="col col-75">
             <button ng-click="eliminarProducto(ped)" class="button button-small button-assertive ion-trash-a assertive">
             </button>
-            <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subt. $ {{ ped.subTotal }}</strong>
+            <strong>&nbsp;&nbsp;Subt. $ {{ ped.subTotal }}</strong>
           </div>
         </div>
       </div>

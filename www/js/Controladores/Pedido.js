@@ -1,6 +1,6 @@
 
 angular.module('starter')
-  .controller('pedidoCtrl', function($scope, PedidoFactory, $ionicPopup, $timeout) {
+  .controller('pedidoCtrl', function($scope, PedidoFactory, $ionicPopup, $timeout, $cordovaGeolocation) {
 
     $scope.pedido       = PedidoFactory;
     $scope.pedidoActual = $scope.pedido.getPedido();
@@ -84,6 +84,32 @@ angular.module('starter')
         }
       });
     };
+
+
+    //***************** geo localizacion test *********************
+
+    var options = {timeout: 10000, enableHighAccuracy: true};
+    $cordovaGeolocation.getCurrentPosition(options)
+      .then(function(position){
+        var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+        console.log(latLng);
+        var mapOptions = {
+          center: latLng,
+          zoom: 15,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+
+      $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+    }, function(error){
+      console.log("Could not get location");
+    });
+
+    //*******************************************************************************************************************
+
+
+
 
 
   });
