@@ -2,7 +2,7 @@ angular.module('starter')
   .factory('PedidoFactory', function($q, $rootScope){
 
   /**
-   *
+   * Seteo los valores del json de pedio en null | 0
    * @param id
    * @param fecha
    * @constructor
@@ -16,7 +16,6 @@ angular.module('starter')
   };
 
     $rootScope.totalProductos = 0;
-//    $rootScope.total = 0;
 
     /**
      *
@@ -28,7 +27,7 @@ angular.module('starter')
         pedido.numero = (Math.ceil(Math.random() * 999999999));
         pedido.fecha = new Date();
         console.log('nuevo pedido');
-      }
+      }  // checkeo si existe el mismo producto en el pedido, si no existe lo pusheo
       if(!pedido.checkExisteProducto(producto, cantidad)){
         var subTotalprod = parseInt(cantidad) * parseFloat(producto.precio);
         subTotalprod =  parseFloat(subTotalprod).toFixed(2);
@@ -38,11 +37,7 @@ angular.module('starter')
           subTotal: subTotalprod
         };
         pedido.detalle.push(productoPedido);
-        console.log(pedido.detalle);
         $rootScope.totalProductos = parseInt($rootScope.totalProductos) + parseInt(cantidad);
-        //pedido.subTotal           = parseInt(cantidad) * parseFloat(producto.precio);
-        //pedido.total              = parseFloat(pedido.total) + parseFloat(pedido.subTotal);
-        //console.log(parseFloat($rootScope.total));
       }
     };
 
@@ -149,9 +144,9 @@ angular.module('starter')
       pedido.detalle = [{}];
       pedido.numero  = null;
       pedido.fecha   = null;
-      pedido.totalProductos = 0;
-      pedido.total = 0;
-      pedido.subTotal = 0;
+      pedido.totalProductos     = 0;
+      pedido.total              = 0;
+      pedido.subTotal           = 0;
       $rootScope.totalProductos = 0;
     };
 

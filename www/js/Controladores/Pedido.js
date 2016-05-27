@@ -1,14 +1,20 @@
 
 angular.module('starter')
-  .controller('pedidoCtrl', function($scope, PedidoFactory, $ionicPopup, $timeout, $cordovaGeolocation, $ionicModal) {
-
+  .controller('pedidoCtrl', function($scope,
+                                     PedidoFactory,
+                                     $ionicPopup,
+                                     $timeout,
+                                     $cordovaGeolocation)
+  {
     $scope.pedido       = PedidoFactory;
     $scope.pedidoActual = $scope.pedido.getPedido();
+    $scope.mostrarMapa  = false;
 
-    $scope.mostrarMapa = false;
+    //***************** geo localizacion  *********************
 
-
-    //***************** geo localizacion test *********************
+    /**
+     * Muestra el mapa
+     */
     $scope.verUbicacion = function(){
       var options = {timeout: 10000, enableHighAccuracy: true};
       $cordovaGeolocation.getCurrentPosition(options)
@@ -32,9 +38,6 @@ angular.module('starter')
         }, function(error){
           console.log("Could not get location");
         });
-
-
-
       $scope.mostrarMapa = true;
     };
     //*******************************************************************************************************************
@@ -119,39 +122,4 @@ angular.module('starter')
       });
     };
 
-
-
-//*****************   modal  ***********************
-
-    $ionicModal.fromTemplateUrl('templates/ubicacion.html', {
-      scope: $scope
-    }).then(function(modal) {
-      $scope.modal = modal;
-    });
-
-    // Triggered in the login modal to close it
-    $scope.cerrarUbicacion = function() {
-      $scope.modal.hide();
-    };
-
-    // Open the login modal
-    $scope.ubicacionMostrar = function() {
-      $scope.modal.show();
-    };
-
-    // Perform the login action when the user submits the login form
-    $scope.doLogin = function() {
-      console.log('Doing login', $scope.loginData);
-
-      // Simulate a login delay. Remove this and replace with your login
-      // code if using a login system
-      $timeout(function() {
-        $scope.cerrarUbicacion();
-      }, 1000);
-    };
-
-    //**************************************************
-
-
-
-  });
+});

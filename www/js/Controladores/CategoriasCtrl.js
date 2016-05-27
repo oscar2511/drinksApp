@@ -7,23 +7,24 @@ angular.module('starter')
 
     var url = 'http://oscarnr.16mb.com/appDrinks/categorias/getCategorias.php';
 
+    /**
+     *  Obtener las categorias del servidor
+     */
     $http.get(url)
       .then(function(data){
-        angular.forEach(data.data, function(value, key) {
+        angular.forEach(data.data, function(value) {
           $scope.dataCruda = value;
         });
         $scope.categorias =[];
 
-        angular.forEach($scope.dataCruda, function(valor, key) {
+        angular.forEach($scope.dataCruda, function(valor) {
           $scope.categorias.push({
             id      : valor.id,
             nombre  : valor.nombre,
             urlImg  : valor.urlImg
           });
         });
-        console.log($scope.categorias);
         $ionicLoading.hide();
       });
-
 
   });

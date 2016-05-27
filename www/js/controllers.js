@@ -7,9 +7,5 @@ angular.module('starter.controllers', [])
 
   $scope.pedido = PedidoFactory;
 
-
-  // Create the login modal that we will use later
-
-
 });
 

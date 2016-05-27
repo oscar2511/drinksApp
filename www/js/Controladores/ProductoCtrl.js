@@ -1,10 +1,11 @@
 angular.module('starter')
-  .controller('productoCtrl', function($scope, $stateParams, $rootScope, PedidoFactory, $ionicPopup, $timeout){
-    //var producto = angular.fromJson($stateParams.producto);
-
-
+  .controller('productoCtrl', function($scope,
+                                       $stateParams,
+                                       $rootScope,
+                                       PedidoFactory,
+                                       $ionicPopup)
+  {
     $scope.producto = angular.fromJson($stateParams.producto);
-    //console.log($scope.producto);
     $scope.cantidad = 1;
     $scope.pedido   = PedidoFactory;
 
@@ -17,6 +18,10 @@ angular.module('starter')
     $scope.addAlCarro = function(producto, cantidad){
       $scope.pedido.addProducto(producto, cantidad);
 
+      /**
+       * Mostrar pupop cuando se agrega un producto al pedido
+       * @type {Object|*}
+       */
       var alertPopup = $ionicPopup.alert({
         title:   'Producto añadido correctamente',
         buttons: [{
@@ -24,11 +29,6 @@ angular.module('starter')
           type: 'button button-positive'
         }]
       });
-
-     /* $timeout(function() {
-        alertPopup.close(); //close the popup after 3 seconds for some reason
-      }, 2000);
-          */
 
       alertPopup.then(function(res) {
         console.log('Thank you for not eating my delicious ice cream cone');
