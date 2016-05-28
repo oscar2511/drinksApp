@@ -6,31 +6,52 @@ angular.module('starter')
                                      $timeout,
                                      $cordovaGeolocation)
   {
-    $scope.pedido       = PedidoFactory;
-    $scope.pedidoActual = $scope.pedido.getPedido();
-    $scope.mostrarMapa  = false;
+    $scope.pedido                = PedidoFactory;
+    $scope.pedidoActual          = $scope.pedido.getPedido();
+    $scope.mostrarMapa           = false;
+    $scope.mostrarTotales        = true;
+    $scope.mostrarFormUbicacion  = false;
 
     //***************** geo localizacion  *********************
 
     /**
      * Muestra el mapa
      */
-    $scope.verUbicacion = function(){
+    var verUbicacion = function(){
+
+      var styles = [
+        {
+          stylers: [
+            { hue: "#00ffe6" },
+            { saturation: -20 }
+          ]
+        },{
+          featureType: "road",
+          elementType: "geometry",
+          stylers: [
+            { lightness: 100 },
+            { visibility: "simplified" }
+          ]
+        },{
+          featureType: "road",
+          elementType: "labels",
+          stylers: [
+            { visibility: "on" }
+          ]
+        }
+      ];
+
+      $scope.mostrarTotales = false;
       var options = {timeout: 10000, enableHighAccuracy: true};
       $cordovaGeolocation.getCurrentPosition(options)
         .then(function(position){
           var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
-          var myLocation = new google.maps.Marker({
-            position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
-            map: map,
-            title: "My Location"
-          });
-
           var mapOptions = {
             center: latLng,
             zoom: 15,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            styles: styles
           };
 
           $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
@@ -39,7 +60,13 @@ angular.module('starter')
           console.log("Could not get location");
         });
       $scope.mostrarMapa = true;
+      $scope.mostrarFormUbicacion= true;
     };
+
+    $scope.verUbicacion = function(){
+      verUbicacion();
+    };
+
     //*******************************************************************************************************************
 
     /**
@@ -120,6 +147,12 @@ angular.module('starter')
           $scope.pedido.eliminarProductoPedido(producto);
         }
       });
+    };
+
+    $scope.volverAPedido = function(){
+      $scope.mostrarMapa           = false;
+      $scope.mostrarTotales        = true;
+      $scope.mostrarFormUbicacion  = false;
     };
 
 });
