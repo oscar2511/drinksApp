@@ -9,40 +9,42 @@
       <div class="list list-inset">
         <div class="item" align="center">
           <i class="ion-ios-location"></i> <h2>Ubicación detectada</h2>
-          <p align="left">
-            Con el fin de mejorar los tiempos de entrega, es necesario <br> que ingreses
+          <h2 style="color: #28a54c; text-decoration: underline;">{{direccion.calle}}, {{direccion.numero}}</h2>
+          <p align="left" style="color: darkgrey;">
+            Mejora la exactitud de la dirección, ingresando<br>
             datos de referencia.
           </p>
         </div>
       </div>
       <div class="list">
-        <label class="item item-input">
-          <i class="icon ion-social-whatsapp-outline placeholder-icon"></i>
-          <input type="text" placeholder="Número de teléfono">
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Nro de teléfono</span>
+          <input type="text" placeholder="Teléfono">
         </label>
         <div class="list">
-          <label class="item item-input">
-            <i class="icon ion-android-locate placeholder-icon"></i>
-            <textarea rows="5" placeholder='Ingresa datos de tu ubicación, ej: n° dpto, "frente a..", etc. '></textarea>
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Referencia</span>
+            <input type="text" placeholder='Dir. exacta, piso, dpto, "frente a..."'>
           </label>
         </div>
       </div>
-      <button class="button button-block button-positive">
-        Confirmar pedido
-      </button>
-      <div align="center">
-        <button ng-click="volverAPedido()" class="button button-small button-assertive">
-          Volver
-        </button>
+      <div class="row">
+        <div class="col col-25">
+          <button ng-click="volverAPedido()" class="button button-full button-default">
+            Volver
+          </button>
+        </div>
+        <br>
+        <div class="col">
+          <button class="button button-full button-positive">
+            Confirmar pedido
+          </button>
+        </div>
       </div>
+
     </section>
 
     <section ng-show=" mostrarTotales ">
-      <div class="list list-inset">
-        <div class="item" align="center">
-          <i class="ion-android-cart"></i> <h2>Detalle de tu pedido</h2>
-        </div>
-      </div>
       <div class="card">
         <div class="item item-divider">
           <div class="row">
@@ -55,19 +57,26 @@
           </div>
         </div>
 
-        <div class="item item-divider">
+        <div class="item">
           <div class="row">
-            <div class="col" align="center">
-              <button ng-click="verUbicacion()" class="button button-full button-positive">Finalizar compra</button>
-              <button ng-click="limpiarCarro()" class="button button-small button-assertive">
+            <div class="col col-25" >
+              <button ng-click="limpiarCarro()" class="button button-full button-default">
                 Limpiar
               </button>
+            </div>
+            <div class="col">
+              <button ng-click="verUbicacion()" class="button button-full button-positive">Finalizar compra</button>
             </div>
           </div>
         </div>
       </div>
     </section>
 
+    <div class="list">
+      <div class="item item-divider" align="left">
+         <h2 style="color: #007aff;">Detalle de tu pedido</h2>
+      </div>
+    </div>
     <div class="list" ng-repeat="ped in pedidoActual.detalle" ng-if="$index > 0">
       <div class="item item-avatar">
         <img src="http://oscarnr.16mb.com/appDrinks/img/productos/{{ped.producto.urlImg}}">
@@ -85,13 +94,13 @@
         </div>
         <div class="row">
           <div class="col">
-            <button ng-click="addCantidad(ped)" class="button button-outline button-small ion-plus button-balanced"></button>
+            <button ng-disabled="bloquearBtns" ng-click="addCantidad(ped)" class="button button-outline button-small ion-plus button-balanced"></button>
             </div>
           <div class="col">
-            <button ng-click="restarCantidad(ped)" class="button button-outline button-small ion-minus button-assertive"></button>
+            <button ng-disabled="bloquearBtns" ng-click="restarCantidad(ped)" class="button button-outline button-small ion-minus button-assertive"></button>
           </div>
           <div class="col col-75">
-            <button ng-click="eliminarProducto(ped)" class="button button-small button-assertive ion-trash-a assertive">
+            <button ng-disabled="bloquearBtns" ng-click="eliminarProducto(ped)" class="button button-small button-assertive ion-trash-a assertive">
             </button>
             <strong>&nbsp;&nbsp;Subt. $ {{ ped.subTotal }}</strong>
           </div>

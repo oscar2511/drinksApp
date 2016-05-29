@@ -220,7 +220,11 @@ ion-item.item:hover a {
 
 #map {
     width: 100%;
-    height: 30%;
+    height: 35%;
+    border-bottom: solid 4px lightblue;
+    border-left: solid 10px #ffffff;
+    border-right: solid 10px #ffffff;
+    border-top: solid 10px #ffffff;
 }
 
 /***************************************/

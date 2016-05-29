@@ -4,21 +4,24 @@ angular.module('starter')
                                      PedidoFactory,
                                      $ionicPopup,
                                      $timeout,
-                                     $cordovaGeolocation)
+                                     $cordovaGeolocation,
+                                     $http)
   {
     $scope.pedido                = PedidoFactory;
     $scope.pedidoActual          = $scope.pedido.getPedido();
     $scope.mostrarMapa           = false;
     $scope.mostrarTotales        = true;
     $scope.mostrarFormUbicacion  = false;
+    $scope.bloquearBtns          = false;
 
     //***************** geo localizacion  *********************
+
 
     /**
      * Muestra el mapa
      */
     var verUbicacion = function(){
-
+      $scope.bloquearBtns = true;
       var styles = [
         {
           stylers: [
@@ -47,14 +50,46 @@ angular.module('starter')
         .then(function(position){
           var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
+          var latitud = position.coords.latitude;
+          var longitud = position.coords.longitude;
+
+
           var mapOptions = {
             center: latLng,
             zoom: 15,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
-            styles: styles
+            styles: styles,
+            marker: marker
           };
 
           $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+          //marker//
+          var marker = new google.maps.Marker({
+            position: latLng,
+            map     : $scope.map,
+            title   : "Dirección de entrega"
+          });
+
+
+
+          //detectar calle
+          var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+latitud+','+longitud+'&key=AIzaSyDDM7IL8Ep6r1jUoMXZUo0fDGNuigfX-GU';
+
+          $http.get(url)
+            .then(function(data){
+              $scope.direccion={
+                calle:"",
+                numero: null
+              };
+              //console.log(data.data.results[0].formatted_address);
+              console.log(data.data.results[0].address_components[1].short_name);
+
+              $scope.direccion.calle  = data.data.results[0].address_components[1].short_name;
+              $scope.direccion.numero = data.data.results[0].address_components[0].short_name;
+            });
+
+
 
         }, function(error){
           console.log("Could not get location");
@@ -153,6 +188,7 @@ angular.module('starter')
       $scope.mostrarMapa           = false;
       $scope.mostrarTotales        = true;
       $scope.mostrarFormUbicacion  = false;
+      $scope.bloquearBtns          = false;
     };
 
 });
