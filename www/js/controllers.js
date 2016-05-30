@@ -1,11 +1,13 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, PedidoFactory) {
+.controller('AppCtrl',
+  function($scope,
+           $ionicModal,
+           $timeout,
+           PedidoService)
+  {
 
-  // Form data for the login modal
-  $scope.loginData = {};
-
-  $scope.pedido = PedidoFactory;
+  $scope.pedido = PedidoService;
 
 });
 

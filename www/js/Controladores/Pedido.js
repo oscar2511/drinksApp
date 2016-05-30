@@ -1,13 +1,13 @@
 
 angular.module('starter')
   .controller('pedidoCtrl', function($scope,
-                                     PedidoFactory,
+                                     PedidoService,
                                      $ionicPopup,
                                      $timeout,
                                      $cordovaGeolocation,
                                      $http)
   {
-    $scope.pedido                = PedidoFactory;
+    $scope.pedido                = PedidoService;
     $scope.pedidoActual          = $scope.pedido.getPedido();
     $scope.mostrarMapa           = false;
     $scope.mostrarTotales        = true;

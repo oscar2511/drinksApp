@@ -1,18 +1,10 @@
 <ion-view view-title="">
   <ion-content>
-    <!-------------------------------------------------------------->
-
-    <!-------------------------------------------------------------->
-    <div ng-repeat="categoria in categorias">
-      <a  href="#/app/categorias/{{categoria}}">
+    <div style="padding-bottom: 0px;" ng-repeat="categoria in categorias">
+      <a ng-repeat="categoria in categorias" href="#/app/categorias/{{categoria}}">
         <img class="{{categoria.urlImg}}">
       </a>
    </div>
   </ion-content>
-
-  <div class="bar bar-footer bar-clear" >
-    <!--<a href="#/app/home" class="button button-assertive pull-left"><i class="icon ion-home"></i></a>-->
-    <!--<a href="#/app/mi-pedido" class="button button-clear pull-rigth"><i class="icon ion-ios-cart"></i></a>-->
-  </div>
 
 </ion-view>

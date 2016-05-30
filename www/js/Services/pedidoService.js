@@ -23,19 +23,23 @@ angular.module('starter')
      * @param cantidad
      */
     pedido.addProducto = function(producto, cantidad){
+
       if(!pedido.numero){
         pedido.numero = (Math.ceil(Math.random() * 999999999));
         pedido.fecha = new Date();
         console.log('nuevo pedido');
       }  // checkeo si existe el mismo producto en el pedido, si no existe lo pusheo
+
       if(!pedido.checkExisteProducto(producto, cantidad)){
         var subTotalprod = parseInt(cantidad) * parseFloat(producto.precio);
-        subTotalprod =  parseFloat(subTotalprod).toFixed(2);
+        subTotalprod     =  parseFloat(subTotalprod).toFixed(2);
+
         var productoPedido = {
           producto: producto,
           cantidad: cantidad,
           subTotal: subTotalprod
         };
+
         pedido.detalle.push(productoPedido);
         $rootScope.totalProductos = parseInt($rootScope.totalProductos) + parseInt(cantidad);
       }
@@ -49,8 +53,9 @@ angular.module('starter')
      * @param cantidad
      */
     pedido.checkExisteProducto = function(producto, cantidad){
+
       var productoEnPedido = false;
-      angular.forEach(pedido.detalle, function(value, key) {
+      angular.forEach(pedido.detalle, function(value) {
         if(value.producto) {
           if (producto.id == value.producto.id) {
             productoEnPedido = true;
@@ -60,7 +65,7 @@ angular.module('starter')
               value.subTotal = parseFloat(value.subTotal).toFixed(2);
 
               pedido.total    = parseFloat(pedido.total) + parseFloat(cantidad * producto.precio);
-              pedido.total    =parseFloat(pedido.total).toFixed(2)
+              pedido.total    = parseFloat(pedido.total).toFixed(2)
               pedido.subTotal = pedido.total ;
 
               if(cantidad < 0)

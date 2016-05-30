@@ -2,12 +2,12 @@ angular.module('starter')
   .controller('productoCtrl', function($scope,
                                        $stateParams,
                                        $rootScope,
-                                       PedidoFactory,
+                                       PedidoService,
                                        $ionicPopup)
   {
     $scope.producto = angular.fromJson($stateParams.producto);
     $scope.cantidad = 1;
-    $scope.pedido   = PedidoFactory;
+    $scope.pedido   = PedidoService;
 
     /**
      *  Agregar producto al carro

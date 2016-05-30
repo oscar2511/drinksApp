@@ -11,8 +11,8 @@
           <i class="ion-ios-location"></i> <h2>Ubicación detectada</h2>
           <h2 style="color: #28a54c; text-decoration: underline;">{{direccion.calle}}, {{direccion.numero}}</h2>
           <p align="left" style="color: darkgrey;">
-            Mejora la exactitud de la dirección, ingresando<br>
-            datos de referencia.
+            Mejora la exactitud de la dirección<br>
+            ingresando datos de referencia.
           </p>
         </div>
       </div>
@@ -31,7 +31,7 @@
       <div class="row">
         <div class="col col-25">
           <button ng-click="volverAPedido()" class="button button-full button-default">
-            Volver
+            Atrás
           </button>
         </div>
         <br>
@@ -61,7 +61,7 @@
           <div class="row">
             <div class="col col-25" >
               <button ng-click="limpiarCarro()" class="button button-full button-default">
-                Limpiar
+                <i class="ion-trash-a"></i>
               </button>
             </div>
             <div class="col">
@@ -95,14 +95,14 @@
         <div class="row">
           <div class="col">
             <button ng-disabled="bloquearBtns" ng-click="addCantidad(ped)" class="button button-outline button-small ion-plus button-balanced"></button>
-            </div>
+          </div>
           <div class="col">
-            <button ng-disabled="bloquearBtns" ng-click="restarCantidad(ped)" class="button button-outline button-small ion-minus button-assertive"></button>
+            &nbsp;<button ng-disabled="bloquearBtns" ng-click="restarCantidad(ped)" class="button button-outline button-small ion-minus button-assertive"></button>
           </div>
           <div class="col col-75">
-            <button ng-disabled="bloquearBtns" ng-click="eliminarProducto(ped)" class="button button-small button-assertive ion-trash-a assertive">
+            &nbsp;<button ng-disabled="bloquearBtns" ng-click="eliminarProducto(ped)" class="button button-small button-assertive ion-trash-a assertive">
             </button>
-            <strong>&nbsp;&nbsp;Subt. $ {{ ped.subTotal }}</strong>
+            <strong>&nbsp;Subt. $ {{ ped.subTotal }}</strong>
           </div>
         </div>
       </div>
