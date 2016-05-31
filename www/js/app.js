@@ -1,4 +1,4 @@
-angular.module('starter', ['ionic','ngCordova', 'starter.controllers'])
+angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.controllers'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -8,10 +8,23 @@ angular.module('starter', ['ionic','ngCordova', 'starter.controllers'])
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
 
-    }
-    if (window.StatusBar) {
+    }if (window.StatusBar) {
       StatusBar.styleDefault();
     }
+
+    ///////////  notificaciones push
+
+    var push = new Ionic.Push({
+      "debug": true
+    });
+
+    push.register(function(token) {
+      console.log("Device token de mi app:",token.token);
+      push.saveToken(token);
+    });
+
+    //////////////
+
   });
 })
 
