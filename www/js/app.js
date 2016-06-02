@@ -1,4 +1,4 @@
-angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.controllers'])
+angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.controllers','ionic.service.push'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -15,13 +15,16 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
     ///////////  notificaciones push
 
     var push = new Ionic.Push({
-      "debug": true
+      "debug": true,
+      "onNotification": function(notification) {
+        var payload = notification.payload;
+        console.log(notification, payload);
+      }
     });
 
     push.register(function(token) {
-      console.log("Device token de mi app:",token.token);
-      push.saveToken(token);
-      console.log(push.getAccessToken());
+      console.log("Device token:",token.token);
+      push.saveToken(token);  // persist the token in the Ionic Platform
     });
 
     //////////////

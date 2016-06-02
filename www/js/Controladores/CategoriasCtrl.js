@@ -1,5 +1,5 @@
 angular.module('starter')
-  .controller('categoriasCtrl', function($scope, $http, $sce, $ionicLoading){
+  .controller('categoriasCtrl', function($scope, $http, $sce, $ionicLoading, $ionicPush, $ionicPlatform, $ionicUser){
 
     $ionicLoading.show({
       template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
@@ -26,5 +26,18 @@ angular.module('starter')
         });
         $ionicLoading.hide();
       });
+
+    ////////////////
+    var push = new Ionic.Push({
+      "debug": true,
+      "onNotification": function(notification) {
+        var payload = notification.payload;
+        console.log(notification, payload);
+      },
+      "onRegister": function(data) {
+        console.log(data.token);
+      }
+    });
+    ///////////////
 
   });
