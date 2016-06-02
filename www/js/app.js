@@ -21,6 +21,7 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
     push.register(function(token) {
       console.log("Device token de mi app:",token.token);
       push.saveToken(token);
+      console.log(push.getAccessToken());
     });
 
     //////////////
