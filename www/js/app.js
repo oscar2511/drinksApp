@@ -14,16 +14,14 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
 
     ///////////  notificaciones push
 
-    var push = new Ionic.Push();
-    //push.unregister();
+    var push = new Ionic.Push({
+      "debug": true
+    });
 
-    var callback = function(token) {
-      console.log('Registered token:', token.token);
-      push.saveToken(token);
-      console.log(token);
-    };
-
-    push.register(callback);
+    push.register(function(token) {
+      console.log("My Device token:",token.token);
+      push.saveToken(token);  // persist the token in the Ionic Platform
+    });
     //////////////
 
   });
