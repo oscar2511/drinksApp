@@ -1,10 +1,7 @@
 <ion-view view-title="">
   <ion-content>
-    <button class="button-block" ng-click="enviarPush()">
-      enviar push
-    </button>
     <div style="padding-bottom: 0px;" ng-repeat="categoria in categorias">
-      <a ng-repeat="categoria in categorias" href="#/app/categorias/{{categoria}}">
+      <a  href="#/app/categorias/{{categoria}}">
         <img class="{{categoria.urlImg}}">
       </a>
    </div>
