@@ -13,16 +13,23 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
     }
 
     ///////////  notificaciones push
+    Ionic.io();
+    var push = new Ionic.Push();
+    // this will give you a fresh user or the previously saved 'current user'
+    var user = Ionic.User.current();
 
-    var push = new Ionic.Push({
-      "debug": true
-    });
+    // if the user doesn't have an id, you'll need to give it one.
+    if (!user.id) {
+      user.id = Ionic.User.anonymousId();
+    }
 
-    push.register(function(token) {
-      console.log("My Device token:",token.token);
-      push.saveToken(token);  // persist the token in the Ionic Platform
-    });
-
+    var callback = function (data) {
+      console.log('Registered token:', data.token); // is not empty
+      console.log(data.token);
+      push.addTokenToUser(user);
+      user.save();
+    };
+    push.register(callback);
     //////////////
 
   });
