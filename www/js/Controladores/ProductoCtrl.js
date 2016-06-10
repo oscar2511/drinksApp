@@ -31,7 +31,7 @@ angular.module('starter')
       });
 
       alertPopup.then(function(res) {
-        console.log('Thank you for not eating my delicious ice cream cone');
+
       });
 
     };

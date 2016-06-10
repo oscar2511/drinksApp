@@ -4,32 +4,23 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
-    if (window.cordova && window.cordova.plugins.Keyboard) {
+   /* if (window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
 
     }if (window.StatusBar) {
       StatusBar.styleDefault();
-    }
+    }*/
 
     ///////////  notificaciones push
-    Ionic.io();
-    var push = new Ionic.Push();
-    // this will give you a fresh user or the previously saved 'current user'
-    var user = Ionic.User.current();
+    var push = new Ionic.Push({
+      "debug": true
+    });
 
-    // if the user doesn't have an id, you'll need to give it one.
-    if (!user.id) {
-      user.id = Ionic.User.anonymousId();
-    }
-
-    var callback = function (data) {
-      console.log('Registered token:', data.token); // is not empty
-      console.log(data.token);
-      push.addTokenToUser(user);
-      user.save();
-    };
-    push.register(callback);
+    push.register(function(token) {
+      console.log("My Device token:",token.token);
+      push.saveToken(token);  // persist the token in the Ionic Platform
+    });
     //////////////
 
   });
