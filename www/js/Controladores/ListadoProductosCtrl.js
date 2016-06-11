@@ -1,14 +1,12 @@
 angular.module('starter')
   .controller('listadoProductosCtrl', function(
-    $scope,
-    $stateParams,
-    $http,
-    $ionicLoading,
-    $ionicPopup
-  ){
-
+                                              $scope,
+                                              $stateParams,
+                                              $http,
+                                              $ionicLoading)
+  {
     $ionicLoading.show({
-      template: 'Cargando, espere por favor...'
+      template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
     });
     $scope.imgCategoria = null;
     var url = 'http://oscarnr.16mb.com/appDrinks/listadoProductos/listarProductos.php';
@@ -16,11 +14,14 @@ angular.module('starter')
     var categoria = angular.fromJson($stateParams.categoria);
 
     $scope.catUrlImg = categoria.urlImg;
-    console.log(categoria.urlImg);
 
+    /**
+     * Obtener los producto de una categoria del servidor
+     *
+     */
     $http.post(url, categoria, {headers: { 'Content-Type': 'application/json'}})
       .then(function (data){
-        angular.forEach(data.data, function(value, key) {
+        angular.forEach(data.data, function(value) {
           $scope.dataCruda = value;
         });
         $scope.productos =[];
@@ -32,26 +33,12 @@ angular.module('starter')
               descripcion:  valor.descripcion,
               nombre:       valor.nombre,
               stock:        valor.stock,
-              idCategoria:  valor.idCategoria
+              idCategoria:  valor.idCategoria,
+              urlImg  :     valor.urlImg
             });
           });
 
-        console.log($scope.idCategoria);
-        switch ($scope.idCategoria) {
-          case '1':
-            $scope.imgCategoria = "vinos.jpg";
-            break;
-          case '2':
-            $scope.imgCategoria = "cerveza.jpg";
-            break;
-          case '3':
-            $scope.imgCategoria = "cerveza.jpg";
-            break;
-          default:
-            $scope.imgCategoria = "vinos.jpg";
-            break;
-        }
-
+        $ionicLoading.hide();
       });
-    $ionicLoading.hide();
+
   });

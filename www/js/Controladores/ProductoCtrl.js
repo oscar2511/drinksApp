@@ -1,12 +1,13 @@
 angular.module('starter')
-  .controller('productoCtrl', function($scope, $stateParams, $rootScope, PedidoFactory){
-    //var producto = angular.fromJson($stateParams.producto);
-
-
+  .controller('productoCtrl', function($scope,
+                                       $stateParams,
+                                       $rootScope,
+                                       PedidoService,
+                                       $ionicPopup)
+  {
     $scope.producto = angular.fromJson($stateParams.producto);
-    //console.log($scope.producto);
     $scope.cantidad = 1;
-    $scope.pedido   = PedidoFactory;
+    $scope.pedido   = PedidoService;
 
     /**
      *  Agregar producto al carro
@@ -16,6 +17,23 @@ angular.module('starter')
      */
     $scope.addAlCarro = function(producto, cantidad){
       $scope.pedido.addProducto(producto, cantidad);
+
+      /**
+       * Mostrar pupop cuando se agrega un producto al pedido
+       * @type {Object|*}
+       */
+      var alertPopup = $ionicPopup.alert({
+        title:   'Producto añadido correctamente',
+        buttons: [{
+          text: 'Seguir comprando',
+          type: 'button button-positive'
+        }]
+      });
+
+      alertPopup.then(function(res) {
+
+      });
+
     };
 
   });

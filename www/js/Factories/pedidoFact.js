@@ -1,8 +1,8 @@
 angular.module('starter')
-  .factory('PedidoFactory', function($q){
+  .service('PedidoService', function($q, $rootScope){
 
   /**
-   *
+   * Seteo los valores del json de pedio en null | 0
    * @param id
    * @param fecha
    * @constructor
@@ -10,24 +10,35 @@ angular.module('starter')
     var pedido = {
       numero  : null,
       fecha   : null,
-      detalle :[{}]
+      detalle :[{}],
+      total   : 0,
+      subTotal: 0
   };
 
+    $rootScope.totalProductos = 0;
+
+    /**
+     *
+     * @param producto
+     * @param cantidad
+     */
     pedido.addProducto = function(producto, cantidad){
       if(!pedido.numero){
         pedido.numero = (Math.ceil(Math.random() * 999999999));
         pedido.fecha = new Date();
         console.log('nuevo pedido');
-      }
-
-      if(pedido.checkExisteProducto(producto, cantidad) == false){
+      }  // checkeo si existe el mismo producto en el pedido, si no existe lo pusheo
+      if(!pedido.checkExisteProducto(producto, cantidad)){
+        var subTotalprod = parseInt(cantidad) * parseFloat(producto.precio);
+        subTotalprod =  parseFloat(subTotalprod).toFixed(2);
         var productoPedido = {
           producto: producto,
-          cantidad: cantidad
+          cantidad: cantidad,
+          subTotal: subTotalprod
         };
         pedido.detalle.push(productoPedido);
+        $rootScope.totalProductos = parseInt($rootScope.totalProductos) + parseInt(cantidad);
       }
-      console.log(pedido.detalle);
     };
 
     /**
@@ -43,17 +54,33 @@ angular.module('starter')
         if(value.producto) {
           if (producto.id == value.producto.id) {
             productoEnPedido = true;
-            if( value.cantidad + cantidad > 0)
+            if( value.cantidad + cantidad > 0) {
               value.cantidad = value.cantidad + cantidad;
+              value.subTotal = parseInt(value.cantidad) * parseFloat(producto.precio);
+              value.subTotal = parseFloat(value.subTotal).toFixed(2);
+
+              pedido.total    = parseFloat(pedido.total) + parseFloat(cantidad * producto.precio);
+              pedido.total    =parseFloat(pedido.total).toFixed(2)
+              pedido.subTotal = pedido.total ;
+
+              if(cantidad < 0)
+                $rootScope.totalProductos = parseInt($rootScope.totalProductos) - 1;
+              else
+                $rootScope.totalProductos = parseInt($rootScope.totalProductos) + parseInt(cantidad);
+            }
           }
         }
       });
       return productoEnPedido;
-
     };
 
+    /**
+     *
+     * @returns {{numero: null, fecha: null, detalle: {}[]}}
+     */
     pedido.getPedido = function(){
-      return pedido;
+      if(pedido.calcularTotal())
+        return pedido;
     };
 
     /**
@@ -83,21 +110,44 @@ angular.module('starter')
     pedido.eliminarProductoPedido = function(producto){
       angular.forEach(pedido.detalle, function(value, key) {
         if(value.producto) {
-          if (producto.id == value.producto.id)
+          if (producto.id == value.producto.id){
             pedido.detalle.splice(key, 1);
+            $rootScope.totalProductos = parseInt($rootScope.totalProductos) - parseInt(value.cantidad);
+            pedido.calcularTotal();
+          }
         }
       });
     };
 
+    /**
+     * //todo verificar el proceso de calculo del total del pedido, cuando entro al carro de compras
+     */
+    pedido.calcularTotal = function(){
+      pedido.total    = 0;
+      pedido.subTotal = 0;
+      angular.forEach(pedido.detalle, function(value, key) {
+        if(value.producto) {
+          pedido.subTotal = parseInt(value.cantidad) * parseFloat(value.producto.precio);
+          pedido.subTotal = parseFloat(pedido.subTotal).toFixed(2);
+          pedido.total    = parseFloat(pedido.total) + parseFloat(pedido.subTotal);
+          pedido.total    = parseFloat(pedido.total).toFixed(2);
+          pedido.subTotal = parseFloat(pedido.total).toFixed(2); //puesto porque no se usa por ahora el subtotal(pensado para recargos, etc)
+        }
+      });
+       return true;
+    };
 
     /**
-     *
+     * Limpia el pedido
      */
     pedido.limpiarPedido = function(){
       pedido.detalle = [{}];
       pedido.numero  = null;
       pedido.fecha   = null;
-      console.log(pedido);
+      pedido.totalProductos     = 0;
+      pedido.total              = 0;
+      pedido.subTotal           = 0;
+      $rootScope.totalProductos = 0;
     };
 
     return pedido;
