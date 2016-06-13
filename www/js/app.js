@@ -12,6 +12,7 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
       StatusBar.styleDefault();
     }*/
 
+
     ///////////  notificaciones push
     var push = new Ionic.Push({
       "debug": true
@@ -145,5 +146,3 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
 
   $urlRouterProvider.otherwise('/app/categorias');
 });
-
-

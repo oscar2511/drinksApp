@@ -1,9 +1,28 @@
 angular.module('starter')
-  .controller('categoriasCtrl', function($scope, $http, $sce, $ionicLoading, $ionicPush, $ionicPlatform, $ionicUser){
+  .controller('categoriasCtrl', function(
+    $scope,
+    $http,
+    $sce,
+    $ionicLoading){
+
 
     $ionicLoading.show({
       template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
-    });
+     });
+
+    var fechaHoraActual = new Date();
+
+
+    //todo HACER EL CALCULO DIRECTAMENTE EN EL SERVIDOR
+    /*if(horaActual < horaApertura or horaActual > horaCierre){
+      $scope.Abierto = false;
+      // todo podria llamar  a un template que muestre los horarios y cualquier otra informacion a definir
+
+    }*/
+    var urlAbierto = 'http://oscarnr.16mb.com/appDrinks/general/apertura.php';ar
+
+
+    //////////////////////////////
 
     var url = 'http://oscarnr.16mb.com/appDrinks/categorias/getCategorias.php';
 
