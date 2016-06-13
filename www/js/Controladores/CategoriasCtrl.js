@@ -19,7 +19,14 @@ angular.module('starter')
       // todo podria llamar  a un template que muestre los horarios y cualquier otra informacion a definir
 
     }*/
-    var urlAbierto = 'http://oscarnr.16mb.com/appDrinks/general/apertura.php';ar
+    var urlAbierto = 'http://oscarnr.16mb.com/appDrinks/general/horario.php';
+    $http.get(urlAbierto)
+      .then(function(data){
+        var array = data.data.data;
+        if(array[0] != 1)
+          alert("cerrado");
+        console.log(array[0]);
+      });
 
 
     //////////////////////////////
