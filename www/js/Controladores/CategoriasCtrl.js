@@ -1,10 +1,19 @@
 angular.module('starter')
-  .controller('categoriasCtrl', function($scope, $http, $sce, $ionicLoading, $ionicPush, $ionicPlatform, $ionicUser){
+  .controller('categoriasCtrl',
+  function($scope,
+           $http,
+           $sce,
+           $ionicLoading,
+           $ionicPush,
+           $ionicPlatform,
+           $ionicUser
+  ){
 
     $ionicLoading.show({
       template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
     });
 
+    //console.log($ionicPlatform.ionic.Platform.platform());
     var url = 'http://oscarnr.16mb.com/appDrinks/categorias/getCategorias.php';
 
     /**

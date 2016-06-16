@@ -1,5 +1,8 @@
 angular.module('starter')
-  .service('PedidoService', function($q, $rootScope){
+  .service('PedidoService',
+  function($q,
+           $rootScope,
+           $ionicPlatform){
 
   /**
    * Seteo los valores del json de pedio en null | 0
@@ -16,7 +19,6 @@ angular.module('starter')
   };
 
     $rootScope.totalProductos = 0;
-
     /**
      *
      * @param producto

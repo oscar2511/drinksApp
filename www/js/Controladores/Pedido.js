@@ -1,11 +1,13 @@
 
 angular.module('starter')
-  .controller('pedidoCtrl', function($scope,
-                                     PedidoService,
-                                     $ionicPopup,
-                                     $timeout,
-                                     $cordovaGeolocation,
-                                     $http)
+  .controller('pedidoCtrl',
+  function($scope,
+           PedidoService,
+           $ionicPopup,
+           $timeout,
+           $cordovaGeolocation,
+           $http
+  )
   {
     $scope.pedido                = PedidoService;
     $scope.pedidoActual          = $scope.pedido.getPedido();
@@ -89,8 +91,6 @@ angular.module('starter')
               $scope.direccion.numero = data.data.results[0].address_components[0].short_name;
             });
 
-
-
         }, function(error){
           console.log("Could not get location");
         });
@@ -128,7 +128,8 @@ angular.module('starter')
      *
      * @param productoPedido
      */
-    $scope.addCantidad =  function(productoPedido){
+    $scope.addCantidad = function(productoPedido){
+      console.log(ionic.Platform.device());
       var producto = productoPedido.producto;
       var cantidad = 1;
       $scope.pedido.addProductoCantidad(producto, cantidad);

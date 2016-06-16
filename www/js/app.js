@@ -2,26 +2,18 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-   /* if (window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      cordova.plugins.Keyboard.disableScroll(true);
 
-    }if (window.StatusBar) {
-      StatusBar.styleDefault();
-    }*/
+   var uuid = ionic.Platform.device().uuid;
+   alert(uuid);
 
-    ///////////  notificaciones push
     var push = new Ionic.Push({
       "debug": true
     });
 
-    push.register(function(token) { alert(123);
+    push.register(function(token) {
       console.log("My Device token:",token.token);
-      push.saveToken(token);  // persist the token in the Ionic Platform
+      push.saveToken(token);
     });
-    //////////////
 
   });
 })
