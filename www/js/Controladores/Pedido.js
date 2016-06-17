@@ -55,7 +55,6 @@ angular.module('starter')
           var latitud = position.coords.latitude;
           var longitud = position.coords.longitude;
 
-
           var mapOptions = {
             center: latLng,
             zoom: 15,
@@ -66,14 +65,11 @@ angular.module('starter')
 
           $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-          //marker//
           var marker = new google.maps.Marker({
             position: latLng,
             map     : $scope.map,
             title   : "Dirección de entrega"
           });
-
-
 
           //detectar calle
           var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+latitud+','+longitud+'&key=AIzaSyDDM7IL8Ep6r1jUoMXZUo0fDGNuigfX-GU';

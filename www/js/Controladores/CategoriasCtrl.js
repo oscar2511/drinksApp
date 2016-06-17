@@ -6,8 +6,29 @@ angular.module('starter')
            $ionicLoading,
            $ionicPush,
            $ionicPlatform,
-           $ionicUser
+           $ionicUser,
+           PedidoService
   ){
+
+    $scope.pedido = PedidoService;
+
+    var push = new Ionic.Push({
+      "debug": true
+    });
+
+    $ionicPlatform.ready(function() {
+      var uuid = ionic.Platform.device().uuid;
+      $scope.pedido.uuid = uuid;
+    });
+
+    push.register(function(token) {
+      console.log("Mi token:", token.token);
+      $scope.pedido.token = token.token;
+      push.saveToken(token);
+    });
+
+
+    console.log($scope.pedido);
 
     $ionicLoading.show({
       template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
@@ -15,7 +36,6 @@ angular.module('starter')
 
     //console.log($ionicPlatform.ionic.Platform.platform());
     var url = 'http://oscarnr.16mb.com/appDrinks/categorias/getCategorias.php';
-
     /**
      *  Obtener las categorias del servidor
      */

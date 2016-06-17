@@ -1,5 +1,6 @@
 angular.module('starter')
-  .service('PedidoService', function($q, $rootScope){
+  .service('PedidoService',
+    function($q, $rootScope){
 
   /**
    * Seteo los valores del json de pedio en null | 0
@@ -10,9 +11,11 @@ angular.module('starter')
     var pedido = {
       numero  : null,
       fecha   : null,
-      detalle :[{}],
+      detalle : [{}],
       total   : 0,
-      subTotal: 0
+      subTotal: 0,
+      token   : null,
+      uuid    : null
   };
 
     $rootScope.totalProductos = 0;

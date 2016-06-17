@@ -3,17 +3,6 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
 
-   var uuid = ionic.Platform.device().uuid;
-   alert(uuid);
-
-    var push = new Ionic.Push({
-      "debug": true
-    });
-
-    push.register(function(token) {
-      console.log("My Device token:",token.token);
-      push.saveToken(token);
-    });
 
   });
 })
