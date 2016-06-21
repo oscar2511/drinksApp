@@ -14,8 +14,11 @@ angular.module('starter')
       detalle : [{}],
       total   : 0,
       subTotal: 0,
-      token   : null,
-      uuid    : null
+      dispositivo:{
+        'id'   : null,
+        'token': null,
+        'uuid' : null
+      }
   };
 
     $rootScope.totalProductos = 0;

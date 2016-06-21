@@ -188,4 +188,39 @@ angular.module('starter')
       $scope.bloquearBtns          = false;
     };
 
+
+    /**
+     *
+     */
+    $scope.confirmarPedido = function(){
+      var url = 'http://23.94.249.163/appDrinks/pedidos/pedidos.php';
+
+      //var categoria = angular.fromJson($stateParams.categoria);
+      var pedido = angular.fromJson($scope.pedido);
+
+      /**
+       * Obtener los producto de una categoria del servidor
+       *
+       */
+      $http.post(url,pedido, {headers: { 'Content-Type': 'application/json'}})
+        .then(function (data){
+          console.log(data);
+
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    };
+
 });

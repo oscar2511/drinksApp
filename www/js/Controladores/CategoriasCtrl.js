@@ -10,6 +10,10 @@ angular.module('starter')
            PedidoService
   ){
 
+    $ionicLoading.show({
+      template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
+    });
+
     $scope.pedido = PedidoService;
 
     var push = new Ionic.Push({
@@ -17,8 +21,7 @@ angular.module('starter')
     });
 
     $ionicPlatform.ready(function() {
-      var uuid = ionic.Platform.device().uuid;
-      $scope.pedido.uuid = uuid;
+      $scope.pedido.uuid = ionic.Platform.device().uuid;
     });
 
     push.register(function(token) {
@@ -27,15 +30,25 @@ angular.module('starter')
       push.saveToken(token);
     });
 
+    var dataDispositivo = {
+      'uuid' : $scope.pedido.uuid,
+      'token': $scope.pedido.token
+    };
 
-    console.log($scope.pedido);
-
-    $ionicLoading.show({
-      template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
-    });
+    // enviar uuid de dispositivo al servidor para ver si ya existe el dispositivo
+    /**
+     *
+     * @type {string}
+     */
+    var url = 'http://23.94.249.163/appDrinks/dispositivos/dispositivos.php';
+    $http.post(url,dataDispositivo , {headers: { 'Content-Type': 'application/json'}})
+      .then(function (data){
+        $scope.pedido.dispositivo = data.dispositivo; //todo poner dentro del pedido, el objeto Dispositivo (crear factory)
+      });
 
     //console.log($ionicPlatform.ionic.Platform.platform());
-    var url = 'http://oscarnr.16mb.com/appDrinks/categorias/getCategorias.php';
+    //var url = 'http://oscarnr.16mb.com/appDrinks/categorias/getCategorias.php';
+    var url = 'http://23.94.249.163/appDrinks/categorias/getCategorias.php';
     /**
      *  Obtener las categorias del servidor
      */
