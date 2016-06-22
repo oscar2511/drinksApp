@@ -14,26 +14,16 @@ angular.module('starter')
       template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
      });
 
-    var fechaHoraActual = new Date();
 
-
-    //todo HACER EL CALCULO DIRECTAMENTE EN EL SERVIDOR
-    /*if(horaActual < horaApertura or horaActual > horaCierre){
-      $scope.Abierto = false;
-      // todo podria llamar  a un template que muestre los horarios y cualquier otra informacion a definir
-
-    }*/
     var urlAbierto = 'http://23.94.249.163/appDrinks/general/horario.php';
     $http.get(urlAbierto)
       .then(function(data){
         var array = data.data.data;
         if(array[0] != 1)
-          alert("cerrado");
+          console.log("cerrado");
         console.log(array[0]);
       });
 
-
-    //////////////////////////////
 
     $scope.pedido = PedidoService;
 
