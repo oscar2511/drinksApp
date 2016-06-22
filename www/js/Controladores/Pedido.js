@@ -1,11 +1,13 @@
 
 angular.module('starter')
-  .controller('pedidoCtrl', function($scope,
-                                     PedidoService,
-                                     $ionicPopup,
-                                     $timeout,
-                                     $cordovaGeolocation,
-                                     $http)
+  .controller('pedidoCtrl',
+  function($scope,
+           PedidoService,
+           $ionicPopup,
+           $timeout,
+           $cordovaGeolocation,
+           $http
+  )
   {
     $scope.pedido                = PedidoService;
     $scope.pedidoActual          = $scope.pedido.getPedido();
@@ -53,7 +55,6 @@ angular.module('starter')
           var latitud = position.coords.latitude;
           var longitud = position.coords.longitude;
 
-
           var mapOptions = {
             center: latLng,
             zoom: 15,
@@ -64,14 +65,11 @@ angular.module('starter')
 
           $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-          //marker//
           var marker = new google.maps.Marker({
             position: latLng,
             map     : $scope.map,
             title   : "Dirección de entrega"
           });
-
-
 
           //detectar calle
           var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+latitud+','+longitud+'&key=AIzaSyDDM7IL8Ep6r1jUoMXZUo0fDGNuigfX-GU';
@@ -88,8 +86,6 @@ angular.module('starter')
               $scope.direccion.calle  = data.data.results[0].address_components[1].short_name;
               $scope.direccion.numero = data.data.results[0].address_components[0].short_name;
             });
-
-
 
         }, function(error){
           console.log("Could not get location");
@@ -128,7 +124,8 @@ angular.module('starter')
      *
      * @param productoPedido
      */
-    $scope.addCantidad =  function(productoPedido){
+    $scope.addCantidad = function(productoPedido){
+      console.log(ionic.Platform.device());
       var producto = productoPedido.producto;
       var cantidad = 1;
       $scope.pedido.addProductoCantidad(producto, cantidad);
@@ -189,6 +186,41 @@ angular.module('starter')
       $scope.mostrarTotales        = true;
       $scope.mostrarFormUbicacion  = false;
       $scope.bloquearBtns          = false;
+    };
+
+
+    /**
+     *
+     */
+    $scope.confirmarPedido = function(){
+      var url = 'http://23.94.249.163/appDrinks/pedidos/pedidos.php';
+
+      //var categoria = angular.fromJson($stateParams.categoria);
+      var pedido = angular.fromJson($scope.pedido);
+
+      /**
+       * Obtener los producto de una categoria del servidor
+       *
+       */
+      $http.post(url,pedido, {headers: { 'Content-Type': 'application/json'}})
+        .then(function (data){
+          console.log(data);
+
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     };
 
 });

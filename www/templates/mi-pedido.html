@@ -36,7 +36,7 @@
         </div>
         <br>
         <div class="col">
-          <button class="button button-full button-positive">
+          <button class="button button-full button-positive" ng-click="confirmarPedido()">
             Confirmar pedido
           </button>
         </div>
@@ -79,7 +79,7 @@
     </div>
     <div class="list" ng-repeat="ped in pedidoActual.detalle" ng-if="$index > 0">
       <div class="item item-avatar">
-        <img src="http://oscarnr.16mb.com/appDrinks/img/productos/{{ped.producto.urlImg}}">
+        <img src="http://23.94.249.163/appDrinks/img/productos/{{ped.producto.urlImg}}">
         <h2> {{ped.producto.nombre}}</h2>
         <div class="row">
           <div class="col" align="left">
