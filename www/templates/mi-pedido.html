@@ -44,7 +44,26 @@
 
     </section>
 
-    <section ng-show=" mostrarTotales ">
+    <section ng-if="!abierto">
+      <div class="list card">
+
+        <div class="item">
+          <h2>En estos momentos no estamos atendiendo</h2>
+        </div>
+
+        <div class="item item-body">
+          <img class="full-image" src="">
+          <p>
+            Nuestros horarios son: de Jueves a Domingos de hs 22 a hs 6.
+            Puedes recorrer nuestra carta de bebidas y conocer nuestros productos
+          </p>
+
+        </div>
+
+      </div>
+    </section >
+
+    <section ng-if="abierto" ng-show=" mostrarTotales ">
       <div class="card">
         <div class="item item-divider">
           <div class="row">
@@ -65,14 +84,14 @@
               </button>
             </div>
             <div class="col">
-              <button ng-click="verUbicacion()" class="button button-full button-positive">Finalizar compra</button>
+              <button  ng-click="verUbicacion()" class="button button-full button-positive">Finalizar compra</button>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <div class="list">
+    <div ng-if="abierto" class="list">
       <div class="item item-divider" align="left">
          <h2 style="color: #007aff;">Detalle de tu pedido</h2>
       </div>

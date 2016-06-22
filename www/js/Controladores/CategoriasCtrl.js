@@ -7,7 +7,8 @@ angular.module('starter')
            $ionicPush,
            $ionicPlatform,
            $ionicUser,
-           PedidoService
+           PedidoService,
+           $rootScope
   ){
 
     $ionicLoading.show({
@@ -15,13 +16,16 @@ angular.module('starter')
      });
 
 
+    /**
+     * Chequeo si esta abierto (horario)
+     * @type {string}
+     */
     var urlAbierto = 'http://23.94.249.163/appDrinks/general/horario.php';
     $http.get(urlAbierto)
       .then(function(data){
         var array = data.data.data;
         if(array[0] != 1)
-          console.log("cerrado");
-        console.log(array[0]);
+          $rootScope.abierto = false;
       });
 
 

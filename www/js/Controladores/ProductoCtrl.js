@@ -3,7 +3,8 @@ angular.module('starter')
                                        $stateParams,
                                        $rootScope,
                                        PedidoService,
-                                       $ionicPopup)
+                                       $ionicPopup,
+                                       $http)
   {
     $scope.producto = angular.fromJson($stateParams.producto);
     $scope.cantidad = 1;
