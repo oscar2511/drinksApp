@@ -126,5 +126,3 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
 
   $urlRouterProvider.otherwise('/app/categorias');
 });
-
-
