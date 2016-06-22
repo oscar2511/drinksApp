@@ -21,42 +21,37 @@ angular.module('starter')
     });
 
     $ionicPlatform.ready(function() {
-      $scope.pedido.uuid = 12345678;//ionic.Platform.device().uuid;
-    });
-
-    push.register(function(token) {
-      console.log("Mi token:", token.token);
-      $scope.pedido.token = token.token;
-      push.saveToken(token);
-    });
-
-    var dataDispositivoCruda =  {
-      'uuid' : $scope.pedido.uuid,
-      'token': $scope.pedido.token
-    };
-
-    var dataDispositivo = angular.fromJson(dataDispositivoCruda);
-
-    var defaultHTTPHeaders = {
-      'Content-Type':'aplication/json',
-      'Accept':'application/json'
-    };
-
-    $http.defaults.headers.post = defaultHTTPHeaders;
-
-    var tok = 123;
-    var uuid= 456;
-    console.log($scope.pedido.token);
-    /**
-     *
-     * @type {string}
-     */
-    var urlDispositivo = 'http://23.94.249.163/appDrinks/dispositivos/dispositivos.php';
-    //$http.post(url,dataDispositivo , {headers: { 'Content-Type': 'application/json'}})
-    $http.post(urlDispositivo, {"token": tok,"uuid":uuid})
-      .then(function (data){
-        $scope.pedido.dispositivo = data.dispositivo; //todo poner dentro del pedido, el objeto Dispositivo (crear factory)
+      push.register(function(token) {
+        setDataDispositivo(token.token);
+        console.log("Mi token:", token.token);
+        push.saveToken(token);
       });
+    }).then(function(data){
+
+    });
+
+    var setDataDispositivo = function(token){
+      var dataDispositivo =  {
+        'uuid' : ionic.Platform.device().uuid,
+        'token': token
+      };
+
+      var defaultHTTPHeaders = {
+        'Content-Type':'aplication/json',
+        'Accept':'' +
+        'application/json'
+      };
+
+      $http.defaults.headers.post = defaultHTTPHeaders;
+
+      var urlDispositivo = 'http://23.94.249.163/appDrinks/dispositivos/dispositivos.php';
+      $http.post(urlDispositivo, dataDispositivo)
+        .then(function (data){
+          $scope.pedido.dispositivo = data.dispositivo; //todo poner dentro del pedido, el objeto Dispositivo (crear factory)
+        });
+
+
+    };
 
     //console.log($ionicPlatform.ionic.Platform.platform());
     //var url = 'http://oscarnr.16mb.com/appDrinks/categorias/getCategorias.php';
