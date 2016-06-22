@@ -32,7 +32,7 @@ angular.module('starter')
 
     var setDataDispositivo = function(token){
       var dataDispositivo =  {
-        'uuid' : ionic.Platform.device().uuid,
+        'uuid' : 9999,//ionic.Platform.device().uuid,
         'token': token
       };
 
