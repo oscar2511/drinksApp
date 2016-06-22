@@ -36,9 +36,10 @@
           <button ng-if="abierto" ng-disabled="addPedido.$invalid"  ng-click="addAlCarro(producto, cantidad)" class="button  button-block icon-center ion-plus-circled button-positive">
             Agregar
           </button>
-          <button ng-if="!abierto" ng-disabled="addPedido.$invalid"  ng-click="" class="button  button-block icon-center ion-plus-circled button-positive">
-            Está cerrado
+          <a href="#/app/mi-pedido"><button ng-if="!abierto" ng-disabled="addPedido.$invalid" class="button  button-block icon-center ion-plus-circled button-positive">
+            Agregar
           </button>
+          </a>
         </form>
       </div>
     </div>
