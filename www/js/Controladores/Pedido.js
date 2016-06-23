@@ -85,6 +85,12 @@ angular.module('starter')
 
               $scope.direccion.calle  = data.data.results[0].address_components[1].short_name;
               $scope.direccion.numero = data.data.results[0].address_components[0].short_name;
+
+              $scope.pedido.ubicacion.direccion = $scope.direccion;
+              $scope.pedido.ubicacion.coordenadas = {
+                'lat' : latitud,
+                'long': longitud
+              }
             });
 
         }, function(error){
@@ -92,6 +98,7 @@ angular.module('starter')
         });
       $scope.mostrarMapa = true;
       $scope.mostrarFormUbicacion= true;
+      console.log($scope.pedido);
     };
 
     $scope.verUbicacion = function(){
@@ -193,13 +200,13 @@ angular.module('starter')
      *
      */
     $scope.confirmarPedido = function(){
-      var url = 'http://23.94.249.163/appDrinks/pedidos/pedidos.php';
 
-      //var categoria = angular.fromJson($stateParams.categoria);
+
+      var url = 'http://23.94.249.163/appDrinks/pedidos/pedidos.php';
       var pedido = angular.fromJson($scope.pedido);
 
       /**
-       * Obtener los producto de una categoria del servidor
+       *
        *
        */
       $http.post(url,pedido, {headers: { 'Content-Type': 'application/json'}})
@@ -207,19 +214,6 @@ angular.module('starter')
           console.log(data);
 
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     };
 

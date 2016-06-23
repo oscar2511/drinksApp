@@ -15,6 +15,7 @@ angular.module('starter')
       template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
      });
 
+    $scope.pedido = PedidoService;
 
     /**
      * Chequeo si esta abierto (horario)
@@ -25,16 +26,21 @@ angular.module('starter')
       .then(function(data){
         var array = data.data.data;
         if(array[0] != 1)
-          $rootScope.abierto = false;
+          $rootScope.abierto = true;
       });
 
 
-    $scope.pedido = PedidoService;
-
+    /**
+     * Debug push
+     * @type {Ionic.Push}
+     */
     var push = new Ionic.Push({
       "debug": true
     });
 
+    /**
+     * Obtener token
+     */
     $ionicPlatform.ready(function() {
       push.register(function(token) {
         setDataDispositivo(token.token);
@@ -45,30 +51,34 @@ angular.module('starter')
 
     });
 
+    /**
+     * Setear datos del dispositivo
+     * @param token
+     */
     var setDataDispositivo = function(token){
       var dataDispositivo =  {
-        'uuid' : 9999,//ionic.Platform.device().uuid,
-        'token': token
+        'token' : token,
+        'uuid'  : ionic.Platform.device().uuid
       };
-
-      var defaultHTTPHeaders = {
-        'Content-Type':'aplication/json',
-        'Accept':'' +
-        'application/json'
-      };
-
-      $http.defaults.headers.post = defaultHTTPHeaders;
-
-      var urlDispositivo = 'http://23.94.249.163/appDrinks/dispositivos/dispositivos.php';
-      $http.post(urlDispositivo, dataDispositivo)
-        .then(function (data){
-          $scope.pedido.dispositivo = data.dispositivo; //todo poner dentro del pedido, el objeto Dispositivo (crear factory)
-        });
-
-
+      registrarDisp(dataDispositivo)
     };
 
-    //console.log($ionicPlatform.ionic.Platform.platform());
+    /**
+     * Llamada api que registra el dispositivo en la bd
+     * @param dataDispositivo
+     */
+    var registrarDisp = function(dataDispositivo){
+      $scope.pedido.dispositivo.uuid = dataDispositivo.uuid;
+      $scope.pedido.dispositivo.token = dataDispositivo.token;
+      console.log($scope.pedido);
+      var urlDispositivo = 'http://23.94.249.163/appDrinks/dispositivos/dispositivos.php';
+      $http.post(urlDispositivo, dataDispositivo, {headers: { 'Content-Type': 'application/json'}})
+        .then(function (data){
+
+        });
+    };
+
+
     var url = 'http://23.94.249.163/appDrinks/categorias/getCategorias.php';
     /**
      *  Obtener las categorias del servidor

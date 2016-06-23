@@ -15,11 +15,20 @@ angular.module('starter')
       total   : 0,
       subTotal: 0,
       dispositivo:{
-        'id'   : null,
         'token': null,
         'uuid' : null
+      },
+      ubicacion:{
+        coordenadas: {
+          'lat' : null,
+          'long': null
+        },
+        direccion  : {
+          'calle' : null,
+          'numero': null
+        }
       }
-  };
+    };
 
     $rootScope.totalProductos = 0;
     $rootScope.abierto = true;
