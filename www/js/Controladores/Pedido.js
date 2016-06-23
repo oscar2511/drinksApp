@@ -17,8 +17,6 @@ angular.module('starter')
     $scope.bloquearBtns          = false;
 
     //***************** geo localizacion  *********************
-
-
     /**
      * Muestra el mapa
      */
