@@ -25,7 +25,7 @@ angular.module('starter')
     $http.get(urlAbierto)
       .then(function(data){
         var array = data.data.data;
-        if(array[0] != 1)
+        if(array.length < 1)
           $rootScope.abierto = true;
       });
 
