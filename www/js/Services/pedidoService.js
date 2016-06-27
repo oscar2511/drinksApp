@@ -26,6 +26,10 @@ angular.module('starter')
         direccion  : {
           'calle' : null,
           'numero': null
+        },
+        referencia :{
+          'tel'     : null,
+          'dir_ref' : null
         }
       }
     };

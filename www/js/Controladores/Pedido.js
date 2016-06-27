@@ -197,16 +197,15 @@ angular.module('starter')
     /**
      *
      */
-    $scope.confirmarPedido = function(){
+    $scope.confirmarPedido = function(tel, dir_ref){
 
-
+      $scope.pedido.ubicacion.referencia.tel     = tel;
+      $scope.pedido.ubicacion.referencia.dir_ref = dir_ref;
       var url = 'http://23.94.249.163/appDrinks/pedidos/pedidos.php';
       var pedido = angular.fromJson($scope.pedido);
 
-      /**
-       *
-       *
-       */
+      console.log($scope.pedido);
+
       $http.post(url,pedido, {headers: { 'Content-Type': 'application/json'}})
         .then(function (data){
           console.log(data);

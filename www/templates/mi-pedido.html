@@ -11,7 +11,7 @@
           <i class="ion-ios-location"></i> <h2>Ubicación detectada</h2>
           <h2 style="color: #28a54c; text-decoration: underline;">{{direccion.calle}}, {{direccion.numero}}</h2>
           <p align="left" style="color: darkgrey;">
-            Mejora la exactitud de la dirección<br>
+            Mejora la exactitud de tu dirección<br>
             ingresando datos de referencia.
           </p>
         </div>
@@ -19,12 +19,12 @@
       <div class="list">
         <label class="item item-input item-stacked-label">
           <span class="input-label">Nro de teléfono</span>
-          <input type="text" placeholder="Teléfono">
+          <input type="text" placeholder="Teléfono" ng-model="tel">
         </label>
         <div class="list">
           <label class="item item-input item-stacked-label">
             <span class="input-label">Referencia</span>
-            <input type="text" placeholder='Dir. exacta, piso, dpto, "frente a..."'>
+            <input type="text" placeholder='Dir. exacta, piso, dpto, "frente a..."' ng-model="dir_ref">
           </label>
         </div>
       </div>
@@ -36,7 +36,7 @@
         </div>
         <br>
         <div class="col">
-          <button class="button button-full button-positive" ng-click="confirmarPedido()">
+          <button class="button button-full button-positive" ng-click="confirmarPedido(tel, dir_ref)">
             Confirmar pedido
           </button>
         </div>
