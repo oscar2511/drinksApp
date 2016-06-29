@@ -8,7 +8,8 @@ angular.module('starter')
            $ionicPlatform,
            $ionicUser,
            PedidoService,
-           $rootScope
+           $rootScope,
+           $q
   ){
 
     $ionicLoading.show({
@@ -21,13 +22,33 @@ angular.module('starter')
      * Chequeo si esta abierto (horario)
      * @type {string}
      */
-    var urlAbierto = 'http://23.94.249.163/appDrinks/general/horario.php';
-    $http.get(urlAbierto)
-      .then(function(data){
-        var array = data.data.data;
-        if(array.length < 1)
-          $rootScope.abierto = true;
-      });
+    $scope.obtenerHorario = function(){
+      var urlAbierto = 'http://23.94.249.163/appDrinks/general/horario.php';
+      return $http.get(urlAbierto)
+        .then(function(data){
+          var array = data.data.data;
+          if(array.length < 1)
+            $rootScope.abierto = false;
+          return $q.resolve();
+        })
+    };
+
+
+    /**
+     * Ejecuta todas las funcines de inicializacion (resuelve todas las promesas)
+     * @returns {*}
+     */
+    $scope.inicializar = function() {
+      return $q.all([
+        $scope.obtenerHorario(),
+        $scope.obtenerCategorias()
+      ])
+        .then(function() {
+          console.log('Llamadas api OK.');
+        }).catch(function(err) {
+          console.log('error resolviendo las promesas'+ err); //todo ver como manejar el error
+        });
+    };
 
 
     /**
@@ -75,30 +96,38 @@ angular.module('starter')
       $http.post(urlDispositivo, dataDispositivo, {headers: { 'Content-Type': 'application/json'}})
         .then(function (data){
 
+        })
+        .catch(function(){
+          alert("error registrando el dispositivo");
         });
     };
 
 
-    var url = 'http://23.94.249.163/appDrinks/categorias/getCategorias.php';
     /**
-     *  Obtener las categorias del servidor
+     * Obtener las categorias del servidor
+     * @returns {*}
      */
-    $http.get(url)
-      .then(function(data){
-        angular.forEach(data.data, function(value) {
-          $scope.dataCruda = value;
-        });
-        $scope.categorias =[];
-
-        angular.forEach($scope.dataCruda, function(valor) {
-          $scope.categorias.push({
-            id      : valor.id,
-            nombre  : valor.nombre,
-            urlImg  : valor.urlImg
+    $scope.obtenerCategorias = function() {
+      var url = 'http://23.94.249.163/appDrinks/categorias/getCategorias.php';
+      return $http.get(url)
+        .then(function (data) {
+          angular.forEach(data.data, function (value) {
+            $scope.dataCruda = value;
           });
-        });
-        $ionicLoading.hide();
-      });
+          $scope.categorias = [];
 
+          angular.forEach($scope.dataCruda, function (valor) {
+            $scope.categorias.push({
+              id: valor.id,
+              nombre: valor.nombre,
+              urlImg: valor.urlImg
+            });
+          });
+          $ionicLoading.hide();
+          return $q.resolve();
+        });
+      };
+
+    $scope.inicializar();
 
   });
