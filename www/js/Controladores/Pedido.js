@@ -210,12 +210,10 @@ angular.module('starter')
         .then(function (data){
           console.log(data);
 
-          // Define relevant info
           var jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4MjllZTIxOS01MzA4LTRhZDMtYWQ5NS1lZTQ3Y2YxMzhiMTMifQ.QzA7PSQHEEiSz-cEun7iUZdJRyAXd3iIRQSlsWPL0Yw';
           var tokens = ['db0ElKjAjOs:APA91bG8XRFDaNpDbRm4pZ1pwtJV4xcuJxFBf2iOWTC9hMJ-3R1HkvbuqU0wWgv9MIEvs013lu1AUkkNRruf3AMnMKNNGU08Fw4KxWFywL242iKIrQTjAPbXUOGiSXcuJpzgaUwHuiTA'];
           var profile = 'testdevelopment';
 
-// Build the request object
           var req = {
             method: 'POST',
             url: 'https://api.ionic.io/push/notifications',
@@ -231,11 +229,8 @@ angular.module('starter')
                 "message": "Mensaje push test",
                 "android": {
                   "title": "Test app drinks android",
-                  "message": "Mensaje push test android"
-                },
-                "ios": {
-                  "title": "Howdy",
-                  "message": "Hello iOS!"
+                  "message": "Mensaje push test android",
+                  "payload": $scope.pedido
                 }
               }
             }
@@ -249,12 +244,9 @@ angular.module('starter')
             // Handle error
             console.log("Mensaje Push: Mensaje error", error);
           });
-
-
         }).catch(function(){
           alert('error');
         });
-
     };
 
 });
