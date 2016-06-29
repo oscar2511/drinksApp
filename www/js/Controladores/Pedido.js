@@ -210,6 +210,49 @@ angular.module('starter')
         .then(function (data){
           console.log(data);
 
+          // Define relevant info
+          var jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4MjllZTIxOS01MzA4LTRhZDMtYWQ5NS1lZTQ3Y2YxMzhiMTMifQ.QzA7PSQHEEiSz-cEun7iUZdJRyAXd3iIRQSlsWPL0Yw';
+          var tokens = ['db0ElKjAjOs:APA91bG8XRFDaNpDbRm4pZ1pwtJV4xcuJxFBf2iOWTC9hMJ-3R1HkvbuqU0wWgv9MIEvs013lu1AUkkNRruf3AMnMKNNGU08Fw4KxWFywL242iKIrQTjAPbXUOGiSXcuJpzgaUwHuiTA'];
+          var profile = 'testdevelopment';
+
+// Build the request object
+          var req = {
+            method: 'POST',
+            url: 'https://api.ionic.io/push/notifications',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + jwt
+            },
+            data: {
+              "tokens": tokens,
+              "profile": profile,
+              "notification": {
+                "title": "Test app drinks",
+                "message": "Mensaje push test",
+                "android": {
+                  "title": "Test app drinks android",
+                  "message": "Mensaje push test android"
+                },
+                "ios": {
+                  "title": "Howdy",
+                  "message": "Hello iOS!"
+                }
+              }
+            }
+          };
+
+// Make the API call
+          $http(req).success(function(resp){
+            // Handle success
+            console.log("Mensaje Push: Mensaje success", resp);
+          }).error(function(error){
+            // Handle error
+            console.log("Mensaje Push: Mensaje error", error);
+          });
+
+
+        }).catch(function(){
+          alert('error');
         });
 
     };
