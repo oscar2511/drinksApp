@@ -94,6 +94,15 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
       }
     })
 
+    .state('app.error', {
+      url: '/error',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/error.html'
+        }
+      }
+    })
+
     .state('app.salir', {
       url: '/salir',
       views: {

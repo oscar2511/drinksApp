@@ -9,7 +9,8 @@ angular.module('starter')
            $ionicUser,
            PedidoService,
            $rootScope,
-           $q
+           $q,
+           $state
   ){
 
     $ionicLoading.show({
@@ -17,6 +18,8 @@ angular.module('starter')
      });
 
     $scope.pedido = PedidoService;
+
+    //$state.go('app.error');
 
     /**
      * Chequeo si esta abierto (horario)

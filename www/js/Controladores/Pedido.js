@@ -6,7 +6,8 @@ angular.module('starter')
            $ionicPopup,
            $timeout,
            $cordovaGeolocation,
-           $http
+           $http,
+           $state
   )
   {
     $scope.pedido                = PedidoService;
@@ -248,15 +249,18 @@ angular.module('starter')
             });
 
             alertPopup.then(function(res) {
-
+              $scope.pedido.limpiarPedido();
+              $state.go('app.categorias');
             });
 
           }).error(function(error){
             // Handle error
             console.log("Mensaje Push: Mensaje error", error);
+            $state.go('app.error');
           });
         }).catch(function(){
           alert('error');
+          $state.go('app.error');
         });
     };
 
