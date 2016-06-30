@@ -225,8 +225,8 @@ angular.module('starter')
               "tokens": tokens,
               "profile": profile,
               "notification": {
-                "title": "Test app drinks",
-                "message": "Mensaje push test",
+                "title": "Nuevo pedido",
+                "message": "Direccion: "+$scope.pedido.ubicacion.direccion.calle+"\n"+$scope.pedido.ubicacion.direccion.numero,
                 "android": {
                   "title": "Test app drinks android",
                   "message": "Mensaje push test android",
@@ -238,8 +238,19 @@ angular.module('starter')
 
 // Make the API call
           $http(req).success(function(resp){
-            // Handle success
             console.log("Mensaje Push: Mensaje success", resp);
+            var alertPopup = $ionicPopup.alert({
+              title:   'Tu pedido fué enviado, te notificaremos cuando sea procesado. Salud!',
+              buttons: [{
+                text: 'Aceptar',
+                type: 'button button-positive'
+              }]
+            });
+
+            alertPopup.then(function(res) {
+
+            });
+
           }).error(function(error){
             // Handle error
             console.log("Mensaje Push: Mensaje error", error);

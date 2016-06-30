@@ -28,7 +28,7 @@ angular.module('starter')
         .then(function(data){
           var array = data.data.data;
           if(array.length < 1)
-            $rootScope.abierto = false;
+            $rootScope.abierto = true;
           return $q.resolve();
         })
     };
@@ -43,11 +43,12 @@ angular.module('starter')
         $scope.obtenerHorario(),
         $scope.obtenerCategorias()
       ])
-        .then(function() {
-          console.log('Llamadas api OK.');
-        }).catch(function(err) {
-          console.log('error resolviendo las promesas'+ err); //todo ver como manejar el error
-        });
+      .then(function() {
+        console.log('Llamadas api OK.');
+      })
+      .catch(function(err) {
+        console.log('error resolviendo las promesas'+ err); //todo ver como manejar el error
+      });
     };
 
 
