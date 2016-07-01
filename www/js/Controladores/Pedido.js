@@ -164,6 +164,8 @@ angular.module('starter')
     $scope.restarCantidad = function(productoPedido){
       console.log(productoPedido);
      var producto = productoPedido.producto;
+      if(productoPedido.cantidad == 1)
+        $scope.eliminarProducto(productoPedido)
      var cantidad = -1;
      $scope.pedido.decrementarProductoCantidad(producto, cantidad);
       var alertPopup = $ionicPopup.alert({
