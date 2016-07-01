@@ -10,7 +10,10 @@
       </ion-nav-buttons>
       <ion-nav-buttons side="right">
         <span class="badge badge-assertive ">{{ totalProductos }}</span>
-        <a href="#/app/mi-pedido" class="button button-clear  pull-rigth">
+        <a ng-if="!pedidoPendiente" href="#/app/mi-pedido" class="button button-clear  pull-rigth">
+          <i class="ion-ios-cart"></i>
+        </a>
+        <a ng-if="pedidoPendiente" href="#/app/pedido-pendiente" class="button button-clear  pull-rigth">
           <i class="ion-ios-cart"></i>
         </a>
       </ion-nav-buttons>

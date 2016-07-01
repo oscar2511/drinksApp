@@ -83,7 +83,7 @@ angular.module('starter')
     var setDataDispositivo = function(token){
       var dataDispositivo =  {
         'token' : token,
-        'uuid'  : ionic.Platform.device().uuid
+        'uuid'  : 9999//ionic.Platform.device().uuid
       };
       registrarDisp(dataDispositivo)
     };
@@ -100,14 +100,27 @@ angular.module('starter')
       $http.post(urlDispositivo, dataDispositivo, {headers: { 'Content-Type': 'application/json'}})
         .then(function (data){
           $rootScope.estadoUltPedido = data.data.data.estado_ult_pedido;
+          console.log($rootScope.estadoUltPedido);
           if($rootScope.estadoUltPedido == 1)
-            $rootScope.pedidoPendiente = true;
-            $rootScope.totalUltPedido  = data.data.data.total;
-            $rootScope.fechaUltPedido  = data.data.data.fecha_pedido;
+            $scope.setDataUltPedido(data);
         })
         .catch(function(){
           alert("error registrando el dispositivo");
         });
+    };
+
+    /**
+     * Setea los dastos del ultimo pedido
+     * @param data
+     */
+    $scope.setDataUltPedido = function(data){
+       console.log(data.data.data.id_pedido);
+       $rootScope.totalProductos = 'pendiente';
+       console.log($rootScope.totalProductos);
+       $rootScope.pedidoPendiente = true;
+       $rootScope.idUltPedido     = data.data.data.id_pedido;
+       $rootScope.totalUltPedido  = data.data.data.total;
+       $rootScope.fechaUltPedido  = data.data.data.fecha_pedido;
     };
 
 

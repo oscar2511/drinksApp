@@ -254,7 +254,7 @@ angular.module('starter')
           $http(req).success(function(resp){
             console.log("Mensaje Push: Mensaje success", resp);
             var alertPopup = $ionicPopup.alert({
-              title:   'Tu pedido fué enviado, te notificaremos cuando sea procesado. Salud!',
+              title:   'Tu pedido fué enviado, te notificaremos cuando sea procesado. Salud !!',
               buttons: [{
                 text: 'Aceptar',
                 type: 'button button-positive'
@@ -262,7 +262,9 @@ angular.module('starter')
             });
 
             alertPopup.then(function(res) {
-              $scope.pedido.limpiarPedido();
+              //$scope.pedido.limpiarPedido();
+              $rootScope.totalProductos = "pendiente";
+              $rootScope.pedidoPendiente= true;
               $state.go('app.categorias');
             });
 

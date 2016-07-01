@@ -4,12 +4,12 @@ angular.module('starter')
                                        $rootScope,
                                        PedidoService,
                                        $ionicPopup,
-                                       $http)
+                                       $state
+  )
   {
     $scope.producto = angular.fromJson($stateParams.producto);
     $scope.cantidad = 1;
     $scope.pedido   = PedidoService;
-
     /**
      *  Agregar producto al carro
      *
@@ -17,6 +17,12 @@ angular.module('starter')
      * @param cantidad
      */
     $scope.addAlCarro = function(producto, cantidad){
+      console.log($rootScope.pedidoPendiente);
+      if($rootScope.totalProductos == 'pendiente') {
+        $scope.tienePedidoPendiente();
+        return 0;
+      }
+
       $scope.pedido.addProducto(producto, cantidad);
 
       /**
@@ -32,9 +38,28 @@ angular.module('starter')
       });
 
       alertPopup.then(function(res) {
-
       });
 
+
+      /**
+       * Redirige a pedido si intenta agregar producto y tiene uno pendiente
+       */
+      $scope.tienePedidoPendiente = function(){
+        var alertPopup = $ionicPopup.alert({
+          title:   'Tienes un pedido pendiente',
+          buttons: [{
+            text: 'Aceptar',
+            type: 'button button-positive'
+          }]
+        });
+
+        alertPopup.then(function(res) {
+          $scope.pedido.limpiarPedido();
+          $rootScope.totalProductos = 'pendiente';
+          $rootScope.tieneProductos = 0;
+          $state.go('app.pedido-pendiente');
+        });
+      }
     };
 
   });
