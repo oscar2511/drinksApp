@@ -123,6 +123,16 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
       }
     })
 
+    .state('app.pedido-pendiente', {
+      url: '/pedido-pendiente',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/pedido-pendiente.html',
+          controller: 'pedidoPendienteCtrl'
+        }
+      }
+    })
+
     .state('app.producto', {
       url: '/producto/producto-detalle/:producto',
       views: {

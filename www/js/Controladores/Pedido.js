@@ -7,7 +7,8 @@ angular.module('starter')
            $timeout,
            $cordovaGeolocation,
            $http,
-           $state
+           $state,
+           $rootScope
   )
   {
     $scope.pedido                = PedidoService;
@@ -16,6 +17,11 @@ angular.module('starter')
     $scope.mostrarTotales        = true;
     $scope.mostrarFormUbicacion  = false;
     $scope.bloquearBtns          = false;
+
+
+    if(true == $rootScope.pedidoPendiente)
+      $state.go('app.pedido-pendiente');
+
 
     //***************** geo localizacion  *********************
     /**
@@ -229,8 +235,8 @@ angular.module('starter')
                 "title": "Nuevo pedido",
                 "message": "Direccion: "+$scope.pedido.ubicacion.direccion.calle+"\n"+$scope.pedido.ubicacion.direccion.numero,
                 "android": {
-                  "title": "Test app drinks android",
-                  "message": "Mensaje push test android",
+                  "title": "Nuevo pedido",
+                  "message": "Direccion: "+$scope.pedido.ubicacion.direccion.calle+"\n"+$scope.pedido.ubicacion.direccion.numero,
                   "payload": $scope.pedido
                 }
               }

@@ -95,11 +95,15 @@ angular.module('starter')
     var registrarDisp = function(dataDispositivo){
       $scope.pedido.dispositivo.uuid = dataDispositivo.uuid;
       $scope.pedido.dispositivo.token = dataDispositivo.token;
-      console.log($scope.pedido);
+
       var urlDispositivo = 'http://23.94.249.163/appDrinks/dispositivos/dispositivos.php';
       $http.post(urlDispositivo, dataDispositivo, {headers: { 'Content-Type': 'application/json'}})
         .then(function (data){
-
+          $rootScope.estadoUltPedido = data.data.data.estado_ult_pedido;
+          if($rootScope.estadoUltPedido == 1)
+            $rootScope.pedidoPendiente = true;
+            $rootScope.totalUltPedido  = data.data.data.total;
+            $rootScope.fechaUltPedido  = data.data.data.fecha_pedido;
         })
         .catch(function(){
           alert("error registrando el dispositivo");

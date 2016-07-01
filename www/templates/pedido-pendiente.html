@@ -1,0 +1,40 @@
+<ion-view view-title="Pedido pendiente">
+  <ion-content>
+    <div class="card">
+      <div class="item item-text-wrap">
+        <h1>Tienes un pedido pendiente</h1>
+        Para hacer un nuevo pedido no debes tener uno pendiente.
+      </div>
+    </div>
+
+    <ul class="list">
+      <div class="item item-divider">
+        Fecha
+      </div>
+      <li class="item">
+        {{ fechaUltPedido }}
+      </li>
+      <div class="item item-divider">
+        Total
+      </div>
+      <li class="item">
+        $ {{ totalUltPedido }}
+      </li>
+    </ul>
+
+    <div class="row">
+      <div class="col">
+        <button class="button button-clear button-assertive">
+          Cancelar
+        </button>
+      </div>
+      <div class="col col-75">
+        <button class="button button-large button-positive">
+          Lo recibí
+        </button>
+      </div>
+      <div class="col"></div>
+    </div>
+
+  </ion-content>
+</ion-view>

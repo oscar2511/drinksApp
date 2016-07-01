@@ -34,8 +34,9 @@ angular.module('starter')
       }
     };
 
-    $rootScope.totalProductos = 0;
-    $rootScope.abierto = true;
+    $rootScope.totalProductos  = 0;
+    $rootScope.abierto         = true;
+    $rootScope.estadoUltPedido = null;
 
     /**
      *
