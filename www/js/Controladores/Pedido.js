@@ -17,8 +17,13 @@ angular.module('starter')
     $scope.mostrarTotales        = true;
     $scope.mostrarFormUbicacion  = false;
     $scope.bloquearBtns          = false;
+    $scope.tieneProductos        = false;
+
+    if($rootScope.totalProductos > 0)
+      $scope.tieneProductos = true;
 
 
+    //$rootScope.pedidoPendiente = true;
     if(true == $rootScope.pedidoPendiente)
       $state.go('app.pedido-pendiente');
 
