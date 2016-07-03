@@ -17,7 +17,6 @@ angular.module('starter')
      * @param cantidad
      */
     $scope.addAlCarro = function(producto, cantidad){
-      console.log($rootScope.pedidoPendiente);
       if($rootScope.totalProductos == 'pendiente') {
         $scope.tienePedidoPendiente();
         return 0;

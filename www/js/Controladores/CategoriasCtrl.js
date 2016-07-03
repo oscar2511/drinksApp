@@ -83,7 +83,7 @@ angular.module('starter')
     var setDataDispositivo = function(token){
       var dataDispositivo =  {
         'token' : token,
-        'uuid'  : 9999//ionic.Platform.device().uuid
+        'uuid'  : ionic.Platform.device().uuid
       };
       registrarDisp(dataDispositivo)
     };
@@ -118,6 +118,7 @@ angular.module('starter')
        $rootScope.totalProductos = 'pendiente';
        console.log($rootScope.totalProductos);
        $rootScope.pedidoPendiente = true;
+      $scope.pedido.setTotalProductos();
        $rootScope.idUltPedido     = data.data.data.id_pedido;
        $rootScope.totalUltPedido  = data.data.data.total;
        $rootScope.fechaUltPedido  = data.data.data.fecha_pedido;

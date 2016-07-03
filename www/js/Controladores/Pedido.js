@@ -17,13 +17,11 @@ angular.module('starter')
     $scope.mostrarTotales        = true;
     $scope.mostrarFormUbicacion  = false;
     $scope.bloquearBtns          = false;
-    $scope.tieneProductos        = false;
+    $rootScope.tieneProductos    = false;
 
     if($rootScope.totalProductos > 0)
-      $scope.tieneProductos = true;
+      $rootScope.tieneProductos = true;
 
-
-    //$rootScope.pedidoPendiente = true;
     if(true == $rootScope.pedidoPendiente)
       $state.go('app.pedido-pendiente');
 
@@ -209,7 +207,7 @@ angular.module('starter')
 
 
     /**
-     *
+     * Registra el pedido en la base de datos
      */
     $scope.confirmarPedido = function(tel, dir_ref){
 
@@ -222,7 +220,8 @@ angular.module('starter')
 
       $http.post(url,pedido, {headers: { 'Content-Type': 'application/json'}})
         .then(function (data){
-          console.log(data);
+          console.log(data.data);
+          $rootScope.idUltPedido = data.data.data.id_pedido;
 
           var jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4MjllZTIxOS01MzA4LTRhZDMtYWQ5NS1lZTQ3Y2YxMzhiMTMifQ.QzA7PSQHEEiSz-cEun7iUZdJRyAXd3iIRQSlsWPL0Yw';
           var tokens = ['db0ElKjAjOs:APA91bG8XRFDaNpDbRm4pZ1pwtJV4xcuJxFBf2iOWTC9hMJ-3R1HkvbuqU0wWgv9MIEvs013lu1AUkkNRruf3AMnMKNNGU08Fw4KxWFywL242iKIrQTjAPbXUOGiSXcuJpzgaUwHuiTA'];
@@ -265,6 +264,8 @@ angular.module('starter')
               //$scope.pedido.limpiarPedido();
               $rootScope.totalProductos = "pendiente";
               $rootScope.pedidoPendiente= true;
+              $rootScope.totalUltPedido  = $scope.pedido.total;
+              $rootScope.fechaUltPedido  = $scope.pedido.fecha;
               $state.go('app.categorias');
             });
 

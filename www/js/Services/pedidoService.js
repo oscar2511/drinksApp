@@ -38,6 +38,11 @@ angular.module('starter')
     $rootScope.abierto         = true;
     $rootScope.estadoUltPedido = null;
 
+    pedido.setTotalProductos = function (){
+      $rootScope.totalProductos = 'pendiente';
+      alert($rootScope.totalProductos);
+    };
+
     /**
      *
      * @param producto
@@ -176,6 +181,26 @@ angular.module('starter')
       $rootScope.totalProductos = 0;
     };
 
-    return pedido;
+      /**
+       * Limpia todo
+       */
+      pedido.limpiarTodo = function(){
+        pedido.detalle = [{}];
+        pedido.numero  = null;
+        pedido.fecha   = null;
+        pedido.totalProductos      = 0;
+        pedido.total               = 0;
+        pedido.subTotal            = 0;
+        $rootScope.totalProductos  = 0;
+        $rootScope.pedidoPendiente = false;
+        $rootScope.estadoUltPedido = null;
+        $rootScope.totalUltPedido  = null;
+        $rootScope.fechaUltPedido  = null;
+        $rootScope.idUltPedido     = null;
+        $rootScope.tieneProductos  = false;
+      };
+
+
+      return pedido;
 
 });
