@@ -110,7 +110,7 @@ angular.module('starter')
     };
 
     /**
-     * Setea los dastos del ultimo pedido
+     * Setea los datos del ultimo pedido
      * @param data
      */
     $scope.setDataUltPedido = function(data){

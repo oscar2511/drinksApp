@@ -262,10 +262,11 @@ angular.module('starter')
 
             alertPopup.then(function(res) {
               //$scope.pedido.limpiarPedido();
-              $rootScope.totalProductos = "pendiente";
-              $rootScope.pedidoPendiente= true;
+              $rootScope.totalProductos  = "pendiente";
+              $rootScope.pedidoPendiente = true;
               $rootScope.totalUltPedido  = $scope.pedido.total;
               $rootScope.fechaUltPedido  = $scope.pedido.fecha;
+              $scope.mostrarMapa = false;
               $state.go('app.categorias');
             });
 
