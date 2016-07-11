@@ -94,6 +94,16 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
       }
     })
 
+    .state('app.admin', {
+      url: '/admin',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/Admin/home.html',
+          controller: 'adminCtrl'
+        }
+      }
+    })
+
     .state('app.error', {
       url: '/error',
       views: {

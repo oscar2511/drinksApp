@@ -1,0 +1,60 @@
+
+angular.module('starter')
+  .controller('adminCtrl', function(
+    $scope,
+    $stateParams,
+    $http,
+    $ionicLoading){
+
+
+
+    $ionicLoading.show({
+      template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
+    });
+
+    var url = 'http://23.94.249.163/appDrinks/admin/listarPedidos.php';
+
+//    var categoria = angular.fromJson($stateParams.categoria);
+
+   // $scope.catUrlImg = categoria.urlImg;
+
+    /**
+     * Obtener los pedidos del servidor
+     *
+     */
+    $http.post(url, {headers: { 'Content-Type': 'application/json'}})
+      .then(function (data){
+        angular.forEach(data.data, function(value) {
+          $scope.dataCruda = value;
+        });
+        $scope.pedidos =[];
+        angular.forEach($scope.dataCruda, function(valor, key) {
+          //$scope.idCategoria = valor.idCategoria;
+          $scope.pedidos.push({
+            id:            valor.id,
+            numero:        valor.numero,
+            fecha:         valor.fecha,
+            total:         valor.total,
+            idDispositivo: valor.id_dispositivo,
+            calle:         valor.calle,
+            nro  :         valor.nro,
+            telefono  :    valor.telefono
+          });
+        });
+        console.log($scope.pedidos);
+        $ionicLoading.hide();
+        console.log($scope.pedidos);
+      });
+
+
+
+
+
+
+
+
+
+
+
+
+  });
