@@ -42,6 +42,7 @@ angular.module('starter')
             });
           });
           $ionicLoading.hide();
+          $scope.$broadcast('scroll.refreshComplete');
         });
     };
 

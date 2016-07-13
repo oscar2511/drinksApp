@@ -18,6 +18,7 @@ angular.module('starter')
     $scope.mostrarFormUbicacion  = false;
     $scope.bloquearBtns          = false;
     $rootScope.tieneProductos    = false;
+    $scope.mapaCargado           = false;
 
     if($rootScope.totalProductos > 0)
       $rootScope.tieneProductos = true;
@@ -100,6 +101,8 @@ angular.module('starter')
                 'long': longitud
               }
             });
+
+          $scope.mapaCargado = true;
 
         }, function(error){
           console.log("Could not get location");

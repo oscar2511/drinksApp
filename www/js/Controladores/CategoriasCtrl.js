@@ -48,6 +48,7 @@ angular.module('starter')
       ])
       .then(function() {
         console.log('Llamadas api OK.');
+        $scope.$broadcast('scroll.refreshComplete');
       })
       .catch(function(err) {
         console.log('error resolviendo las promesas'+ err); //todo ver como manejar el error

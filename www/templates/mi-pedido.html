@@ -39,9 +39,11 @@
         </div>
         <br>
         <div class="col">
-          <button ng-disabled="pedidoPendiente" class="button button-full button-positive" ng-click="confirmarPedido(tel, dir_ref)">
-            Confirmar pedido
-          </button>
+          <div ng-show="mapaCargado">
+            <button ng-disabled="pedidoPendiente" class="button button-full button-positive" ng-click="confirmarPedido(tel, dir_ref)">
+              Confirmar pedido
+            </button>
+          </div>
         </div>
       </div>
 
