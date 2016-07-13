@@ -1,5 +1,26 @@
-<ion-view view-title="Contacto">
+<ion-view view-title="">
   <ion-content>
-    <h1>Administración</h1>
+    <h2>Listado de pedidos</h2>
+    <table width="600px">
+      <tr>
+        <td>Fecha</td><td>Hora</td><td>Total</td><td>Calle</td>
+      </tr>
+      <tr ng-repeat="pedido in pedidos" href="#">
+        <td>{{pedido.fecha | date:'dd-MM-yyyy' }}</td>
+        <td>{{pedido.fecha | date:'HH:mm' }}</td>
+        <td>$ {{pedido.total}}</td>
+        <td>{{pedido.calle}}</td>
+      </tr>
+    </table>
+    <ul class="list">
+      <li class="item"  ng-repeat="pedido in pedidos" href="#">
+        <div class="row">
+          <div class="col">{{pedido.fecha | date:'dd-MM-yyyy' }}</div>
+          <div class="col">{{pedido.fecha | date:'HH:mm' }}</div>
+          <div class="col">$ {{pedido.total}}</div>
+          <div class="col">{{pedido.calle}}</div>
+        </div>
+      </li>
+    </ul>
   </ion-content>
 </ion-view>

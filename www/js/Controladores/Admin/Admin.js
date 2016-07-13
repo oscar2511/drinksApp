@@ -1,4 +1,3 @@
-
 angular.module('starter')
   .controller('adminCtrl', function(
     $scope,
@@ -29,11 +28,10 @@ angular.module('starter')
         });
         $scope.pedidos =[];
         angular.forEach($scope.dataCruda, function(valor, key) {
-          //$scope.idCategoria = valor.idCategoria;
           $scope.pedidos.push({
             id:            valor.id,
             numero:        valor.numero,
-            fecha:         valor.fecha,
+            fecha:         new Date(valor.fecha),
             total:         valor.total,
             idDispositivo: valor.id_dispositivo,
             calle:         valor.calle,
@@ -41,9 +39,7 @@ angular.module('starter')
             telefono  :    valor.telefono
           });
         });
-        console.log($scope.pedidos);
         $ionicLoading.hide();
-        console.log($scope.pedidos);
       });
 
 
