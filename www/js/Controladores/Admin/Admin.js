@@ -21,36 +21,30 @@ angular.module('starter')
      * Obtener los pedidos del servidor
      *
      */
-    $http.post(url, {headers: { 'Content-Type': 'application/json'}})
-      .then(function (data){
-        angular.forEach(data.data, function(value) {
-          $scope.dataCruda = value;
-        });
-        $scope.pedidos =[];
-        angular.forEach($scope.dataCruda, function(valor, key) {
-          $scope.pedidos.push({
-            id:            valor.id,
-            numero:        valor.numero,
-            fecha:         new Date(valor.fecha),
-            total:         valor.total,
-            idDispositivo: valor.id_dispositivo,
-            calle:         valor.calle,
-            nro  :         valor.nro,
-            telefono  :    valor.telefono
+    $scope.getPedidos = function(){
+      $http.post(url, {headers: { 'Content-Type': 'application/json'}})
+        .then(function (data){
+          angular.forEach(data.data, function(value) {
+            $scope.dataCruda = value;
           });
+          $scope.pedidos =[];
+          angular.forEach($scope.dataCruda, function(valor, key) {
+            $scope.pedidos.push({
+              id:            valor.id,
+              numero:        valor.numero,
+              fecha:         new Date(valor.fecha),
+              total:         valor.total,
+              idDispositivo: valor.id_dispositivo,
+              calle:         valor.calle,
+              nro  :         valor.nro,
+              telefono  :    valor.telefono,
+              estado    :    valor.estado
+            });
+          });
+          $ionicLoading.hide();
         });
-        $ionicLoading.hide();
-      });
+    };
 
-
-
-
-
-
-
-
-
-
-
+    $scope.getPedidos();
 
   });
