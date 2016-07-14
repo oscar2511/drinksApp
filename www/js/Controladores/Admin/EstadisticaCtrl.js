@@ -1,9 +1,6 @@
 angular.module('starter')
   .controller('estadisticaCtrl', function($scope) {
 
-    $scope.test = function(){
-      alert(123);
-    };
 
     $scope.labels = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
     $scope.series = ['Series A', 'Series B'];
