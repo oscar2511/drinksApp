@@ -3,7 +3,9 @@ angular.module('starter')
     $scope,
     $stateParams,
     $http,
-    $ionicLoading){
+    $ionicLoading,
+    $ionicPopover
+  ){
 
 
 
@@ -16,6 +18,12 @@ angular.module('starter')
 //    var categoria = angular.fromJson($stateParams.categoria);
 
    // $scope.catUrlImg = categoria.urlImg;
+
+    $ionicPopover.fromTemplateUrl('templates/popover.html', {
+      scope: $scope
+    }).then(function(popover) {
+      $scope.popover = popover;
+    });
 
     /**
      * Obtener los pedidos del servidor
@@ -47,5 +55,7 @@ angular.module('starter')
     };
 
     $scope.getPedidos();
+
+
 
   });

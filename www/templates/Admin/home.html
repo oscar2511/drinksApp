@@ -1,10 +1,13 @@
 <ion-view view-title="Administración">
   <ion-nav-bar class="bar-dark">
     <ion-nav-buttons side="right">
+      <button class="button icon-rigth button-icon ion-more" ng-click="popover.show($event)"></button>
+    </ion-nav-buttons>
+    <!--<ion-nav-buttons side="right">
       <a href="#/app/estadistica">
         <button class="button icon-left ion-arrow-graph-up-right button-positive">&nbsp;&nbsp; Estadísticas</button>
       </a>
-    </ion-nav-buttons>
+    </ion-nav-buttons>-->
   </ion-nav-bar>
 
   <ion-content>
@@ -54,4 +57,29 @@
       </div>
     </div>
   </ion-content>
+
+
+  <script id="templates/popover.html" type="text/ng-template">
+    <ion-popover-view>
+      <ion-content>
+        <div class="list">
+          <a class="item" href="#/app/estadistica" target="_blank">
+            Estadísticas
+          </a>
+          <a class="item" href="#" target="_blank">
+            Reportes
+          </a>
+          <a class="item" href="#" target="_blank">
+            Mas..
+          </a>
+        </div>
+      </ion-content>
+    </ion-popover-view>
+  </script>
+
+
+
+
 </ion-view>
+
+
