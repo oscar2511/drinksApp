@@ -1,0 +1,28 @@
+<ion-view view-title="Estadísticas">
+  <ion-nav-bar class="bar-dark">
+    <ion-nav-buttons side="right">
+      <button ng-click="test()" class="button icon-left ion-arrow-graph-up-right button-positive"> Estadísticas</button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+
+  <ion-content>
+    <br>
+    <h3>Estadisticas de pedidos</h3>
+    <div class="card">
+      <div class="item item-divider">
+        Pedidos por días
+      </div>
+      <div class="item item-text-wrap">
+        <canvas id="line" class="chart chart-line" data="data" labels="labels" legend="true" series="series" options="{showTooltips: false}"></canvas>
+      </div>
+    </div>
+    <div class="card">
+      <div class="item item-divider">
+        Montos por día
+      </div>
+      <div class="item item-text-wrap">
+        <canvas id="bar" class="chart chart-bar" data="data" labels="labels" legend="true" series="series" options="{showTooltips: false}"></canvas>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

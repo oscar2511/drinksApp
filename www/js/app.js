@@ -104,6 +104,16 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
       }
     })
 
+    .state('app.estadistica', {
+      url: '/estadistica',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/Admin/estadistica.html',
+          controller: 'estadisticaCtrl'
+        }
+      }
+    })
+
     .state('app.error', {
       url: '/error',
       views: {

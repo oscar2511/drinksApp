@@ -169,6 +169,9 @@ ion-item.item:hover a {
 .ion-stats-bars{
   font-size: 20px!important;
 }
+.ion-clipboard{
+  font-size: 20px!important;
+}
 
 /* boton eliminar producto de pedido*/
 .ion-trash-a{
