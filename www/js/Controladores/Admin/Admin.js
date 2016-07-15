@@ -9,21 +9,34 @@ angular.module('starter')
 
 
 
-    $ionicLoading.show({
+/*    $ionicLoading.show({
       template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
     });
-
+*/
     var url = 'http://23.94.249.163/appDrinks/admin/listarPedidos.php';
 
-//    var categoria = angular.fromJson($stateParams.categoria);
-
-   // $scope.catUrlImg = categoria.urlImg;
-
-    $ionicPopover.fromTemplateUrl('templates/popover.html', {
+   /* $ionicPopover.fromTemplateUrl('templates/popover.html', {
       scope: $scope
     }).then(function(popover) {
       $scope.popover = popover;
     });
+*/
+    $ionicPopover.fromTemplateUrl('templates/popover.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(popover) {
+      $scope.popover = popover;
+    });
+    $scope.openPopover = function($event) {
+      $scope.popover.show($event);
+    };
+    $scope.closePopover = function() {
+      $scope.popover.hide();
+    };
+
+
+
+
 
     /**
      * Obtener los pedidos del servidor

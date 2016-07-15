@@ -1,5 +1,7 @@
 <ion-view view-title="Administración">
   <ion-nav-bar class="bar-dark">
+    <ion-nav-view>
+    </ion-nav-view>
     <ion-nav-buttons side="right">
       <button class="button icon-rigth button-icon ion-more" ng-click="popover.show($event)"></button>
     </ion-nav-buttons>
@@ -18,7 +20,7 @@
     <img width="100%" height="120px" src="http://23.94.249.163/appDrinks/img/pedidos-admin.jpg">
     <div class="card">
       <div class="item item-text-wrap">
-        <h2 style="color:#1e6ed1";> <i class="ion-clipboard"></i> Listado pedidos</h2>
+        <h2 style="color:#1e6ed1; font-size: 24px";> <i class="ion-clipboard"></i> Listado pedidos</h2>
       </div>
     </div>
     <div class="list" ng-repeat="pedido in pedidos" href="#">
@@ -64,13 +66,16 @@
       <ion-content>
         <div class="list">
           <a class="item" href="#/app/estadistica" target="_blank">
-            Estadísticas
+            <font color="blue"><i class="ion-pie-graph"></i>&nbsp;&nbsp; Estadísticas</font>
           </a>
           <a class="item" href="#" target="_blank">
-            Reportes
+            <font color="blue"><i class="ion-calculator"></i>&nbsp;&nbsp; Reportes</font>
           </a>
           <a class="item" href="#" target="_blank">
-            Mas..
+            <font color="blue"><i class="ion-podium"></i>&nbsp;&nbsp; Stock </font>
+          </a>
+          <a class="item" href="#" target="_blank">
+            <font color="blue"><i class="ion-gear-b"></i>&nbsp;&nbsp; Configuración </font>
           </a>
         </div>
       </ion-content>
