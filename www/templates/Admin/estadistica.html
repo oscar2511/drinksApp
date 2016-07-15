@@ -8,10 +8,19 @@
   <ion-content>
     <div class="card">
       <div class="item item-divider">
-        Pedidos por días
+        Ventas por día
       </div>
       <div class="item item-text-wrap">
         <canvas id="line" class="chart chart-line" data="data" labels="labels" legend="true" series="series" options="{showTooltips: false}"></canvas>
+      </div>
+    </div>
+    <div class="card">
+      <div class="item item-divider">
+        Productos más Vendidos
+      </div>
+      <div class="item item-text-wrap">
+        <canvas id="doughnut" class="chart chart-doughnut" chart-data="datadona" chart-labels="labeldona">
+        </canvas>
       </div>
     </div>
     <div class="card">

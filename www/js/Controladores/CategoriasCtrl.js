@@ -123,7 +123,7 @@ angular.module('starter')
        $scope.pedido.setTotalProductos();
        $rootScope.idUltPedido     = data.data.data.id_pedido;
        $rootScope.totalUltPedido  = data.data.data.total;
-       $rootScope.fechaUltPedido  = data.data.data.fecha_pedido;
+       $rootScope.fechaUltPedido  = new Date(data.data.data.fecha_pedido);
     };
 
 

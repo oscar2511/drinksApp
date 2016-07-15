@@ -9,4 +9,7 @@ angular.module('starter')
       [28, 48, 40, 19, 86, 27, 90]
     ];
 
+    $scope.labeldona = ["Cerveza", "Promo Fernet", "Vinos"];
+    $scope.datadona = [300, 500, 100];
+
   });

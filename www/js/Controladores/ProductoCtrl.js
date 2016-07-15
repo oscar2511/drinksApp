@@ -29,10 +29,10 @@ angular.module('starter')
        * @type {Object|*}
        */
       var alertPopup = $ionicPopup.alert({
-        title:   'Producto añadido correctamente',
+        title:   'Producto añadido!',
         buttons: [{
-          text: 'Seguir comprando',
-          type: 'button button-positive'
+          text: 'Ok',
+          type: 'button button-outline button-positive'
         }]
       });
 
@@ -48,7 +48,7 @@ angular.module('starter')
           title:   'Tienes un pedido pendiente',
           buttons: [{
             text: 'Aceptar',
-            type: 'button button-positive'
+            type: 'button button-outline button-positive'
           }]
         });
 

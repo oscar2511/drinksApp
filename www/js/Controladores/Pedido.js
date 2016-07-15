@@ -5,6 +5,7 @@ angular.module('starter')
            PedidoService,
            $ionicPopup,
            $timeout,
+           $ionicLoading,
            $cordovaGeolocation,
            $http,
            $state,
@@ -213,6 +214,9 @@ angular.module('starter')
      * Registra el pedido en la base de datos
      */
     $scope.confirmarPedido = function(tel, dir_ref){
+      $ionicLoading.show({
+        template: 'Enviando pedido. Espera por favor...<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
+      });
 
       $scope.pedido.ubicacion.referencia.tel     = tel;
       $scope.pedido.ubicacion.referencia.dir_ref = dir_ref;
@@ -254,12 +258,12 @@ angular.module('starter')
 
 // Make the API call
           $http(req).success(function(resp){
-            console.log("Mensaje Push: Mensaje success", resp);
+            $ionicLoading.hide();
             var alertPopup = $ionicPopup.alert({
               title:   'Tu pedido fué enviado, te notificaremos cuando sea procesado. Salud !!',
               buttons: [{
                 text: 'Aceptar',
-                type: 'button button-positive'
+                type: 'button button-outline button-positive'
               }]
             });
 
