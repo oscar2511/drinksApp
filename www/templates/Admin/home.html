@@ -2,6 +2,13 @@
   <ion-nav-bar class="bar-dark">
     <ion-nav-view>
     </ion-nav-view>
+    <ion-nav-buttons side="left">
+
+        <button ng-click="atrasAdmin()" class="button back-button buttons button-clear header-item">
+        <i class="icon ion-ios-arrow-back"></i> Atrás </button>
+
+    </ion-nav-buttons>
+
     <ion-nav-buttons side="right">
       <button class="button icon-rigth button-icon ion-more" ng-click="popover.show($event)"></button>
     </ion-nav-buttons>
@@ -63,16 +70,16 @@
     <ion-popover-view>
       <ion-content>
         <div class="list">
-          <a class="item" href="#/app/estadistica" target="_blank">
+          <a ng-click="closePopover()" class="item" href="#/app/estadistica" target="_blank">
             <font color="#1e6ed1"><i class="ion-pie-graph"></i>&nbsp;&nbsp; Estadísticas</font>
           </a>
-          <a class="item" href="#" target="_blank">
+          <a ng-click="closePopover()" class="item" href="#" target="_blank">
             <font color="#1e6ed1"><i class="ion-calculator"></i>&nbsp;&nbsp; Reportes</font>
           </a>
-          <a class="item" href="#" target="_blank">
+          <a ng-click="closePopover()" class="item" href="#" target="_blank">
             <font color="#1e6ed1"><i class="ion-podium"></i>&nbsp;&nbsp; Stock </font>
           </a>
-          <a class="item" href="#" target="_blank">
+          <a ng-click="closePopover()" class="item" href="#" target="_blank">
             <font color="#1e6ed1"><i class="ion-gear-b"></i>&nbsp;&nbsp; Configuración </font>
           </a>
         </div>

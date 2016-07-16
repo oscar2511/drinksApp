@@ -1,17 +1,17 @@
 <ion-view view-title="Estadísticas">
   <ion-nav-bar class="bar-dark">
-    <ion-nav-buttons side="right">
+<!--    <ion-nav-buttons side="right">
       <button class="button icon-left ion-arrow-graph-up-right button-positive"> Estadísticas</button>
-    </ion-nav-buttons>
+    </ion-nav-buttons>-->
   </ion-nav-bar>
 
   <ion-content>
     <div class="card">
       <div class="item item-divider">
-        Ventas por día
+        Ventas
       </div>
       <div class="item item-text-wrap">
-        <canvas id="line" class="chart chart-line" data="data" labels="labels" legend="true" series="series" options="{showTooltips: false}"></canvas>
+        <canvas id="bar" class="chart chart-bar" data="dataVentas" labels="labelsVentas" legend="true" series="seriesVentas" options="{showTooltips: true}"></canvas>
       </div>
     </div>
     <div class="card">
@@ -19,16 +19,16 @@
         Productos más Vendidos
       </div>
       <div class="item item-text-wrap">
-        <canvas id="doughnut" class="chart chart-doughnut" chart-data="datadona" chart-labels="labeldona">
+        <canvas id="doughnut" class="chart chart-doughnut" chart-data="dataProductos" legend="true" chart-labels="labelProductos">
         </canvas>
       </div>
     </div>
     <div class="card">
       <div class="item item-divider">
-        Montos por día
+        Estado de los Pedidos (última semana)
       </div>
       <div class="item item-text-wrap">
-        <canvas id="bar" class="chart chart-bar" data="data" labels="labels" legend="true" series="series" options="{showTooltips: false}"></canvas>
+        <canvas id="pie" class="chart chart-pie" data="dataEstado" labels="labelsEstado" legend="true"  options="{showTooltips: true}" colours="colorEstado"></canvas>
       </div>
     </div>
   </ion-content>

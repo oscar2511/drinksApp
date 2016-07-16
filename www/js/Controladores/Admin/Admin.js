@@ -4,7 +4,8 @@ angular.module('starter')
     $stateParams,
     $http,
     $ionicLoading,
-    $ionicPopover
+    $ionicPopover,
+    $state
   ){
 
 
@@ -21,18 +22,37 @@ angular.module('starter')
       $scope.popover = popover;
     });
 */
+
+    $scope.atrasAdmin = function (){
+      $state.go('app.categorias');
+    };
+
     $ionicPopover.fromTemplateUrl('templates/popover.html', {
       scope: $scope,
       animation: 'slide-in-up'
     }).then(function(popover) {
       $scope.popover = popover;
     });
+
     $scope.openPopover = function($event) {
       $scope.popover.show($event);
     };
+
     $scope.closePopover = function() {
       $scope.popover.hide();
     };
+
+    $scope.$on('$destroy', function() {
+      $scope.popover.remove();
+    });
+    // Execute action on hide popover
+    $scope.$on('popover.hidden', function() {
+      // Execute action
+    });
+    // Execute action on remove popover
+    $scope.$on('popover.removed', function() {
+      // Execute action
+    });
 
 
 
