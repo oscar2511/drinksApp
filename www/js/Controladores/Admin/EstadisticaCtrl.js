@@ -1,5 +1,11 @@
 angular.module('starter')
-  .controller('estadisticaCtrl', function($scope) {
+  .controller('estadisticaCtrl', function(
+    $scope,
+    $state) {
+
+    $scope.atrasEst = function (){
+      $state.go('app.categorias');
+    };
 
 
     $scope.labels = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];

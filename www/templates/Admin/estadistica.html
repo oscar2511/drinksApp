@@ -1,8 +1,13 @@
 <ion-view view-title="Estadísticas">
+
   <ion-nav-bar class="bar-dark">
-<!--    <ion-nav-buttons side="right">
-      <button class="button icon-left ion-arrow-graph-up-right button-positive"> Estadísticas</button>
-    </ion-nav-buttons>-->
+    <ion-nav-buttons side="left">
+      <button ng-click="atrasEst()" class="button back-button buttons button-clear header-item">
+        <i class="icon ion-ios-arrow-back"></i> Atrás </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+      <button class="button icon-rigth button-icon ion-more" ng-click="popover.show($event)"></button>
+    </ion-nav-buttons>
   </ion-nav-bar>
 
   <ion-content>

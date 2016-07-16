@@ -5,7 +5,8 @@ angular.module('starter')
                                        PedidoService,
                                        $ionicPopup,
                                        $http,
-                                       $state
+                                       $state,
+                                       $ionicLoading
   )
   {
 
@@ -22,22 +23,17 @@ angular.module('starter')
 
       confirmPopup.then(function(res) {
         if(res) {
+          $ionicLoading.show({
+            template: 'Cancelando pedido<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
+          });
+
           var urlCambiarEstado = 'http://23.94.249.163/appDrinks/pedidos/cambiar_estado_pedido.php';
           $http.post(urlCambiarEstado, {idPedido: $rootScope.idUltPedido, estado:4}, {headers: { 'Content-Type': 'application/json'}})
             .then(function (data){
               console.log(data);
               $scope.pedido.limpiarTodo();
-              var alertPopup = $ionicPopup.alert({
-                title:   'Tu pedido fué cancelado',
-                buttons: [{
-                  text: 'Aceptar',
-                  type: 'button button-outline button-positive'
-                }]
-              });
-
-              alertPopup.then(function(res) {
-                $state.go('app.categorias');
-              });
+              $state.go('app.categorias');
+              $ionicLoading.hide();
             });
         }
       });
@@ -56,11 +52,15 @@ angular.module('starter')
 
       confirmPopup.then(function(res) {
         if(res) {
+          $ionicLoading.show({
+            template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
+          });
           var urlCambiarEstado = 'http://23.94.249.163/appDrinks/pedidos/cambiar_estado_pedido.php';
           $http.post(urlCambiarEstado, {idPedido: $rootScope.idUltPedido, estado:3}, {headers: { 'Content-Type': 'application/json'}})
             .then(function (data){
               $scope.pedido.limpiarTodo();
               $state.go('app.categorias');
+              $ionicLoading.hide();
             });
         }
       });
@@ -68,6 +68,5 @@ angular.module('starter')
     };
 
     $scope.pedido = PedidoService;
-
 
   });
