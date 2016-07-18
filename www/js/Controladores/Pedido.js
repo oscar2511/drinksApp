@@ -223,11 +223,8 @@ angular.module('starter')
       var url = 'http://23.94.249.163/appDrinks/pedidos/pedidos.php';
       var pedido = angular.fromJson($scope.pedido);
 
-      console.log($scope.pedido);
-
       $http.post(url,pedido, {headers: { 'Content-Type': 'application/json'}})
         .then(function (data){
-          console.log(data.data);
           $rootScope.idUltPedido = data.data.data.id_pedido;
 
           var jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4MjllZTIxOS01MzA4LTRhZDMtYWQ5NS1lZTQ3Y2YxMzhiMTMifQ.QzA7PSQHEEiSz-cEun7iUZdJRyAXd3iIRQSlsWPL0Yw';

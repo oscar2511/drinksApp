@@ -40,7 +40,6 @@ angular.module('starter')
 
     pedido.setTotalProductos = function (){
       $rootScope.totalProductos = 'pendiente';
-      alert($rootScope.totalProductos);
     };
 
     /**

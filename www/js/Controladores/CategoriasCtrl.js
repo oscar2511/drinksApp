@@ -10,12 +10,16 @@ angular.module('starter')
            PedidoService,
            $rootScope,
            $q,
-           $state
+           $state,
+           NotificacionService,
+           $cordovaSplashscreen
   ){
 
     $ionicLoading.show({
       template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
      });
+
+    navigator.$cordovaSplashscreen.show();
 
     $scope.pedido = PedidoService;
 
@@ -31,14 +35,14 @@ angular.module('starter')
         .then(function(data){
           var array = data.data.data;
           if(array.length < 1)
-            $rootScope.abierto = true;
+            $rootScope.abierto = true; //cambiar a false
           return $q.resolve();
         })
     };
 
 
     /**
-     * Ejecuta todas las funcines de inicializacion (resuelve todas las promesas)
+     * Ejecuta todas las funciones de inicializacion (resuelve todas las promesas)
      * @returns {*}
      */
     $scope.inicializar = function() {
@@ -55,27 +59,20 @@ angular.module('starter')
       });
     };
 
-
     /**
-     * Debug push
+     * Inicializo notificaciones push
      * @type {Ionic.Push}
      */
-    var push = new Ionic.Push({
-      "debug": true,
-      "onNotification": function(notification) {
-        var payload = notification.payload;
-        console.log(notification, payload);
-      }
-    });
+    var notificacion = NotificacionService.iniciarPush();
 
     /**
      * Obtener token
      */
     $ionicPlatform.ready(function() {
-      push.register(function(token) {
+      notificacion.register(function(token) {
         setDataDispositivo(token.token);
         console.log("Mi token:", token.token);
-        push.saveToken(token);
+        notificacion.saveToken(token);
       });
     }).then(function(data){
 
@@ -94,7 +91,7 @@ angular.module('starter')
     };
 
     /**
-     * Llamada api que registra el dispositivo en la bd
+     * Llamada api que registra el dispositivo en la bd y obtiene el ultimo pedido realizado
      * @param dataDispositivo
      */
     var registrarDisp = function(dataDispositivo){
@@ -105,12 +102,10 @@ angular.module('starter')
       $http.post(urlDispositivo, dataDispositivo, {headers: { 'Content-Type': 'application/json'}})
         .then(function (data){
           $rootScope.estadoUltPedido = data.data.data.estado_ult_pedido;
-          console.log($rootScope.estadoUltPedido);
           if($rootScope.estadoUltPedido == 1)
             $scope.setDataUltPedido(data);
         })
         .catch(function(){
-          //alert("error registrando el dispositivo");
           console.log('error registrando el dispositivo');
         });
     };
@@ -120,9 +115,7 @@ angular.module('starter')
      * @param data
      */
     $scope.setDataUltPedido = function(data){
-       console.log(data.data.data.id_pedido);
        $rootScope.totalProductos = 'pendiente';
-       console.log($rootScope.totalProductos);
        $rootScope.pedidoPendiente = true;
        $scope.pedido.setTotalProductos();
        $rootScope.idUltPedido     = data.data.data.id_pedido;
