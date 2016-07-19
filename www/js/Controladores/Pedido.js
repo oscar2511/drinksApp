@@ -281,6 +281,7 @@ angular.module('starter')
           });
         }).catch(function(){
           alert('error');
+          $ionicLoading.hide();
           $state.go('app.error');
         });
     };

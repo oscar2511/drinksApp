@@ -8,11 +8,9 @@ angular.module('starter')
     $state
   ){
 
-
-
-    /*$ionicLoading.show({
+    $ionicLoading.show({
       template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
-    });*/
+    });
 
     var url = 'http://23.94.249.163/appDrinks/admin/listarPedidos.php';
 

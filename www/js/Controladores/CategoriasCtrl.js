@@ -19,7 +19,7 @@ angular.module('starter')
       template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
      });
 
-    navigator.$cordovaSplashscreen.show();
+    //navigator.$cordovaSplashscreen.show();
 
     $scope.pedido = PedidoService;
 
@@ -63,19 +63,22 @@ angular.module('starter')
      * Inicializo notificaciones push
      * @type {Ionic.Push}
      */
-    var notificacion = NotificacionService.iniciarPush();
+    //var notificacion = NotificacionService.iniciarPush();
+   $ionicPlatform.ready(function() {
+      var push = new Ionic.Push({
+        'debug': true,
+        'onNotification': function (notification) {
+          var payload = notification.payload;
+          console.log(notification, payload);
+          //$state.go('app.admin');
+        }
+      });
 
-    /**
-     * Obtener token
-     */
-    $ionicPlatform.ready(function() {
-      notificacion.register(function(token) {
+      push.register(function(token) {
         setDataDispositivo(token.token);
         console.log("Mi token:", token.token);
-        notificacion.saveToken(token);
-      });
-    }).then(function(data){
-
+        push.saveToken(token);
+      })
     });
 
     /**
