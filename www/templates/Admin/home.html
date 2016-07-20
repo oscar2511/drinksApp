@@ -18,7 +18,7 @@
     <br>
     <h2 style="color:#1e6ed1; font-size: 18px";>&nbsp;&nbsp; <i class="ion-clipboard"></i> Listado pedidos</h2>
 
-    <div class="list" ng-repeat="pedido in pedidos" href="#">
+    <div class="list" ng-repeat="pedido in pedidos">
       <div class="item item-avatar">
         <img ng-if="pedido.estado==1" src="http://23.94.249.163/appDrinks/img/circle-azul.png">
         <img ng-if="pedido.estado==4" src="http://23.94.249.163/appDrinks/img/circle-rojo2.png">
@@ -38,7 +38,7 @@
         </div>
         <div class="row">
           <div class="col">
-            <a  href="#/app/admin/pedido/{{pedido}}"><button class="button button-outline button-small ion-eye button-dark"></button></a>
+            <button ng-click = "verDetallePedido(pedido)" class="button button-outline button-small ion-eye button-dark"></button>
           </div>
           <div class="col">
             &nbsp;<button class="button button-outline button-small ion-paper-airplane button-positive"></button>

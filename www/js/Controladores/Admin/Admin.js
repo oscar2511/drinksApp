@@ -8,10 +8,10 @@ angular.module('starter')
     $state
   ){
 
-    $ionicLoading.show({
+   /* $ionicLoading.show({
       template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
     });
-
+*/
     var url = 'http://23.94.249.163/appDrinks/admin/listarPedidos.php';
 
    /* $ionicPopover.fromTemplateUrl('templates/popover.html', {
@@ -52,7 +52,10 @@ angular.module('starter')
       // Execute action
     });
 
+    $scope.verDetallePedido = function(pedido){
+      $state.go('app.pedDet',{"pedido": pedido});
 
+    };
 
     /**
      * Obtener los pedidos del servidor

@@ -104,7 +104,7 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
       }
     })
 
-    .state('app.admin.pedido.detalle', {
+    .state('app.pedDet', {
       url: '/admin/pedido/:pedido',
       views: {
         'menuContent': {
