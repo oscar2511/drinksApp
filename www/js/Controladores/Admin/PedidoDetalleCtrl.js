@@ -1,5 +1,5 @@
 angular.module('starter')
-  .controller('adminCtrl', function(
+  .controller('pedidoDetalleCtrl', function(
     $scope,
     $stateParams,
     $http,
@@ -14,12 +14,10 @@ angular.module('starter')
 
     var url = 'http://23.94.249.163/appDrinks/admin/listarPedidos.php';
 
-   /* $ionicPopover.fromTemplateUrl('templates/popover.html', {
-      scope: $scope
-    }).then(function(popover) {
-      $scope.popover = popover;
-    });
-*/
+    var pedido = angular.fromJson($stateParams.pedido);
+
+    alert('pedido detalle');
+    console.log(pedido);
 
     $scope.atrasAdmin = function (){
       $state.go('app.categorias');
@@ -83,11 +81,7 @@ angular.module('starter')
         });
     };
 
-    $scope.getPedidos();
+    //$scope.getPedidos();
 
-  $scope.verDetalle = function(pedido){
-    alert('pedido');
-    console.log(pedido);
-  };
 
   });
