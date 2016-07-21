@@ -1,17 +1,43 @@
-<ion-view view-title="Detalle Pedido">
+<ion-view view-title="">
   <ion-content>
-    <ion-nav-bar>
-      <ion-nav-buttons side="left">
-        <div class="bar bar-header">
-          <h1 class="title">Popover</h1>
-          <div class="buttons">
-            <button class="button button-icon ion-more" ng-click="popover.show($event)">
-            </button>
+
+    <div class="card">
+      <div class="item item-text-wrap">
+        Dirección:
+      </div>
+    </div>
+
+    <div class="list">
+      <br>
+      <h2 style="color:#1e6ed1; font-size: 18px;">&nbsp;&nbsp; <i class="ion-clipboard"></i>
+        Detalle de tu pedido
+      </h2>
+      <div>
+        <div class="list" ng-repeat="pedido in pedido">
+          <div class="item item-avatar">
+            <img src="http://23.94.249.163/appDrinks/img/productos/{{ped.producto.urlImg}}">
+            <h2> {{pedido.pedido}}</h2>
+            <div class="row">
+              <div class="col" align="left">
+                <strong> {{pedido.producto}}</strong>
+              </div>
+              <div class="col" align="left">
+                c/u $ {{pedido.subtotal}}
+              </div>
+              <div class="col col-75" align="left">
+
+              </div>
+            </div>
           </div>
         </div>
-      </ion-nav-buttons>
-
-    </ion-nav-bar>
-    <h1>Detalle pedido</h1>
+      </div>
+    </div>
   </ion-content>
 </ion-view>
+<!--<div class="bar bar-footer bar-light" >
+  <button ng-click="limpiarCarro()" class="button button-positive">
+    Finalizar la compra
+  </button>
+  Limpiar carro<a href="#/app/mi-pedido" class="button button-clear pull-rigth"><i class="icon ion-ios-cart"></i></a>
+</div>
+-->
