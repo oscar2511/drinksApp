@@ -4,6 +4,7 @@ angular.module('starter')
   function($scope,
            PedidoService,
            $ionicPopup,
+           mapaService,
            $timeout,
            $ionicLoading,
            $cordovaGeolocation,
@@ -90,8 +91,6 @@ angular.module('starter')
                 calle:"",
                 numero: null
               };
-              //console.log(data.data.results[0].formatted_address);
-              console.log(data.data.results[0].address_components[1].short_name);
 
               $scope.direccion.calle  = data.data.results[0].address_components[1].short_name;
               $scope.direccion.numero = data.data.results[0].address_components[0].short_name;
@@ -110,11 +109,17 @@ angular.module('starter')
         });
       $scope.mostrarMapa = true;
       $scope.mostrarFormUbicacion= true;
-      console.log($scope.pedido);
     };
 
     $scope.verUbicacion = function(){
       verUbicacion();
+      /*$scope.bloquearBtns   = true;
+      $scope.mostrarTotales = false;
+      mapaService.mostrarMapa().then(function(){
+        $scope.mapaCargado          = true;
+        $scope.mostrarMapa          = true;
+        $scope.mostrarFormUbicacion = true;
+      });*/
     };
 
     //*******************************************************************************************************************

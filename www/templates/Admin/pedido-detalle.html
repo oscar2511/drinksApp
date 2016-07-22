@@ -3,26 +3,63 @@
 
     <div class="card">
       <div class="item item-text-wrap">
-        Dirección:
+        <div class="row">
+          <div class="col">
+            <strong>Nro. Pedido:</strong> {{pedido.id}}
+          </div>
+          <div class="col">
+            <strong>Fecha:</strong> {{pedido.fecha | date:'dd-MM-yyyy' }} | {{pedido.fecha | date:'HH:mm' }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <strong>Dirección:</strong>
+          </div>
+          <div class="col">
+            {{pedido.calle}} , {{pedido.nro}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <strong>Total:</strong>
+          </div>
+          <div class="col">
+            $ {{pedido.total}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="item item-text-wrap">
+        <div class="row">
+          <div class="col">
+            <button class="button icon-left ion-ios-paperplane button-dark">Msj</button>
+          </div>
+          <div class="col">
+            <button class="button icon-left ion-ios-location button-dark">Mapa</button>
+          </div>
+          <div class="col">
+            <button class="button icon-left ion-ios-paperplane button-dark">Estado</button>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="list">
-      <br>
       <h2 style="color:#1e6ed1; font-size: 18px;">&nbsp;&nbsp; <i class="ion-clipboard"></i>
-        Detalle de tu pedido
+        Productos del pedido
       </h2>
       <div>
-        <div class="list" ng-repeat="pedido in pedido">
-          <div class="item item-avatar">
-            <img src="http://23.94.249.163/appDrinks/img/productos/{{ped.producto.urlImg}}">
-            <h2> {{pedido.pedido}}</h2>
+        <div class="list" ng-repeat="pedidoDetalle in pedidoDetalle">
+          <div class="item">
+            <h2> {{pedidoDetalle.nombreProducto}}</h2>
             <div class="row">
               <div class="col" align="left">
-                <strong> {{pedido.producto}}</strong>
+                <strong> {{pedidoDetalle.producto}}</strong>
               </div>
               <div class="col" align="left">
-                c/u $ {{pedido.subtotal}}
+                c/u $ {{pedidoDetalle.subtotal}}
               </div>
               <div class="col col-75" align="left">
 
