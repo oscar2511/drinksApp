@@ -5,7 +5,7 @@
       <i class="icon ion-ios-arrow-back"></i> Atrás </button>
     </ion-nav-buttons>
     <ion-nav-buttons side="right">
-      <button class="button icon-rigth button-icon ion-more" ng-click="popover.show($event)"></button>
+      <button class="button icon-rigth button-icon ion-android-more-vertical" ng-click="popover.show($event)"></button>
     </ion-nav-buttons>
   </ion-nav-bar>
 
@@ -19,40 +19,25 @@
     <h2 style="color:#1e6ed1; font-size: 18px";>&nbsp;&nbsp; <i class="ion-clipboard"></i> Listado pedidos</h2>
 
     <div class="list" ng-repeat="pedido in pedidos">
-      <div class="item item-avatar">
-        <img ng-if="pedido.estado==1" src="http://23.94.249.163/appDrinks/img/circle-azul.png">
-        <img ng-if="pedido.estado==4" src="http://23.94.249.163/appDrinks/img/circle-rojo2.png">
-        <img ng-if="pedido.estado==2" src="http://23.94.249.163/appDrinks/img/circle-amarillo.png">
-        <img ng-if="pedido.estado==3" src="http://23.94.249.163/appDrinks/img/circle-verde2.png">
-        <h2> {{pedido.fecha | date:'dd-MM-yyyy' }} | {{pedido.fecha | date:'HH:mm' }}</h2>
+      <a class="item" href="#">
         <div class="row">
-          <div class="col" align="left">
-            <strong> $ {{pedido.total}}</strong>
+          <div class="col.25">
+            <span align="left" ng-if="pedido.estado==1" class="badge badge-balanced">Nuevo</span>
+            <span ng-if="pedido.estado==2" class="badge badge-energized">En Camino</span>
+            <span ng-if="pedido.estado==3" class="badge badge-positive">Cerrado</span>
+            <span ng-if="pedido.estado==4" class="badge badge-assertive">Cancelado</span>
           </div>
-          <div class="col" align="left">
-            {{pedido.calle}}
-          </div>
-          <div class="col col-75" align="left">
-
+          <div class="col">
+            <p> <strong>Fecha : </strong> {{pedido.fecha | date:'dd-MM-yyyy' }} {{pedido.fecha | date:'HH:mm' }}</p>
+            <p> <strong>Monto: </strong> $ {{pedido.total}}</p>
+            <p> <strong>Dirección: </strong> {{pedido.calle}} {{pedido.nro}}</p>
           </div>
         </div>
-        <div class="row">
-          <div class="col">
-            <a href="#/app/admin/pedido/{{pedido}}"><button class="button button-outline button-small ion-eye button-dark"></button></a>
-          </div>
-          <div class="col">
-            &nbsp;<button class="button button-outline button-small ion-paper-airplane button-positive"></button></a>
-          </div>
-          <div class="col">
-            &nbsp;<button class="button button-outline button-small ion-happy button-balanced"></button>
-          </div>
-          <div class="col col-75">
-            &nbsp;<button class="button button-small button-assertive ion-sad assertive">
-          </button>
-          </div>
-        </div>
-      </div>
+      </a>
     </div>
+
+
+
   </ion-content>
 
 

@@ -139,6 +139,7 @@ angular.module('starter')
         confirmPopup.then(function(res) {
           if(res) {
             $scope.pedido.limpiarPedido();
+            $scope.tieneProductos = false;
           }
         });
     };
@@ -172,7 +173,7 @@ angular.module('starter')
       console.log(productoPedido);
      var producto = productoPedido.producto;
       if(productoPedido.cantidad == 1)
-        return $scope.eliminarProducto(productoPedido)
+        return $scope.eliminarProducto(productoPedido);
      var cantidad = -1;
      $scope.pedido.decrementarProductoCantidad(producto, cantidad);
       var alertPopup = $ionicPopup.alert({
@@ -203,6 +204,7 @@ angular.module('starter')
         if(res) {
           var producto = productoPedido.producto;
           $scope.pedido.eliminarProductoPedido(producto);
+          $scope.tieneProductos = false;
         }
       });
     };
