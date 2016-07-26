@@ -19,7 +19,7 @@
     <h2 style="color:#1e6ed1; font-size: 18px";>&nbsp;&nbsp; <i class="ion-clipboard"></i> Listado pedidos</h2>
 
     <div class="list" ng-repeat="pedido in pedidos">
-      <a class="item" href="#">
+      <a class="item" href="#/app/admin/pedido/{{pedido}}">
         <div class="row">
           <div class="col.25">
             <span align="left" ng-if="pedido.estado==1" class="badge badge-balanced">Nuevo</span>
