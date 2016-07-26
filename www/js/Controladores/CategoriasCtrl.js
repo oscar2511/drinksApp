@@ -12,14 +12,13 @@ angular.module('starter')
            $q,
            $state,
            NotificacionService,
-           $cordovaSplashscreen
+           $timeout
   ){
+
 
     $ionicLoading.show({
       template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
      });
-
-    //navigator.$cordovaSplashscreen.show();
 
     $scope.pedido = PedidoService;
 
@@ -70,7 +69,10 @@ angular.module('starter')
         'onNotification': function (notification) {
           var payload = notification.payload;
           console.log(notification, payload);
-          //$state.go('app.admin');
+          /*if(payload.mensaje == "nuevo pedido") //todo manejar cuando llegue la notificacion
+            $state.go('app.admin');
+          if(payload.mensaje == "confirmacion de pedido")
+            $state.go('app.confirmacion');*/
         }
       });
 
@@ -92,10 +94,6 @@ angular.module('starter')
       };
       registrarDisp(dataDispositivo)
     };
-
-    //$postdata = file_get_contents("php://input");
-    //$request = json_decode($postdata); $request->uuid
-
 
     /**
      * Llamada api que registra el dispositivo en la bd y obtiene el ultimo pedido realizado
@@ -135,9 +133,10 @@ angular.module('starter')
      * Obtener las categorias del servidor
      * @returns {*}
      */
+    $scope.config = {};
     $scope.obtenerCategorias = function() {
       var url = 'http://23.94.249.163/appDrinks/categorias/getCategorias.php';
-      return $http.get(url)
+      return $http.get(url, { timeout: 100000 })
         .then(function (data) {
           angular.forEach(data.data, function (value) {
             $scope.dataCruda = value;
@@ -153,6 +152,9 @@ angular.module('starter')
           });
           $ionicLoading.hide();
           return $q.resolve();
+        })
+        .catch(function(err){
+         // $state.go('app.error'); //todo siempre entra al catch
         });
       };
 
