@@ -2,6 +2,9 @@
   <ion-content>
 
     <div class="card">
+      <h2 style="color:#1e6ed1; font-size: 18px;">&nbsp;&nbsp; <i class="ion-paperclip"></i>
+        Detalle del pedido
+      </h2>
       <div class="item item-text-wrap">
         <div class="row">
           <div class="col">
@@ -31,41 +34,67 @@
     </div>
 
     <div class="card">
+      <h2 style="color:#1e6ed1; font-size: 18px;">&nbsp;&nbsp; <i class="ion-gear-a"></i>
+        Acciones
+      </h2>
       <div class="item item-text-wrap">
         <div class="row">
           <div class="col">
-            <button class="button icon-left ion-ios-paperplane button-dark">Msj</button>
+            <button class="button button-royal button-outline icon ion-ios-paperplane"></button>
           </div>
           <div class="col">
-            <button class="button icon-left ion-ios-location button-dark">Mapa</button>
+            <button class="button button-positive button-outline icon ion-ios-location"></button>
           </div>
-          <div class="col">
-            <button class="button icon-left ion-flash button-dark">Estado</button>
+          <div class="col.50">
+            <button class="button button-clear icon-left ion-flash button-calm" ng-click="openModal()">Estado</button>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="list">
-      <h2 style="color:#1e6ed1; font-size: 18px;">&nbsp;&nbsp; <i class="ion-clipboard"></i>
-        Productos del pedido
-      </h2>
-      <div>
-        <div class="list" ng-repeat="pedidoDetalle in pedidoDetalle">
-          <div class="item">
-            <h2> {{pedidoDetalle.nombreProducto}}</h2>
-            <div class="row">
-              <div class="col" align="left">
-                <strong> {{pedidoDetalle.producto}}</strong>
-              </div>
-              <div class="col" align="left">
-                c/u $ {{pedidoDetalle.subtotal}}
-              </div>
-            </div>
+    <h2 style="color:#1e6ed1; font-size: 18px;">&nbsp;&nbsp; <i class="ion-clipboard"></i>
+      Productos
+    </h2>
+
+    <ion-list>
+      <ion-item ng-repeat="pedidoDetalle in pedidoDetalle">
+        <h2> {{pedidoDetalle.nombreProducto}}</h2>
+        <div class="row">
+          <div class="col" align="left">
+            <strong>Cant.  {{pedidoDetalle.cantidad}}</strong>
+          </div>
+          <div class="col" align="left">
+            c/u $ {{pedidoDetalle.subtotal}}
           </div>
         </div>
-      </div>
-    </div>
+      </ion-item>
+    </ion-list>
+
+
+
+    <!-- modal -->
+    <script id="my-modal.html" type="text/ng-template">
+      <ion-modal-view style="width: 100%; height: 50%;margin-top: 40px; ">
+        <ion-header-bar>
+          <h1 class="title">Estado del pedido</h1><button class="button button-outline button-assertive"  ng-click="closeModal()">Cerrar</button>
+        </ion-header-bar>
+        <ion-content>
+          <div class="card">
+            <div class="item item-text-wrap">
+              <ion-list ng-init="estado=pedido.estado">
+                <ion-radio ng-model="estado" ng-value="1" style="color: #33CD5F;">Nuevo</ion-radio>
+                <ion-radio ng-model="estado" ng-value="2" style="color: #FFC900;">En Camino</ion-radio>
+                <ion-radio ng-model="estado" ng-value="3" style="color: #387EF5;">Cerrado</ion-radio>
+                <ion-radio ng-model="estado" ng-value="4" style="color: #EF473A;">Cancelado</ion-radio>
+              </ion-list>
+            </div>
+          </div>
+
+        </ion-content>
+      </ion-modal-view>
+    </script>
+
+
   </ion-content>
 </ion-view>
 <!--<div class="bar bar-footer bar-light" >

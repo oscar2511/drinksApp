@@ -93,6 +93,10 @@ angular.module('starter')
       registrarDisp(dataDispositivo)
     };
 
+    //$postdata = file_get_contents("php://input");
+    //$request = json_decode($postdata); $request->uuid
+
+
     /**
      * Llamada api que registra el dispositivo en la bd y obtiene el ultimo pedido realizado
      * @param dataDispositivo

@@ -1,17 +1,16 @@
-<ion-view view-title="Contacto">
-  <ion-content>
-    <ion-nav-bar>
-      <ion-nav-buttons side="left">
-        <div class="bar bar-header">
-          <h1 class="title">Popover</h1>
-          <div class="buttons">
-            <button class="button button-icon ion-more" ng-click="popover.show($event)">
-            </button>
-          </div>
+<ion-view view-title="Contacto" >
+  <ion-content scroll="false">
+    <ion-slide-box>
+      <ion-slide>
+        <div class="box blue">
+          <button ng-click="nextSlide()">Next slide!</button>
         </div>
-      </ion-nav-buttons>
-
-    </ion-nav-bar>
-    <h1>Contacto</h1>
+      </ion-slide>
+      <ion-slide>
+        <div class="box red">
+          Slide 2!
+        </div>
+      </ion-slide>
+    </ion-slide-box>
   </ion-content>
 </ion-view>
