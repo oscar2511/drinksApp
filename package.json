@@ -27,7 +27,8 @@
       },
       "locator": "phonegap-plugin-push",
       "id": "phonegap-plugin-push"
-    }
+    },
+    "onesignal-cordova-plugin"
   ],
   "cordovaPlatforms": [
     "android"

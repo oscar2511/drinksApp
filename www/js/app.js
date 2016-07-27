@@ -3,6 +3,19 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
 
+    //OneSignal.setLogLevel(OneSignal.LOG_LEVEL.DEBUG, OneSignal.LOG_LEVEL.DEBUG);
+
+    var notificationOpenedCallback = function(jsonData) {
+      console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
+    };
+
+    window.plugins.OneSignal.init("98d5dc91-6245-4e20-803e-35726012074c",
+      {googleProjectNumber: "578455890116"},
+      notificationOpenedCallback);
+
+    window.plugins.OneSignal.enableInAppAlertNotification(true);
+
+    window.plugins.OneSignal.sendTag("idUs", "123");
 
   });
 })
