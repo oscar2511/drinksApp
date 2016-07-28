@@ -1,6 +1,5 @@
 <ion-view view-title="">
   <ion-content>
-
     <div class="card">
       <h2 style="color:#1e6ed1; font-size: 18px;">&nbsp;&nbsp; <i class="ion-paperclip"></i>
         Detalle del pedido
@@ -40,7 +39,7 @@
       <div class="item item-text-wrap">
         <div class="row">
           <div class="col">
-            <button class="button button-royal button-outline icon ion-ios-paperplane"></button>
+            <button class="button button-royal button-outline icon ion-ios-paperplane" ng-click="openModalNotif()"></button>
           </div>
           <div class="col">
             <button class="button button-positive button-outline icon ion-ios-location"></button>
@@ -72,8 +71,8 @@
 
 
 
-    <!-- modal -->
-    <script id="my-modal.html" type="text/ng-template">
+    <!-- modal estado-->
+    <script id="modal-estado.html" type="text/ng-template">
       <ion-modal-view style="width: 100%; height: 50%;margin-top: 40px; ">
         <ion-header-bar>
           <h1 class="title">Estado del pedido</h1><button class="button button-outline button-assertive"  ng-click="closeModal()">Cerrar</button>
@@ -93,6 +92,37 @@
         </ion-content>
       </ion-modal-view>
     </script>
+
+    <!-- modal notificacion -->
+    <script id="modal-notificacion.html" type="text/ng-template">
+      <ion-modal-view style="width: 100%; height: 50%;margin-top: 40px; ">
+        <ion-header-bar>
+          <h1 class="title">Enviar notificación</h1><button class="button button-outline button-assertive"  ng-click="closeModalNotif()">Cerrar</button>
+        </ion-header-bar>
+        <ion-content>
+          <div class="card">
+            <div class="list">
+              <label class="item item-input item-floating-label">
+                <span class="input-label">Título</span>
+                <input type="text" placeholder="Título de la notificación">
+              </label>
+              <label class="item item-input item-floating-label">
+                <span class="input-label">Mensaje</span>
+                <input type="text" placeholder="Mensaje a enviar">
+              </label>
+            </div>
+            <button class="button button-block button-balanced  icon ion-ios-paperplane">
+              Enviar notificación
+            </button>
+          </div>
+          <div class="card">
+            <p>* Cantidad de carateres para el título: 25</p>
+            <p>* Cantidad de carateres para el cuerpo del mensaje: 100</p>
+          </div>
+        </ion-content>
+      </ion-modal-view>
+    </script>
+
 
 
   </ion-content>

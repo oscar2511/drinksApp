@@ -69,10 +69,11 @@ angular.module('starter')
         'onNotification': function (notification) {
           var payload = notification.payload;
           console.log(notification, payload);
-          /*if(payload.mensaje == "nuevo pedido") //todo manejar cuando llegue la notificacion
+          alert(notification.title );
+          if(notification.title == 'Nuevo pedido')
             $state.go('app.admin');
           if(payload.mensaje == "confirmacion de pedido")
-            $state.go('app.confirmacion');*/
+            $state.go('app.confirmacion');
         }
       });
 

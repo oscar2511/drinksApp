@@ -15,10 +15,9 @@ angular.module('starter')
 
     var url = 'http://23.94.249.163/appDrinks/admin/detallePedido.php';
 
-    $scope.pedido = angular.fromJson($stateParams.pedido);
-    console.log($scope.pedido);
+    $scope.pedido       = angular.fromJson($stateParams.pedido);
     $scope.pedido.fecha = new Date($scope.pedido.fecha);
-    var idPedido = $scope.pedido.id;
+    var idPedido        = $scope.pedido.id;
 
     /**
      * Obtener el detalle de un pedido
@@ -41,7 +40,6 @@ angular.module('starter')
               nombreProducto: valor.nombre_producto
             });
           });
-          console.log($scope.pedidoDetalle);
           $ionicLoading.hide();
         });
     };
@@ -50,7 +48,7 @@ angular.module('starter')
 
 
 //modal
-    $ionicModal.fromTemplateUrl('my-modal.html', {
+    $ionicModal.fromTemplateUrl('modal-estado.html', {
       scope: $scope,
       animation: 'slide-in-up'
     }).then(function(modal) {
@@ -74,6 +72,23 @@ angular.module('starter')
     $scope.$on('modal.removed', function() {
       // Execute action
     });
+
+
+    //notificacion
+    $ionicModal.fromTemplateUrl('modal-notificacion.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modalNotif) {
+      $scope.modalNotif = modalNotif;
+    });
+    $scope.openModalNotif = function() {
+      $scope.modalNotif.show();
+    };
+    $scope.closeModalNotif = function() {
+      $scope.modalNotif.hide();
+    };
+
+
 
 
 

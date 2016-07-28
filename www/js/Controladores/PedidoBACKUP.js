@@ -11,8 +11,7 @@ angular.module('starter')
            $http,
            $state,
            $rootScope,
-           NotificacionService,
-           $q
+           NotificacionService
   )
   {
     $scope.pedido                = PedidoService;
@@ -229,32 +228,73 @@ angular.module('starter')
 
       $scope.pedido.ubicacion.referencia.tel     = tel;
       $scope.pedido.ubicacion.referencia.dir_ref = dir_ref;
+      var url = 'http://23.94.249.163/appDrinks/pedidos/pedidos.php';
       var pedido = angular.fromJson($scope.pedido);
-      // registra el pedido y envia push al admin
-      $q.all([
-        NotificacionService.registrarNuevoPedido(pedido),
-        NotificacionService.enviarPushNuevoPedido($scope.pedido)
-      ])
-        .then(function() {
+
+      NotificacionService.registrarNuevoPedido(pedido)
+        .then(function(){
+          NotificacionService.enviarPushNuevoPedido($scope.pedido);
+        });
+
+      $http.post(url,pedido, {headers: { 'Content-Type': 'application/json'}})
+        .then(function (data){
+          $rootScope.idUltPedido = data.data.data.id_pedido;
+
+          var jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4MjllZTIxOS01MzA4LTRhZDMtYWQ5NS1lZTQ3Y2YxMzhiMTMifQ.QzA7PSQHEEiSz-cEun7iUZdJRyAXd3iIRQSlsWPL0Yw';
+          var tokens = ['dR0mBCNclQg:APA91bGjdUHQk2Y_g89HTSF-XAr_44Rcr2UTbqaqY2MlF9D_ofGFmI4MHjs3PwA2OoDuEcm-yOfpTmOAECa1psgUUl_N1WRQOQmVXOlZWOtkY1PHGXidcruKWuFuvVCdzz5aUNGl79TL'];
+          var profile = 'testdevelopment';
+
+          var req = {
+            method: 'POST',
+            url: 'https://api.ionic.io/push/notifications',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + jwt
+            },
+            data: {
+              "tokens": tokens,
+              "profile": profile,
+              "notification": {
+                "title": "Nuevo pedido",
+                "message": "Direccion: "+$scope.pedido.ubicacion.direccion.calle+"\n"+$scope.pedido.ubicacion.direccion.numero,
+                "android": {
+                  "title": "Nuevo pedido",
+                  "message": "Direccion: "+$scope.pedido.ubicacion.direccion.calle+"\n"+$scope.pedido.ubicacion.direccion.numero,
+                  "payload": $scope.pedido
+                }
+              }
+            }
+          };
+
+// Make the API call
+          $http(req).success(function(resp){
+            $ionicLoading.hide();
+            var alertPopup = $ionicPopup.alert({
+              title:   'Tu pedido fué enviado, te notificaremos cuando sea procesado. Salud !!',
+              buttons: [{
+                text: 'Aceptar',
+                type: 'button button-outline button-positive'
+              }]
+            });
+
+            alertPopup.then(function(res) {
+              //$scope.pedido.limpiarPedido();
+              $rootScope.totalProductos  = "pendiente";
+              $rootScope.pedidoPendiente = true;
+              $rootScope.totalUltPedido  = $scope.pedido.total;
+              $rootScope.fechaUltPedido  = $scope.pedido.fecha;
+              $scope.mostrarMapa = false;
+              $state.go('app.categorias');
+            });
+
+          }).error(function(error){
+            // Handle error
+            console.log("Mensaje Push: Mensaje error", error);
+            $state.go('app.error');
+          });
+        }).catch(function(){
+          alert('error');
           $ionicLoading.hide();
-          var alertPopup = $ionicPopup.alert({
-            title:   'Tu pedido fué enviado, te notificaremos cuando sea procesado. Salud !!',
-            buttons: [{
-              text: 'Aceptar',
-              type: 'button button-outline button-positive'
-            }]
-          });
-          alertPopup.then(function(res) {
-            $rootScope.totalProductos  = "pendiente";
-            $rootScope.pedidoPendiente = true;
-            $rootScope.totalUltPedido  = $scope.pedido.total;
-            $rootScope.fechaUltPedido  = $scope.pedido.fecha;
-            $scope.mostrarMapa = false;
-            $state.go('app.categorias');
-          });
-        })
-        .catch(function(err) {
-          console.log("Mensaje Push: Mensaje error", error);
           $state.go('app.error');
         });
     };
