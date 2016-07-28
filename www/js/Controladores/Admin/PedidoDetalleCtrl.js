@@ -7,7 +7,8 @@ angular.module('starter')
     $ionicPopover,
     $state,
     $ionicModal,
-    NotificacionService
+    NotificacionService,
+    dispositivoService
   ){
 
     $ionicLoading.show({
@@ -96,10 +97,12 @@ angular.module('starter')
      *
      */
     $scope.enviarPushUsuario = function(titulo, contenido){
-      console.log(titulo, contenido);
+
+
+      //console.log(titulo, contenido, token);
       var mensaje = {'titulo':titulo, 'contenido': contenido};
-      //NotificacionService.pushUsuario($scope.pedidoDetalle.token, mensaje);
-      console.log(mensaje, $scope.pedidoDetalle.token);
+      NotificacionService.pushUsuario(mensaje);
+      //console.log(mensaje, $scope.pedidoDetalle.token);
     };
 
 

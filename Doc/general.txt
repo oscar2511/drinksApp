@@ -1,0 +1,4 @@
+# install
+bower install --save angular-chart.js
+
+bower install angular-material-icons

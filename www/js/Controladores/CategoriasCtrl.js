@@ -101,7 +101,7 @@ angular.module('starter')
      * @param dataDispositivo
      */
     var registrarDisp = function(dataDispositivo){
-      $scope.pedido.dispositivo.uuid = dataDispositivo.uuid;
+      $scope.pedido.dispositivo.uuid  = 123;//dataDispositivo.uuid;
       $scope.pedido.dispositivo.token = dataDispositivo.token;
 
       var urlDispositivo = 'http://23.94.249.163/appDrinks/dispositivos/dispositivos.php';

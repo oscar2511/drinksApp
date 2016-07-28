@@ -97,7 +97,7 @@
     <script id="modal-notificacion.html" type="text/ng-template">
       <ion-modal-view style="width: 100%; height: 50%;margin-top: 40px;">
         <ion-header-bar>
-          <h1 class="title">Enviar notificación</h1><button class="button button-outline button-assertive"  ng-click="closeModalNotif()">Cerrar</button>
+          <h1 class="title">Enviar notificación </h1><button class="button button-outline button-assertive"  ng-click="closeModalNotif()">Cerrar</button>
         </ion-header-bar>
         <ion-content>
           <div class="card">
@@ -119,7 +119,7 @@
                 </span>
                 </label>
                 <div style="padding: 15px;">
-                  <button ng-disabled="notificacion.$invalid" ng-click="enviarPushUsuario(titulo, contenido)" class="button button-block button-balanced  icon ion-ios-paperplane">
+                  <button ng-disabled="notificacion.$invalid" ng-click="enviarPushUsuario(titulo, contenido, scope.pedidoDetalle.token)" class="button button-block button-balanced  icon ion-ios-paperplane">
                     Enviar notificación
                   </button>
                 </div>

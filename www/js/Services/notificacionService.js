@@ -6,7 +6,9 @@ angular.module('starter')
            $http,
            $rootScope,
            $ionicLoading,
-           $state) {
+           $state,
+          dispositivoService
+  ) {
 
     /**
      * Registra un pedido en la base de datos
@@ -63,7 +65,14 @@ angular.module('starter')
     /**
      * Envia notificación push a usuario.
      */
-    this.pushUsuario = function(token, mensaje){
+    this.pushUsuario = function(mensaje){
+
+      dispositivoService.getTokenDispositivo({id:24})
+        .then(function(data){
+
+        });
+
+     /*
       var jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4MjllZTIxOS01MzA4LTRhZDMtYWQ5NS1lZTQ3Y2YxMzhiMTMifQ.QzA7PSQHEEiSz-cEun7iUZdJRyAXd3iIRQSlsWPL0Yw';
       var tokens = [token];
       var profile = 'testdevelopment';
@@ -87,17 +96,8 @@ angular.module('starter')
           }
         }
       };
-      return $http(req);
+      return $http(req);*/
     };
-
-
-
-
-
-
-
-
-
 
 
 
