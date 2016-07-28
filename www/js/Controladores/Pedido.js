@@ -231,32 +231,34 @@ angular.module('starter')
       $scope.pedido.ubicacion.referencia.dir_ref = dir_ref;
       var pedido = angular.fromJson($scope.pedido);
       // registra el pedido y envia push al admin
-      $q.all([
-        NotificacionService.registrarNuevoPedido(pedido),
-        NotificacionService.enviarPushNuevoPedido($scope.pedido)
-      ])
-        .then(function() {
-          $ionicLoading.hide();
-          var alertPopup = $ionicPopup.alert({
-            title:   'Tu pedido fué enviado, te notificaremos cuando sea procesado. Salud !!',
-            buttons: [{
-              text: 'Aceptar',
-              type: 'button button-outline button-positive'
-            }]
-          });
-          alertPopup.then(function(res) {
-            $rootScope.totalProductos  = "pendiente";
-            $rootScope.pedidoPendiente = true;
-            $rootScope.totalUltPedido  = $scope.pedido.total;
-            $rootScope.fechaUltPedido  = $scope.pedido.fecha;
-            $scope.mostrarMapa = false;
-            $state.go('app.categorias');
-          });
-        })
-        .catch(function(err) {
-          console.log("Mensaje Push: Mensaje error", error);
-          $state.go('app.error');
-        });
-    };
+      NotificacionService.registrarNuevoPedido(pedido)
+        .then(function(){
+          NotificacionService.enviarPushNuevoPedido($scope.pedido)
+            .success(function(){
+              var alertPopup = $ionicPopup.alert({
+                title:   'Tu pedido fué enviado, te notificaremos cuando sea procesado. Salud !!',
+                buttons: [{
+                  text: 'Aceptar',
+                  type: 'button button-outline button-positive'
+                }]
+              });
+              alertPopup.then(function(res) {
+                $rootScope.totalProductos  = "pendiente";
+                $rootScope.pedidoPendiente = true;
+                $rootScope.totalUltPedido  = $scope.pedido.total;
+                $rootScope.fechaUltPedido  = $scope.pedido.fecha;
+                $scope.mostrarMapa = false;
+                $state.go('app.categorias');
+              });
+              $ionicLoading.hide();
+            }).error(function(){
+               //todo reintentar enviar push
+            })
+      })
+      .catch(function(err) {
+        console.log("Mensaje Push: Mensaje error", error);
+        $state.go('app.error');
+      })
+  };
 
 });

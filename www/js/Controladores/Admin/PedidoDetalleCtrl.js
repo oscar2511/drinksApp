@@ -6,7 +6,8 @@ angular.module('starter')
     $ionicLoading,
     $ionicPopover,
     $state,
-    $ionicModal
+    $ionicModal,
+    NotificacionService
   ){
 
     $ionicLoading.show({
@@ -37,10 +38,12 @@ angular.module('starter')
               pedido:         valor.id_pedido,
               cantidad:       valor.cantidad,
               subtotal:       valor.subtotal,
-              nombreProducto: valor.nombre_producto
+              nombreProducto: valor.nombre_producto,
+              token:          valor.token
             });
           });
           $ionicLoading.hide();
+          console.log( $scope.pedidoDetalle);
         });
     };
 
@@ -89,6 +92,15 @@ angular.module('starter')
     };
 
 
+    /**
+     *
+     */
+    $scope.enviarPushUsuario = function(titulo, contenido){
+      console.log(titulo, contenido);
+      var mensaje = {'titulo':titulo, 'contenido': contenido};
+      //NotificacionService.pushUsuario($scope.pedidoDetalle.token, mensaje);
+      console.log(mensaje, $scope.pedidoDetalle.token);
+    };
 
 
 
