@@ -8,7 +8,9 @@ angular.module('starter')
     $state,
     $ionicModal,
     NotificacionService,
-    dispositivoService
+    $ionicPopup,
+    $timeout,
+    mapaService
   ){
 
     $ionicLoading.show({
@@ -92,17 +94,54 @@ angular.module('starter')
       $scope.modalNotif.hide();
     };
 
+    //mapa
+    $ionicModal.fromTemplateUrl('modal-mapa.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modalMapa) {
+      $scope.modalMapa = modalMapa;
+    });
+    $scope.openModalMapa = function() {
+      $scope.modalMapa.show();
+      console.log($scope.pedido);
+      mapaService.verMapa($scope.pedido.latitud, $scope.pedido.longitud);
+    };
+    $scope.closeModalMapa= function() {
+      $scope.modalMapa.hide();
+    };
+
 
     /**
      *
      */
     $scope.enviarPushUsuario = function(titulo, contenido){
+      $ionicLoading.show({
+        template: 'Enviando notificación<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
+      });
 
+      var mensaje = {
+        'titulo':titulo,
+        'contenido': contenido
+      };
 
-      //console.log(titulo, contenido, token);
-      var mensaje = {'titulo':titulo, 'contenido': contenido};
-      NotificacionService.pushUsuario(mensaje);
-      //console.log(mensaje, $scope.pedidoDetalle.token);
+      NotificacionService.pushUsuario(mensaje, $scope.pedido.idDispositivo)
+        .then(function(){
+          $ionicLoading.hide();
+          var alertPopup = $ionicPopup.alert({
+            title: 'Notificación enviada',
+            buttons: null
+          });
+
+          $timeout(function() {
+            alertPopup.close();
+            $scope.closeModalNotif();
+          }, 2000);
+        })
+        .catch(function(){
+          $ionicLoading.hide();
+          alert('Error al enviar notificaion al usuario');
+        });
+
     };
 
 

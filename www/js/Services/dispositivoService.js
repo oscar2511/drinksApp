@@ -19,8 +19,8 @@ angular.module('starter')
       return $http.post(url, id, {headers: { 'Content-Type': 'application/json'}})
         .then(function (data){
           if(!data) return $q.reject();
-          console.log(data);
-          return $q.resolve(data.token);
+         // console.log(data);
+          return $q.resolve(data);
         }).catch(function(){
           console.log('eror obteniendo el token');
         });

@@ -71,15 +71,18 @@ angular.module('starter')
           $scope.pedidos =[];
           angular.forEach($scope.dataCruda, function(valor, key) {
             $scope.pedidos.push({
-              id:            valor.id,
-              numero:        valor.numero,
-              fecha:         new Date(valor.fecha),
-              total:         valor.total,
-              idDispositivo: valor.id_dispositivo,
-              calle:         valor.calle,
-              nro  :         valor.nro,
-              telefono  :    valor.telefono,
-              estado    :    valor.estado
+              id:             valor.id,
+              numero:         valor.numero,
+              fecha:          new Date(valor.fecha),
+              total:          valor.total,
+              idDispositivo:  valor.id_dispositivo,
+              calle:          valor.calle,
+              nro  :          valor.nro,
+              telefono :      valor.telefono,
+              estado :        valor.estado,
+              latitud :       valor.latitud,
+              longitud :      valor.longitud,
+              dirReferencia : valor.dir_ref
             });
           });
           $ionicLoading.hide();

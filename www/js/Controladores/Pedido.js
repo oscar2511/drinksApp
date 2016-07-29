@@ -76,11 +76,11 @@ angular.module('starter')
             marker: marker
           };
 
-          $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+          var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
           var marker = new google.maps.Marker({
             position: latLng,
-            map     : $scope.map,
+            map     : map,
             title   : "Dirección de entrega"
           });
 

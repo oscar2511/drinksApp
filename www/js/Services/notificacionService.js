@@ -7,7 +7,7 @@ angular.module('starter')
            $rootScope,
            $ionicLoading,
            $state,
-          dispositivoService
+           dispositivoService
   ) {
 
     /**
@@ -65,40 +65,42 @@ angular.module('starter')
     /**
      * Envia notificación push a usuario.
      */
-    this.pushUsuario = function(mensaje){
+    this.pushUsuario = function(mensaje, idDispositivo){
 
-      dispositivoService.getTokenDispositivo({id:24})
+      return dispositivoService.getTokenDispositivo({id: idDispositivo})
         .then(function(data){
+          angular.forEach(data.data, function (value) {
+            return  dataCruda = value;
+          });
+          angular.forEach(dataCruda, function (valor) {
+            return  token = valor.token;
+          });
 
-        });
-
-     /*
-      var jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4MjllZTIxOS01MzA4LTRhZDMtYWQ5NS1lZTQ3Y2YxMzhiMTMifQ.QzA7PSQHEEiSz-cEun7iUZdJRyAXd3iIRQSlsWPL0Yw';
-      var tokens = [token];
-      var profile = 'testdevelopment';
-      var req = {
-        method: 'POST',
-        url: 'https://api.ionic.io/push/notifications',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + jwt
-        },
-        data: {
-          "tokens": tokens,
-          "profile": profile,
-          "notification": {
-            "title": mensaje.titulo,
-            "message": mensaje.contenido,
-            "android": {
-              "title": mensaje.titulo,
-              "message": mensaje.contenido
+          var jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4MjllZTIxOS01MzA4LTRhZDMtYWQ5NS1lZTQ3Y2YxMzhiMTMifQ.QzA7PSQHEEiSz-cEun7iUZdJRyAXd3iIRQSlsWPL0Yw';
+          var tokens = [token];
+          var profile = 'testdevelopment';
+          var req = {
+            method: 'POST',
+            url: 'https://api.ionic.io/push/notifications',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + jwt
+            },
+            data: {
+              "tokens": tokens,
+              "profile": profile,
+              "notification": {
+                "title": mensaje.titulo,
+                "message": mensaje.contenido,
+                "android": {
+                  "title": mensaje.titulo,
+                  "message": mensaje.contenido
+                }
+              }
             }
-          }
-        }
-      };
-      return $http(req);*/
+          };
+          return $http(req);
+        });
     };
-
-
 
   });

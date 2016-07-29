@@ -101,7 +101,7 @@ angular.module('starter')
      * @param dataDispositivo
      */
     var registrarDisp = function(dataDispositivo){
-      $scope.pedido.dispositivo.uuid  = 123;//dataDispositivo.uuid;
+      $scope.pedido.dispositivo.uuid  = dataDispositivo.uuid;
       $scope.pedido.dispositivo.token = dataDispositivo.token;
 
       var urlDispositivo = 'http://23.94.249.163/appDrinks/dispositivos/dispositivos.php';
@@ -126,7 +126,7 @@ angular.module('starter')
        $scope.pedido.setTotalProductos();
        $rootScope.idUltPedido     = data.data.data.id_pedido;
        $rootScope.totalUltPedido  = data.data.data.total;
-       $rootScope.fechaUltPedido  = new Date(data.data.data.fecha_pedido);
+       $rootScope.fechaUltPedido  = data.data.data.fecha_pedido;//new Date(data.data.data.fecha_pedido);
     };
 
 
