@@ -72,8 +72,10 @@ angular.module('starter')
           alert(notification.title );
           if(notification.title == 'Nuevo pedido')
             $state.go('app.admin');
-          if(payload.mensaje == "confirmacion de pedido")
+          if(payload.mensaje == "Confirmación de pedido")
             $state.go('app.confirmacion');
+
+          alert('llegó un mensaje personalizado');
         }
       });
 

@@ -102,9 +102,8 @@ angular.module('starter')
       $scope.modalMapa = modalMapa;
     });
     $scope.openModalMapa = function() {
-      $scope.modalMapa.show();
-      console.log($scope.pedido);
       mapaService.verMapa($scope.pedido.latitud, $scope.pedido.longitud);
+      $scope.modalMapa.show();
     };
     $scope.closeModalMapa= function() {
       $scope.modalMapa.hide();

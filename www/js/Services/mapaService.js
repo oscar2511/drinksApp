@@ -28,7 +28,7 @@ angular.module('starter')
 
 
     var options = {timeout: 10000, enableHighAccuracy: true};
-    $cordovaGeolocation.getCurrentPosition(options)
+    return $cordovaGeolocation.getCurrentPosition(options)
       .then(function (position) {
         var latitud  = lat ? lat : position.coords.latitude;
         var longitud = long ? long :position.coords.longitude;
@@ -43,11 +43,14 @@ angular.module('starter')
         };
 
         var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
         var marker = new google.maps.Marker({
           position: latLng,
           map: map,
           title: "Dirección de entrega"
         });
+        return $q.resolve(map);
+
       });
   }
 
