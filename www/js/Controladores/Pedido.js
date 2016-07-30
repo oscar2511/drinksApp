@@ -231,6 +231,7 @@ angular.module('starter')
       $scope.pedido.ubicacion.referencia.dir_ref = dir_ref;
       var pedido = angular.fromJson($scope.pedido);
       // registra el pedido y envia push al admin
+      console.log(pedido);
       NotificacionService.registrarNuevoPedido(pedido)
         .then(function(){
           NotificacionService.enviarPushNuevoPedido($scope.pedido)

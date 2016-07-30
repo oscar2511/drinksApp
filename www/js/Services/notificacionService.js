@@ -76,6 +76,7 @@ angular.module('starter')
             return  token = valor.token;
           });
 
+          console.log(token);
           var jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4MjllZTIxOS01MzA4LTRhZDMtYWQ5NS1lZTQ3Y2YxMzhiMTMifQ.QzA7PSQHEEiSz-cEun7iUZdJRyAXd3iIRQSlsWPL0Yw';
           var tokens = [token];
           var profile = 'testdevelopment';
@@ -101,6 +102,28 @@ angular.module('starter')
           };
           return $http(req);
         });
+    };
+
+
+    /**
+     * Manejo de notificaciones recibidas
+     *
+     * @param notificacion
+     */
+    this.postNotificacion = function (notificacion){
+      var payload = notificacion.payload;
+      console.log(notificacion, payload);
+      alert(notificacion.title);
+      switch (notificacion.title){
+        case 'Nuevo pedido':
+          $state.go('app.admin');
+        break;
+        case 'Confirmación de pedido':
+          $state.go('app.confirmacion');
+        break;
+        default :
+          alert('llegó un mensaje personalizado');
+      }
     };
 
   });

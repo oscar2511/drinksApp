@@ -67,7 +67,10 @@ angular.module('starter')
       var push = new Ionic.Push({
         'debug': true,
         'onNotification': function (notification) {
-          var payload = notification.payload;
+          console.log(notification);
+          alert('llego not');
+          NotificacionService.postNotificacion(notificacion);
+          /*var payload = notification.payload;
           console.log(notification, payload);
           alert(notification.title );
           if(notification.title == 'Nuevo pedido')
@@ -75,7 +78,7 @@ angular.module('starter')
           if(payload.mensaje == "Confirmación de pedido")
             $state.go('app.confirmacion');
 
-          alert('llegó un mensaje personalizado');
+          alert('llegó un mensaje personalizado');*/
         }
       });
 
