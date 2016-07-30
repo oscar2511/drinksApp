@@ -42,7 +42,7 @@ angular.module('starter')
           marker: marker
         };
 
-        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+        var map = new google.maps.Map(document.getElementById("maps"), mapOptions);
 
         var marker = new google.maps.Marker({
           position: latLng,

@@ -22,6 +22,8 @@ angular.module('starter')
     $scope.pedido       = angular.fromJson($stateParams.pedido);
     $scope.pedido.fecha = new Date($scope.pedido.fecha);
     var idPedido        = $scope.pedido.id;
+    $scope.mostrarMapa = false;
+    $scope.claseBtn    = 'button button-balanced button-outline iconleft ion-chevron-down';
 
     /**
      * Obtener el detalle de un pedido
@@ -94,21 +96,22 @@ angular.module('starter')
       $scope.modalNotif.hide();
     };
 
-    //mapa
-    $ionicModal.fromTemplateUrl('modal-mapa.html', {
-      scope: $scope,
-      animation: 'slide-in-up'
-    }).then(function(modalMapa) {
-      $scope.modalMapa = modalMapa;
-    });
-    $scope.openModalMapa = function() {
-      mapaService.verMapa($scope.pedido.latitud, $scope.pedido.longitud);
-      $scope.modalMapa.show();
-    };
-    $scope.closeModalMapa= function() {
-      $scope.modalMapa.hide();
-    };
 
+
+    /**
+     * Mostrar mapa
+     */
+    $scope.verMapa = function(mostrarMapa){
+      if(mostrarMapa) {
+        $scope.mostrarMapa = false;
+        $scope.claseBtn    = 'button button-balanced button-outline iconleft ion-chevron-down';
+      }
+      else {
+        $scope.mostrarMapa = true;
+        $scope.claseBtn    = 'button button-balanced button-outline iconleft ion-chevron-up';
+      }
+      mapaService.verMapa($scope.pedido.latitud, $scope.pedido.longitud);
+    };
 
     /**
      *
