@@ -1,11 +1,42 @@
 <ion-view cache-view="false" view-title="">
   <ion-content>
+
+
+    <div class="card">
+      <h2 style="color:#1e6ed1; font-size: 18px;">&nbsp;&nbsp; <i class="ion-gear-a"></i>
+        Acciones
+      </h2>
+      <div class="item item-text-wrap">
+        <div class="row">
+          <div class="col">
+            <button class="button button-royal button-outline icon ion-ios-paperplane" ng-click="openModalNotif()"></button>
+          </div>
+          <div class="col">
+            <button class={{claseBtn}}
+                    ng-class="{claseBtnMapaAb: mostrarMapa == true}"
+                    ng-click="verMapa(mostrarMapa)"> Mapa</button>
+          </div>
+          <div class="col.50">
+            <button class="button button-clear icon-left ion-flash button-calm" ng-click="openModal()">Estado</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
     <section ng-show="!mostrarMapa">
     <div class="card">
       <h2 style="color:#1e6ed1; font-size: 18px;">&nbsp;&nbsp; <i class="ion-paperclip"></i>
-        Detalle del pedido
+        Inf. del pedido
       </h2>
       <div class="item item-text-wrap">
+        <div class="row">
+          <div class="col">
+            <strong>Estado:</strong> {{pedido.estado}}
+          </div>
+        </div>
         <div class="row">
           <div class="col">
             <strong>Nro. Pedido:</strong> {{pedido.id}}
@@ -38,30 +69,18 @@
             {{pedido.telefono}}
           </div>
         </div>
-      </div>
-    </div>
-    </section>
-
-    <div class="card">
-      <h2 style="color:#1e6ed1; font-size: 18px;">&nbsp;&nbsp; <i class="ion-gear-a"></i>
-        Acciones
-      </h2>
-      <div class="item item-text-wrap">
         <div class="row">
           <div class="col">
-            <button class="button button-royal button-outline icon ion-ios-paperplane" ng-click="openModalNotif()"></button>
+            <strong>Referencia: </strong>
           </div>
           <div class="col">
-            <button class={{claseBtn}}
-                    ng-class="{claseBtnMapaAb: mostrarMapa == true}"
-                    ng-click="verMapa(mostrarMapa)"> Mapa</button>
-          </div>
-          <div class="col.50">
-            <button class="button button-clear icon-left ion-flash button-calm" ng-click="openModal()">Estado</button>
+            {{pedido.dirReferencia}}
           </div>
         </div>
       </div>
     </div>
+    </section>
+
 
     <section ng-show="mostrarMapa">
       <div class="card">
@@ -85,7 +104,7 @@
             <strong>Cant.  {{pedidoDetalle.cantidad}}</strong>
           </div>
           <div class="col" align="left">
-            c/u $ {{pedidoDetalle.subtotal}}
+            Subt. $ {{pedidoDetalle.subtotal}}
           </div>
         </div>
       </ion-item>
@@ -103,10 +122,10 @@
           <div class="card">
             <div class="item item-text-wrap">
               <ion-list ng-init="estado=pedido.estado">
-                <ion-radio ng-model="estado" ng-value="1" style="color: #33CD5F;">Nuevo</ion-radio>
-                <ion-radio ng-model="estado" ng-value="2" style="color: #FFC900;">En Camino</ion-radio>
-                <ion-radio ng-model="estado" ng-value="3" style="color: #387EF5;">Cerrado</ion-radio>
-                <ion-radio ng-model="estado" ng-value="4" style="color: #EF473A;">Cancelado</ion-radio>
+                <ion-radio ng-model="estado" ng-value="1" style="color: #33CD5F;" ng-click="cambiarEstado(pedido.id, 1)">Nuevo</ion-radio>
+                <ion-radio ng-model="estado" ng-value="2" style="color: #FFC900;" ng-click="cambiarEstado(pedido.id, 2)">En Camino</ion-radio>
+                <ion-radio ng-model="estado" ng-value="3" style="color: #387EF5;" ng-click="cambiarEstado(pedido.id, 3)">Cerrado</ion-radio>
+                <ion-radio ng-model="estado" ng-value="4" style="color: #EF473A;" ng-click="cambiarEstado(pedido.id, 4)">Cancelado</ion-radio>
               </ion-list>
             </div>
           </div>

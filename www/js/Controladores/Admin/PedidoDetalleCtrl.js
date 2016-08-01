@@ -10,12 +10,15 @@ angular.module('starter')
     NotificacionService,
     $ionicPopup,
     $timeout,
-    mapaService
+    mapaService,
+    PedidoService
   ){
 
     $ionicLoading.show({
       template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
     });
+
+    $scope.pedidoService = PedidoService;
 
     var url = 'http://23.94.249.163/appDrinks/admin/detallePedido.php';
 
@@ -44,7 +47,9 @@ angular.module('starter')
               cantidad:       valor.cantidad,
               subtotal:       valor.subtotal,
               nombreProducto: valor.nombre_producto,
-              token:          valor.token
+              token:          valor.token,
+              telefono:       valor.telefono,
+              dirRef:         valor.dir_ref
             });
           });
           $ionicLoading.hide();
@@ -143,8 +148,47 @@ angular.module('starter')
           $ionicLoading.hide();
           alert('Error al enviar notificaion al usuario');
         });
-
     };
+
+
+    /**
+     *  Cambiar estado de un pedido
+     * @param idPedido
+     * @param estado
+     */
+    $scope.cambiarEstado = function(idPedido, estado){
+      var confirmPopup = $ionicPopup.confirm({
+        title:      'Confirmar acción',
+        template:   'Realmente quieres cambiar el estado del pedido?',
+        cancelText: 'Cancelar',
+        okText:     'Confirmar'
+      });
+
+      confirmPopup.then(function(res) {
+        if(res) {
+          $ionicLoading.show({
+            template: 'Cambiando estado<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
+          });
+          $scope.pedidoService.cambiarEstado(idPedido, estado)
+            .then(function(data){
+              $scope.pedido.estado = estado;
+              $ionicLoading.hide();
+              var alertPopup = $ionicPopup.alert({
+                title: 'Cambio de estado exitoso',
+                buttons: null
+              });
+              $timeout(function() {
+                alertPopup.close();
+                $scope.closeModalNotif();
+              }, 2000);
+            });
+        }
+
+      });
+
+
+
+    }
 
 
 

@@ -6,9 +6,12 @@ angular.module('starter')
                                        $ionicPopup,
                                        $http,
                                        $state,
-                                       $ionicLoading
+                                       $ionicLoading,
+                                       PedidoService
   )
   {
+
+    $scope.pedidoService = PedidoService;
 
     /**
      * Cancelar un pedido que esta como pendiente
@@ -42,10 +45,12 @@ angular.module('starter')
     /**
      * Marcar como recibido un pedido
      */
-    $scope.pedidoRecibido = function(){
+    $scope.cambiarEstado = function(estado){
+      if(estado == 1) var cambio = 'recibido';
+      else cambio = 'cancelado';
       var confirmPopup = $ionicPopup.confirm({
         title:      'Confirmar acción',
-        template:   'Realmente quieres marcar tu pedido como "Recibido" ?',
+        template:   'Realmente quieres marcar tu pedido como '+cambio+' ?',
         cancelText: 'Cancelar',
         okText:     'Confirmar'
       });
@@ -55,13 +60,20 @@ angular.module('starter')
           $ionicLoading.show({
             template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
           });
-          var urlCambiarEstado = 'http://23.94.249.163/appDrinks/pedidos/cambiar_estado_pedido.php';
+
+          $scope.pedidoService.cambiarEstado($rootScope.idUltPedido, estado)
+            .then(function(){
+              $ionicLoading.hide();
+              $scope.pedido.limpiarTodo();
+              $state.go('app.categorias');
+            });
+         /* var urlCambiarEstado = 'http://23.94.249.163/appDrinks/pedidos/cambiar_estado_pedido.php';
           $http.post(urlCambiarEstado, {idPedido: $rootScope.idUltPedido, estado:3}, {headers: { 'Content-Type': 'application/json'}})
             .then(function (data){
               $scope.pedido.limpiarTodo();
               $state.go('app.categorias');
               $ionicLoading.hide();
-            });
+            });*/
         }
       });
 

@@ -1,6 +1,6 @@
 
 angular.module('starter')
-  .controller('contactoCtrl', function($scope, $http) {
+  .controller('contactoCtrl', function($scope, $http, PedidoService) {
 
     $scope.enviar = function () {
 
@@ -48,5 +48,56 @@ angular.module('starter')
           alert('error');
         });
     };
+
+
+    /**
+     *
+     */
+    $scope.pedido = PedidoService;
+    $scope.cambiarEstado = function(){
+      $scope.pedido.cambiarEstado();
+    };
+
+
+
+    /**
+     *
+     */
+    $scope.pedidoRecibido = function(idPedido,estado){
+     /* var confirmPopup = $ionicPopup.confirm({
+        title:      'Confirmar acción',
+        template:   'Realmente quieres marcar tu pedido como "Recibido" ?',
+        cancelText: 'Cancelar',
+        okText:     'Confirmar'
+      });
+*/
+      //confirmPopup.then(function(res) {
+
+        //if(res) {
+         // $ionicLoading.show({
+           // template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
+          //});
+          var urlCambiarEstado = 'http://23.94.249.163/appDrinks/pedidos/cambiar_estado_pedido.php';
+          $http.post(urlCambiarEstado, {idPedido: $rootScope.idUltPedido, estado:3}, {headers: { 'Content-Type': 'application/json'}})
+            .then(function (data){
+              $scope.pedido.limpiarTodo();
+              $state.go('app.categorias');
+              $ionicLoading.hide();
+            });
+        //}
+     // });
+
+    };
+
+
+
+
+
+
+
+
+
+
+
 
   });

@@ -1,6 +1,6 @@
 angular.module('starter')
   .service('PedidoService',
-    function($q, $rootScope){
+    function($q, $rootScope, $http){
 
   /**
    * Seteo los valores del json de pedio en null | 0
@@ -197,6 +197,20 @@ angular.module('starter')
         $rootScope.fechaUltPedido  = null;
         $rootScope.idUltPedido     = null;
         $rootScope.tieneProductos  = false;
+      };
+
+
+      /**
+       * Cambiar estado de un pedido
+       * @param idPedido
+       * @param estado
+       */
+      pedido.cambiarEstado = function(idPedido, estado){
+        var urlCambiarEstado = 'http://23.94.249.163/appDrinks/pedidos/cambiar_estado_pedido.php';
+        return $http.post(urlCambiarEstado, {idPedido: idPedido, estado:estado}, {headers: { 'Content-Type': 'application/json'}})
+          .then(function (data){
+            return $q.resolve(data);
+          });
       };
 
 
