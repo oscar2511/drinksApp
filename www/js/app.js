@@ -1,9 +1,11 @@
 angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.controllers','ionic.service.push', 'chart.js'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $cordovaStatusbar) {
   $ionicPlatform.ready(function() {
-
-
+    $cordovaStatusbar.overlaysWebView(true);
+    $cordovaStatusBar.style(1);
+    $cordovaStatusbar.styleHex('#FF0000');
+    //$cordovaStatusbar.styleColor('black');
   });
 })
 
