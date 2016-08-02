@@ -2,3 +2,6 @@
 bower install --save angular-chart.js
 
 bower install angular-material-icons
+
+//status bar
+cordova plugin add cordova-plugin-statusbar
