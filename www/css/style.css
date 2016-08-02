@@ -6,7 +6,7 @@ background: #ececee;
 
 .img_categoria{
   width: 100% !important;
-  height: 220px;!important;
+  height: 170px;!important;
   /*background-image: url("../img/categorias/vinos.jpg")!important;*/
   background-repeat: no-repeat;
   background-position: center center;
@@ -17,47 +17,47 @@ background: #ececee;
 /* categorias *********************************************************************/
 .vinos{
   width: 100% !important;
-  height: 220px!important;
+  height: 170px!important;
   background-image: url("../img/categorias/vinos.jpg")!important;
   background-repeat: no-repeat;
-  /*background-position: center center;*/
+  background-position: center center;
   background-size: cover;
   margin-bottom: -20px;
 }
 
 .cervezas{
   width: 100% !important;
-  height: 220px!important;
+  height: 170px!important;
   background-image: url("../img/categorias/cerveza.jpg")!important;
   background-repeat: no-repeat;
-  /*background-position: center center;*/
+  background-position: center center;
   background-size: cover;
   margin-bottom: -20px;
 }
 
 .fernets{
   width: 100% !important;
-  height: 220px!important;
+  height: 170px!important;
   background-image: url("../img/categorias/fernet.jpg")!important;
   background-repeat: no-repeat;
-  /*background-position: center center;*/
+  background-position: center center;
   background-size: cover;
   margin-bottom: -20px;
 }
 
 .whiskies{
   width: 100% !important;
-  height: 220px!important;
+  height: 170px!important;
   background-image: url("../img/categorias/whiskies.jpg")!important;
   background-repeat: no-repeat;
-  /*background-position: center center;*/
+  background-position: center center;
   background-size: cover;
   margin-bottom: -20px;
 }
 
 .promociones{
   width: 100% !important;
-  height: 250px!important;
+  height: 170px!important;
   background-image: url("../img/categorias/promociones.jpg")!important;
   background-repeat: no-repeat;
   background-position: center center;
@@ -67,15 +67,21 @@ background: #ececee;
 
 .vodkas{
   width: 100% !important;
-  height: 220px!important;
+  height: 170px!important;
   background-image: url("../img/categorias/vodkas-licores.jpg")!important;
   background-repeat: no-repeat;
-  /*background-position: center center;*/
+  background-position: center center;
   background-size: cover;
   margin-bottom: -20px;
 }
 /* /categorias *********************************************************************/
 
+.bar-custom{
+  /*background-color: #050404;*/
+  background-image: url("../img/black.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 /*
 .img-menu{
 }
