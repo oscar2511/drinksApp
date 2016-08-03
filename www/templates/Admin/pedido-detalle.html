@@ -29,13 +29,14 @@
     <section ng-show="!mostrarMapa">
     <div class="card">
       <h2 style="color:#1e6ed1; font-size: 18px;">&nbsp;&nbsp; <i class="ion-paperclip"></i>
-        Inf. del pedido
+        Inf. del pedido&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
          <span ng-switch="pedido.estado">
               <span class="badge badge-left badge-balanced" ng-switch-when="1">Nuevo</span>
               <span class="badge badge-left badge-energized" ng-switch-when="2">En Camino</span>
               <span class="badge badge-left badge-positive" ng-switch-when="3">Cerrado</span>
               <span class="badge badge-left badge-assertive" ng-switch-when="4">Cancelado</span>
-            </span>
+         </span>
       </h2>
       <div class="item item-text-wrap">
         <div class="row">

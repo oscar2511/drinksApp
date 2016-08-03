@@ -60,7 +60,7 @@ angular.module('starter')
     $scope.getDetallePedido();
 
 
-//modal
+//modal estado
     $scope.crearModal = function() {
       $ionicModal.fromTemplateUrl('modal-estado.html', {
         scope: $scope,
@@ -187,7 +187,7 @@ angular.module('starter')
               });
               $timeout(function() {
                 alertPopup.close();
-                $scope.closeModalNotif();
+                $scope.closeModal();
               }, 2000);
               var mensaje = {
                 'titulo':     'Pedido fué procesado',
