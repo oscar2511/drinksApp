@@ -161,9 +161,13 @@ angular.module('starter')
      * @param estado
      */
     $scope.cambiarEstado = function(idPedido, estado){
+      var msj = '';
+      if(estado == 2) {
+        msj = '(se enviará notificación al usuario)';
+      }
       var confirmPopup = $ionicPopup.confirm({
         title:      'Confirmar acción',
-        template:   'Realmente quieres cambiar el estado del pedido?',
+        template:   'Realmente quieres cambiar el estado del pedido? '+msj,
         cancelText: 'Cancelar',
         okText:     'Confirmar'
       });
@@ -185,6 +189,11 @@ angular.module('starter')
                 alertPopup.close();
                 $scope.closeModalNotif();
               }, 2000);
+              var mensaje = {
+                'titulo':     'Pedido fué procesado',
+                'contenido':  'Recibimos tu pedido, pronto será entregado'
+              };
+              NotificacionService.pushUsuario( mensaje, $scope.pedido.idDispositivo)
             });
         } else{
             $scope.modal.remove();

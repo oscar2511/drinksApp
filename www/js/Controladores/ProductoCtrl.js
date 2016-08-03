@@ -4,7 +4,8 @@ angular.module('starter')
                                        $rootScope,
                                        PedidoService,
                                        $ionicPopup,
-                                       $state
+                                       $state,
+                                       $timeout
   )
   {
     $scope.producto = angular.fromJson($stateParams.producto);
@@ -29,15 +30,13 @@ angular.module('starter')
        * @type {Object|*}
        */
       var alertPopup = $ionicPopup.alert({
-        title:   'Producto añadido!',
-        buttons: [{
-          text: 'Ok',
-          type: 'button button-outline button-positive'
-        }]
+        title: 'Producto agregado!',
+        buttons: null
       });
 
-      alertPopup.then(function(res) {
-      });
+      $timeout(function() {
+        alertPopup.close();
+      }, 1500);
 
 
       /**

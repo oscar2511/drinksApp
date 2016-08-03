@@ -22,6 +22,14 @@ angular.module('starter')
 
     $scope.pedido = PedidoService;
 
+    var timer = $timeout(
+      function() {
+        $ionicLoading.hide();
+        $state.go('app.error');
+      },
+      10000
+    );
+
     //$state.go('app.error');
 
     /**
@@ -52,6 +60,7 @@ angular.module('starter')
       .then(function() {
         console.log('Llamadas api OK.');
         $scope.$broadcast('scroll.refreshComplete');
+        $timeout.cancel(timer);
       })
       .catch(function(err) {
         console.log('error resolviendo las promesas'+ err); //todo ver como manejar el error

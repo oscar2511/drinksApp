@@ -7,7 +7,8 @@ angular.module('starter')
                                        $http,
                                        $state,
                                        $ionicLoading,
-                                       PedidoService
+                                       PedidoService,
+                                       NotificacionService
   )
   {
 
@@ -16,7 +17,7 @@ angular.module('starter')
     /**
      * Cancelar un pedido que esta como pendiente
      */
-    $scope.cancelarPedido = function(){
+   /* $scope.cancelarPedido = function(){
       var confirmPopup = $ionicPopup.confirm({
         title:      'Confirmar acción',
         template:   'Realmente quieres cancelar tu pedido ?',
@@ -40,17 +41,18 @@ angular.module('starter')
             });
         }
       });
-    };
+    };*/
 
     /**
-     * Marcar como recibido un pedido
+     * Cambiar estado de pedido
+     * @param integer estado
      */
     $scope.cambiarEstado = function(estado){
       if(estado == 1) var cambio = 'recibido';
       else cambio = 'cancelado';
       var confirmPopup = $ionicPopup.confirm({
         title:      'Confirmar acción',
-        template:   'Realmente quieres marcar tu pedido como '+cambio+' ?',
+        template:   'Realmente quieres marcar tu pedido como '+cambio+'?',
         cancelText: 'Cancelar',
         okText:     'Confirmar'
       });
@@ -63,6 +65,12 @@ angular.module('starter')
 
           $scope.pedidoService.cambiarEstado($rootScope.idUltPedido, estado)
             .then(function(){
+              var mensaje = {
+                'titulo':     '!Pedido '+cambio,
+                'contenido':  'El pedido nro: '+$rootScope.idUltPedido+' fué marcado como '+cambio
+              };
+              NotificacionService.pushAdministrador( mensaje);
+
               $ionicLoading.hide();
               $scope.pedido.limpiarTodo();
               $state.go('app.categorias');

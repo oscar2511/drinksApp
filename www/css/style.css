@@ -83,10 +83,46 @@ background: #ececee;
   background-size: cover;
   background-position: center center;
 }
-/*
-.img-menu{
+
+.img-error{
+  width: 100% !important;
+  height: 170px!important;
+  background-image: url("../img/copaRota.png")!important;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  margin-bottom: -20px;
 }
-*/
+
+.img-det-prod{
+  width: 90% !important;
+  height: 220px!important;
+  padding: 10px;
+  margin-left: 16px;
+  border-radius: 35px;
+  box-shadow: 2px 2px 5px #999;
+}
+
+.img-pago-logo{
+  width: 100% !important;
+  height: 120px!important;
+  background-image: url("../img/pago-logo.jpeg")!important;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.img-admin-logo{
+  width: 100% !important;
+  height: 120px!important;
+  background-image: url("../img/pedidos-admin.jpg")!important;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+
 .menu-header{
   /*background-image: url("../img/categorias/menuImg.png")!important;*/
   background-color: #111111;

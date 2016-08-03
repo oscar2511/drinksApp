@@ -12,7 +12,8 @@ angular.module('starter')
            $state,
            $rootScope,
            NotificacionService,
-           $q
+           $q,
+           $timeout
   )
   {
     $scope.pedido                = PedidoService;
@@ -227,6 +228,14 @@ angular.module('starter')
         template: 'Enviando pedido. Espera por favor...<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
       });
 
+      var timer = $timeout(
+        function() {
+          $ionicLoading.hide();
+          $state.go('app.error');
+        },
+        20000
+      );
+
       $scope.pedido.ubicacion.referencia.tel     = tel;
       $scope.pedido.ubicacion.referencia.dir_ref = dir_ref;
       var pedido = angular.fromJson($scope.pedido);
@@ -254,7 +263,9 @@ angular.module('starter')
               $ionicLoading.hide();
             }).error(function(){
                //todo reintentar enviar push
-            })
+            });
+
+          $timeout.cancel(timer);
       })
       .catch(function(err) {
         console.log("Mensaje Push: Mensaje error", error);
