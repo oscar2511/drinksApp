@@ -81,6 +81,7 @@ background: #ececee;
   background-image: url("../img/black.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center center;
 }
 /*
 .img-menu{
