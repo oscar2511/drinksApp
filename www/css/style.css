@@ -103,6 +103,14 @@ background: #ececee;
   box-shadow: 2px 2px 5px #999;
 }
 
+.list-prod{
+
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  background: #000000;
+}
+
 .img-pago-logo{
   width: 100% !important;
   height: 120px!important;

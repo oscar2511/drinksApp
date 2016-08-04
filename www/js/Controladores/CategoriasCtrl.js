@@ -77,17 +77,7 @@ angular.module('starter')
         'debug': true,
         'onNotification': function (notification) {
           console.log(notification);
-          alert('llego not');
           NotificacionService.postNotificacion(notificacion);
-          /*var payload = notification.payload;
-          console.log(notification, payload);
-          alert(notification.title );
-          if(notification.title == 'Nuevo pedido')
-            $state.go('app.admin');
-          if(payload.mensaje == "Confirmación de pedido")
-            $state.go('app.confirmacion');
-
-          alert('llegó un mensaje personalizado');*/
         }
       });
 

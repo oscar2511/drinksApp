@@ -47,7 +47,7 @@ angular.module('starter')
           "tokens": tokens,
           "profile": profile,
           "notification": {
-            "title": "Nuevo pedido",
+            "title": "Drink up: nuevo pedido!",
             "message": "Direccion: "+pedido.ubicacion.direccion.calle+"\n"+pedido.ubicacion.direccion.numero,
             "android": {
               "title": "Nuevo pedido",
@@ -91,10 +91,10 @@ angular.module('starter')
               "tokens": tokens,
               "profile": profile,
               "notification": {
-                "title": mensaje.titulo,
+                "title": 'Drink up: '+mensaje.titulo,
                 "message": mensaje.contenido,
                 "android": {
-                  "title": mensaje.titulo,
+                  "title": 'Drink up: '+mensaje.titulo,
                   "message": mensaje.contenido
                 }
               }
@@ -120,7 +120,7 @@ angular.module('starter')
       console.log(notificacion, payload);
       alert(notificacion.title);
       switch (notificacion.title){
-        case 'Nuevo pedido':
+        case 'Drink up: nuevo pedido!':
           $state.go('app.admin');
         break;
         case 'Confirmación de pedido':
