@@ -1,6 +1,24 @@
 angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.controllers','ionic.service.push', 'chart.js'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $http, $rootScope, $q) {
+
+    /**
+     * Chequeo si esta abierto (horario)
+     * @type {string}
+     */
+    var obtenerHorario = function(){
+      var urlAbierto = 'http://23.94.249.163/appDrinks/general/horario.php';
+      return $http.get(urlAbierto)
+        .then(function(data){
+          var array = data.data.data;
+          if(array.length < 1)
+            $rootScope.abierto = false; //cambiar a false
+          console.log(data.data.data);
+          return $q.resolve();
+        })
+    };
+
+    obtenerHorario();
 
 })
 

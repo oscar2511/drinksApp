@@ -27,7 +27,7 @@ angular.module('starter')
         $ionicLoading.hide();
         //$state.go('app.error');
       },
-      10000
+      30000
     );
 
     //$state.go('app.error');
@@ -36,7 +36,7 @@ angular.module('starter')
      * Chequeo si esta abierto (horario)
      * @type {string}
      */
-    $scope.obtenerHorario = function(){
+   /* $scope.obtenerHorario = function(){
       var urlAbierto = 'http://23.94.249.163/appDrinks/general/horario.php';
       return $http.get(urlAbierto)
         .then(function(data){
@@ -45,7 +45,7 @@ angular.module('starter')
             $rootScope.abierto = true; //cambiar a false
           return $q.resolve();
         })
-    };
+    };*/
 
 
     /**
@@ -54,7 +54,7 @@ angular.module('starter')
      */
     $scope.inicializar = function() {
       return $q.all([
-        $scope.obtenerHorario(),
+        //$scope.obtenerHorario(),
         $scope.obtenerCategorias()
       ])
       .then(function() {
@@ -104,6 +104,10 @@ angular.module('starter')
      * Llamada api que registra el dispositivo en la bd y obtiene el ultimo pedido realizado
      * @param dataDispositivo
      */
+    var intentos           = 0,
+        esperaEntreIntentos = 1000,
+        maxIntentos        = 3;
+
     var registrarDisp = function(dataDispositivo){
       $scope.pedido.dispositivo.uuid  = dataDispositivo.uuid;
       $scope.pedido.dispositivo.token = dataDispositivo.token;
@@ -111,14 +115,24 @@ angular.module('starter')
       var urlDispositivo = 'http://23.94.249.163/appDrinks/dispositivos/dispositivos.php';
       $http.post(urlDispositivo, dataDispositivo, {headers: { 'Content-Type': 'application/json'}})
         .then(function (data){
+          intentos = 0;
           $rootScope.estadoUltPedido = data.data.data.estado_ult_pedido;
           if($rootScope.estadoUltPedido == 1)
             $scope.setDataUltPedido(data);
         })
         .catch(function(){
-          console.log('error registrando el dispositivo');
+          console.log('Error registrando el dispositivo, intento: '+intentos);
+          if(intentos < maxIntentos){
+            intentos++;
+            $timeout(function() {
+              registrarDisp(dataDispositivo);
+            }, esperaEntreIntentos);
+          }
+
         });
     };
+
+
 
     /**
      * Setea los datos del ultimo pedido
@@ -130,7 +144,7 @@ angular.module('starter')
        $scope.pedido.setTotalProductos();
        $rootScope.idUltPedido     = data.data.data.id_pedido;
        $rootScope.totalUltPedido  = data.data.data.total;
-       $rootScope.fechaUltPedido  = data.data.data.fecha_pedido;//new Date(data.data.data.fecha_pedido);
+       $rootScope.fechaUltPedido  = new Date(data.data.data.fecha_pedido);
     };
 
 
@@ -164,5 +178,6 @@ angular.module('starter')
       };
 
     $scope.inicializar();
+
 
   });

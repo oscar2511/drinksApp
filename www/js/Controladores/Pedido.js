@@ -223,6 +223,11 @@ angular.module('starter')
     /**
      * Registra el pedido en la base de datos
      */
+
+    var intentos           = 0,
+        esperaEntreIntentos = 1000,
+        maxIntentos        = 3;
+
     $scope.confirmarPedido = function(tel, dir_ref){
       $ionicLoading.show({
         template: 'Enviando pedido. Espera por favor...<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
@@ -248,8 +253,8 @@ angular.module('starter')
               var alertPopup = $ionicPopup.alert({
                 title:   'Tu pedido fué enviado, te notificaremos cuando sea procesado. Salud !!',
                 buttons: [{
-                  text: 'Aceptar',
-                  type: 'button button-outline button-positive'
+                  text:  'Aceptar',
+                  type:  'button button-outline button-positive'
                 }]
               });
               alertPopup.then(function(res) {
@@ -262,14 +267,21 @@ angular.module('starter')
               });
               $ionicLoading.hide();
             }).error(function(){
-               //todo reintentar enviar push
+
             });
 
           $timeout.cancel(timer);
       })
       .catch(function(err) {
-        console.log("Mensaje Push: Mensaje error", error);
-        $state.go('app.error');
+        console.log("Mensaje Push: Mensaje error", err);
+          if(intentos < maxIntentos){
+            intentos++;
+            $timeout(function() {
+              $scope.confirmarPedido(tel, dir_ref);
+            }, esperaEntreIntentos);
+          }
+          else
+            $state.go('app.error');
       })
   };
 
