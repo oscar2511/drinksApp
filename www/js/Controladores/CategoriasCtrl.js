@@ -25,7 +25,7 @@ angular.module('starter')
     var timer = $timeout(
       function() {
         $ionicLoading.hide();
-        $state.go('app.error');
+        //$state.go('app.error');
       },
       10000
     );

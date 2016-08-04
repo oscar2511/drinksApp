@@ -60,4 +60,19 @@ angular.module('starter')
       }
     };
 
+    /**
+     *
+     */
+    $scope.sumarCantidad = function(){
+      $scope.cantidad = $scope.cantidad + 1;
+    };
+
+    /**
+     *
+     */
+    $scope.restarCantidad = function(){
+      $scope.cantidad = $scope.cantidad - 1;
+    };
+
+
   });
