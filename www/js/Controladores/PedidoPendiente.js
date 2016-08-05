@@ -48,7 +48,7 @@ angular.module('starter')
      * @param integer estado
      */
     $scope.cambiarEstado = function(estado){
-      if(estado == 1) var cambio = 'recibido';
+      if(estado == 3) var cambio = 'recibido';
       else cambio = 'cancelado';
       var confirmPopup = $ionicPopup.confirm({
         title:      'Confirmar acción',
@@ -74,6 +74,10 @@ angular.module('starter')
               $ionicLoading.hide();
               $scope.pedido.limpiarTodo();
               $state.go('app.categorias');
+            })
+            .catch(function(){
+              $ionicLoading.hide();
+              $state.go('app.error');
             });
          /* var urlCambiarEstado = 'http://23.94.249.163/appDrinks/pedidos/cambiar_estado_pedido.php';
           $http.post(urlCambiarEstado, {idPedido: $rootScope.idUltPedido, estado:3}, {headers: { 'Content-Type': 'application/json'}})

@@ -106,7 +106,7 @@ angular.module('starter')
 
     this.pushAdministrador = function(mensaje){
       var idDispositivoAdmin = 59; //todo buscar el id del tel de los admin con una funcion (traer array)
-      pushUsuario(mensaje, idDispositivoAdmin)
+      this.pushUsuario(mensaje, idDispositivoAdmin)
     };
 
 

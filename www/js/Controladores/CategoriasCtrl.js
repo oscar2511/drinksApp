@@ -25,27 +25,10 @@ angular.module('starter')
     var timer = $timeout(
       function() {
         $ionicLoading.hide();
-        //$state.go('app.error');
+        $state.go('app.error');
       },
-      30000
+      20000
     );
-
-    //$state.go('app.error');
-
-    /**
-     * Chequeo si esta abierto (horario)
-     * @type {string}
-     */
-   /* $scope.obtenerHorario = function(){
-      var urlAbierto = 'http://23.94.249.163/appDrinks/general/horario.php';
-      return $http.get(urlAbierto)
-        .then(function(data){
-          var array = data.data.data;
-          if(array.length < 1)
-            $rootScope.abierto = true; //cambiar a false
-          return $q.resolve();
-        })
-    };*/
 
 
     /**
@@ -54,7 +37,6 @@ angular.module('starter')
      */
     $scope.inicializar = function() {
       return $q.all([
-        //$scope.obtenerHorario(),
         $scope.obtenerCategorias()
       ])
       .then(function() {
@@ -75,7 +57,7 @@ angular.module('starter')
    $ionicPlatform.ready(function() {
       var push = new Ionic.Push({
         'debug': true,
-        'onNotification': function (notification) {
+        'onNotification': function (notificacion) {
           console.log(notification);
           NotificacionService.postNotificacion(notificacion);
         }
