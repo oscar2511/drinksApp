@@ -118,8 +118,8 @@ angular.module('starter')
     this.postNotificacion = function (notificacion){
       var payload = notificacion.payload;
       console.log(notificacion, payload);
-      alert(notificacion.title);
-      switch (notificacion.title){
+      alert(payload.title);
+      switch (payload.title){
         case 'Drink up: nuevo pedido!':
           $state.go('app.admin');
         break;
@@ -128,6 +128,7 @@ angular.module('starter')
         break;
         default :
           alert('llegó un mensaje personalizado');
+          break;
       }
     };
 

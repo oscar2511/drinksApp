@@ -86,32 +86,39 @@ angular.module('starter')
      * Llamada api que registra el dispositivo en la bd y obtiene el ultimo pedido realizado
      * @param dataDispositivo
      */
-    var intentos           = 0,
+    var intentos            = 0,
         esperaEntreIntentos = 1000,
-        maxIntentos        = 3;
+        maxIntentos         = 3;
 
     var registrarDisp = function(dataDispositivo){
-      $scope.pedido.dispositivo.uuid  = dataDispositivo.uuid;
-      $scope.pedido.dispositivo.token = dataDispositivo.token;
+      console.log(typeof(dataDispositivo.uuid));
+      if(typeof(dataDispositivo.uuid) != 'undefined' && dataDispositivo.token) {
+        $scope.pedido.dispositivo.uuid  = dataDispositivo.uuid;
+        $scope.pedido.dispositivo.token = dataDispositivo.token;
 
-      var urlDispositivo = 'http://23.94.249.163/appDrinks/dispositivos/dispositivos.php';
-      $http.post(urlDispositivo, dataDispositivo, {headers: { 'Content-Type': 'application/json'}})
-        .then(function (data){
-          intentos = 0;
-          $rootScope.estadoUltPedido = data.data.data.estado_ult_pedido;
-          if($rootScope.estadoUltPedido == 1)
-            $scope.setDataUltPedido(data);
-        })
-        .catch(function(){
-          console.log('Error registrando el dispositivo, intento: '+intentos);
-          if(intentos < maxIntentos){
-            intentos++;
-            $timeout(function() {
-              registrarDisp(dataDispositivo);
-            }, esperaEntreIntentos);
-          }
+        var urlDispositivo = 'http://23.94.249.163/appDrinks/dispositivos/dispositivos.php';
+        $http.post(urlDispositivo, dataDispositivo, {headers: {'Content-Type': 'application/json'}})
+          .then(function (data) {
+            intentos = 0;
+            $rootScope.estadoUltPedido = data.data.data.estado_ult_pedido;
+            if ($rootScope.estadoUltPedido == 1)
+              $scope.setDataUltPedido(data);
+          })
+          .catch(function () {
+            console.log('Error registrando el dispositivo, intento: ' + intentos);
+            if (intentos < maxIntentos) {
+              intentos++;
+              $timeout(function () {
+                registrarDisp(dataDispositivo);
+              }, esperaEntreIntentos);
+            }
 
-        });
+          });
+      }else {
+        console.log('No se encontró uuid o token, por favor cierra la aplicación y vuelve a iniciarla');
+        //alert('No se encontró uuid o token, por favor cierra la aplicación y vuelve a iniciarla');
+        $state.go('app.error');
+      }
     };
 
 

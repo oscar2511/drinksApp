@@ -54,6 +54,10 @@ angular.module('starter')
           });
           $ionicLoading.hide();
           console.log( $scope.pedidoDetalle);
+        })
+        .catch(function(){
+          $ionicLoading.hide();
+          $state.go(app.error)
         });
     };
 
@@ -130,13 +134,22 @@ angular.module('starter')
         template: 'Enviando notificación<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
       });
 
+      var timer = $timeout(
+        function() {
+          $ionicLoading.hide();
+          $state.go('app.error');
+        },
+        20000
+      );
+
       var mensaje = {
-        'titulo':titulo,
+        'titulo':    titulo,
         'contenido': contenido
       };
 
       NotificacionService.pushUsuario(mensaje, $scope.pedido.idDispositivo)
         .then(function(){
+          $timeout.cancel(timer);
           $ionicLoading.hide();
           var alertPopup = $ionicPopup.alert({
             title: 'Notificación enviada',
@@ -149,6 +162,7 @@ angular.module('starter')
           }, 2000);
         })
         .catch(function(){
+          $timeout.cancel(timer);
           $ionicLoading.hide();
           alert('Error al enviar notificaion al usuario');
         });

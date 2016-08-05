@@ -5,21 +5,23 @@ angular.module('starter')
     $http,
     $ionicLoading,
     $ionicPopover,
-    $state
+    $state,
+    $timeout
   ){
 
     $ionicLoading.show({
       template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
     });
 
-    var url = 'http://23.94.249.163/appDrinks/admin/listarPedidos.php';
+    var timer = $timeout(
+      function() {
+        $ionicLoading.hide();
+        $state.go('app.error');
+      },
+      20000
+    );
 
-   /* $ionicPopover.fromTemplateUrl('templates/popover.html', {
-      scope: $scope
-    }).then(function(popover) {
-      $scope.popover = popover;
-    });
-*/
+    var url = 'http://23.94.249.163/appDrinks/admin/listarPedidos.php';
 
     $scope.atrasAdmin = function (){
       $state.go('app.categorias');
@@ -86,6 +88,7 @@ angular.module('starter')
             });
           });
           $ionicLoading.hide();
+          $timeout.cancel(timer);
           $scope.$broadcast('scroll.refreshComplete');
         });
     };

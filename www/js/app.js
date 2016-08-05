@@ -13,7 +13,6 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
           var array = data.data.data;
           if(array.length < 1)
             $rootScope.abierto = false; //cambiar a false
-          console.log(data.data.data);
           return $q.resolve();
         })
     };
