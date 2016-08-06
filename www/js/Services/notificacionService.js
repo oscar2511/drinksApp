@@ -30,17 +30,16 @@ angular.module('starter')
     /**
      * Envia notificación push cuando se realiza un pedido.
      */
-    this.enviarPushNuevoPedido = function(pedido){
-      var tokenAdmins = '';
-      var dispAdm = dispositivoService.getAdministradores()
-        .then(function(){
+    this.enviarPushNuevoPedido = function(pedido, dispAdm){
+      var tokenAdmins = [];
           angular.forEach(dispAdm, function (valor) {
-            return tokenAdmins = valor.token+','+valor.token;
+             tokenAdmins.push(valor.token) ;
           });
           console.log(tokenAdmins);
           var jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4MjllZTIxOS01MzA4LTRhZDMtYWQ5NS1lZTQ3Y2YxMzhiMTMifQ.QzA7PSQHEEiSz-cEun7iUZdJRyAXd3iIRQSlsWPL0Yw';
-          //var tokens = ['dR0mBCNclQg:APA91bGjdUHQk2Y_g89HTSF-XAr_44Rcr2UTbqaqY2MlF9D_ofGFmI4MHjs3PwA2OoDuEcm-yOfpTmOAECa1psgUUl_N1WRQOQmVXOlZWOtkY1PHGXidcruKWuFuvVCdzz5aUNGl79TL'];
-          var tokens = [tokenAdmins];
+          //var tokens = ['dlGvLxSg0Mc:APA91bGs3RIp6_wlkX7sW8AG1DmWTLKvFWlmsGal-Dor4tZuXAV9Ey43LSu3nPge5SqGHlpNak4UrbW1vTPamDa9mtRGmTstY54so5dTwySdOEMnpVkgyP782da_wEsNBvb7KJ1hSHbD'];
+          //var tokens = ['dlGvLxSg0Mc:APA91bGs3RIp6_wlkX7sW8AG1DmWTLKvFWlmsGal-Dor4tZuXAV9Ey43LSu3nPge5SqGHlpNak4UrbW1vTPamDa9mtRGmTstY54so5dTwySdOEMnpVkgyP782da_wEsNBvb7KJ1hSHbD','dxJgVmX0NUI:APA91bF8XLWKDQMYs50aHB4ox7V7yuXE9HQnNpbuoTRs7NVlJ8ENGg_Kb_fSiFSGCKY7RL8T1auW9drFjVncRsMwzyGE0xaDtOqO6icufzVLwWMxxYS67c9XPWZIEah6bEzsY7kDSUYZ'];
+          var tokens = tokenAdmins;
           var profile = 'testdevelopment';
           var req = {
             method: 'POST',
@@ -63,8 +62,8 @@ angular.module('starter')
               }
             }
           };
+      console.log(req);
           return $http(req);
-        });
 
     };
 

@@ -25,14 +25,8 @@
         </br>
 
         <form name="addPedido">
-          <span ng-show="addPedido.cantidad.$error.required">
-            <h3><font color="red"> Debes pedir al menos 1 producto</font></h3>
-          </span>
           <span ng-show="addPedido.cantidad.$error.max">
             <h3><font color="red"> La cantidad no puede exceder 100</font></h3>
-          </span>
-          <span ng-show="addPedido.cantidad.$error.min">
-            <h3><font color="red"> Debes pedir al menos 1 producto</font></h3>
           </span>
           <div ng-show="!pedidoPendiente">
             <button ng-if="abierto" ng-disabled="addPedido.$invalid"  ng-click="addAlCarro(producto, cantidad)" class="button  button-block icon-center ion-plus-circled button-positive">

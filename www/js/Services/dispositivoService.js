@@ -40,7 +40,6 @@ angular.module('starter')
           angular.forEach(data.data, function (value) {
             return dispAdm = value;
           });
-
           return $q.resolve(dispAdm);
         })
     };

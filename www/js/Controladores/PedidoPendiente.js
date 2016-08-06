@@ -5,6 +5,7 @@ angular.module('starter')
                                        PedidoService,
                                        $ionicPopup,
                                        $http,
+                                       $timeout,
                                        $state,
                                        $ionicLoading,
                                        PedidoService,
