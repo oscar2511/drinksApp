@@ -1,7 +1,48 @@
 
 angular.module('starter')
-  .controller('contactoCtrl', function($scope, $http, PedidoService) {
+  .controller('contactoCtrl', function($rootScope, $scope, $http, PedidoService, $q) {
 
+
+
+
+
+    var getAdministradores = function(){
+      var dataCruda;
+      var urlDispAdm = 'http://23.94.249.163/appDrinks/dispositivos/getAdministradores.php';
+      return $http.get(urlDispAdm)
+        .then(function(data){
+          angular.forEach(data.data, function (value) {
+            return dataCruda = value;
+          });
+
+          var admins = '';
+          angular.forEach(dataCruda, function (valor) {
+            admins = valor.token+','+valor.token;
+
+          });
+
+
+
+
+
+        console.log(admins);
+
+          return $q.resolve();
+        })
+    };
+
+getAdministradores();
+
+
+
+
+
+
+
+
+
+
+    console.log($rootScope.dispAdmin);
     $scope.enviar = function () {
 
       var url = 'http://23.94.249.163/appDrinks/pedidos/pedidos.php';

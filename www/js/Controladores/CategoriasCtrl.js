@@ -9,13 +9,14 @@ angular.module('starter')
            $ionicUser,
            PedidoService,
            $rootScope,
+           dispositivoService,
            $q,
            $state,
            NotificacionService,
            $timeout
   ){
 
-
+    console.log($rootScope.dispAdmin);
     $ionicLoading.show({
       template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
      });
@@ -37,7 +38,8 @@ angular.module('starter')
      */
     $scope.inicializar = function() {
       return $q.all([
-        $scope.obtenerCategorias()
+        $scope.obtenerCategorias(),
+        dispositivoService.getAdministradores()
       ])
       .then(function() {
         console.log('Llamadas api OK.');
@@ -117,7 +119,7 @@ angular.module('starter')
       }else {
         console.log('No se encontró uuid o token, por favor cierra la aplicación y vuelve a iniciarla');
         //alert('No se encontró uuid o token, por favor cierra la aplicación y vuelve a iniciarla');
-        $state.go('app.error');
+        //$state.go('app.error'); // todo: en produccion quitar esto
       }
     };
 

@@ -27,6 +27,24 @@ angular.module('starter')
     };
 
 
+    /**
+     *  Obtener el listado de dispositivos administradores
+     *
+      * @returns {*}
+     */
+    this.getAdministradores = function(){
+      var urlDispAdm = 'http://23.94.249.163/appDrinks/dispositivos/getAdministradores.php';
+      var dispAdm;
+      return $http.get(urlDispAdm)
+        .then(function(data){
+          angular.forEach(data.data, function (value) {
+            return dispAdm = value;
+          });
+
+          return $q.resolve(dispAdm);
+        })
+    };
+
 
 
   });
