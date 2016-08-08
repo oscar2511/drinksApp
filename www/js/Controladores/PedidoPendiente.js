@@ -49,7 +49,7 @@ angular.module('starter')
                 'titulo':     '!Pedido '+cambio,
                 'contenido':  'El pedido nro: '+$rootScope.idUltPedido+' fué marcado como '+cambio
               };
-              NotificacionService.pushAdministrador( mensaje);
+              NotificacionService.pushAdministrador(mensaje, $rootScope.idUltPedido);
 
               $timeout.cancel(timer);
               $ionicLoading.hide();

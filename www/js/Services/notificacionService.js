@@ -30,16 +30,12 @@ angular.module('starter')
     /**
      * Envia notificación push cuando se realiza un pedido.
      */
-    this.enviarPushNuevoPedido = function(pedido, dispAdm){
-      /*var tokenAdmins = [];
-          angular.forEach(dispAdm, function (valor) {
-             tokenAdmins.push(valor.token) ;
-          });
-          console.log(tokenAdmins);*/
+    this.enviarPushNuevoPedido = function(pedido){
+
           var jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4MjllZTIxOS01MzA4LTRhZDMtYWQ5NS1lZTQ3Y2YxMzhiMTMifQ.QzA7PSQHEEiSz-cEun7iUZdJRyAXd3iIRQSlsWPL0Yw';
           //var tokens = ['dlGvLxSg0Mc:APA91bGs3RIp6_wlkX7sW8AG1DmWTLKvFWlmsGal-Dor4tZuXAV9Ey43LSu3nPge5SqGHlpNak4UrbW1vTPamDa9mtRGmTstY54so5dTwySdOEMnpVkgyP782da_wEsNBvb7KJ1hSHbD'];
           //var tokens = ['dlGvLxSg0Mc:APA91bGs3RIp6_wlkX7sW8AG1DmWTLKvFWlmsGal-Dor4tZuXAV9Ey43LSu3nPge5SqGHlpNak4UrbW1vTPamDa9mtRGmTstY54so5dTwySdOEMnpVkgyP782da_wEsNBvb7KJ1hSHbD','dxJgVmX0NUI:APA91bF8XLWKDQMYs50aHB4ox7V7yuXE9HQnNpbuoTRs7NVlJ8ENGg_Kb_fSiFSGCKY7RL8T1auW9drFjVncRsMwzyGE0xaDtOqO6icufzVLwWMxxYS67c9XPWZIEah6bEzsY7kDSUYZ'];
-          var tokens  = $rootScope.tokenAdm;//tokenAdmins;
+          var tokens  = $rootScope.tokenAdm;
           var profile = 'testdevelopment';
           var req = {
             method: 'POST',
@@ -71,15 +67,16 @@ angular.module('starter')
     /**
      * Envia notificación push a usuario.
      */
-    this.pushUsuario = function(mensaje, idDispositivo, token){
+    this.pushUsuario = function(mensaje, idDispositivo){
 
         dispositivoService.getTokenDispositivo({id: idDispositivo})
           .then(function (data) {
+            var token ='';
             angular.forEach(data.data, function (value) {
               return dataCruda = value;
             });
             angular.forEach(dataCruda, function (valor) {
-              return token = valor.token;
+              token = valor.token;
             });
 
             //console.log(token);
@@ -106,9 +103,8 @@ angular.module('starter')
                 }
               }
             };
-
+            return $http(req);
           });
-      return $http(req);
     };
 
 
@@ -118,9 +114,11 @@ angular.module('starter')
      * @param mensaje
      * @returns {*}s
      */
-    this.pushAdministrador = function(mensaje){
+    this.pushAdministrador = function(mensaje, nroPedido){
       var jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4MjllZTIxOS01MzA4LTRhZDMtYWQ5NS1lZTQ3Y2YxMzhiMTMifQ.QzA7PSQHEEiSz-cEun7iUZdJRyAXd3iIRQSlsWPL0Yw';
-      var tokens = [$rootScope.tokenAdm];
+      //var tokens = ['dlGvLxSg0Mc:APA91bGs3RIp6_wlkX7sW8AG1DmWTLKvFWlmsGal-Dor4tZuXAV9Ey43LSu3nPge5SqGHlpNak4UrbW1vTPamDa9mtRGmTstY54so5dTwySdOEMnpVkgyP782da_wEsNBvb7KJ1hSHbD'];
+      //var tokens = ['dlGvLxSg0Mc:APA91bGs3RIp6_wlkX7sW8AG1DmWTLKvFWlmsGal-Dor4tZuXAV9Ey43LSu3nPge5SqGHlpNak4UrbW1vTPamDa9mtRGmTstY54so5dTwySdOEMnpVkgyP782da_wEsNBvb7KJ1hSHbD','dxJgVmX0NUI:APA91bF8XLWKDQMYs50aHB4ox7V7yuXE9HQnNpbuoTRs7NVlJ8ENGg_Kb_fSiFSGCKY7RL8T1auW9drFjVncRsMwzyGE0xaDtOqO6icufzVLwWMxxYS67c9XPWZIEah6bEzsY7kDSUYZ'];
+      var tokens  = $rootScope.tokenAdm;//tokenAdmins;
       var profile = 'testdevelopment';
       var req = {
         method: 'POST',
@@ -133,16 +131,16 @@ angular.module('starter')
           "tokens": tokens,
           "profile": profile,
           "notification": {
-            "title": 'Drink up: ' + mensaje.titulo,
-            "message": mensaje.contenido,
+            "title": "Drink up: "+mensaje.titulo,
+            "message": "Drink up: "+mensaje.contenido,
             "android": {
-              "title": 'Drink up: ' + mensaje.titulo,
-              "message": mensaje.contenido
+              "title": "Drink up: "+mensaje.titulo,
+              "message": "Drink up: "+mensaje.contenido,
+              "payload": {"idPedido": nroPedido}
             }
           }
         }
       };
-      console.log(req);
       return $http(req);
     };
 
@@ -155,13 +153,14 @@ angular.module('starter')
     this.postNotificacion = function (notificacion){
       var payload = notificacion.payload;
       //console.log(notificacion, payload);
-      alert(payload.title);
-      switch (payload.title){
+      alert(notificacion.title);
+      switch (notificacion.title){
         case 'Drink up: nuevo pedido!':
           $state.go('app.admin');
         break;
-        case 'Confirmación de pedido':
-          $state.go('app.confirmacion');
+        case 'Pedido procesado':
+          alert("Pedido procesado");
+          //$state.go('app.confirmacion');
         break;
         default :
           alert('llegó un mensaje personalizado');

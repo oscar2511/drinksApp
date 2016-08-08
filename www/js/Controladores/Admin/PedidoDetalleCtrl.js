@@ -204,7 +204,7 @@ angular.module('starter')
                 $scope.closeModal();
               }, 2000);
               var mensaje = {
-                'titulo':     'pedido procesado',
+                'titulo':     'Pedido procesado',
                 'contenido':  'Recibimos tu pedido, pronto será entregado'
               };
               NotificacionService.pushUsuario( mensaje, $scope.pedido.idDispositivo)

@@ -23,6 +23,8 @@ background: #ececee;
   background-position: center center;
   background-size: cover;
   margin-bottom: -20px;
+  box-shadow: 2px 2px 5px #999;
+  padding-left: 100%;
 }
 
 .cervezas{
@@ -33,6 +35,8 @@ background: #ececee;
   background-position: center center;
   background-size: cover;
   margin-bottom: -20px;
+  box-shadow: 2px 2px 5px #999;
+  padding-left: 100%;
 }
 
 .fernets{
@@ -43,6 +47,7 @@ background: #ececee;
   background-position: center center;
   background-size: cover;
   margin-bottom: -20px;
+  padding-left: 100%;
 }
 
 .whiskies{
@@ -53,6 +58,7 @@ background: #ececee;
   background-position: center center;
   background-size: cover;
   margin-bottom: -20px;
+  padding-left: 100%;
 }
 
 .promociones{
@@ -63,6 +69,7 @@ background: #ececee;
   background-position: center center;
   background-size: cover;
   margin-bottom: -20px;
+  padding-left: 100%;
 }
 
 .vodkas{
@@ -73,6 +80,7 @@ background: #ececee;
   background-position: center center;
   background-size: cover;
   margin-bottom: -20px;
+  padding-left: 100%;
 }
 /* /categorias *********************************************************************/
 
@@ -86,12 +94,13 @@ background: #ececee;
 
 .img-error{
   width: 100% !important;
-  height: 300px!important;
+  height: 200px !important;
   background-image: url("../img/copaRota.png")!important;
   background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  margin-bottom: -20px;
+
+  box-shadow: 2px 2px 5px #999;
+  /*background-position: center center;*/
+  /*background-size: cover;*/
 }
 
 .img-det-prod{
@@ -111,6 +120,10 @@ background: #ececee;
   /*box-shadow: 1px 1px 1px 1px #000000;*/
 }
 
+.sombra-categ{
+  box-shadow: 2px 2px 5px #999;
+}
+
 .img-pago-logo{
   width: 100% !important;
   height: 120px!important;
@@ -118,6 +131,7 @@ background: #ececee;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
+  box-shadow: 2px 2px 5px #999;
 }
 
 .img-cerrado-logo{
@@ -127,6 +141,7 @@ background: #ececee;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
+  box-shadow: 2px 2px 5px #999;
 }
 
 .img-admin-logo{
@@ -136,6 +151,7 @@ background: #ececee;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
+  box-shadow: 2px 2px 5px #999;
 }
 
 

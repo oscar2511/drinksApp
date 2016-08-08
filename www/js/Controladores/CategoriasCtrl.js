@@ -52,15 +52,15 @@ angular.module('starter')
     };
 
     /**
-     * Inicializo notificaciones push
+     * Inicializo notificaciones push y manejo la recepcion de notif.
+     *
      * @type {Ionic.Push}
      */
-    //var notificacion = NotificacionService.iniciarPush();
    $ionicPlatform.ready(function() {
       var push = new Ionic.Push({
         'debug': true,
         'onNotification': function (notificacion) {
-          console.log(notification);
+          console.log(notificacion);
           NotificacionService.postNotificacion(notificacion);
         }
       });
@@ -86,6 +86,7 @@ angular.module('starter')
 
     /**
      * Llamada api que registra el dispositivo en la bd y obtiene el ultimo pedido realizado
+     *
      * @param dataDispositivo
      */
     var intentos            = 0,

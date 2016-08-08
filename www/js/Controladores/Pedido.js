@@ -248,10 +248,8 @@ angular.module('starter')
       // registra el pedido y envia push al admin
       NotificacionService.registrarNuevoPedido(pedido)
         .then(function() {
-          dispositivoService.getAdministradores()
-            .then(function (dispAdm) {
-              console.log($scope.pedido);
-          NotificacionService.enviarPushNuevoPedido($scope.pedido, dispAdm)
+          console.log($scope.pedido);
+          NotificacionService.enviarPushNuevoPedido($scope.pedido)
             .success(function () {
               var alertPopup = $ionicPopup.alert({
                 title: 'Tu pedido fué enviado, te notificaremos cuando sea procesado. Salud !!',
@@ -274,7 +272,6 @@ angular.module('starter')
             });
 
           $timeout.cancel(timer);
-        });
       })
       .catch(function(err) {
         console.log("Mensaje Push: Mensaje error", err);
