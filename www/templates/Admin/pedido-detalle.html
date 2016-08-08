@@ -3,9 +3,12 @@
 
 
     <div class="card">
-      <h2 style="color:#1e6ed1; font-size: 18px;">&nbsp;&nbsp; <i class="ion-gear-a"></i>
-        Acciones
-      </h2>
+      <div class="item item-divider">
+        <font color="#696969">
+          <i class="ion-gear-a"></i>
+          Acciones
+        </font>
+      </div>
       <div class="item item-text-wrap">
         <div class="row">
           <div class="col">
@@ -28,17 +31,26 @@
 
     <section ng-show="!mostrarMapa">
     <div class="card">
-      <h2 style="color:#1e6ed1; font-size: 18px;">&nbsp;&nbsp; <i class="ion-paperclip"></i>
-        Inf. del pedido&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <div class="item item-divider">
+        <font color="#696969">
+          <i class="ion-paperclip"></i>
+          Inf. del pedido
+        </font>
+      </div>
 
-         <span ng-switch="pedido.estado">
+      </h2>
+      <div class="item item-text-wrap">
+        <div class="row">
+          <div class="col.25">
+             <section ng-switch="pedido.estado">
               <span class="badge badge-left badge-balanced" ng-switch-when="1">Nuevo</span>
               <span class="badge badge-left badge-energized" ng-switch-when="2">En Camino</span>
               <span class="badge badge-left badge-positive" ng-switch-when="3">Cerrado</span>
               <span class="badge badge-left badge-assertive" ng-switch-when="4">Cancelado</span>
-         </span>
-      </h2>
-      <div class="item item-text-wrap">
+            </section>
+          </div>
+        </div>
+        <br>
         <div class="row">
           <div class="col">
             <strong>Nro. Pedido:</strong> {{pedido.id}}
@@ -94,9 +106,13 @@
       </div>
     </section>
 
-    <h2 style="color:#1e6ed1; font-size: 18px;">&nbsp;&nbsp; <i class="ion-clipboard"></i>
-      Productos
-    </h2>
+
+    <div class="item item-divider">
+      <font color="#696969">
+        <i class="ion-clipboard"></i>
+        Productos
+      </font>
+    </div>
 
     <ion-list>
       <ion-item ng-repeat="pedidoDetalle in pedidoDetalle">
