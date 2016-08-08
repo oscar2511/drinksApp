@@ -31,15 +31,15 @@ angular.module('starter')
      * Envia notificación push cuando se realiza un pedido.
      */
     this.enviarPushNuevoPedido = function(pedido, dispAdm){
-      var tokenAdmins = [];
+      /*var tokenAdmins = [];
           angular.forEach(dispAdm, function (valor) {
              tokenAdmins.push(valor.token) ;
           });
-          console.log(tokenAdmins);
+          console.log(tokenAdmins);*/
           var jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4MjllZTIxOS01MzA4LTRhZDMtYWQ5NS1lZTQ3Y2YxMzhiMTMifQ.QzA7PSQHEEiSz-cEun7iUZdJRyAXd3iIRQSlsWPL0Yw';
           //var tokens = ['dlGvLxSg0Mc:APA91bGs3RIp6_wlkX7sW8AG1DmWTLKvFWlmsGal-Dor4tZuXAV9Ey43LSu3nPge5SqGHlpNak4UrbW1vTPamDa9mtRGmTstY54so5dTwySdOEMnpVkgyP782da_wEsNBvb7KJ1hSHbD'];
           //var tokens = ['dlGvLxSg0Mc:APA91bGs3RIp6_wlkX7sW8AG1DmWTLKvFWlmsGal-Dor4tZuXAV9Ey43LSu3nPge5SqGHlpNak4UrbW1vTPamDa9mtRGmTstY54so5dTwySdOEMnpVkgyP782da_wEsNBvb7KJ1hSHbD','dxJgVmX0NUI:APA91bF8XLWKDQMYs50aHB4ox7V7yuXE9HQnNpbuoTRs7NVlJ8ENGg_Kb_fSiFSGCKY7RL8T1auW9drFjVncRsMwzyGE0xaDtOqO6icufzVLwWMxxYS67c9XPWZIEah6bEzsY7kDSUYZ'];
-          var tokens = tokenAdmins;
+          var tokens  = $rootScope.tokenAdm;//tokenAdmins;
           var profile = 'testdevelopment';
           var req = {
             method: 'POST',
@@ -62,7 +62,6 @@ angular.module('starter')
               }
             }
           };
-      console.log(req);
           return $http(req);
 
     };
@@ -74,32 +73,6 @@ angular.module('starter')
      */
     this.pushUsuario = function(mensaje, idDispositivo, token){
 
-      if(token){
-        var jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4MjllZTIxOS01MzA4LTRhZDMtYWQ5NS1lZTQ3Y2YxMzhiMTMifQ.QzA7PSQHEEiSz-cEun7iUZdJRyAXd3iIRQSlsWPL0Yw';
-        var tokens = [token];
-        var profile = 'testdevelopment';
-        var req = {
-          method: 'POST',
-          url: 'https://api.ionic.io/push/notifications',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + jwt
-          },
-          data: {
-            "tokens": tokens,
-            "profile": profile,
-            "notification": {
-              "title": 'Drink up: ' + mensaje.titulo,
-              "message": mensaje.contenido,
-              "android": {
-                "title": 'Drink up: ' + mensaje.titulo,
-                "message": mensaje.contenido
-              }
-            }
-          }
-        };
-      }
-      else {
         dispositivoService.getTokenDispositivo({id: idDispositivo})
           .then(function (data) {
             angular.forEach(data.data, function (value) {
@@ -109,7 +82,7 @@ angular.module('starter')
               return token = valor.token;
             });
 
-            console.log(token);
+            //console.log(token);
             var jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4MjllZTIxOS01MzA4LTRhZDMtYWQ5NS1lZTQ3Y2YxMzhiMTMifQ.QzA7PSQHEEiSz-cEun7iUZdJRyAXd3iIRQSlsWPL0Yw';
             var tokens = [token];
             var profile = 'testdevelopment';
@@ -135,7 +108,6 @@ angular.module('starter')
             };
 
           });
-      }
       return $http(req);
     };
 
@@ -144,17 +116,34 @@ angular.module('starter')
      *  Envia notificacion a los dispositivos administradores
      *
      * @param mensaje
-     * @returns {*}
+     * @returns {*}s
      */
     this.pushAdministrador = function(mensaje){
-      var dispAdm = dispositivoService.getAdministradores();
-
-      var tokenAdmins = '';
-      angular.forEach(dispAdm, function (valor) {
-        return tokenAdmins = valor.token+','+valor.token;
-      });
-
-     this.pushUsuario(mensaje, null, token)
+      var jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4MjllZTIxOS01MzA4LTRhZDMtYWQ5NS1lZTQ3Y2YxMzhiMTMifQ.QzA7PSQHEEiSz-cEun7iUZdJRyAXd3iIRQSlsWPL0Yw';
+      var tokens = [$rootScope.tokenAdm];
+      var profile = 'testdevelopment';
+      var req = {
+        method: 'POST',
+        url: 'https://api.ionic.io/push/notifications',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + jwt
+        },
+        data: {
+          "tokens": tokens,
+          "profile": profile,
+          "notification": {
+            "title": 'Drink up: ' + mensaje.titulo,
+            "message": mensaje.contenido,
+            "android": {
+              "title": 'Drink up: ' + mensaje.titulo,
+              "message": mensaje.contenido
+            }
+          }
+        }
+      };
+      console.log(req);
+      return $http(req);
     };
 
 
@@ -165,7 +154,7 @@ angular.module('starter')
      */
     this.postNotificacion = function (notificacion){
       var payload = notificacion.payload;
-      console.log(notificacion, payload);
+      //console.log(notificacion, payload);
       alert(payload.title);
       switch (payload.title){
         case 'Drink up: nuevo pedido!':

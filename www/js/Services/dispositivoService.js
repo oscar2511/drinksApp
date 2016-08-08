@@ -38,7 +38,7 @@ angular.module('starter')
       return $http.get(urlDispAdm)
         .then(function(data){
           angular.forEach(data.data, function (value) {
-            return dispAdm = value;
+             dispAdm = value;
           });
           return $q.resolve(dispAdm);
         })

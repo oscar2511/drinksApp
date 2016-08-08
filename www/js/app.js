@@ -1,6 +1,6 @@
 angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.controllers','ionic.service.push', 'chart.js'])
 
-.run(function($ionicPlatform, $http, $rootScope, $q) {
+.run(function($ionicPlatform, $http, $rootScope, $q, dispositivoService) {
 
     /**
      * Chequeo si esta abierto (horario)
@@ -17,6 +17,19 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
         })
     };
 
+    var getTokenAdmins = function(){
+      var tokenAdmins = [];
+      dispositivoService.getAdministradores()
+        .then(function(dispAdm){
+          angular.forEach(dispAdm, function (valor) {
+            tokenAdmins.push(valor.token) ;
+          });
+          $rootScope.tokenAdm = tokenAdmins;
+        });
+
+    };
+
+    getTokenAdmins();
     obtenerHorario();
 
 })

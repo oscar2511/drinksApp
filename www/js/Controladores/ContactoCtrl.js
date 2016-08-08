@@ -4,6 +4,34 @@ angular.module('starter')
 
 
 
+    $scope.pushAdministrador = function(mensaje){
+      var jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4MjllZTIxOS01MzA4LTRhZDMtYWQ5NS1lZTQ3Y2YxMzhiMTMifQ.QzA7PSQHEEiSz-cEun7iUZdJRyAXd3iIRQSlsWPL0Yw';
+      //var tokens = ['dlGvLxSg0Mc:APA91bGs3RIp6_wlkX7sW8AG1DmWTLKvFWlmsGal-Dor4tZuXAV9Ey43LSu3nPge5SqGHlpNak4UrbW1vTPamDa9mtRGmTstY54so5dTwySdOEMnpVkgyP782da_wEsNBvb7KJ1hSHbD'];
+      //var tokens = ['dlGvLxSg0Mc:APA91bGs3RIp6_wlkX7sW8AG1DmWTLKvFWlmsGal-Dor4tZuXAV9Ey43LSu3nPge5SqGHlpNak4UrbW1vTPamDa9mtRGmTstY54so5dTwySdOEMnpVkgyP782da_wEsNBvb7KJ1hSHbD','dxJgVmX0NUI:APA91bF8XLWKDQMYs50aHB4ox7V7yuXE9HQnNpbuoTRs7NVlJ8ENGg_Kb_fSiFSGCKY7RL8T1auW9drFjVncRsMwzyGE0xaDtOqO6icufzVLwWMxxYS67c9XPWZIEah6bEzsY7kDSUYZ'];
+      var tokens  = $rootScope.tokenAdm;//tokenAdmins;
+      var profile = 'testdevelopment';
+      var req = {
+        method: 'POST',
+        url: 'https://api.ionic.io/push/notifications',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + jwt
+        },
+        data: {
+          "tokens": tokens,
+          "profile": profile,
+          "notification": {
+            "title": "test push adm",
+            "message": "test: ",
+            "android": {
+              "title": "test push adm",
+              "message": "test push adm: "
+            }
+          }
+        }
+      };
+      return $http(req);
+    };
 
 
     var getAdministradores = function(){
@@ -20,10 +48,6 @@ angular.module('starter')
             admins = valor.token+','+valor.token;
 
           });
-
-
-
-
 
         console.log(admins);
 
