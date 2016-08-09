@@ -113,8 +113,9 @@
         </font>
       </div>
 
+    <br>
     <div ng-if="!tieneProductos">
-      <h4 style="color: #af7550";>&nbsp;&nbsp; <i class="ion-ios-information"></i> Aún no tienes productos en tu pedido </h4>
+      <h4 style="color: #af7550";>&nbsp;&nbsp; <i class="ion-ios-information"></i> Aún no tienes productos en tu pedido. </h4>
     </div>
     <div ng-if="tieneProductos">
       <div class="list" ng-repeat="ped in pedidoActual.detalle" ng-if="$index > 0">

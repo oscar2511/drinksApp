@@ -4,6 +4,7 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
 
     /**
      * Chequeo si esta abierto (horario)
+     *
      * @type {string}
      */
     var obtenerHorario = function(){
@@ -17,6 +18,11 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
         })
     };
 
+
+    /**
+     *  Obtengo los token de los dispositivos administradores
+     *
+     */
     var getTokenAdmins = function(){
       var tokenAdmins = [];
       dispositivoService.getAdministradores()
@@ -43,33 +49,6 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
     templateUrl: 'templates/menu.html',
     controller: 'AppCtrl'
   })
-
-  .state('app.search', {
-    url: '/search',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/search.html'
-      }
-    }
-  })
-
-  .state('app.browse', {
-      url: '/browse',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/browse.html'
-        }
-      }
-    })
-    .state('app.playlists', {
-      url: '/playlists',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/playlists.html',
-          controller: 'PlaylistsCtrl'
-        }
-      }
-    })
 
   .state('app.categorias', {
       url: '/categorias',
