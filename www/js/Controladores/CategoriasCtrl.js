@@ -131,6 +131,7 @@ angular.module('starter')
      * @param data
      */
     $scope.setDataUltPedido = function(data){
+      console.log(data.data);
        $rootScope.totalProductos = 'pendiente';
        $rootScope.pedidoPendiente = true;
        $scope.pedido.setTotalProductos();

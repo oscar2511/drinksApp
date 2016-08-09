@@ -6,7 +6,8 @@ angular.module('starter')
            $http,
            $rootScope,
            $ionicLoading,
-           dispositivoService
+           dispositivoService,
+           PedidoService
   ) {
 
     /**
@@ -112,6 +113,7 @@ angular.module('starter')
      *  Envia notificacion a los dispositivos administradores
      *
      * @param mensaje
+     * @param nroPedido
      * @returns {*}s
      */
     this.pushAdministrador = function(mensaje, nroPedido){
@@ -158,12 +160,22 @@ angular.module('starter')
         case 'Drink up: nuevo pedido!':
           $state.go('app.admin');
         break;
-        case 'Pedido procesado':
+        case 'Drink up: Pedido procesado':
           alert("Pedido procesado");
           //$state.go('app.confirmacion');
         break;
+        case 'Drink up: Pedido cancelado':
+          alert("Pedido cancelado");
+          PedidoService.limpiarPedido();
+          //$state.go('app.confirmacion');
+          break;
+        case 'Drink up: Pedido cerrado':
+          alert("Pedido cerrado");
+          PedidoService.limpiarPedido();
+          //$state.go('app.confirmacion');
+          break;
         default :
-          alert('llegó un mensaje personalizado');
+          alert('Llegó un mensaje personalizado');
           break;
       }
     };

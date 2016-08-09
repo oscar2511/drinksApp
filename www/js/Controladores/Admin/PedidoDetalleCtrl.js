@@ -176,9 +176,16 @@ angular.module('starter')
      */
     $scope.cambiarEstado = function(idPedido, estado){
       var msj = '';
+      var msjPush = '';
       if(estado == 2) {
-        msj = '(se enviará notificación al usuario)';
+        msj     =  '(se enviará notificación al usuario)';
+        msjPush = 'Pedido procesado';
       }
+      else if (estado == 4)
+        msjPush = 'Pedido cancelado';
+      else
+        msjPush = 'Pedido cerrado';
+
       var confirmPopup = $ionicPopup.confirm({
         title:      'Confirmar acción',
         template:   'Realmente quieres cambiar el estado del pedido? '+msj,
@@ -204,7 +211,7 @@ angular.module('starter')
                 $scope.closeModal();
               }, 2000);
               var mensaje = {
-                'titulo':     'Pedido procesado',
+                'titulo':     msjPush,
                 'contenido':  'Recibimos tu pedido, pronto será entregado'
               };
               NotificacionService.pushUsuario( mensaje, $scope.pedido.idDispositivo)

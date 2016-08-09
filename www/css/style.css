@@ -17,13 +17,12 @@ background: #ececee;
 /* categorias *********************************************************************/
 .vinos{
   width: 100% !important;
-  height: 170px!important;
+  height: 165px!important;
   background-image: url("../img/categorias/vinos.jpg")!important;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
   margin-bottom: -20px;
-  box-shadow: 2px 2px 5px #999;
   padding-left: 100%;
 }
 
@@ -48,6 +47,7 @@ background: #ececee;
   background-size: cover;
   margin-bottom: -20px;
   padding-left: 100%;
+  box-shadow: 2px 2px 5px #999;
 }
 
 .whiskies{
@@ -59,6 +59,7 @@ background: #ececee;
   background-size: cover;
   margin-bottom: -20px;
   padding-left: 100%;
+  box-shadow: 2px 2px 5px #999;
 }
 
 .promociones{
@@ -70,17 +71,21 @@ background: #ececee;
   background-size: cover;
   margin-bottom: -20px;
   padding-left: 100%;
+  box-shadow: 2px 2px 5px #999;
 }
 
 .vodkas{
-  width: 100% !important;
+  width: 300px !important;
   height: 170px!important;
+  /*background-image: url("../img/categorias/whiskies.jpg")!important;*/
   background-image: url("../img/categorias/vodkas-licores.jpg")!important;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
   margin-bottom: -20px;
-  padding-left: 100%;
+  padding-left: 500px;
+  margin-left: -5px;
+  box-shadow: 2px 2px 5px #999;
 }
 /* /categorias *********************************************************************/
 
@@ -121,7 +126,8 @@ background: #ececee;
 }
 
 .sombra-categ{
-  box-shadow: 2px 2px 5px #999;
+  box-shadow: 2px 2px 5px #999!important;
+  margin-bottom: 20px;
 }
 
 .img-pago-logo{
