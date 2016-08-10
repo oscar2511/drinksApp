@@ -25,12 +25,34 @@ angular.module('starter')
     $scope.bloquearBtns          = false;
     $rootScope.tieneProductos    = false;
     $scope.mapaCargado           = false;
+    $scope.errorUbicacion        = false;
 
     if($rootScope.totalProductos > 0)
       $rootScope.tieneProductos = true;
 
-    $scope.habilitarBtnPedido = function(){
-      if($scope.dir_ref  && $scope.tel) {
+
+
+    $scope.habilitarBtnPedido = function(value, type){
+      alert(value+" "+ type);
+      if(type == 'dir_ref') {
+        if (value != '')
+          $scope.referencia = true;
+        else
+          $scope.referencia = false;
+      }
+
+      if(type == 'tel') {
+        if (value != '')
+          $scope.telefono = true;
+        else
+          $scope.telefono = false;
+      }
+
+      if($scope.referencia && $scope.telefono)
+        $scope.mapaCargado = true;
+      else{
+      alert('mapa false');
+        $scope.mapaCargado = false;
       }
     };
 
@@ -46,10 +68,9 @@ angular.module('starter')
 
       var timer = $timeout(
         function() {
-          $ionicLoading.hide();
-          $scope.mapaError = true;
+          $scope.errorUbicacion= true;
         },
-        0
+        10000
       );
 
       $scope.bloquearBtns = true;
@@ -92,7 +113,7 @@ angular.module('starter')
             marker: marker
           };
 
-          var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+          //var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
           var marker = new google.maps.Marker({
             position: latLng,
@@ -123,6 +144,7 @@ angular.module('starter')
           $scope.mapaCargado = true;
 
         }, function(error){
+          $scope.errorUbicacion= true;
           console.log("Could not get location");
         });
       $scope.mostrarMapa = true;

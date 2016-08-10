@@ -4,8 +4,8 @@
 
     <div ng-show="mostrarMapa" id="map" data-tap-disabled="true">
       <div align="center" style="padding: 25%">
-        <span ng-if="mapaError">No se pudo detectar la ubicación</span>
-        <ion-spinner ng-if="!mapaError" icon="lines"></ion-spinner>
+        <span ng-if="mapaError">{{msjErrorMapa}}</span>
+        <ion-spinner ng-if="!errorUbicacion" icon="lines"></ion-spinner>
       </div>
     </div>
 
@@ -14,6 +14,9 @@
         <div class="item" align="center">
           <i class="ion-ios-location"></i> <h2>Ubicación detectada</h2>
           <h2 style="color: #28a54c; text-decoration: underline;">{{direccion.calle}}, {{direccion.numero}}</h2>
+          <div ng-show="errorUbicacion"><p  style="color:#ff6f75;">Error detectando la ubicación.Ingresa <br>
+                                          tu dirección y teléfono <br>
+                                          para enviar el pedido</p> </div>
           <p align="left" style="color: darkgrey;">
           <p align="left" style="color: darkgrey;">
             Mejora la exactitud de tu dirección<br>
@@ -24,12 +27,12 @@
       <div class="list">
         <label class="item item-input item-stacked-label">
           <span class="input-label">Nro de teléfono</span>
-          <input type="text" placeholder="Teléfono" ng-model="tel" ng-change="habilitarBtnPedido()">
+          <input type="text" placeholder="Teléfono" ng-model="tel" ng-change="habilitarBtnPedido(tel,'tel')">
         </label>
         <div class="list">
           <label class="item item-input item-stacked-label">
             <span class="input-label">Referencia</span>
-            <input type="text" placeholder='Dir. exacta, piso, dpto, "frente a..."' ng-model="dir_ref" ng-change="habilitarBtnPedido()">
+            <input type="text" placeholder='Dir. exacta, piso, dpto, "frente a..."' ng-model="dir_ref" ng-change="habilitarBtnPedido(dir_ref,'dir_ref')">
           </label>
         </div>
       </div>
