@@ -16,7 +16,6 @@ angular.module('starter')
            $timeout
   ){
 
-    console.log($rootScope.dispAdmin);
     $ionicLoading.show({
       template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
      });
@@ -31,15 +30,14 @@ angular.module('starter')
       20000
     );
 
-
     /**
      * Ejecuta todas las funciones de inicializacion (resuelve todas las promesas)
      * @returns {*}
      */
     $scope.inicializar = function() {
       return $q.all([
-        $scope.obtenerCategorias(),
-        dispositivoService.getAdministradores()
+        $scope.obtenerCategorias()
+        //dispositivoService.getAdministradores()
       ])
       .then(function() {
         console.log('Llamadas api OK.');
@@ -102,9 +100,10 @@ angular.module('starter')
         var urlDispositivo = 'http://23.94.249.163/appDrinks/dispositivos/dispositivos.php';
         $http.post(urlDispositivo, dataDispositivo, {headers: {'Content-Type': 'application/json'}})
           .then(function (data) {
+            console.log(data);
             intentos = 0;
             $rootScope.estadoUltPedido = data.data.data.estado_ult_pedido;
-            if ($rootScope.estadoUltPedido == 1)
+            if ($rootScope.estadoUltPedido == 1 || $rootScope.estadoUltPedido == 2)
               $scope.setDataUltPedido(data);
           })
           .catch(function () {

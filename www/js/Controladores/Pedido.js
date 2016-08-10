@@ -29,6 +29,11 @@ angular.module('starter')
     if($rootScope.totalProductos > 0)
       $rootScope.tieneProductos = true;
 
+    $scope.habilitarBtnPedido = function(){
+      if($scope.dir_ref  && $scope.tel) {
+      }
+    };
+
     if(true == $rootScope.pedidoPendiente)
       $state.go('app.pedido-pendiente');
 
@@ -38,6 +43,15 @@ angular.module('starter')
      * Muestra el mapa
      */
     var verUbicacion = function(){
+
+      var timer = $timeout(
+        function() {
+          $ionicLoading.hide();
+          $scope.mapaError = true;
+        },
+        0
+      );
+
       $scope.bloquearBtns = true;
       var styles = [
         {
@@ -105,7 +119,7 @@ angular.module('starter')
                 'long': longitud
               }
             });
-
+          $timeout.cancel(timer);
           $scope.mapaCargado = true;
 
         }, function(error){
@@ -116,14 +130,8 @@ angular.module('starter')
     };
 
     $scope.verUbicacion = function(){
-      verUbicacion();
-      /*$scope.bloquearBtns   = true;
-      $scope.mostrarTotales = false;
-      mapaService.mostrarMapa().then(function(){
-        $scope.mapaCargado          = true;
-        $scope.mostrarMapa          = true;
-        $scope.mostrarFormUbicacion = true;
-      });*/
+
+    verUbicacion();
     };
 
     //*******************************************************************************************************************
@@ -281,8 +289,10 @@ angular.module('starter')
               $scope.confirmarPedido(tel, dir_ref);
             }, esperaEntreIntentos);
           }
-          else
+          else {
+            $ionicLoading.hide();
             $state.go('app.error');
+          }
       })
   };
 

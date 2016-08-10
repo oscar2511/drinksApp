@@ -4,7 +4,8 @@
 
     <div ng-show="mostrarMapa" id="map" data-tap-disabled="true">
       <div align="center" style="padding: 25%">
-        <ion-spinner icon="lines"></ion-spinner>
+        <span ng-if="mapaError">No se pudo detectar la ubicación</span>
+        <ion-spinner ng-if="!mapaError" icon="lines"></ion-spinner>
       </div>
     </div>
 
@@ -23,12 +24,12 @@
       <div class="list">
         <label class="item item-input item-stacked-label">
           <span class="input-label">Nro de teléfono</span>
-          <input type="text" placeholder="Teléfono" ng-model="tel">
+          <input type="text" placeholder="Teléfono" ng-model="tel" ng-change="habilitarBtnPedido()">
         </label>
         <div class="list">
           <label class="item item-input item-stacked-label">
             <span class="input-label">Referencia</span>
-            <input type="text" placeholder='Dir. exacta, piso, dpto, "frente a..."' ng-model="dir_ref">
+            <input type="text" placeholder='Dir. exacta, piso, dpto, "frente a..."' ng-model="dir_ref" ng-change="habilitarBtnPedido()">
           </label>
         </div>
       </div>
