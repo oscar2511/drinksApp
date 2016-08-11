@@ -3,8 +3,8 @@
   <ion-content>
 
     <div ng-show="mostrarMapa" id="map" data-tap-disabled="true">
-      <div align="center" style="padding: 25%">
-        <span ng-if="mapaError">{{msjErrorMapa}}</span>
+      <div  style="padding: 10%">
+        <span ng-if="errorUbicacion"><p  style="color:#ff6f75;">Error detectando la ubicación. Tu pedido se enviará en la dirección que ingreses en el formulario.</p></span>
         <ion-spinner ng-if="!errorUbicacion" icon="lines"></ion-spinner>
       </div>
     </div>
@@ -14,26 +14,24 @@
         <div class="item" align="center">
           <i class="ion-ios-location"></i> <h2>Ubicación detectada</h2>
           <h2 style="color: #28a54c; text-decoration: underline;">{{direccion.calle}}, {{direccion.numero}}</h2>
-          <div ng-show="errorUbicacion"><p  style="color:#ff6f75;">Error detectando la ubicación.Ingresa <br>
-                                          tu dirección y teléfono <br>
-                                          para enviar el pedido</p> </div>
-          <p align="left" style="color: darkgrey;">
-          <p align="left" style="color: darkgrey;">
-            Mejora la exactitud de tu dirección<br>
-            ingresando datos de referencia.
-          </p>
+          <div ng-show="errorUbicacion">
+            <p  style="color: #d3ced2;">Ubicación no encontrada</p>
+          </div>
         </div>
       </div>
-      <div class="list">
-        <label class="item item-input item-stacked-label">
-          <span class="input-label">Nro de teléfono</span>
-          <input type="text" placeholder="Teléfono" ng-model="tel" ng-change="habilitarBtnPedido(tel,'tel')">
-        </label>
-        <div class="list">
+      <div class="card">
+        <p align="left" style="color: #31a8dd; padding-top: 4px; padding-left: 4px; padding-bottom: 0px">Para facilitar la entrega es necesario que ingreses los siguientes datos (obligatorios):</p>
+        <div class="card">
           <label class="item item-input item-stacked-label">
-            <span class="input-label">Referencia</span>
-            <input type="text" placeholder='Dir. exacta, piso, dpto, "frente a..."' ng-model="dir_ref" ng-change="habilitarBtnPedido(dir_ref,'dir_ref')">
+            <span class="input-label">Nro de teléfono</span>
+            <input type="text" placeholder="Teléfono" ng-model="tel" ng-change="habilitarBtnPedido(tel,'tel')">
           </label>
+          <div class="list">
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">Referencia</span>
+              <input type="text" placeholder='Dir. exacta, piso, dpto, "frente a..."' ng-model="dir_ref" ng-change="habilitarBtnPedido(dir_ref,'dir_ref')">
+            </label>
+          </div>
         </div>
       </div>
       <div class="row">
@@ -44,11 +42,11 @@
         </div>
         <br>
         <div class="col">
-          <div ng-show="mapaCargado">
-            <button ng-disabled="pedidoPendiente" class="button button-full button-positive" ng-click="confirmarPedido(tel, dir_ref)">
+
+            <button ng-disabled="!mapaCargado" class="button button-full button-positive" ng-click="confirmarPedido(tel, dir_ref)">
               Confirmar pedido
             </button>
-          </div>
+
         </div>
       </div>
     </section>

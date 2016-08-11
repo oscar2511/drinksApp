@@ -33,7 +33,6 @@ angular.module('starter')
 
 
     $scope.habilitarBtnPedido = function(value, type){
-      alert(value+" "+ type);
       if(type == 'dir_ref') {
         if (value != '')
           $scope.referencia = true;
@@ -51,7 +50,6 @@ angular.module('starter')
       if($scope.referencia && $scope.telefono)
         $scope.mapaCargado = true;
       else{
-      alert('mapa false');
         $scope.mapaCargado = false;
       }
     };
@@ -68,7 +66,7 @@ angular.module('starter')
 
       var timer = $timeout(
         function() {
-          $scope.errorUbicacion= true;
+          $scope.errorUbicacion = true;
         },
         10000
       );
@@ -113,7 +111,7 @@ angular.module('starter')
             marker: marker
           };
 
-          //var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+          var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
           var marker = new google.maps.Marker({
             position: latLng,
@@ -141,7 +139,7 @@ angular.module('starter')
               }
             });
           $timeout.cancel(timer);
-          $scope.mapaCargado = true;
+         // $scope.mapaCargado = true;
 
         }, function(error){
           $scope.errorUbicacion= true;

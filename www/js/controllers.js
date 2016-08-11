@@ -10,6 +10,9 @@ angular.module('starter.controllers', [])
 
   $scope.pedido = PedidoService;
 
+    $scope.salir = function(){
+      ionic.Platform.exitApp();
+    }
 
 
 });
