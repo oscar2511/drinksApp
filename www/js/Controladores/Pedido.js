@@ -276,7 +276,6 @@ angular.module('starter')
       // registra el pedido y envia push al admin
       NotificacionService.registrarNuevoPedido(pedido)
         .then(function() {
-          console.log($scope.pedido);
           NotificacionService.enviarPushNuevoPedido($scope.pedido)
             .success(function () {
               var alertPopup = $ionicPopup.alert({

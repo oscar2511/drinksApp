@@ -36,8 +36,8 @@ angular.module('starter')
      */
     $scope.inicializar = function() {
       return $q.all([
-        $scope.obtenerCategorias()
-        //dispositivoService.getAdministradores()
+        $scope.obtenerCategorias(),
+        dispositivoService.getAdministradores()
       ])
       .then(function() {
         console.log('Llamadas api OK.');

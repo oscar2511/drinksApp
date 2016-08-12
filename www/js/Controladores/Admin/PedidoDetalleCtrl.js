@@ -179,13 +179,13 @@ angular.module('starter')
       var msjPush = '';
       if(estado == 2) {
         msj     =  '(se enviará notificación al usuario)';
-        msjPush = 'Pedido procesado';
+        msjPush = 'Pedido procesado!';
       }
-      else if (estado == 4)
+      /*else if (estado == 4)
         msjPush = 'Pedido cancelado';
       else
         msjPush = 'Pedido cerrado';
-
+*/
       var confirmPopup = $ionicPopup.confirm({
         title:      'Confirmar acción',
         template:   'Realmente quieres cambiar el estado del pedido? '+msj,
@@ -210,11 +210,14 @@ angular.module('starter')
                 alertPopup.close();
                 $scope.closeModal();
               }, 2000);
-              var mensaje = {
-                'titulo':     msjPush,
-                'contenido':  'Recibimos tu pedido, pronto será entregado'
-              };
-              NotificacionService.pushUsuario( mensaje, $scope.pedido.idDispositivo)
+
+              if(estado == 2) {
+                var mensaje = {
+                  'titulo': msjPush,
+                  'contenido': 'Recibimos tu pedido, pronto será entregado'
+                };
+                NotificacionService.pushUsuario(mensaje, $scope.pedido.idDispositivo);
+              }
             });
         } else{
             $scope.modal.remove();

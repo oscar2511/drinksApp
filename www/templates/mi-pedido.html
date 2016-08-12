@@ -3,7 +3,7 @@
   <ion-content>
 
     <div ng-show="mostrarMapa" id="map" data-tap-disabled="true">
-      <div  style="padding: 10%">
+      <div>
         <span ng-if="errorUbicacion"><p  style="color:#ff6f75;">Error detectando la ubicación. Tu pedido se enviará en la dirección que ingreses en el formulario.</p></span>
         <ion-spinner ng-if="!errorUbicacion" icon="lines"></ion-spinner>
       </div>

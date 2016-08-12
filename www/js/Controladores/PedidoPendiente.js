@@ -20,7 +20,7 @@ angular.module('starter')
      * @param integer estado
      */
     $scope.cambiarEstado = function(estado){
-      if(estado == 3) var cambio = 'recibido';
+      if(estado == 3) var cambio = 'cerrado';
       else cambio = 'cancelado';
       var confirmPopup = $ionicPopup.confirm({
         title:      'Confirmar acción',
@@ -46,7 +46,7 @@ angular.module('starter')
           $scope.pedidoService.cambiarEstado($rootScope.idUltPedido, estado)
             .then(function(){
               var mensaje = {
-                'titulo':     '!Pedido '+cambio,
+                'titulo':     'Pedido '+cambio+'!',
                 'contenido':  'El pedido nro: '+$rootScope.idUltPedido+' fué marcado como '+cambio
               };
               NotificacionService.pushAdministrador(mensaje, $rootScope.idUltPedido);

@@ -32,10 +32,8 @@ angular.module('starter')
      * Envia notificación push cuando se realiza un pedido.
      */
     this.enviarPushNuevoPedido = function(pedido){
-
-          var jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4MjllZTIxOS01MzA4LTRhZDMtYWQ5NS1lZTQ3Y2YxMzhiMTMifQ.QzA7PSQHEEiSz-cEun7iUZdJRyAXd3iIRQSlsWPL0Yw';
-          //var tokens = ['dlGvLxSg0Mc:APA91bGs3RIp6_wlkX7sW8AG1DmWTLKvFWlmsGal-Dor4tZuXAV9Ey43LSu3nPge5SqGHlpNak4UrbW1vTPamDa9mtRGmTstY54so5dTwySdOEMnpVkgyP782da_wEsNBvb7KJ1hSHbD'];
-          //var tokens = ['dlGvLxSg0Mc:APA91bGs3RIp6_wlkX7sW8AG1DmWTLKvFWlmsGal-Dor4tZuXAV9Ey43LSu3nPge5SqGHlpNak4UrbW1vTPamDa9mtRGmTstY54so5dTwySdOEMnpVkgyP782da_wEsNBvb7KJ1hSHbD','dxJgVmX0NUI:APA91bF8XLWKDQMYs50aHB4ox7V7yuXE9HQnNpbuoTRs7NVlJ8ENGg_Kb_fSiFSGCKY7RL8T1auW9drFjVncRsMwzyGE0xaDtOqO6icufzVLwWMxxYS67c9XPWZIEah6bEzsY7kDSUYZ'];
+          console.log('token admin: '+$rootScope.tokenAdm);
+          var jwt     = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4MjllZTIxOS01MzA4LTRhZDMtYWQ5NS1lZTQ3Y2YxMzhiMTMifQ.QzA7PSQHEEiSz-cEun7iUZdJRyAXd3iIRQSlsWPL0Yw';
           var tokens  = $rootScope.tokenAdm;
           var profile = 'testdevelopment';
           var req = {
@@ -52,7 +50,7 @@ angular.module('starter')
                 "title": "Drink up: nuevo pedido!",
                 "message": "Direccion: "+pedido.ubicacion.direccion.calle+"\n"+pedido.ubicacion.direccion.numero,
                 "android": {
-                  "title": "Nuevo pedido",
+                  "title": "Drink up: nuevo pedido!",
                   "message": "Direccion: "+pedido.ubicacion.direccion.calle+"\n"+pedido.ubicacion.direccion.numero,
                   "payload": pedido
                 }
@@ -69,7 +67,6 @@ angular.module('starter')
      * Envia notificación push a usuario.
      */
     this.pushUsuario = function(mensaje, idDispositivo){
-
         dispositivoService.getTokenDispositivo({id: idDispositivo})
           .then(function (data) {
             var token ='';
@@ -80,7 +77,7 @@ angular.module('starter')
               token = valor.token;
             });
 
-            //console.log(token);
+            console.log('Token de usuario: '+token);
             var jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4MjllZTIxOS01MzA4LTRhZDMtYWQ5NS1lZTQ3Y2YxMzhiMTMifQ.QzA7PSQHEEiSz-cEun7iUZdJRyAXd3iIRQSlsWPL0Yw';
             var tokens = [token];
             var profile = 'testdevelopment';
@@ -105,7 +102,7 @@ angular.module('starter')
               }
             };
             return $http(req);
-          });
+          }); return $q.resolve();
     };
 
 
@@ -117,9 +114,8 @@ angular.module('starter')
      * @returns {*}s
      */
     this.pushAdministrador = function(mensaje, nroPedido){
-      var jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4MjllZTIxOS01MzA4LTRhZDMtYWQ5NS1lZTQ3Y2YxMzhiMTMifQ.QzA7PSQHEEiSz-cEun7iUZdJRyAXd3iIRQSlsWPL0Yw';
-      //var tokens = ['dlGvLxSg0Mc:APA91bGs3RIp6_wlkX7sW8AG1DmWTLKvFWlmsGal-Dor4tZuXAV9Ey43LSu3nPge5SqGHlpNak4UrbW1vTPamDa9mtRGmTstY54so5dTwySdOEMnpVkgyP782da_wEsNBvb7KJ1hSHbD'];
-      //var tokens = ['dlGvLxSg0Mc:APA91bGs3RIp6_wlkX7sW8AG1DmWTLKvFWlmsGal-Dor4tZuXAV9Ey43LSu3nPge5SqGHlpNak4UrbW1vTPamDa9mtRGmTstY54so5dTwySdOEMnpVkgyP782da_wEsNBvb7KJ1hSHbD','dxJgVmX0NUI:APA91bF8XLWKDQMYs50aHB4ox7V7yuXE9HQnNpbuoTRs7NVlJ8ENGg_Kb_fSiFSGCKY7RL8T1auW9drFjVncRsMwzyGE0xaDtOqO6icufzVLwWMxxYS67c9XPWZIEah6bEzsY7kDSUYZ'];
+      console.log('token admin: '+$rootScope.tokenAdm);
+      var jwt     = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4MjllZTIxOS01MzA4LTRhZDMtYWQ5NS1lZTQ3Y2YxMzhiMTMifQ.QzA7PSQHEEiSz-cEun7iUZdJRyAXd3iIRQSlsWPL0Yw';
       var tokens  = $rootScope.tokenAdm;//tokenAdmins;
       var profile = 'testdevelopment';
       var req = {
@@ -157,24 +153,25 @@ angular.module('starter')
       //console.log(notificacion, payload);
       switch (notificacion.title){
         case 'Drink up: nuevo pedido!':
+          alert("Nuevo pedido!");
           $state.go('app.admin');
         break;
-        case 'Drink up: Pedido procesado':
+        case 'Drink up: Pedido procesado!':
           alert("Pedido procesado");
           //$state.go('app.confirmacion');
         break;
-        case 'Drink up: Pedido cancelado':
-          alert("Pedido cancelado");
+        case 'Drink up: Pedido cancelado!':
+          alert('Pedido nro. '+payload.idPedido +' cancelado!');
           PedidoService.limpiarPedido();
           //$state.go('app.confirmacion');
           break;
-        case 'Drink up: Pedido cerrado':
-          alert("Pedido cerrado");
+        case 'Drink up: Pedido cerrado!':
+          alert('Pedido nro. '+payload.idPedido +' cerrado!');
           PedidoService.limpiarPedido();
           //$state.go('app.confirmacion');
           break;
         default :
-          alert('Llegó un mensaje personalizado');
+//          alert('Llegó un mensaje personalizado');
           break;
       }
     };
