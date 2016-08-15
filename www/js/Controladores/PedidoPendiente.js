@@ -8,7 +8,6 @@ angular.module('starter')
                                        $timeout,
                                        $state,
                                        $ionicLoading,
-                                       PedidoService,
                                        NotificacionService
   )
   {
@@ -17,11 +16,13 @@ angular.module('starter')
 
     /**
      * Cambiar estado de pedido
+     * @param estado
      * @param integer estado
      */
     $scope.cambiarEstado = function(estado){
-      if(estado == 3) var cambio = 'cerrado';
+      if(estado == 3) var cambio = 'recibido';
       else cambio = 'cancelado';
+
       var confirmPopup = $ionicPopup.confirm({
         title:      'Confirmar acción',
         template:   'Realmente quieres marcar tu pedido como '+cambio+'?',

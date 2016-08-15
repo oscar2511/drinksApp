@@ -165,7 +165,7 @@ angular.module('starter')
           PedidoService.limpiarPedido();
           //$state.go('app.confirmacion');
           break;
-        case 'Drink up: Pedido cerrado!':
+        case 'Drink up: Pedido recibido!':
           alert('Pedido nro. '+payload.idPedido +' cerrado!');
           PedidoService.limpiarPedido();
           //$state.go('app.confirmacion');

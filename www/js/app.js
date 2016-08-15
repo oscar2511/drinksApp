@@ -130,6 +130,16 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
       }
     })
 
+    .state('app.stock', {
+      url: '/stock',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/Admin/stock.html',
+          controller: 'stockCtrl'
+        }
+      }
+    })
+
     .state('app.error', {
       url: '/error',
       views: {

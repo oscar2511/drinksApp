@@ -37,7 +37,7 @@ angular.module('starter')
     $scope.inicializar = function() {
       return $q.all([
         $scope.obtenerCategorias(),
-        dispositivoService.getAdministradores()
+        getTokenAdmins()
       ])
       .then(function() {
         console.log('Llamadas api OK.');
@@ -49,6 +49,26 @@ angular.module('starter')
       });
     };
 
+
+    /**
+     *  Obtengo los token de los dispositivos administradores
+     *
+     */
+    var getTokenAdmins = function(){
+      var tokenAdmins = [];
+      dispositivoService.getAdministradores()
+        .then(function(dispAdm){
+          angular.forEach(dispAdm, function (valor) {
+            tokenAdmins.push(valor.token) ;
+          });
+          $rootScope.tokenAdm = tokenAdmins;
+        });
+
+    };
+
+
+
+
     /**
      * Inicializo notificaciones push y manejo la recepcion de notif.
      *
@@ -58,7 +78,6 @@ angular.module('starter')
       var push = new Ionic.Push({
         'debug': true,
         'onNotification': function (notificacion) {
-          console.log(notificacion);
           NotificacionService.postNotificacion(notificacion);
         }
       });
@@ -92,7 +111,6 @@ angular.module('starter')
         maxIntentos         = 3;
 
     var registrarDisp = function(dataDispositivo){
-      console.log(typeof(dataDispositivo.uuid));
       if(typeof(dataDispositivo.uuid) != 'undefined' && dataDispositivo.token) {
         $scope.pedido.dispositivo.uuid  = dataDispositivo.uuid;
         $scope.pedido.dispositivo.token = dataDispositivo.token;
@@ -100,7 +118,6 @@ angular.module('starter')
         var urlDispositivo = 'http://23.94.249.163/appDrinks/dispositivos/dispositivos.php';
         $http.post(urlDispositivo, dataDispositivo, {headers: {'Content-Type': 'application/json'}})
           .then(function (data) {
-            console.log(data);
             intentos = 0;
             $rootScope.estadoUltPedido = data.data.data.estado_ult_pedido;
             if ($rootScope.estadoUltPedido == 1 || $rootScope.estadoUltPedido == 2)
@@ -130,7 +147,6 @@ angular.module('starter')
      * @param data
      */
     $scope.setDataUltPedido = function(data){
-      console.log(data.data);
        $rootScope.totalProductos = 'pendiente';
        $rootScope.pedidoPendiente = true;
        $scope.pedido.setTotalProductos();

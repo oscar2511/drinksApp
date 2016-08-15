@@ -33,7 +33,7 @@
     <div class="card">
       <div class="item item-divider">
         <font color="#696969">
-          <i class="ion-paperclip"></i>
+          <i class="ion-information-circled"></i>
           Inf. del pedido
         </font>
       </div>
@@ -56,7 +56,7 @@
             <strong>Nro. Pedido:</strong> {{pedido.id}}
           </div>
           <div class="col">
-            <strong>Fecha:</strong> {{pedido.fecha | date:'dd-MM-yyyy' }} | {{pedido.fecha | date:'HH:mm' }}
+            <strong>Fecha:</strong> {{pedido.fecha | date:'dd-MM-yyyy' }}  {{pedido.fecha | date:'HH:mm' }}
           </div>
         </div>
         <div class="row">
@@ -109,7 +109,7 @@
 
     <div class="item item-divider">
       <font color="#696969">
-        <i class="ion-clipboard"></i>
+        <i class="ion-paperclip"></i>
         Productos
       </font>
     </div>

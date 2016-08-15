@@ -209,6 +209,8 @@ angular.module('starter')
         var urlCambiarEstado = 'http://23.94.249.163/appDrinks/pedidos/cambiar_estado_pedido.php';
         return $http.post(urlCambiarEstado, {idPedido: idPedido, estado:estado}, {headers: { 'Content-Type': 'application/json'}})
           .then(function (data){
+            if(data.data.data.status != 'OK') return $q.reject();
+            console.log(data);
             return $q.resolve(data);
           });
       };
