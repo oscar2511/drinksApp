@@ -140,6 +140,16 @@ background: #ececee;
   box-shadow: 2px 2px 5px #999;
 }
 
+.img-stock-logo{
+  width: 100% !important;
+  height: 120px!important;
+  background-image: url("../img/stock.jpg")!important;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 2px 2px 5px #999;
+}
+
 .img-cerrado-logo{
   width: 100% !important;
   height: 220px!important;

@@ -28,14 +28,15 @@
           <span ng-show="addPedido.cantidad.$error.max">
             <h3><font color="red"> La cantidad no puede exceder 100</font></h3>
           </span>
-          <div ng-show="!pedidoPendiente">
-            <button ng-if="abierto" ng-disabled="addPedido.$invalid"  ng-click="addAlCarro(producto, cantidad)" class="button  button-block icon-center ion-plus-circled button-positive">
+          <div ng-show="!pedidoPendiente && producto.stock=='Stock'">
+            <button ng-if="abierto" ng-click="addAlCarro(producto, cantidad)" class="button  button-block icon-center ion-plus-circled button-positive">
               Agregar
             </button>
-            <a href="#/app/mi-pedido"><button ng-if="!abierto" ng-disabled="addPedido.$invalid" class="button  button-block icon-center ion-plus-circled button-positive">
-              Agregar
-            </button>
-            </a>
+          </div>
+          <div ng-show="producto.stock=='Sin stock'">
+            <span>
+              <h2><font color="#951d1d"><i class="ion-alert-circled"></i> Producto sin Stock</font></h2>
+            </span>
           </div>
           <div ng-show="pedidoPendiente">
             <span>

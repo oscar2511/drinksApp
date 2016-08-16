@@ -2,21 +2,35 @@ angular.module('starter')
   .controller('stockCtrl', function(
     $scope,
     $state,
-    $http
+    $http,
+    $ionicLoading,
+    $timeout
   ) {
+
+    $ionicLoading.show({
+      template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
+    });
 
     $scope.atrasEst = function (){
       $state.go('app.categorias');
     };
 
+    var timer = $timeout(
+      function() {
+        $ionicLoading.hide();
+        $state.go('app.error');
+      },
+      20000
+    );
 
     var url = 'http://23.94.249.163/appDrinks/admin/getStock.php';
 
-
+    /**
+     * Obtener los productos
+     */
     $scope.getProductos = function(){
       $http.get(url)
         .then(function(data){
-          console.log(data);
           angular.forEach(data.data, function (value) {
             $scope.dataCruda = value;
           });
@@ -32,11 +46,10 @@ angular.module('starter')
               estado:      valor.estado
             });
           });
-
-          console.log($scope.productos);
+          $timeout.cancel(timer);
+          $ionicLoading.hide();
         })
     };
-
 
     /**
      *
@@ -44,18 +57,20 @@ angular.module('starter')
      * @param stockCambio
      */
     $scope.cambiarStock = function(idProducto, stockCambio){
+      $ionicLoading.show({
+        template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
+      });
       var urlCambio = 'http://23.94.249.163/appDrinks/admin/cambiarEstadoStock.php';
       var nuevoStock;
-      console.log(idProducto);
       if(stockCambio == 'Stock') nuevoStock = 'Sin stock';
       if(stockCambio == 'Sin stock') nuevoStock = 'Stock';
       $http.post(urlCambio,{idProducto:idProducto, stockCambio:nuevoStock},  {headers: {'Content-Type': 'application/json'}})
         .then(function(data){
+          $ionicLoading.hide();
         $scope.getProductos();
       });
 
     };
-
 
     $scope.getProductos();
 
