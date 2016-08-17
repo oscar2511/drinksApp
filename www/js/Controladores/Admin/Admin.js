@@ -6,12 +6,10 @@ angular.module('starter')
     $ionicLoading,
     $ionicPopover,
     $state,
-    $timeout
+    $timeout,
+    $ionicActionSheet
   ){
 
-    $ionicLoading.show({
-      template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
-    });
 
     var timer = $timeout(
       function() {
@@ -21,6 +19,7 @@ angular.module('starter')
       20000
     );
 
+    var estado = null;
     var url = 'http://23.94.249.163/appDrinks/admin/listarPedidos.php';
 
     $scope.atrasAdmin = function (){
@@ -64,13 +63,18 @@ angular.module('starter')
      * Obtener los pedidos del servidor
      *
      */
-    $scope.getPedidos = function(){
-      $http.post(url, {headers: { 'Content-Type': 'application/json'}})
+    $scope.getPedidos = function(estado){
+      $ionicLoading.show({
+        template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
+      });
+      $http.post(url,{estado:estado}, {headers: { 'Content-Type': 'application/json'}})
         .then(function (data){
           angular.forEach(data.data, function(value) {
             $scope.dataCruda = value;
           });
-          $scope.pedidos =[];
+
+          setPedidos($scope.dataCruda);
+          /*$scope.pedidos =[];
           angular.forEach($scope.dataCruda, function(valor, key) {
             $scope.pedidos.push({
               id:             valor.id,
@@ -86,14 +90,96 @@ angular.module('starter')
               longitud :      valor.longitud,
               dirReferencia : valor.dir_ref
             });
-          });
+          });*/
           $ionicLoading.hide();
           $timeout.cancel(timer);
           $scope.$broadcast('scroll.refreshComplete');
         });
     };
 
-    $scope.getPedidos();
+
+    var setPedidos = function(data){
+      $scope.pedidos =[];
+      angular.forEach(data, function(valor, key) {
+        $scope.pedidos.push({
+          id:             valor.id,
+          numero:         valor.numero,
+          fecha:          new Date(valor.fecha),
+          total:          valor.total,
+          idDispositivo:  valor.id_dispositivo,
+          calle:          valor.calle,
+          nro  :          valor.nro,
+          telefono :      valor.telefono,
+          estado :        valor.estado,
+          latitud :       valor.latitud,
+          longitud :      valor.longitud,
+          dirReferencia : valor.dir_ref
+        });
+      });
+    };
+
+    /**
+     *
+     */
+    $scope.mostrarFiltro = function() {
+      // Show the action sheet
+      $scope.closePopover();
+      var hideSheet = $ionicActionSheet.show({
+        buttons: [
+          { text: 'Nuevo' },
+          { text: 'En camino' },
+          { text: 'Cerrado' },
+          { text: 'Cancelado' }
+        ],
+        destructiveText: 'Delete',
+        titleText: '<b>Ordenar por:</b>',
+        cancelText: 'Cancel',
+        cancel: function() {
+          // add cancel code..
+        },
+        buttonClicked: function(index) {
+
+          var estado;
+
+          switch (index){
+            case 0:
+              console.log(index);
+              estado = 1;
+              break;
+            case 1:
+              console.log(index);
+              estado = 2;
+              break;
+            case 2:
+              console.log(index);
+              estado = 3;
+              break;
+            case 3:
+              console.log(index);
+              estado = 4;
+              break;
+          }
+
+          $scope.getPedidos(estado);
+         /* var url = 'http://23.94.249.163/appDrinks/admin/ordenarPedidos.php';
+          $http.post(url,{estado:estado}, {headers: { 'Content-Type': 'application/json'}})
+            .then(function (data){
+                    console.log(data);
+            });
+*/
+          return true;
+        }
+      });
+
+      // For example's sake, hide the sheet after two seconds
+      $timeout(function() {
+//        hideSheet();
+      }, 2000);
+
+    };
+
+
+    $scope.getPedidos(estado);
 
 
   });

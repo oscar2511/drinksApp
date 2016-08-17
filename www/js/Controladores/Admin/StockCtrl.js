@@ -4,7 +4,8 @@ angular.module('starter')
     $state,
     $http,
     $ionicLoading,
-    $timeout
+    $timeout,
+    $ionicPopup
   ) {
 
     $ionicLoading.show({
@@ -67,7 +68,19 @@ angular.module('starter')
       $http.post(urlCambio,{idProducto:idProducto, stockCambio:nuevoStock},  {headers: {'Content-Type': 'application/json'}})
         .then(function(data){
           $ionicLoading.hide();
+          var alertPopup = $ionicPopup.alert({
+            title: 'Se cambió el estado de stock!',
+            buttons: null
+          });
+
+          $timeout(function() {
+            alertPopup.close();
+          }, 1500);
+
         $scope.getProductos();
+      })
+      .catch(function(){
+        $state.go('app.error');
       });
 
     };

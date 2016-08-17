@@ -24,7 +24,6 @@
       </font>
     </div>
 
-
     <div class="list" ng-repeat="pedido in pedidos">
       <a class="item" href="#/app/admin/pedido/{{pedido}}">
         <div class="row">
@@ -35,6 +34,7 @@
             <span ng-if="pedido.estado==4" class="badge badge-assertive">Cancelado</span>
           </div>
           <div class="col">
+            <p> <strong>Nro.: </strong><b> {{pedido.id}}</b></p>
             <p> <strong>Fecha : </strong> {{pedido.fecha | date:'dd-MM-yyyy' }} {{pedido.fecha | date:'HH:mm' }}</p>
             <p> <strong>Monto: </strong> $ {{pedido.total}}</p>
             <p> <strong>Dirección: </strong> {{pedido.calle}} {{pedido.nro}}</p>
@@ -60,6 +60,9 @@
           </a>
           <a ng-click="closePopover()" class="item" href="#/app/stock" target="_blank">
             <font color="#1e6ed1"><i class="ion-podium"></i>&nbsp;&nbsp; Stock </font>
+          </a>
+          <a ng-click="mostrarFiltro()" class="item" target="_blank">
+            <font color="#1e6ed1"><i class="ion-gear-b"></i>&nbsp;&nbsp; Filtro </font>
           </a>
           <a ng-click="closePopover()" class="item" href="#" target="_blank">
             <font color="#1e6ed1"><i class="ion-gear-b"></i>&nbsp;&nbsp; Configuración </font>
