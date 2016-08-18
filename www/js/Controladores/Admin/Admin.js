@@ -102,8 +102,16 @@ angular.module('starter')
 
 
     var setPedidos = function(data){
+      $scope.nuevos     = 0;
+      $scope.enCamino   = 0;
+      $scope.cancelados = 0;
+      $scope.recibidos  = 0;
       $scope.pedidos =[];
       angular.forEach(data, function(valor, key) {
+        if(valor.estado == 1) $scope.nuevos ++;
+        if(valor.estado == 2) $scope.enCamino ++;
+        if(valor.estado == 3) $scope.cancelados ++;
+        if(valor.estado == 4) $scope.recibidos ++;
         $scope.pedidos.push({
           id:             valor.id,
           numero:         valor.numero,

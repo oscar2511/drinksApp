@@ -7,7 +7,8 @@ angular.module('starter')
            $rootScope,
            $ionicLoading,
            dispositivoService,
-           PedidoService
+           PedidoService,
+           $ionicPopup
   ) {
 
     /**
@@ -153,12 +154,28 @@ angular.module('starter')
       //console.log(notificacion, payload);
       switch (notificacion.title){
         case 'Drink up: nuevo pedido!':
-          alert("Nuevo pedido!");
-          $state.go('app.admin');
+          var confirmPopup = $ionicPopup.confirm({
+            title:      'Nuevo pedido!',
+            template:   'Ir al listado de pedidos?',
+            cancelText: 'Cancelar',
+            okText:     'Ok'
+          });
+          confirmPopup.then(function(res) {
+            if(res) {
+              $state.go('app.admin');
+            }
+          });
+
         break;
         case 'Drink up: Pedido procesado!':
-          alert("Pedido procesado");
-          //$state.go('app.confirmacion');
+          var alertPopup = $ionicPopup.alert({
+            title: 'Tu pedido fué procesado!',
+            buttons: null
+          });
+
+          $timeout(function() {
+            alertPopup.close();
+          }, 1500);
         break;
         case 'Drink up: Pedido cancelado!':
           alert('Pedido nro. '+payload.idPedido +' cancelado!');
