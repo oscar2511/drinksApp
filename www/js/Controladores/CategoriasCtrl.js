@@ -63,9 +63,7 @@ angular.module('starter')
           });
           $rootScope.tokenAdm = tokenAdmins;
         });
-
     };
-
 
 
 

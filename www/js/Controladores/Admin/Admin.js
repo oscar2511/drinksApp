@@ -64,6 +64,9 @@ angular.module('starter')
      *
      */
     $scope.getPedidos = function(estado){
+
+      if(!estado) $scope.tieneFiltro = false;
+
       $ionicLoading.show({
         template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
       });
@@ -131,9 +134,9 @@ angular.module('starter')
           { text: 'Cerrado' },
           { text: 'Cancelado' }
         ],
-        destructiveText: 'Delete',
-        titleText: '<b>Ordenar por:</b>',
-        cancelText: 'Cancel',
+        //destructiveText: 'Delete',
+        titleText: '<h3>Filtrar por:</h3>',
+        cancelText: '<i class="ion-close assertive"></i>',
         cancel: function() {
           // add cancel code..
         },
@@ -160,6 +163,7 @@ angular.module('starter')
               break;
           }
 
+          $scope.tieneFiltro = true;
           $scope.getPedidos(estado);
          /* var url = 'http://23.94.249.163/appDrinks/admin/ordenarPedidos.php';
           $http.post(url,{estado:estado}, {headers: { 'Content-Type': 'application/json'}})
