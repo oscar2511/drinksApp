@@ -143,7 +143,7 @@ angular.module('starter')
 
         }, function(error){
           $scope.errorUbicacion= true;
-          console.log("Could not get location");
+          //console.log("Could not get location");
         });
       $scope.mostrarMapa = true;
       $scope.mostrarFormUbicacion= true;
@@ -182,7 +182,7 @@ angular.module('starter')
      * @param productoPedido
      */
     $scope.addCantidad = function(productoPedido){
-      console.log(ionic.Platform.device());
+      //console.log(ionic.Platform.device());
       var producto = productoPedido.producto;
       var cantidad = 1;
       $scope.pedido.addProductoCantidad(producto, cantidad);
@@ -202,7 +202,7 @@ angular.module('starter')
      * @param productoPedido
      */
     $scope.restarCantidad = function(productoPedido){
-      console.log(productoPedido);
+      //console.log(productoPedido);
      var producto = productoPedido.producto;
       if(productoPedido.cantidad == 1)
         return $scope.eliminarProducto(productoPedido);
@@ -301,7 +301,7 @@ angular.module('starter')
           $timeout.cancel(timer);
       })
       .catch(function(err) {
-        console.log("Mensaje Push: Mensaje error", err);
+        //console.log("Mensaje Push: Mensaje error", err);
           if(intentos < maxIntentos){
             intentos++;
             $timeout(function() {

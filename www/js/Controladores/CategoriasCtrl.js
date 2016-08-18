@@ -40,12 +40,12 @@ angular.module('starter')
         getTokenAdmins()
       ])
       .then(function() {
-        console.log('Llamadas api OK.');
+        //console.log('Llamadas api OK.');
         $scope.$broadcast('scroll.refreshComplete');
         $timeout.cancel(timer);
       })
       .catch(function(err) {
-        console.log('error resolviendo las promesas'+ err); //todo ver como manejar el error
+        //console.log('error resolviendo las promesas'+ err); //todo ver como manejar el error
       });
     };
 
@@ -82,7 +82,7 @@ angular.module('starter')
 
       push.register(function(token) {
         setDataDispositivo(token.token);
-        console.log("Mi token:", token.token);
+        //console.log("Mi token:", token.token);
         push.saveToken(token);
       })
     });
@@ -122,7 +122,7 @@ angular.module('starter')
               $scope.setDataUltPedido(data);
           })
           .catch(function () {
-            console.log('Error registrando el dispositivo, intento: ' + intentos);
+            //console.log('Error registrando el dispositivo, intento: ' + intentos);
             if (intentos < maxIntentos) {
               intentos++;
               $timeout(function () {
@@ -132,9 +132,9 @@ angular.module('starter')
 
           });
       }else {
-        console.log('No se encontró uuid o token, por favor cierra la aplicación y vuelve a iniciarla');
+        //console.log('No se encontró uuid o token, por favor cierra la aplicación y vuelve a iniciarla');
         //alert('No se encontró uuid o token, por favor cierra la aplicación y vuelve a iniciarla');
-        //$state.go('app.error'); // todo: en produccion quitar esto
+        $state.go('app.error'); // todo: en produccion quitar esto
       }
     };
 

@@ -32,7 +32,7 @@ angular.module('starter')
      * Envia notificación push cuando se realiza un pedido.
      */
     this.enviarPushNuevoPedido = function(pedido){
-          console.log('token admin: '+$rootScope.tokenAdm);
+          //console.log('token admin: '+$rootScope.tokenAdm);
           var jwt     = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4MjllZTIxOS01MzA4LTRhZDMtYWQ5NS1lZTQ3Y2YxMzhiMTMifQ.QzA7PSQHEEiSz-cEun7iUZdJRyAXd3iIRQSlsWPL0Yw';
           var tokens  = $rootScope.tokenAdm;
           var profile = 'testdevelopment';
@@ -77,7 +77,7 @@ angular.module('starter')
               token = valor.token;
             });
 
-            console.log('Token de usuario: '+token);
+            //console.log('Token de usuario: '+token);
             var jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4MjllZTIxOS01MzA4LTRhZDMtYWQ5NS1lZTQ3Y2YxMzhiMTMifQ.QzA7PSQHEEiSz-cEun7iUZdJRyAXd3iIRQSlsWPL0Yw';
             var tokens = [token];
             var profile = 'testdevelopment';
@@ -114,7 +114,7 @@ angular.module('starter')
      * @returns {*}s
      */
     this.pushAdministrador = function(mensaje, nroPedido){
-      console.log('token admin: '+$rootScope.tokenAdm);
+      //console.log('token admin: '+$rootScope.tokenAdm);
       var jwt     = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4MjllZTIxOS01MzA4LTRhZDMtYWQ5NS1lZTQ3Y2YxMzhiMTMifQ.QzA7PSQHEEiSz-cEun7iUZdJRyAXd3iIRQSlsWPL0Yw';
       var tokens  = $rootScope.tokenAdm;//tokenAdmins;
       var profile = 'testdevelopment';

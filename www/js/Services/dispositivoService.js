@@ -22,7 +22,7 @@ angular.module('starter')
          // console.log(data);
           return $q.resolve(data);
         }).catch(function(){
-          console.log('eror obteniendo el token');
+          //console.log('eror obteniendo el token');
         });
     };
 

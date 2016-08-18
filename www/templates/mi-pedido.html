@@ -3,7 +3,7 @@
   <ion-content>
 
     <div ng-show="mostrarMapa" id="map" data-tap-disabled="true">
-      <div>
+      <div align="center">
         <span ng-if="errorUbicacion"><p  style="color:#ff6f75;">Error detectando la ubicación. Tu pedido se enviará en la dirección que ingreses en el formulario.</p></span>
         <ion-spinner ng-if="!errorUbicacion" icon="lines"></ion-spinner>
       </div>
@@ -12,7 +12,7 @@
     <section ng-show="mostrarFormUbicacion">
       <div class="list list-inset">
         <div class="item" align="center">
-          <i class="ion-ios-location"></i> <h2>Ubicación detectada</h2>
+           <h2> <i class="ion-ios-location"></i> Ubicación detectada</h2>
           <h2 style="color: #28a54c; text-decoration: underline;">{{direccion.calle}}, {{direccion.numero}}</h2>
           <div ng-show="errorUbicacion">
             <p  style="color: #d3ced2;">Ubicación no encontrada</p>
@@ -43,9 +43,9 @@
         <br>
         <div class="col">
 
-            <button ng-disabled="!mapaCargado" class="button button-full button-positive" ng-click="confirmarPedido(tel, dir_ref)">
-              Confirmar pedido
-            </button>
+        <button ng-disabled="!mapaCargado" class="button button-full button-positive" ng-click="confirmarPedido(tel, dir_ref)">
+          Confirmar pedido
+        </button>
 
         </div>
       </div>

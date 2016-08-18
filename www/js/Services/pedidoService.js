@@ -52,7 +52,7 @@ angular.module('starter')
       if(!pedido.numero){
         pedido.numero = (Math.ceil(Math.random() * 999999999));
         pedido.fecha = new Date();
-        console.log('nuevo pedido');
+        //console.log('nuevo pedido');
       }  // checkeo si existe el mismo producto en el pedido, si no existe lo pusheo
 
       if(!pedido.checkExisteProducto(producto, cantidad)){
@@ -210,7 +210,7 @@ angular.module('starter')
         return $http.post(urlCambiarEstado, {idPedido: idPedido, estado:estado}, {headers: { 'Content-Type': 'application/json'}})
           .then(function (data){
             if(data.data.data.status != 'OK') return $q.reject();
-            console.log(data);
+            //console.log(data);
             return $q.resolve(data);
           });
       };
