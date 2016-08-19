@@ -19,23 +19,15 @@
     </br></br>
 
     <div class="item">
-      <div class="row">
-        <div class="col.25">
-          <i class="ion-asterisk"></i> {{nuevos}}
-        </div>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp
-        <div class="col.25">
-          <i class="ion-clock"></i> {{enCamino}}
-        </div>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
-        <div class="col.25">
-          <i class="ion-close"></i> {{cancelados}}
-        </div>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
-        <div class="col.25">
-          <i class="ion-checkmark"></i> {{recibidos}}
-        </div>
-      </div>
+      <table align="center" style="width: 100%;">
+        <tr>
+          <td ng-click="getPedidos()"><i class="ion-asterisk"></i> Todos</td>
+          <td ng-click="getPedidos(1)"><i class="ion-speakerphone balanced"></i> {{nuevos}}</td>
+          <td ng-click="getPedidos(2)"> <i class="ion-clock energized"></i> {{enCamino}}</td>
+          <td ng-click="getPedidos(4)"> <i class="ion-close assertive"></i> {{cancelados}}</td>
+          <td ng-click="getPedidos(3)"><i class="ion-checkmark positive"></i> {{recibidos}}</td>
+        </tr>
+      </table>
     </div>
     <div class="item item-divider">
       <font color="#696969">

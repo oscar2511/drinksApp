@@ -76,24 +76,7 @@ angular.module('starter')
             $scope.dataCruda = value;
           });
 
-          setPedidos($scope.dataCruda);
-          /*$scope.pedidos =[];
-          angular.forEach($scope.dataCruda, function(valor, key) {
-            $scope.pedidos.push({
-              id:             valor.id,
-              numero:         valor.numero,
-              fecha:          new Date(valor.fecha),
-              total:          valor.total,
-              idDispositivo:  valor.id_dispositivo,
-              calle:          valor.calle,
-              nro  :          valor.nro,
-              telefono :      valor.telefono,
-              estado :        valor.estado,
-              latitud :       valor.latitud,
-              longitud :      valor.longitud,
-              dirReferencia : valor.dir_ref
-            });
-          });*/
+          setPedidos($scope.dataCruda, estado);
           $ionicLoading.hide();
           $timeout.cancel(timer);
           $scope.$broadcast('scroll.refreshComplete');
@@ -101,17 +84,21 @@ angular.module('starter')
     };
 
 
-    var setPedidos = function(data){
-      $scope.nuevos     = 0;
-      $scope.enCamino   = 0;
-      $scope.cancelados = 0;
-      $scope.recibidos  = 0;
-      $scope.pedidos =[];
+    var setPedidos = function(data, estado){
+      if(!estado) {
+        $scope.nuevos     = 0;
+        $scope.enCamino   = 0;
+        $scope.cancelados = 0;
+        $scope.recibidos  = 0;
+      }
+        $scope.pedidos =[];
       angular.forEach(data, function(valor, key) {
-        if(valor.estado == 1) $scope.nuevos ++;
-        if(valor.estado == 2) $scope.enCamino ++;
-        if(valor.estado == 3) $scope.cancelados ++;
-        if(valor.estado == 4) $scope.recibidos ++;
+        if(!estado) {
+          if (valor.estado == 1) $scope.nuevos++;
+          if (valor.estado == 2) $scope.enCamino++;
+          if (valor.estado == 3) $scope.cancelados++;
+          if (valor.estado == 4) $scope.recibidos++;
+        }
         $scope.pedidos.push({
           id:             valor.id,
           numero:         valor.numero,
