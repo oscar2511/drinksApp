@@ -178,14 +178,31 @@ angular.module('starter')
           }, 1500);
         break;
         case 'Drink up: Pedido cancelado!':
-          alert('Pedido nro. '+payload.idPedido +' cancelado!');
           PedidoService.limpiarPedido();
-          //$state.go('app.confirmacion');
+          var popupCancelado = $ionicPopup.confirm({
+            title:      'Pedido cancelado!',
+            template:   'El pedido n° '+payload.idPedido +'fué cancelado. Ir a pedidos? ',
+            cancelText: 'Cancelar',
+            okText:     'Ok'
+          });
+          popupCancelado.then(function(res) {
+            if(res) {
+              $state.go('app.admin');
+            }
+          });
           break;
         case 'Drink up: Pedido recibido!':
-          alert('Pedido nro. '+payload.idPedido +' cerrado!');
-          PedidoService.limpiarPedido();
-          //$state.go('app.confirmacion');
+          var popupRecibido = $ionicPopup.confirm({
+            title:      'Pedido recibido!',
+            template:   'El pedido n° '+payload.idPedido +'fué marcado como recibido. Ir a pedidos? ',
+            cancelText: 'Cancelar',
+            okText:     'Ok'
+          });
+          popupRecibido.then(function(res) {
+            if(res) {
+              $state.go('app.admin');
+            }
+          });
           break;
         default :
 //          alert('Llegó un mensaje personalizado');

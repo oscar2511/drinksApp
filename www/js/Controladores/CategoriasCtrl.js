@@ -128,8 +128,9 @@ angular.module('starter')
               $timeout(function () {
                 registrarDisp(dataDispositivo);
               }, esperaEntreIntentos);
+            }else{
+              $state.go('app.error');
             }
-
           });
       }else {
         //console.log('No se encontró uuid o token, por favor cierra la aplicación y vuelve a iniciarla');

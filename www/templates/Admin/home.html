@@ -1,4 +1,4 @@
-<ion-view cache-view="false" view-title="">
+<ion-view cache-view="false" view-title="" ng-cloak>
   <ion-nav-bar class="bar-custom">
     <ion-nav-buttons side="left">
       <button ng-click="atrasAdmin()" class="button back-button buttons button-clear header-item">
@@ -21,11 +21,11 @@
     <div class="item">
       <table align="center" style="width: 100%;">
         <tr>
-          <td ng-click="getPedidos()"><i class="ion-asterisk"></i> Todos</td>
-          <td ng-click="getPedidos(1)"><i class="ion-speakerphone balanced"></i> {{nuevos}}</td>
-          <td ng-click="getPedidos(2)"> <i class="ion-clock energized"></i> {{enCamino}}</td>
-          <td ng-click="getPedidos(4)"> <i class="ion-close assertive"></i> {{cancelados}}</td>
-          <td ng-click="getPedidos(3)"><i class="ion-checkmark positive"></i> {{recibidos}}</td>
+          <td ng-click="getPedidos()"><i class="ion-asterisk"></i> <filtro ng-show="!tieneFiltro"><u>Todos</u></filtro><filtro ng-show="tieneFiltro">Todos</filtro></td>
+          <td ng-click="getPedidos(1)"><i class="ion-speakerphone balanced"></i> <filtro ng-show="tieneFiltro && estadoFiltro == 1"><u>{{nuevos}}</u></filtro><filtro ng-show="estadoFiltro !=1">{{nuevos}}</filtro></td>
+          <td ng-click="getPedidos(2)"> <i class="ion-clock energized"></i> <filtro ng-show="tieneFiltro && estadoFiltro == 2"><u>{{enCamino}}</u></filtro><filtro ng-show="estadoFiltro !=2">{{enCamino}}</filtro></td>
+          <td ng-click="getPedidos(4)"> <i class="ion-close assertive"></i> <filtro ng-show="tieneFiltro && estadoFiltro == 4"><u>{{cancelados}}</u></filtro><filtro ng-show="estadoFiltro !=4 ">{{cancelados}}</filtro></td>
+          <td ng-click="getPedidos(3)"><i class="ion-checkmark positive"></i> <filtro ng-show="tieneFiltro && estadoFiltro == 3"><u>{{recibidos}}</u></filtro><filtro ng-show="estadoFiltro !=3 ">{{recibidos}}</filtro></td>
         </tr>
       </table>
     </div>
@@ -35,12 +35,6 @@
         Listado de pedidos
       </font>
     </div>
-    <div style="margin: 10px;" align="left">
-      <button ng-show="tieneFiltro" class="button icon-left ion-close button-small button-outline button-assertive" ng-click="getPedidos()">
-        Quitar filtro
-      </button>
-    </div>
-
     <div class="list" ng-repeat="pedido in pedidos">
       <a class="item" href="#/app/admin/pedido/{{pedido}}">
         <div class="row">
@@ -60,8 +54,6 @@
       </a>
     </div>
 
-
-
   </ion-content>
 
 
@@ -69,9 +61,6 @@
     <ion-popover-view>
       <ion-content>
         <div class="list">
-          <a ng-click="mostrarFiltro()" class="item" target="_blank">
-          <font color="#1e6ed1"><i class="ion-gear-b"></i>&nbsp;&nbsp; Filtro </font>
-          </a>
           <a ng-click="closePopover()" class="item" href="#/app/estadistica" target="_blank">
             <font color="#1e6ed1"><i class="ion-pie-graph"></i>&nbsp;&nbsp; Estadísticas</font>
           </a>

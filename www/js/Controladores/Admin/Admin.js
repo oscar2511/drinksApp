@@ -65,7 +65,8 @@ angular.module('starter')
      */
     $scope.getPedidos = function(estado){
 
-      if(!estado) $scope.tieneFiltro = false;
+      $scope.tieneFiltro = estado ? true : false;
+      $scope.estadoFiltro = estado;
 
       $ionicLoading.show({
         template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
@@ -84,6 +85,10 @@ angular.module('starter')
     };
 
 
+    /**
+     * @param data array
+     * @param  estado int
+     */
     var setPedidos = function(data, estado){
       if(!estado) {
         $scope.nuevos     = 0;
@@ -114,67 +119,6 @@ angular.module('starter')
           dirReferencia : valor.dir_ref
         });
       });
-    };
-
-    /**
-     *
-     */
-    $scope.mostrarFiltro = function() {
-      // Show the action sheet
-      $scope.closePopover();
-      var hideSheet = $ionicActionSheet.show({
-        buttons: [
-          { text: 'Nuevo' },
-          { text: 'En camino' },
-          { text: 'Cerrado' },
-          { text: 'Cancelado' }
-        ],
-        //destructiveText: 'Delete',
-        titleText: '<h3>Filtrar por:</h3>',
-        cancelText: '<i class="ion-close assertive"></i>',
-        cancel: function() {
-          // add cancel code..
-        },
-        buttonClicked: function(index) {
-
-          var estado;
-
-          switch (index){
-            case 0:
-              console.log(index);
-              estado = 1;
-              break;
-            case 1:
-              console.log(index);
-              estado = 2;
-              break;
-            case 2:
-              console.log(index);
-              estado = 3;
-              break;
-            case 3:
-              console.log(index);
-              estado = 4;
-              break;
-          }
-
-          $scope.tieneFiltro = true;
-          $scope.getPedidos(estado);
-         /* var url = 'http://23.94.249.163/appDrinks/admin/ordenarPedidos.php';
-          $http.post(url,{estado:estado}, {headers: { 'Content-Type': 'application/json'}})
-            .then(function (data){
-                    console.log(data);
-            });
-*/
-          return true;
-        }
-      });
-
-      // For example's sake, hide the sheet after two seconds
-      $timeout(function() {
-//        hideSheet();
-      }, 2000);
-
     };
 
 
