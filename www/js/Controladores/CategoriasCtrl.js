@@ -130,11 +130,13 @@ angular.module('starter')
               }, esperaEntreIntentos);
             }else{
               $state.go('app.error');
+              $ionicLoading.hide();
             }
           });
       }else {
         //console.log('No se encontró uuid o token, por favor cierra la aplicación y vuelve a iniciarla');
         //alert('No se encontró uuid o token, por favor cierra la aplicación y vuelve a iniciarla');
+        $ionicLoading.hide();
         $state.go('app.error'); // todo: en produccion quitar esto
       }
     };

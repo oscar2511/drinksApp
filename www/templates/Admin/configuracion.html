@@ -1,0 +1,35 @@
+<ion-view cache-view="false" view-title="" ng-cloak>
+  <ion-content>
+    <img class="img-config-logo sombra-categ">
+
+  <div class="item item-divider">
+    <font color="#696969">
+      <i class="ion-gear-a"></i>
+      Abrir/Cerrar aplicación
+    </font>
+  </div>
+  <div class="item">
+    <div class="row">
+      <div align="left" class="col">
+        Cerrado &nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <div class="col">
+        <label  class="toggle toggle-balanced">
+          <input ng-if="abierto" ng-click="abrirCerrar()" type="checkbox" checked>
+          <input ng-if="!abierto" ng-click="abrirCerrar()" type="checkbox">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </div>
+      <div align="left" class="col">
+        Abierto
+      </div>
+    </div>
+  </div>
+
+  </ion-content>
+
+</ion-view>
+
+

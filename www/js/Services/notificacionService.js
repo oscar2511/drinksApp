@@ -8,7 +8,8 @@ angular.module('starter')
            $ionicLoading,
            dispositivoService,
            PedidoService,
-           $ionicPopup
+           $ionicPopup,
+           $timeout
   ) {
 
     /**
@@ -175,6 +176,7 @@ angular.module('starter')
 
           $timeout(function() {
             alertPopup.close();
+            $state.go('app.pedido-pendiente');
           }, 1500);
         break;
         case 'Drink up: Pedido cancelado!':

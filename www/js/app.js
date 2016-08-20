@@ -7,7 +7,21 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
      *
      * @type {string}
      */
-    var obtenerHorario = function(){
+    var url = 'http://23.94.249.163/appDrinks/general/abrir-cerrar.php';
+
+    var getAbiertoCerrado = function(){
+      $http.get(url)
+        .then(function(data){
+          console.log(data.data.data[0]);
+          if(data.data.data[0] == 1)
+            $rootScope.abierto = true;
+          else $rootScope.abierto = false;
+        })
+    };
+
+
+
+   /* var obtenerHorario = function(){
       var urlAbierto = 'http://23.94.249.163/appDrinks/general/horario.php';
       return $http.get(urlAbierto)
         .then(function(data){
@@ -16,7 +30,7 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
             $rootScope.abierto = false; //cambiar a false
           return $q.resolve();
         })
-    };
+    };*/
 
 
     /**
@@ -36,7 +50,8 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
     };
 
     getTokenAdmins();
-    obtenerHorario();
+    //obtenerHorario();
+    getAbiertoCerrado();
 
 })
 
@@ -185,6 +200,16 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
         'menuContent': {
           templateUrl: 'templates/producto/detalleProducto.html',
           controller: 'productoCtrl'
+        }
+      }
+    })
+
+    .state('app.configuracion', {
+      url: '/configuracion',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/Admin/configuracion.html',
+          controller: 'configuracionCtrl'
         }
       }
     });
