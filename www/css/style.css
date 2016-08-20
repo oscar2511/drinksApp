@@ -47,7 +47,6 @@ background: #ececee;
   background-size: cover;
   margin-bottom: -20px;
   padding-left: 100%;
-  box-shadow: 2px 2px 5px #999;
 }
 
 .whiskies{
@@ -59,7 +58,6 @@ background: #ececee;
   background-size: cover;
   margin-bottom: -20px;
   padding-left: 100%;
-  box-shadow: 2px 2px 5px #999;
 }
 
 .promociones{
@@ -85,7 +83,6 @@ background: #ececee;
   margin-bottom: -20px;
   padding-left: 500px;
   margin-left: -5px;
-  box-shadow: 2px 2px 5px #999;
 }
 /* /categorias *********************************************************************/
 
@@ -110,9 +107,11 @@ background: #ececee;
 
 .img-det-prod{
   width: 70% !important;
-  height: 200px!important;
+  height: 170px!important;
   padding: 10px;
-  margin: 60px;
+  /*margin: 60px;*/
+  margin-right:20px;
+  margin-left:39px;
   margin-top: 0;
   margin-bottom: 0;
   border-radius: 35px;
@@ -140,6 +139,16 @@ background: #ececee;
   background-repeat: no-repeat;
   background-size: cover;
   box-shadow: 2px 2px 5px #999;
+}
+
+
+.img-config-logo{
+  width: 100% !important;
+  height: 120px!important;
+  background-image: url("../img/configuracion.jpg")!important;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .img-pago-contact{

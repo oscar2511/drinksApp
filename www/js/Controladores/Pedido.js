@@ -31,6 +31,22 @@ angular.module('starter')
       $rootScope.tieneProductos = true;
 
 
+    $scope.abiertoCerrado = function(){
+      var urlAbCe = 'http://23.94.249.163/appDrinks/general/abrir-cerrar.php';
+      $http.get(urlAbCe)
+        .then(function(data){
+          console.log(data.data.data[0]);
+          if(data.data.data[0] == 1){
+            $rootScope.abierto = true;
+          }
+          else{
+            $rootScope.abierto = false;
+          }
+        })
+
+
+    };
+
 
     $scope.habilitarBtnPedido = function(value, type){
       if(type == 'dir_ref') {
