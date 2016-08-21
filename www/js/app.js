@@ -4,10 +4,7 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
 
     /**
      * Chequeo si esta abierto (horario)
-     *
-     * @type {string}
-     */
-    var url = 'http://23.94.249.163/appDrinks/general/abrir-cerrar.php';
+     **var url = 'http://23.94.249.163/appDrinks/general/abrir-cerrar.php';
 
     var getAbiertoCerrado = function(){
       $http.get(url)
@@ -17,7 +14,7 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
             $rootScope.abierto = true;
           else $rootScope.abierto = false;
         })
-    };
+    };*/
 
 
 
@@ -51,7 +48,7 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
 
     getTokenAdmins();
     //obtenerHorario();
-    getAbiertoCerrado();
+    //getAbiertoCerrado();
 
 })
 

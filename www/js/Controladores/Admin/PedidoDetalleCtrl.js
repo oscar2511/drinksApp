@@ -218,6 +218,24 @@ angular.module('starter')
                 };
                 NotificacionService.pushUsuario(mensaje, $scope.pedido.idDispositivo);
               }
+
+              if(estado == 3) {
+                var mensajeSilencioso1 = {
+                  'titulo': 'Pedido cerrado!',
+                  'contenido': 'Tu pedido fué marcado como cerrado.'
+                };
+                NotificacionService.pushSilencioso(mensajeSilencioso1, $scope.pedido.idDispositivo, estado);
+              }
+
+              if(estado == 4) {
+                var mensajeSilencioso2 = {
+                  'titulo': 'Pedido cancelado!',
+                  'contenido': 'Tu pedido fué cancelado.'
+                };
+                NotificacionService.pushSilencioso(mensajeSilencioso2, $scope.pedido.idDispositivo, estado);
+              }
+
+
             });
         } else{
             $scope.modal.remove();

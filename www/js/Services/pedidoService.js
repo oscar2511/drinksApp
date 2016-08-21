@@ -178,6 +178,7 @@ angular.module('starter')
       pedido.total              = 0;
       pedido.subTotal           = 0;
       $rootScope.totalProductos = 0;
+      $rootScope.pedidoPendiente = false;
     };
 
       /**

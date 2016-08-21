@@ -269,9 +269,9 @@ angular.module('starter')
      * Registra el pedido en la base de datos
      */
 
-    var intentos           = 0,
+    var intentos            = 0,
         esperaEntreIntentos = 1000,
-        maxIntentos        = 3;
+        maxIntentos         = 3;
 
     $scope.confirmarPedido = function(tel, dir_ref){
       $ionicLoading.show({
@@ -294,25 +294,25 @@ angular.module('starter')
         .then(function() {
           NotificacionService.enviarPushNuevoPedido($scope.pedido)
             .success(function () {
-              var alertPopup = $ionicPopup.alert({
-                title: 'Tu pedido fué enviado, te notificaremos cuando sea procesado. Salud !!',
-                buttons: [{
-                  text: 'Aceptar',
-                  type: 'button button-outline button-positive'
-                }]
-              });
-              alertPopup.then(function (res) {
-                $rootScope.totalProductos = "pendiente";
-                $rootScope.pedidoPendiente = true;
-                $rootScope.totalUltPedido = $scope.pedido.total;
-                $rootScope.fechaUltPedido = $scope.pedido.fecha;
-                $scope.mostrarMapa = false;
-                $state.go('app.categorias');
-              });
-              $ionicLoading.hide();
-            })
-            .error(function () {
+
             });
+
+          var alertPopup = $ionicPopup.alert({
+            title: 'Tu pedido fué enviado, te notificaremos cuando sea procesado. Salud !!',
+            buttons: [{
+              text: 'Aceptar',
+              type: 'button button-outline button-positive'
+            }]
+          });
+          alertPopup.then(function (res) {
+            $rootScope.totalProductos = "pendiente";
+            $rootScope.pedidoPendiente = true;
+            $rootScope.totalUltPedido = $scope.pedido.total;
+            $rootScope.fechaUltPedido = $scope.pedido.fecha;
+            $scope.mostrarMapa = false;
+            $state.go('app.categorias');
+          });
+          $ionicLoading.hide();
 
           $timeout.cancel(timer);
       })

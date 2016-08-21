@@ -34,7 +34,6 @@ background: #ececee;
   background-position: center center;
   background-size: cover;
   margin-bottom: -20px;
-  box-shadow: 2px 2px 5px #999;
   padding-left: 100%;
 }
 
@@ -67,15 +66,12 @@ background: #ececee;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  /*margin-bottom: -20px;*/
   padding-left: 100%;
-  /*box-shadow: 2px 2px 5px #999;*/
 }
 
 .vodkas{
   width: 300px !important;
   height: 170px!important;
-  /*background-image: url("../img/categorias/whiskies.jpg")!important;*/
   background-image: url("../img/categorias/vodkas-licores.jpg")!important;
   background-repeat: no-repeat;
   background-position: center center;
@@ -99,7 +95,6 @@ background: #ececee;
   height: 260px !important;
   background-image: url("../img/copaRota.png")!important;
   background-repeat: no-repeat;
-
   box-shadow: 2px 2px 5px #999;
   background-position: center center;
   /*background-size: cover;*/
@@ -107,7 +102,7 @@ background: #ececee;
 
 .img-det-prod{
   width: 70% !important;
-  height: 170px!important;
+  height: 150px!important;
   padding: 10px;
   /*margin: 60px;*/
   margin-right:20px;
