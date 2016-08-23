@@ -36,12 +36,10 @@ angular.module('starter')
      */
     $scope.inicializar = function() {
       return $q.all([
-        $scope.obtenerCategorias(),
-        getTokenAdmins()
+        $scope.obtenerCategorias()
       ])
       .then(function() {
         //console.log('Llamadas api OK.');
-        $scope.$broadcast('scroll.refreshComplete');
         $timeout.cancel(timer);
       })
       .catch(function(err) {
@@ -52,9 +50,10 @@ angular.module('starter')
 
     /**
      *  Obtengo los token de los dispositivos administradores
-     *
+     * esta en app.js
+     * deprecated
      */
-    var getTokenAdmins = function(){
+    /*var getTokenAdmins = function(){
       var tokenAdmins = [];
       dispositivoService.getAdministradores()
         .then(function(dispAdm){
@@ -63,7 +62,7 @@ angular.module('starter')
           });
           $rootScope.tokenAdm = tokenAdmins;
         });
-    };
+    };*/
 
 
 

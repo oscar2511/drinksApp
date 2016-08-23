@@ -112,6 +112,8 @@ angular.module('starter')
 
     /**
      * Envia notificación push a usuario.
+     * esta notificacion se ejecuta cuando se cambia el estado del pedido desde el admin a "cancelado o recibido".
+     * Esto limpiará el pedido del dispositivo.
      */
     this.pushSilencioso = function(mensaje, idDispositivo, estado){
       dispositivoService.getTokenDispositivo({id: idDispositivo})
@@ -124,7 +126,6 @@ angular.module('starter')
             token = valor.token;
           });
 
-          //console.log('Token de usuario: '+token);
           var jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4MjllZTIxOS01MzA4LTRhZDMtYWQ5NS1lZTQ3Y2YxMzhiMTMifQ.QzA7PSQHEEiSz-cEun7iUZdJRyAXd3iIRQSlsWPL0Yw';
           var tokens = [token];
           var profile = 'testdevelopment';
@@ -241,7 +242,7 @@ angular.module('starter')
             PedidoService.limpiarPedido();
             var popupCancelado = $ionicPopup.confirm({
               title: 'Pedido cancelado!',
-              template: 'El pedido n° ' + payload.idPedido + 'fué cancelado. Ir a pedidos? ',
+              template: 'El pedido n° ' + payload.idPedido + ' fué cancelado. Ir a pedidos? ',
               cancelText: 'Cancelar',
               okText: 'Ok'
             });
@@ -254,7 +255,7 @@ angular.module('starter')
           case 'Drink up: Pedido recibido!':
             var popupRecibido = $ionicPopup.confirm({
               title: 'Pedido recibido!',
-              template: 'El pedido n° ' + payload.idPedido + 'fué marcado como recibido. Ir a pedidos? ',
+              template: 'El pedido n° ' + payload.idPedido + ' fué marcado como recibido. Ir a pedidos? ',
               cancelText: 'Cancelar',
               okText: 'Ok'
             });

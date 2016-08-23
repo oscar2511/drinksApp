@@ -4,15 +4,15 @@
 background: #ececee;
 }
 
-.img_categoria{
+/*.img_categoria{
   width: 100% !important;
   height: 170px;!important;
-  /*background-image: url("../img/categorias/vinos.jpg")!important;*/
+  *//*background-image: url("../img/categorias/vinos.jpg")!important;*//*
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
 
-}
+}*/
 
 /* categorias *********************************************************************/
 .vinos{
@@ -67,6 +67,7 @@ background: #ececee;
   background-position: center center;
   background-size: cover;
   padding-left: 100%;
+  margin-bottom: -20px;
 }
 
 .vodkas{
@@ -147,8 +148,8 @@ background: #ececee;
 }
 
 .img-pago-contact{
-  width: 100% !important;
-  height: 300px!important;
+  width: 90% !important;
+  height: 200px!important;
   background-image: url("../img/logoNew.png")!important;
   background-position: center center;
   background-repeat: no-repeat;
