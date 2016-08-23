@@ -5,3 +5,6 @@ bower install angular-material-icons
 
 //status bar
 cordova plugin add cordova-plugin-statusbar
+
+//image cache
+bower install --save ionic-img-cache  (https://github.com/vitaliy-bobrov/ionic-img-cache/blob/master/README.md)
