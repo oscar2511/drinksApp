@@ -15,7 +15,7 @@ angular.module('starter')
      * @returns {*}
      */
     this.getTokenDispositivo = function(id){
-      var url = 'http://23.94.249.163/appDrinks/dispositivos/getToken.php';
+      var url = 'http://23.94.249.163/appDrinks-dev/dispositivos/getToken.php';
       return $http.post(url, id, {headers: { 'Content-Type': 'application/json'}})
         .then(function (data){
           if(!data) return $q.reject();
@@ -33,7 +33,7 @@ angular.module('starter')
       * @returns {*}
      */
     this.getAdministradores = function(){
-      var urlDispAdm = 'http://23.94.249.163/appDrinks/dispositivos/getAdministradores.php';
+      var urlDispAdm = 'http://23.94.249.163/appDrinks-dev/dispositivos/getAdministradores.php';
       var dispAdm;
       return $http.get(urlDispAdm)
         .then(function(data){

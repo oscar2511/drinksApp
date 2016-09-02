@@ -207,7 +207,7 @@ angular.module('starter')
        * @param estado
        */
       pedido.cambiarEstado = function(idPedido, estado){
-        var urlCambiarEstado = 'http://23.94.249.163/appDrinks/pedidos/cambiar_estado_pedido.php';
+        var urlCambiarEstado = 'http://23.94.249.163/appDrinks-dev/pedidos/cambiar_estado_pedido.php';
         return $http.post(urlCambiarEstado, {idPedido: idPedido, estado:estado}, {headers: { 'Content-Type': 'application/json'}})
           .then(function (data){
             if(data.data.data.status != 'OK') return $q.reject();

@@ -16,7 +16,7 @@ angular.module('starter')
      * Registra un pedido en la base de datos
      */
     this.registrarNuevoPedido = function(pedido){
-      var url = 'http://23.94.249.163/appDrinks/pedidos/pedidos.php';
+      var url = 'http://23.94.249.163/appDrinks-dev/pedidos/pedidos.php';
       return $http.post(url, pedido, {headers: { 'Content-Type': 'application/json'}})
         .then(function (data){
           if(!data) return $q.reject();

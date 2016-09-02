@@ -32,7 +32,7 @@ angular.module('starter')
 
 
     $scope.abiertoCerrado = function(){
-      var urlAbCe = 'http://23.94.249.163/appDrinks/general/abrir-cerrar.php';
+      var urlAbCe = 'http://23.94.249.163/appDrinks-dev/general/abrir-cerrar.php';
       $http.get(urlAbCe)
         .then(function(data){
           console.log(data.data.data[0]);

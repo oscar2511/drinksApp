@@ -9,7 +9,7 @@ angular.module('starter')
       template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
     });
     $scope.imgCategoria = null;
-    var url = 'http://23.94.249.163/appDrinks/listadoProductos/listarProductos.php';
+    var url = 'http://23.94.249.163/appDrinks-dev/listadoProductos/listarProductos.php';
 
     var categoria = angular.fromJson($stateParams.categoria);
 

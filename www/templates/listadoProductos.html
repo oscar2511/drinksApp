@@ -3,7 +3,7 @@
     <img class=" {{ catUrlImg }} sombra-categ" >
     <div class="list" ng-repeat="producto in productos" href="#/app/producto/producto-detalle/{{producto}}">
       <a class="item item-thumbnail-left" href="#/app/producto/producto-detalle/{{producto}}">
-        <img class="list-prod" ion-img-cache ng-src="http://23.94.249.163/appDrinks/img/productos/{{producto.urlImg}}">
+        <img class="list-prod" ion-img-cache ng-src="http://23.94.249.163/appDrinks-dev/img/productos/{{producto.urlImg}}">
         <h2> {{producto.nombre}}</h2>
         <p>$ {{producto.precio}}</p>
         <button class="button button-small button-clear icon-center ion-record button-dark"> {{producto.stock}}</button>

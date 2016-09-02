@@ -93,7 +93,7 @@ angular.module('starter')
     var setDataDispositivo = function(token){
       var dataDispositivo =  {
         'token' : token,
-        'uuid'  : ionic.Platform.device().uuid
+        'uuid'  : 9999//ionic.Platform.device().uuid
       };
       registrarDisp(dataDispositivo)
     };
@@ -112,7 +112,7 @@ angular.module('starter')
         $scope.pedido.dispositivo.uuid  = dataDispositivo.uuid;
         $scope.pedido.dispositivo.token = dataDispositivo.token;
 
-        var urlDispositivo = 'http://23.94.249.163/appDrinks/dispositivos/dispositivos.php';
+        var urlDispositivo = 'http://23.94.249.163/appDrinks-dev/dispositivos/dispositivos.php';
         $http.post(urlDispositivo, dataDispositivo, {headers: {'Content-Type': 'application/json'}})
           .then(function (data) {
             intentos = 0;
@@ -162,9 +162,11 @@ angular.module('starter')
      */
     $scope.config = {};
     $scope.obtenerCategorias = function() {
-      var url = 'http://23.94.249.163/appDrinks/categorias/getCategorias.php';
+      var url = 'http://23.94.249.163/appDrinks-dev/categorias/getCategorias.php';
       return $http.get(url, { timeout: 100000 })
         .then(function (data) {
+          console.log(data);
+          alert(123);
           angular.forEach(data.data, function (value) {
             $scope.dataCruda = value;
           });

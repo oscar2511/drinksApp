@@ -20,7 +20,7 @@ angular.module('starter')
 
     $scope.pedidoService = PedidoService;
 
-    var url = 'http://23.94.249.163/appDrinks/admin/detallePedido.php';
+    var url = 'http://23.94.249.163/appDrinks-dev/admin/detallePedido.php';
 
     $scope.pedido       = angular.fromJson($stateParams.pedido);
     $scope.pedido.fecha = new Date($scope.pedido.fecha);

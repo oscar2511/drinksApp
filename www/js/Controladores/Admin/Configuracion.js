@@ -6,7 +6,7 @@ angular.module('starter')
       template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
     });
 
-    var url = 'http://23.94.249.163/appDrinks/general/abrir-cerrar.php';
+    var url = 'http://23.94.249.163/appDrinks-dev/general/abrir-cerrar.php';
 
     var getAbiertoCerrado = function(){
       $http.get(url)

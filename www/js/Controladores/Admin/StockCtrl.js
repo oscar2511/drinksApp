@@ -24,7 +24,7 @@ angular.module('starter')
       20000
     );
 
-    var url = 'http://23.94.249.163/appDrinks/admin/getStock.php';
+    var url = 'http://23.94.249.163/appDrinks-dev/admin/getStock.php';
 
     /**
      * Obtener los productos
@@ -61,7 +61,7 @@ angular.module('starter')
       $ionicLoading.show({
         template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
       });
-      var urlCambio = 'http://23.94.249.163/appDrinks/admin/cambiarEstadoStock.php';
+      var urlCambio = 'http://23.94.249.163/appDrinks-dev/admin/cambiarEstadoStock.php';
       var nuevoStock;
       if(stockCambio == 'Stock') nuevoStock = 'Sin stock';
       if(stockCambio == 'Sin stock') nuevoStock = 'Stock';

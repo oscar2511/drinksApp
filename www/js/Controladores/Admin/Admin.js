@@ -20,7 +20,7 @@ angular.module('starter')
     );
 
     var estado = null;
-    var url = 'http://23.94.249.163/appDrinks/admin/listarPedidos.php';
+    var url = 'http://23.94.249.163/appDrinks-dev/admin/listarPedidos.php';
 
     $scope.atrasAdmin = function (){
       $state.go('app.categorias');
