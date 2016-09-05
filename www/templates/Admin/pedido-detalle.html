@@ -42,7 +42,7 @@
       <div class="item item-text-wrap">
         <div class="row">
           <div class="col.25">
-             <section ng-switch="pedido.estado">
+             <section ng-switch="pedido.estado.id">
               <span class="badge badge-left badge-balanced" ng-switch-when="1">Nuevo</span>
               <span class="badge badge-left badge-energized" ng-switch-when="2">En Camino</span>
               <span class="badge badge-left badge-positive" ng-switch-when="3">Cerrado</span>
@@ -139,11 +139,11 @@
         <ion-content>
           <div class="card">
             <div class="item item-text-wrap">
-              <ion-list ng-init="estado=pedido.estado">
-                <ion-radio ng-model="estado" ng-value="1" style="color: #33CD5F;" ng-disabled="pedido.estado==3 || pedido.estado==4" ng-change="cambiarEstado(pedido.id, 1)">Nuevo</ion-radio>
-                <ion-radio ng-model="estado" ng-value="2" style="color: #FFC900;" ng-disabled="pedido.estado==3 || pedido.estado==4" ng-click="cambiarEstado(pedido.id, 2)">En Camino</ion-radio>
-                <ion-radio ng-model="estado" ng-value="3" style="color: #387EF5;" ng-disabled="pedido.estado==4" ng-click="cambiarEstado(pedido.id, 3)">Cerrado</ion-radio>
-                <ion-radio ng-model="estado" ng-value="4" style="color: #EF473A;" ng-disabled="pedido.estado==3" ng-click="cambiarEstado(pedido.id, 4)">Cancelado</ion-radio>
+              <ion-list ng-init="estado=pedido.estado.id">
+                <ion-radio ng-model="estado" ng-value="1" style="color: #33CD5F;" ng-disabled="pedido.estado.id==3 || pedido.estado.id==4" ng-change="cambiarEstado(pedido.id, 1)">Nuevo</ion-radio>
+                <ion-radio ng-model="estado.id" ng-value="2" style="color: #FFC900;" ng-disabled="pedido.estado.id==3 || pedido.estado.id==4" ng-click="cambiarEstado(pedido.id, 2)">En Camino</ion-radio>
+                <ion-radio ng-model="estado" ng-value="3" style="color: #387EF5;" ng-disabled="pedido.estado.id==4" ng-click="cambiarEstado(pedido.id, 3)">Cerrado</ion-radio>
+                <ion-radio ng-model="estado" ng-value="4" style="color: #EF473A;" ng-disabled="pedido.estado.id==3" ng-click="cambiarEstado(pedido.id, 4)">Cancelado</ion-radio>
               </ion-list>
             </div>
           </div>
@@ -178,7 +178,7 @@
                 </span>
                 </label>
                 <div style="padding: 15px;">
-                  <button ng-disabled="notificacion.$invalid" ng-click="enviarPushUsuario(titulo, contenido, scope.pedidoDetalle.token)" class="button button-block button-balanced  icon ion-ios-paperplane">
+                  <button ng-disabled="notificacion.$invalid" ng-click="enviarPushUsuario(titulo, contenido)" class="button button-block button-balanced  icon ion-ios-paperplane">
                     Enviar notificación
                   </button>
                 </div>

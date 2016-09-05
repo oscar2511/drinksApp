@@ -207,12 +207,21 @@ angular.module('starter')
        * @param estado
        */
       pedido.cambiarEstado = function(idPedido, estado){
-        var urlCambiarEstado = 'http://23.94.249.163/appDrinks-dev/pedidos/cambiar_estado_pedido.php';
-        return $http.post(urlCambiarEstado, {idPedido: idPedido, estado:estado}, {headers: { 'Content-Type': 'application/json'}})
+        var config = {
+          headers : {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+          }
+        };
+        var params = {
+          idPedido: idPedido,
+            estado: estado
+        };
+        var urlCambiarEstado = $rootScope.urls.pedidoEstado;
+
+        return $http.post(urlCambiarEstado, params, config)
           .then(function (data){
-            if(data.data.data.status != 'OK') return $q.reject();
-            //console.log(data);
-            return $q.resolve(data);
+            if(data.data.estado != 200) return $q.reject();
+            return $q.resolve(data.data.estado);
           });
       };
 

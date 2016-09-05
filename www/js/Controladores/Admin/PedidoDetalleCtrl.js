@@ -11,7 +11,8 @@ angular.module('starter')
     $ionicPopup,
     $timeout,
     mapaService,
-    PedidoService
+    PedidoService,
+    $rootScope
   ){
 
     $ionicLoading.show({
@@ -20,36 +21,34 @@ angular.module('starter')
 
     $scope.pedidoService = PedidoService;
 
-    var url = 'http://23.94.249.163/appDrinks-dev/admin/detallePedido.php';
-
     $scope.pedido       = angular.fromJson($stateParams.pedido);
     $scope.pedido.fecha = new Date($scope.pedido.fecha);
     var idPedido        = $scope.pedido.id;
     $scope.mostrarMapa = false;
     $scope.claseBtn    = 'button button-balanced button-outline iconleft ion-chevron-down';
 
+
+    console.log($scope.pedido);
     /**
      * Obtener el detalle de un pedido
      *
      */
     $scope.getDetallePedido = function(){
-      $http.post(url, {idPedido: idPedido}, {headers: { 'Content-Type': 'application/json'}})
+      var url = $rootScope.urls.detallePedido+idPedido;
+      $http.get(url)
         .then(function (data){
-          angular.forEach(data.data, function(value) {
-            $scope.dataCruda = value;
-          });
           $scope.pedidoDetalle =[];
-          angular.forEach($scope.dataCruda, function(valor, key) {
+          angular.forEach(data.data, function(valor, key) {
             $scope.pedidoDetalle.push({
               id:             $scope.pedido.id,
-              producto:       valor.id_producto,
+              producto:       valor.producto.id,
               pedido:         valor.id_pedido,
               cantidad:       valor.cantidad,
-              subtotal:       valor.subtotal,
-              nombreProducto: valor.nombre_producto,
-              token:          valor.token,
-              telefono:       valor.telefono,
-              dirRef:         valor.dir_ref
+              subtotal:       valor.sub_total,
+              nombreProducto: valor.producto.nombre,
+              token:          valor.pedido.dispositivo.token,
+              telefono:       valor.pedido.telefono,
+              dirRef:         valor.pedido.dir_referencia
             });
           });
           $ionicLoading.hide();
@@ -200,16 +199,27 @@ angular.module('starter')
           });
           $scope.pedidoService.cambiarEstado(idPedido, estado)
             .then(function(data){
-              $scope.pedido.estado = estado;
-              $ionicLoading.hide();
-              var alertPopup = $ionicPopup.alert({
-                title: 'Cambio de estado exitoso',
-                buttons: null
-              });
-              $timeout(function() {
-                alertPopup.close();
-                $scope.closeModal();
-              }, 2000);
+              if(data == 200) {
+                $scope.pedido.estado.id = estado;
+                $ionicLoading.hide();
+                var alertPopup = $ionicPopup.alert({
+                  title: 'Cambio de estado exitoso',
+                  buttons: null
+                });
+                $timeout(function () {
+                  alertPopup.close();
+                  $scope.closeModal();
+                }, 2000);
+              }else{
+                var alertPopupError = $ionicPopup.alert({
+                  title: 'Error cambiando estado de pedido',
+                  buttons: null
+                });
+                $timeout(function () {
+                  alertPopupError.close();
+                  $scope.closeModal();
+                }, 2000);
+              }
 
               if(estado == 2) {
                 var mensaje = {

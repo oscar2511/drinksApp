@@ -13,7 +13,6 @@ angular.module('starter')
            $rootScope,
            NotificacionService,
            $q,
-           $timeout,
            dispositivoService
   )
   {
@@ -32,19 +31,14 @@ angular.module('starter')
 
 
     $scope.abiertoCerrado = function(){
-      var urlAbCe = 'http://23.94.249.163/appDrinks-dev/general/abrir-cerrar.php';
-      $http.get(urlAbCe)
+      var estadoApertura = $rootScope.urls.estadoApertura;
+      $http.get(estadoApertura)
         .then(function(data){
-          console.log(data.data.data[0]);
-          if(data.data.data[0] == 1){
+          if(data.data[0].esta_abierto)
             $rootScope.abierto = true;
-          }
-          else{
+          else
             $rootScope.abierto = false;
-          }
         })
-
-
     };
 
 
@@ -291,30 +285,36 @@ angular.module('starter')
       var pedido = angular.fromJson($scope.pedido);
       // registra el pedido y envia push al admin
       NotificacionService.registrarNuevoPedido(pedido)
-        .then(function() {
-          NotificacionService.enviarPushNuevoPedido($scope.pedido)
-            .success(function () {
+        .then(function(estado) {
+          if(estado == 200) {
+            NotificacionService.enviarPushNuevoPedido($scope.pedido)
+              .success(function () {
 
+              });
+
+            var alertPopup = $ionicPopup.alert({
+              title: 'Tu pedido fué enviado, te notificaremos cuando sea procesado. Salud !!',
+              buttons: [{
+                text: 'Aceptar',
+                type: 'button button-outline button-positive'
+              }]
             });
+            alertPopup.then(function (res) {
+              $rootScope.totalProductos = "pendiente";
+              $rootScope.pedidoPendiente = true;
+              $rootScope.totalUltPedido = $scope.pedido.total;
+              $rootScope.fechaUltPedido = $scope.pedido.fecha;
+              $scope.mostrarMapa = false;
+              $state.go('app.categorias');
+            });
+            $ionicLoading.hide();
+            $timeout.cancel(timer);
+          } else{
+            $ionicLoading.hide();
+            $timeout.cancel(timer);
+            $state.go('app.error');
+          }
 
-          var alertPopup = $ionicPopup.alert({
-            title: 'Tu pedido fué enviado, te notificaremos cuando sea procesado. Salud !!',
-            buttons: [{
-              text: 'Aceptar',
-              type: 'button button-outline button-positive'
-            }]
-          });
-          alertPopup.then(function (res) {
-            $rootScope.totalProductos = "pendiente";
-            $rootScope.pedidoPendiente = true;
-            $rootScope.totalUltPedido = $scope.pedido.total;
-            $rootScope.fechaUltPedido = $scope.pedido.fecha;
-            $scope.mostrarMapa = false;
-            $state.go('app.categorias');
-          });
-          $ionicLoading.hide();
-
-          $timeout.cancel(timer);
       })
       .catch(function(err) {
         //console.log("Mensaje Push: Mensaje error", err);

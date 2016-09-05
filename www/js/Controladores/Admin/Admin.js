@@ -7,7 +7,8 @@ angular.module('starter')
     $ionicPopover,
     $state,
     $timeout,
-    $ionicActionSheet
+    $ionicActionSheet,
+    $rootScope
   ){
 
 
@@ -20,7 +21,8 @@ angular.module('starter')
     );
 
     var estado = null;
-    var url = 'http://23.94.249.163/appDrinks-dev/admin/listarPedidos.php';
+    //var url = 'http://23.94.249.163/appDrinks-dev/admin/listarPedidos.php';
+    //var url = '$rootScope.urls.listarPedidos';
 
     $scope.atrasAdmin = function (){
       $state.go('app.categorias');
@@ -65,19 +67,19 @@ angular.module('starter')
      */
     $scope.getPedidos = function(estado){
 
+      var url ='';
       $scope.tieneFiltro = estado ? true : false;
       $scope.estadoFiltro = estado;
+
+      if(!estado) url = $rootScope.urls.listarPedidos;
+      else  url = $rootScope.urls.listarPedidos+'/'+estado;
 
       $ionicLoading.show({
         template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
       });
-      $http.post(url,{estado:estado}, {headers: { 'Content-Type': 'application/json'}})
+      $http.get(url)
         .then(function (data){
-          angular.forEach(data.data, function(value) {
-            $scope.dataCruda = value;
-          });
-
-          setPedidos($scope.dataCruda, estado);
+          setPedidos(data.data, estado);
           $ionicLoading.hide();
           $timeout.cancel(timer);
           $scope.$broadcast('scroll.refreshComplete');
@@ -99,24 +101,24 @@ angular.module('starter')
         $scope.pedidos =[];
       angular.forEach(data, function(valor, key) {
         if(!estado) {
-          if (valor.estado == 1) $scope.nuevos++;
-          if (valor.estado == 2) $scope.enCamino++;
-          if (valor.estado == 3) $scope.cancelados++;
-          if (valor.estado == 4) $scope.recibidos++;
+          if (valor.estado.id == 1) $scope.nuevos++;
+          if (valor.estado.id == 2) $scope.enCamino++;
+          if (valor.estado.id == 3) $scope.cancelados++;
+          if (valor.estado.id == 4) $scope.recibidos++;
         }
         $scope.pedidos.push({
           id:             valor.id,
           numero:         valor.numero,
           fecha:          new Date(valor.fecha),
           total:          valor.total,
-          idDispositivo:  valor.id_dispositivo,
+          idDispositivo:  valor.dispositivo.id,
           calle:          valor.calle,
           nro  :          valor.nro,
           telefono :      valor.telefono,
           estado :        valor.estado,
           latitud :       valor.latitud,
           longitud :      valor.longitud,
-          dirReferencia : valor.dir_ref
+          dirReferencia : valor.dir_referencia
         });
       });
     };

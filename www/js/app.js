@@ -2,32 +2,19 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
 
 .run(function($ionicPlatform, $http, $rootScope, $q, dispositivoService) {
 
-    /**
-     * Chequeo si esta abierto (horario)
-     **var url = 'http://23.94.249.163/appDrinks/general/abrir-cerrar.php';
-
-    var getAbiertoCerrado = function(){
-      $http.get(url)
-        .then(function(data){
-          console.log(data.data.data[0]);
-          if(data.data.data[0] == 1)
-            $rootScope.abierto = true;
-          else $rootScope.abierto = false;
-        })
-    };*/
+    $rootScope.urls={};
+    $rootScope.urls.dispositivo          = 'http://localhost/app-drink/web/app_dev.php/api/dispositivo/administradores';
+    $rootScope.urls.categorias           = 'http://localhost/app-drink/web/app_dev.php/api/categorias';
+    $rootScope.urls.listadoProductos     = 'http://localhost/app-drink/web/app_dev.php/api/producto/';
+    $rootScope.urls.estadoApertura       = 'http://localhost/app-drink/web/app_dev.php/api/horario';
+    $rootScope.urls.listarPedidos        = 'http://localhost/app-drink/web/app_dev.php/api/pedidos';
+    $rootScope.urls.detallePedido        = 'http://localhost/app-drink/web/app_dev.php/api/pedido/';
+    $rootScope.urls.pedidoEstado         = 'http://localhost/app-drink/web/app_dev.php/api/pedido/estado';
+    $rootScope.urls.dispositivoId        = 'http://localhost/app-drink/web/app_dev.php/api/dispositivo/';
+    $rootScope.urls.registrarDispositivo = 'http://localhost/app-drink/web/app_dev.php/api/dispositivo/uuid';
+    $rootScope.urls.pedidoNuevo          = 'http://localhost/app-drink/web/app_dev.php/api/pedido/nuevo';
 
 
-
-   /* var obtenerHorario = function(){
-      var urlAbierto = 'http://23.94.249.163/appDrinks/general/horario.php';
-      return $http.get(urlAbierto)
-        .then(function(data){
-          var array = data.data.data;
-          if(array.length < 1)
-            $rootScope.abierto = false; //cambiar a false
-          return $q.resolve();
-        })
-    };*/
 
 
     /**
@@ -47,8 +34,6 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
     };
 
     getTokenAdmins();
-    //obtenerHorario();
-    //getAbiertoCerrado();
 
 })
 

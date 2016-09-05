@@ -11,6 +11,8 @@ angular.module('starter')
     $scope.producto = angular.fromJson($stateParams.producto);
     $scope.cantidad = 1;
     $scope.pedido   = PedidoService;
+
+    console.log($scope.producto);
     /**
      *  Agregar producto al carro
      *
