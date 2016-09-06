@@ -13,6 +13,8 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
     $rootScope.urls.dispositivoId        = 'http://localhost/app-drink/web/app_dev.php/api/dispositivo/';
     $rootScope.urls.registrarDispositivo = 'http://localhost/app-drink/web/app_dev.php/api/dispositivo/uuid';
     $rootScope.urls.pedidoNuevo          = 'http://localhost/app-drink/web/app_dev.php/api/pedido/nuevo';
+    $rootScope.urls.stock                = 'http://localhost/app-drink/web/app_dev.php/api/productos';
+    $rootScope.urls.cambiarStock         = 'http://localhost/app-drink/web/app_dev.php/api/producto/cambiar-stock';
 
 
 

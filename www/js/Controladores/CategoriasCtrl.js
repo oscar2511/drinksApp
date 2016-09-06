@@ -74,7 +74,7 @@ angular.module('starter')
      */
     var setDataDispositivo = function(token){
       var dataDispositivo =  {
-        'token' : "Devqwwewew",//token,
+        'token' : token,
         'uuid'  : 9999//ionic.Platform.device().uuid
       };
       registrarDisp(dataDispositivo)
@@ -98,7 +98,6 @@ angular.module('starter')
         };
         $scope.pedido.dispositivo.uuid  = dataDispositivo.uuid;
         $scope.pedido.dispositivo.token = dataDispositivo.token;
-        alert(123);
         var urlDispositivo = $rootScope.urls.registrarDispositivo;
         $http.post(urlDispositivo, dataDispositivo, config)
           .then(function (data) {
