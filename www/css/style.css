@@ -104,12 +104,13 @@ background: #ececee;
 .img-det-prod{
   width: 70% !important;
   height: 150px!important;
-  padding: 10px;
-  /*margin: 60px;*/
-  margin-right:20px;
+  /*padding: 10px;*/
+  margin: auto;
+  /*margin: 20px 20px 50px;*/
+  /*margin-right:20px;
   margin-left:39px;
   margin-top: 0;
-  margin-bottom: 0;
+  margin-bottom: 0;*/
   border-radius: 35px;
   box-shadow: 2px 2px 5px #999;
 }
