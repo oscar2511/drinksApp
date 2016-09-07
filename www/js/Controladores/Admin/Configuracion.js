@@ -1,18 +1,25 @@
 
 angular.module('starter')
-  .controller('configuracionCtrl', function($rootScope, $scope, $http, $ionicLoading) {
+  .controller('configuracionCtrl', function(
+    $rootScope,
+    $scope,
+    $ionicPopup,
+    $http,
+    $ionicLoading,
+    $timeout
+  ) {
 
     $ionicLoading.show({
       template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
     });
 
-    var url = 'http://23.94.249.163/appDrinks-dev/general/abrir-cerrar.php';
+    var urlEstadoApertura = $rootScope.urls.estadoApertura;
 
     var getAbiertoCerrado = function(){
-      $http.get(url)
+      $http.get(urlEstadoApertura)
         .then(function(data){
-          console.log(data.data.data[0]);
-          if(data.data.data[0] == 1){
+          console.log(data.data[0].esta_abierto);
+          if(data.data[0].esta_abierto){
             $scope.abierto = true;
           }
           else{
@@ -25,14 +32,33 @@ angular.module('starter')
     };
 
     $scope.abrirCerrar = function(){
+      var url = $rootScope.urls.abrirCerrar;
       $ionicLoading.show({
         template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
       });
 
-      if($scope.abierto == true)  estado  = 0;
-      if($scope.abierto == false) estado = 1;
-      $http.post(url, {estado:estado}, {headers: {'Content-Type': 'application/json'}})
+      $http.post(url)
         .then(function(data){
+          if(data.data.estado == 200){
+            var alertPopupExito = $ionicPopup.alert({
+              title: 'Exito cambiando estado!',
+              buttons: null
+            });
+
+            $timeout(function() {
+              alertPopupExito.close();
+            }, 1500);
+          }else{
+            var alertPopupError = $ionicPopup.alert({
+              title: 'Error cambiando estado',
+              buttons: null
+            });
+
+            $timeout(function() {
+              alertPopupError.close();
+            }, 1500);
+          }
+
           $ionicLoading.hide();
         })
     };

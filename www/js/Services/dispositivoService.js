@@ -19,9 +19,7 @@ angular.module('starter')
       return $http.get(url)
         .then(function (data){
           console.log(data);
-          alert(123);
           if(!data) return $q.reject();
-         // console.log(data);
           return $q.resolve(data);
         }).catch(function(){
           //console.log('eror obteniendo el token');
