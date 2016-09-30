@@ -16,9 +16,9 @@ angular.module('starter')
            $timeout
   ){
 
-    $ionicLoading.show({
-      template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
-     });
+//    $ionicLoading.show({
+  //    template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
+    // });
 
     $scope.pedido = PedidoService;
 
@@ -49,24 +49,6 @@ angular.module('starter')
 
 
     /**
-     *  Obtengo los token de los dispositivos administradores
-     * esta en app.js
-     * deprecated
-     */
-    /*var getTokenAdmins = function(){
-      var tokenAdmins = [];
-      dispositivoService.getAdministradores()
-        .then(function(dispAdm){
-          angular.forEach(dispAdm, function (valor) {
-            tokenAdmins.push(valor.token) ;
-          });
-          $rootScope.tokenAdm = tokenAdmins;
-        });
-    };*/
-
-
-
-    /**
      * Inicializo notificaciones push y manejo la recepcion de notif.
      *
      * @type {Ionic.Push}
@@ -81,7 +63,7 @@ angular.module('starter')
 
       push.register(function(token) {
         setDataDispositivo(token.token);
-        //console.log("Mi token:", token.token);
+        console.log("Mi token:", token.token);
         push.saveToken(token);
       })
     });
@@ -93,7 +75,7 @@ angular.module('starter')
     var setDataDispositivo = function(token){
       var dataDispositivo =  {
         'token' : token,
-        'uuid'  : ionic.Platform.device().uuid
+        'uuid'  : 9999//ionic.Platform.device().uuid
       };
       registrarDisp(dataDispositivo)
     };
@@ -109,14 +91,19 @@ angular.module('starter')
 
     var registrarDisp = function(dataDispositivo){
       if(typeof(dataDispositivo.uuid) != 'undefined' && dataDispositivo.token) {
+        var config = {
+          headers : {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+          }
+        };
         $scope.pedido.dispositivo.uuid  = dataDispositivo.uuid;
         $scope.pedido.dispositivo.token = dataDispositivo.token;
-
-        var urlDispositivo = 'http://23.94.249.163/appDrinks/dispositivos/dispositivos.php';
-        $http.post(urlDispositivo, dataDispositivo, {headers: {'Content-Type': 'application/json'}})
+        var urlDispositivo = $rootScope.urls.registrarDispositivo;
+        $http.post(urlDispositivo, dataDispositivo, config)
           .then(function (data) {
             intentos = 0;
-            $rootScope.estadoUltPedido = data.data.data.estado_ult_pedido;
+            if(data.data.length > 0)
+              $rootScope.estadoUltPedido = data.data[0].estado.id;
             if ($rootScope.estadoUltPedido == 1 || $rootScope.estadoUltPedido == 2)
               $scope.setDataUltPedido(data);
           })
@@ -134,9 +121,8 @@ angular.module('starter')
           });
       }else {
         //console.log('No se encontró uuid o token, por favor cierra la aplicación y vuelve a iniciarla');
-        //alert('No se encontró uuid o token, por favor cierra la aplicación y vuelve a iniciarla');
         $ionicLoading.hide();
-        $state.go('app.error'); // todo: en produccion quitar esto
+        $state.go('app.error');
       }
     };
 
@@ -150,9 +136,9 @@ angular.module('starter')
        $rootScope.totalProductos = 'pendiente';
        $rootScope.pedidoPendiente = true;
        $scope.pedido.setTotalProductos();
-       $rootScope.idUltPedido     = data.data.data.id_pedido;
-       $rootScope.totalUltPedido  = data.data.data.total;
-       $rootScope.fechaUltPedido  = new Date(data.data.data.fecha_pedido);
+       $rootScope.idUltPedido     = data.data[0].id;
+       $rootScope.totalUltPedido  = data.data[0].total;
+       $rootScope.fechaUltPedido  = new Date(data.data[0].fecha);
     };
 
 
@@ -160,9 +146,8 @@ angular.module('starter')
      * Obtener las categorias del servidor
      * @returns {*}
      */
-    $scope.config = {};
     $scope.obtenerCategorias = function() {
-      var url = 'http://23.94.249.163/appDrinks/categorias/getCategorias.php';
+      var url = $rootScope.urls.categorias;
       return $http.get(url, { timeout: 100000 })
         .then(function (data) {
           angular.forEach(data.data, function (value) {
@@ -172,11 +157,12 @@ angular.module('starter')
 
           angular.forEach($scope.dataCruda, function (valor) {
             $scope.categorias.push({
-              id: valor.id,
+              id    : valor.id,
               nombre: valor.nombre,
-              urlImg: valor.urlImg
+              urlImg: valor.url_imagen
             });
           });
+          console.log($scope.categorias);
           $ionicLoading.hide();
           return $q.resolve();
         })

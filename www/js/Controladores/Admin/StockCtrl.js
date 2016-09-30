@@ -5,7 +5,8 @@ angular.module('starter')
     $http,
     $ionicLoading,
     $timeout,
-    $ionicPopup
+    $ionicPopup,
+    $rootScope
   ) {
 
     $ionicLoading.show({
@@ -24,7 +25,7 @@ angular.module('starter')
       20000
     );
 
-    var url = 'http://23.94.249.163/appDrinks/admin/getStock.php';
+    var url = $rootScope.urls.stock;
 
     /**
      * Obtener los productos
@@ -61,26 +62,48 @@ angular.module('starter')
       $ionicLoading.show({
         template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
       });
-      var urlCambio = 'http://23.94.249.163/appDrinks/admin/cambiarEstadoStock.php';
+
+      var config = {
+        headers : {
+          'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+        }
+      };
+      var urlCambio = $rootScope.urls.cambiarStock;
       var nuevoStock;
       if(stockCambio == 'Stock') nuevoStock = 'Sin stock';
       if(stockCambio == 'Sin stock') nuevoStock = 'Stock';
-      $http.post(urlCambio,{idProducto:idProducto, stockCambio:nuevoStock},  {headers: {'Content-Type': 'application/json'}})
-        .then(function(data){
-          $ionicLoading.hide();
-          var alertPopup = $ionicPopup.alert({
-            title: 'Se cambió el estado de stock!',
-            buttons: null
-          });
 
-          $timeout(function() {
-            alertPopup.close();
-          }, 1500);
+      var params = {
+        idProducto : idProducto,
+        stockCambio: nuevoStock
+      };
+      $http.post(urlCambio, params, config)
+        .then(function(data){
+          if(data.data.estado == 200) {
+            $ionicLoading.hide();
+            var alertPopup = $ionicPopup.alert({
+              title: 'Se cambió el estado de stock!',
+              buttons: null
+            });
+
+            $timeout(function () {
+              alertPopup.close();
+            }, 1500);
+          }else{
+            $ionicLoading.hide();
+            var alertPopupError = $ionicPopup.alert({
+              title: 'Error cambiando estado de stock',
+              buttons: null
+            });
+            $timeout(function () {
+              alertPopupError.close();
+            }, 1500);
+          }
 
         $scope.getProductos();
       })
       .catch(function(){
-        $state.go('app.error');
+        alert('error');//$state.go('app.error');
       });
 
     };

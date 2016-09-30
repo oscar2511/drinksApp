@@ -36,7 +36,7 @@ angular.module('starter')
 
     var getAdministradores = function(){
       var dataCruda;
-      var urlDispAdm = 'http://23.94.249.163/appDrinks/dispositivos/getAdministradores.php';
+      var urlDispAdm = 'http://23.94.249.163/appDrinks-dev/dispositivos/getAdministradores.php';
       return $http.get(urlDispAdm)
         .then(function(data){
           angular.forEach(data.data, function (value) {
@@ -69,7 +69,7 @@ getAdministradores();
     console.log($rootScope.dispAdmin);
     $scope.enviar = function () {
 
-      var url = 'http://23.94.249.163/appDrinks/pedidos/pedidos.php';
+      var url = 'http://23.94.249.163/appDrinks-dev/pedidos/pedidos.php';
       var pedido = angular.fromJson($scope.pedido);
 
       $http.post(url, pedido, {headers: {'Content-Type': 'application/json'}})
@@ -142,7 +142,7 @@ getAdministradores();
          // $ionicLoading.show({
            // template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
           //});
-          var urlCambiarEstado = 'http://23.94.249.163/appDrinks/pedidos/cambiar_estado_pedido.php';
+          var urlCambiarEstado = 'http://23.94.249.163/appDrinks-dev/pedidos/cambiar_estado_pedido.php';
           $http.post(urlCambiarEstado, {idPedido: $rootScope.idUltPedido, estado:3}, {headers: { 'Content-Type': 'application/json'}})
             .then(function (data){
               $scope.pedido.limpiarTodo();

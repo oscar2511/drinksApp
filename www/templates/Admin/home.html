@@ -23,8 +23,8 @@
           <td ng-click="getPedidos()"><i class="ion-asterisk"></i> <filtro ng-show="!tieneFiltro"><u>Todos</u></filtro><filtro ng-show="tieneFiltro">Todos</filtro></td>
           <td ng-click="getPedidos(1)"><i class="ion-speakerphone balanced"></i> <filtro ng-show="tieneFiltro && estadoFiltro == 1"><u>{{nuevos}}</u></filtro><filtro ng-show="estadoFiltro !=1">{{nuevos}}</filtro></td>
           <td ng-click="getPedidos(2)"> <i class="ion-clock energized"></i> <filtro ng-show="tieneFiltro && estadoFiltro == 2"><u>{{enCamino}}</u></filtro><filtro ng-show="estadoFiltro !=2">{{enCamino}}</filtro></td>
-          <td ng-click="getPedidos(4)"> <i class="ion-close assertive"></i> <filtro ng-show="tieneFiltro && estadoFiltro == 4"><u>{{cancelados}}</u></filtro><filtro ng-show="estadoFiltro !=4 ">{{cancelados}}</filtro></td>
-          <td ng-click="getPedidos(3)"><i class="ion-checkmark positive"></i> <filtro ng-show="tieneFiltro && estadoFiltro == 3"><u>{{recibidos}}</u></filtro><filtro ng-show="estadoFiltro !=3 ">{{recibidos}}</filtro></td>
+          <td ng-click="getPedidos(3)"> <i class="ion-close assertive"></i> <filtro ng-show="tieneFiltro && estadoFiltro == 4"><u>{{cancelados}}</u></filtro><filtro ng-show="estadoFiltro !=4 ">{{cancelados}}</filtro></td>
+          <td ng-click="getPedidos(4)"><i class="ion-checkmark positive"></i> <filtro ng-show="tieneFiltro && estadoFiltro == 3"><u>{{recibidos}}</u></filtro><filtro ng-show="estadoFiltro !=3 ">{{recibidos}}</filtro></td>
         </tr>
       </table>
     </div>
@@ -38,10 +38,10 @@
       <a class="item" href="#/app/admin/pedido/{{pedido}}">
         <div class="row">
           <div class="col.25">
-            <span align="left" ng-if="pedido.estado==1" class="badge badge-balanced">Nuevo</span>
-            <span ng-if="pedido.estado==2" class="badge badge-energized">En Camino</span>
-            <span ng-if="pedido.estado==3" class="badge badge-positive">Cerrado</span>
-            <span ng-if="pedido.estado==4" class="badge badge-assertive">Cancelado</span>
+            <span align="left" ng-if="pedido.estado.id==1" class="badge badge-balanced">Nuevo</span>
+            <span ng-if="pedido.estado.id==2" class="badge badge-energized">En Camino</span>
+            <span ng-if="pedido.estado.id==4" class="badge badge-positive">Cerrado</span>
+            <span ng-if="pedido.estado.id==3" class="badge badge-assertive">Cancelado</span>
           </div>
           <div class="col">
             <p> <strong>Nro.: </strong><b> {{pedido.id}}</b></p>

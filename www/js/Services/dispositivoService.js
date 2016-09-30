@@ -15,11 +15,11 @@ angular.module('starter')
      * @returns {*}
      */
     this.getTokenDispositivo = function(id){
-      var url = 'http://23.94.249.163/appDrinks/dispositivos/getToken.php';
-      return $http.post(url, id, {headers: { 'Content-Type': 'application/json'}})
+      var url = $rootScope.urls.dispositivoId+id;
+      return $http.get(url)
         .then(function (data){
+          console.log(data);
           if(!data) return $q.reject();
-         // console.log(data);
           return $q.resolve(data);
         }).catch(function(){
           //console.log('eror obteniendo el token');
@@ -33,7 +33,7 @@ angular.module('starter')
       * @returns {*}
      */
     this.getAdministradores = function(){
-      var urlDispAdm = 'http://23.94.249.163/appDrinks/dispositivos/getAdministradores.php';
+      var urlDispAdm = $rootScope.urls.dispositivo;
       var dispAdm;
       return $http.get(urlDispAdm)
         .then(function(data){

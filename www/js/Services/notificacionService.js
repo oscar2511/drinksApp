@@ -16,16 +16,23 @@ angular.module('starter')
      * Registra un pedido en la base de datos
      */
     this.registrarNuevoPedido = function(pedido){
-      var url = 'http://23.94.249.163/appDrinks/pedidos/pedidos.php';
-      return $http.post(url, pedido, {headers: { 'Content-Type': 'application/json'}})
+      var config = {
+        headers : {
+          'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+        }
+      };
+
+      var url = $rootScope.urls.pedidoNuevo;
+      return $http.post(url, pedido, config)
         .then(function (data){
-          if(!data) return $q.reject();
-          $rootScope.idUltPedido = data.data.data.id_pedido;
-          return $q.resolve();
-        }).catch(function(){
-          alert('error');
-          $ionicLoading.hide();
-          $state.go('app.error');
+          console.log(data.data.estado);
+          if(data.data.estado != 200) return $q.reject();
+          $rootScope.idUltPedido = data.data.id_pedido;
+          return $q.resolve(data.data.estado);
+        })
+        .catch(function(){
+            $ionicLoading.hide();
+            $state.go('app.error');
         });
     };
 
@@ -70,17 +77,9 @@ angular.module('starter')
      * Envia notificación push a usuario.
      */
     this.pushUsuario = function(mensaje, idDispositivo){
-        dispositivoService.getTokenDispositivo({id: idDispositivo})
+        dispositivoService.getTokenDispositivo(idDispositivo)
           .then(function (data) {
-            var token ='';
-            angular.forEach(data.data, function (value) {
-              return dataCruda = value;
-            });
-            angular.forEach(dataCruda, function (valor) {
-              token = valor.token;
-            });
-
-            //console.log('Token de usuario: '+token);
+            var token = data.data.token;
             var jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4MjllZTIxOS01MzA4LTRhZDMtYWQ5NS1lZTQ3Y2YxMzhiMTMifQ.QzA7PSQHEEiSz-cEun7iUZdJRyAXd3iIRQSlsWPL0Yw';
             var tokens = [token];
             var profile = 'testdevelopment';
