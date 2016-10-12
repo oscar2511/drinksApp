@@ -3,20 +3,21 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
 .run(function($ionicPlatform, $http, $rootScope, $q, dispositivoService) {
 
     $rootScope.server = '23.94.249.163';
+    $rootScope.env = 'app_dev.php';
     $rootScope.urls={};
-    $rootScope.urls.dispositivo          = 'http://'+$rootScope.server+'/app-drink/web/app_dev.php/api/dispositivo/administradores';
-    $rootScope.urls.categorias           = 'http://'+$rootScope.server+'/app-drink/web/app_dev.php/api/categorias';
-    $rootScope.urls.listadoProductos     = 'http://'+$rootScope.server+'/app-drink/web/app_dev.php/api/producto/';
-    $rootScope.urls.estadoApertura       = 'http://'+$rootScope.server+'/app-drink/web/app_dev.php/api/horario';
-    $rootScope.urls.listarPedidos        = 'http://'+$rootScope.server+'/app-drink/web/app_dev.php/api/pedidos';
-    $rootScope.urls.detallePedido        = 'http://'+$rootScope.server+'/app-drink/web/app_dev.php/api/pedido/';
-    $rootScope.urls.pedidoEstado         = 'http://'+$rootScope.server+'/app-drink/web/app_dev.php/api/pedido/estado';
-    $rootScope.urls.dispositivoId        = 'http://'+$rootScope.server+'/app-drink/web/app_dev.php/api/dispositivo/';
-    $rootScope.urls.registrarDispositivo = 'http://'+$rootScope.server+'/app-drink/web/app_dev.php/api/dispositivo/uuid';
-    $rootScope.urls.pedidoNuevo          = 'http://'+$rootScope.server+'/app-drink/web/app_dev.php/api/pedido/nuevo';
-    $rootScope.urls.stock                = 'http://'+$rootScope.server+'/app-drink/web/app_dev.php/api/productos';
-    $rootScope.urls.cambiarStock         = 'http://'+$rootScope.server+'/app-drink/web/app_dev.php/api/producto/cambiar-stock';
-    $rootScope.urls.abrirCerrar          = 'http://'+$rootScope.server+'/app-drink/web/app_dev.php/api/horario/abrir-cerrar';
+    $rootScope.urls.dispositivo          = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/dispositivo/administradores';
+    $rootScope.urls.categorias           = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/categorias';
+    $rootScope.urls.listadoProductos     = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/producto/';
+    $rootScope.urls.estadoApertura       = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/horario';
+    $rootScope.urls.listarPedidos        = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/pedidos';
+    $rootScope.urls.detallePedido        = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/pedido/';
+    $rootScope.urls.pedidoEstado         = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/pedido/estado';
+    $rootScope.urls.dispositivoId        = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/dispositivo/';
+    $rootScope.urls.registrarDispositivo = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/dispositivo/uuid';
+    $rootScope.urls.pedidoNuevo          = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/pedido/nuevo';
+    $rootScope.urls.stock                = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/productos';
+    $rootScope.urls.cambiarStock         = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/producto/cambiar-stock';
+    $rootScope.urls.abrirCerrar          = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/horario/abrir-cerrar';
 
 
 
