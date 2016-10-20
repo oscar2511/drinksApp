@@ -19,6 +19,8 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
     $rootScope.urls.cambiarStock         = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/producto/cambiar-stock';
     $rootScope.urls.abrirCerrar          = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/horario/abrir-cerrar';
 
+    $rootScope.urls.productos = 'http://'+$rootScope.server+'/app-drink/web/img/productos/';
+
 
 
 

@@ -75,7 +75,7 @@ angular.module('starter')
     var setDataDispositivo = function(token){
       var dataDispositivo =  {
         'token' : token,
-        'uuid'  : 9999//ionic.Platform.device().uuid
+        'uuid'  : ionic.Platform.device().uuid
       };
       registrarDisp(dataDispositivo)
     };

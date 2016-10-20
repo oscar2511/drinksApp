@@ -28,7 +28,7 @@ angular.module('starter')
         angular.forEach(data.data, function(valor, key) {
           $scope.idCategoria = valor.idCategoria;
 
-          console.log(valor.descripcion);
+          console.log(valor);
           $scope.productos.push({
             id:           valor.id,
             precio:       valor.precio,
@@ -36,10 +36,11 @@ angular.module('starter')
             nombre:       valor.nombre,
             stock:        valor.stock,
             idCategoria:  valor.categoria.id,
-            urlImg  :     valor.urlImg
+            urlImg  :     valor.url_imagen
           });
         });
         $ionicLoading.hide();
       });
+
 
   });
