@@ -3,14 +3,14 @@
   <ion-content>
     <div class="list card">
       <div class="item item-avatar">
-        <img ion-img-cache ng-src="http://23.94.249.163/appDrinks-dev/img/productos/{{producto.urlImg}}">
+        <img ion-img-cache ng-src="{{urls.productos}}{{producto.urlImg}}">
         <h2>{{producto.nombre}}</h2>
         <p>$ {{producto.precio}}</p>
       </div>
 
       <div class="item item-body">
-        <div class="img-det-prod">
-          <img align="center" ion-img-cache ng-src="http://23.94.249.163/appDrinks-dev/img/productos/{{producto.urlImg}}">
+        <div class="img-det-prod" style=" background-image: url('{{urls.productos}}{{producto.urlImg}}')">
+          <!--<img align="center" ion-img-cache ng-src="{{urls.productos}}{{producto.urlImg}}">-->
         </div>
 
         <p>{{producto.descripcion}}</p>

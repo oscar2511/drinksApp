@@ -75,7 +75,7 @@ angular.module('starter')
     var setDataDispositivo = function(token){
       var dataDispositivo =  {
         'token' : token,
-        'uuid'  : ionic.Platform.device().uuid
+        'uuid'  : 9999//ionic.Platform.device().uuid
       };
       registrarDisp(dataDispositivo)
     };
@@ -105,6 +105,7 @@ angular.module('starter')
             if(data.data.length > 0)
               $rootScope.estadoUltPedido = data.data[0].estado.id;
             if ($rootScope.estadoUltPedido == 1 || $rootScope.estadoUltPedido == 2)
+            console.log(data)
               $scope.setDataUltPedido(data);
           })
           .catch(function () {
@@ -120,7 +121,7 @@ angular.module('starter')
             }
           });
       }else {
-        //console.log('No se encontró uuid o token, por favor cierra la aplicación y vuelve a iniciarla');
+        console.log('No se encontró uuid o token, por favor cierra la aplicación y vuelve a iniciarla');
         $ionicLoading.hide();
         $state.go('app.error');
       }
