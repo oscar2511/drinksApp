@@ -16,9 +16,9 @@ angular.module('starter')
            $timeout
   ){
 
-//    $ionicLoading.show({
-  //    template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
-    // });
+    $ionicLoading.show({
+      template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
+     });
 
     $scope.pedido = PedidoService;
 
@@ -101,14 +101,13 @@ angular.module('starter')
         var urlDispositivo = $rootScope.urls.registrarDispositivo;
         $http.post(urlDispositivo, dataDispositivo, config)
           .then(function (data) {
-            intentos = 0;
             if(data.data.length > 0)
               $rootScope.estadoUltPedido = data.data[0].estado.id;
             if ($rootScope.estadoUltPedido == 1 || $rootScope.estadoUltPedido == 2)
               $scope.setDataUltPedido(data);
           })
           .catch(function () {
-            //console.log('Error registrando el dispositivo, intento: ' + intentos);
+            console.log('Error registrando el dispositivo, intento: ' + intentos);
             if (intentos < maxIntentos) {
               intentos++;
               $timeout(function () {
@@ -162,7 +161,6 @@ angular.module('starter')
               urlImg: valor.url_imagen
             });
           });
-          console.log($scope.categorias);
           $ionicLoading.hide();
           return $q.resolve();
         })
