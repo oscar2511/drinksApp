@@ -105,7 +105,6 @@ angular.module('starter')
             if(data.data.length > 0)
               $rootScope.estadoUltPedido = data.data[0].estado.id;
             if ($rootScope.estadoUltPedido == 1 || $rootScope.estadoUltPedido == 2)
-            console.log(data)
               $scope.setDataUltPedido(data);
           })
           .catch(function () {
