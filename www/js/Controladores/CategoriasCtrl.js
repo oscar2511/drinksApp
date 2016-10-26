@@ -101,12 +101,12 @@ angular.module('starter')
         var urlDispositivo = $rootScope.urls.registrarDispositivo;
         $http.post(urlDispositivo, dataDispositivo, config)
           .then(function (data) {
-            if(data.data.length > 0)
+            if(typeof (data) != 'undefined' && data.data.length > 0)
               $rootScope.estadoUltPedido = data.data[0].estado.id;
             if ($rootScope.estadoUltPedido == 1 || $rootScope.estadoUltPedido == 2)
               $scope.setDataUltPedido(data);
-          })
-          .catch(function () {
+          });
+          /*.catch(function () {
             console.log('Error registrando el dispositivo, intento: ' + intentos);
             if (intentos < maxIntentos) {
               intentos++;
@@ -117,7 +117,7 @@ angular.module('starter')
               $state.go('app.error');
               $ionicLoading.hide();
             }
-          });
+          });*/
       }else {
         console.log('No se encontró uuid o token, por favor cierra la aplicación y vuelve a iniciarla');
         $ionicLoading.hide();
