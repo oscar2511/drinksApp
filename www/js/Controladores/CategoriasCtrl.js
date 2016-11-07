@@ -63,6 +63,7 @@ angular.module('starter')
 
       push.register(function(token) {
         setDataDispositivo(token.token);
+        alert("token:" + token.token);
         console.log("Mi token:", token.token);
         push.saveToken(token);
       })
@@ -75,8 +76,9 @@ angular.module('starter')
     var setDataDispositivo = function(token){
       var dataDispositivo =  {
         'token' : token,
-        'uuid'  : 9999//ionic.Platform.device().uuid
+        'uuid'  : ionic.Platform.device().uuid
       };
+      alert("uuid: " + ionic.Platform.device().uuid);
       registrarDisp(dataDispositivo)
     };
 
@@ -105,6 +107,9 @@ angular.module('starter')
               $rootScope.estadoUltPedido = data.data[0].estado.id;
             if ($rootScope.estadoUltPedido == 1 || $rootScope.estadoUltPedido == 2)
               $scope.setDataUltPedido(data);
+          })
+          .catch(function(){
+            alert("Error obteniendo el ultimo pedido del dispositivo y/o registrandolo");
           });
           /*.catch(function () {
             console.log('Error registrando el dispositivo, intento: ' + intentos);
@@ -165,6 +170,8 @@ angular.module('starter')
           return $q.resolve();
         })
         .catch(function(err){
+          alert("Error obteniendo las categorias");
+          $ionicLoading.hide();
          // $state.go('app.error'); //todo siempre entra al catch
         });
       };

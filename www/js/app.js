@@ -36,6 +36,9 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
             tokenAdmins.push(valor.token) ;
           });
           $rootScope.tokenAdm = tokenAdmins;
+        })
+        .catch(function (){
+          alert("No se pudo obtener los dispositivos administradores");
         });
 
     };
