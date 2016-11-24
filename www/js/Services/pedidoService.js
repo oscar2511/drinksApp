@@ -15,8 +15,8 @@ angular.module('starter')
       total   : 0,
       subTotal: 0,
       dispositivo:{
-        'token': '12345678',//null,
-        'uuid' : 9876543
+        'token': null,
+        'uuid' : null
       },
       ubicacion:{
         coordenadas: {

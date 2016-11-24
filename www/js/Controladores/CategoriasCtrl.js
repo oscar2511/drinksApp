@@ -54,16 +54,19 @@ angular.module('starter')
      * @type {Ionic.Push}
      */
    $ionicPlatform.ready(function() {
-      var push = new Ionic.Push({
-        'debug': true,
-        'onNotification': function (notificacion) {
-          NotificacionService.postNotificacion(notificacion);
-        }
-      });
+     try {
+       var push = new Ionic.Push({
+         'debug': true,
+         'onNotification': function (notificacion) {
+           NotificacionService.postNotificacion(notificacion);
+         }
+       });
+     } catch (e) {
+       alert(e);
+     }
 
       push.register(function(token) {
         setDataDispositivo(token.token);
-        alert("token:" + token.token);
         console.log("Mi token:", token.token);
         push.saveToken(token);
       })
@@ -76,9 +79,8 @@ angular.module('starter')
     var setDataDispositivo = function(token){
       var dataDispositivo =  {
         'token' : token,
-        'uuid'  : ionic.Platform.device().uuid
+        'uuid'  : 9999//ionic.Platform.device().uuid
       };
-      alert("uuid: " + ionic.Platform.device().uuid);
       registrarDisp(dataDispositivo)
     };
 
@@ -100,6 +102,7 @@ angular.module('starter')
         };
         $scope.pedido.dispositivo.uuid  = dataDispositivo.uuid;
         $scope.pedido.dispositivo.token = dataDispositivo.token;
+
         var urlDispositivo = $rootScope.urls.registrarDispositivo;
         $http.post(urlDispositivo, dataDispositivo, config)
           .then(function (data) {

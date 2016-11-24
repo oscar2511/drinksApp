@@ -60,7 +60,7 @@ background: #ececee;
 }
 
 .promociones{
-  width: 100% !important;
+  width: 320px !important;
   height: 170px!important;
   background-image: url("../img/categorias/promociones.jpg")!important;
   background-repeat: no-repeat;
@@ -68,6 +68,7 @@ background: #ececee;
   background-size: cover;
   padding-left: 100%;
   margin-bottom: -20px;
+  margin-left: -4px;
 }
 
 .vodkas{

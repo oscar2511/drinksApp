@@ -18,7 +18,6 @@ angular.module('starter')
       var url = $rootScope.urls.dispositivoId+id;
       return $http.get(url)
         .then(function (data){
-          console.log(data);
           if(!data) return $q.reject();
           return $q.resolve(data);
         }).catch(function(){
@@ -37,6 +36,7 @@ angular.module('starter')
       var dispAdm;
       return $http.get(urlDispAdm)
         .then(function(data){
+          console.log(data);
           angular.forEach(data.data, function (value) {
              dispAdm = value;
           });

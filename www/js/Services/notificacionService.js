@@ -23,9 +23,9 @@ angular.module('starter')
       };
 
       var url = $rootScope.urls.pedidoNuevo;
+      console.log(pedido);
       return $http.post(url, pedido, config)
         .then(function (data){
-          console.log(data.data.estado);
           if(data.data.estado != 200) return $q.reject();
           $rootScope.idUltPedido = data.data.id_pedido;
           return $q.resolve(data.data.estado);

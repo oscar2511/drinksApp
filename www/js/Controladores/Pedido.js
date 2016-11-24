@@ -192,7 +192,6 @@ angular.module('starter')
      * @param productoPedido
      */
     $scope.addCantidad = function(productoPedido){
-      //console.log(ionic.Platform.device());
       var producto = productoPedido.producto;
       var cantidad = 1;
       $scope.pedido.addProductoCantidad(producto, cantidad);
@@ -283,6 +282,8 @@ angular.module('starter')
       $scope.pedido.ubicacion.referencia.tel     = tel;
       $scope.pedido.ubicacion.referencia.dir_ref = dir_ref;
       var pedido = angular.fromJson($scope.pedido);
+
+      console.log(pedido);
       // registra el pedido y envia push al admin
       NotificacionService.registrarNuevoPedido(pedido)
         .then(function(estado) {
