@@ -53,7 +53,7 @@ angular.module('starter')
      *
      * @type {Ionic.Push}
      */
-   $ionicPlatform.ready(function() {
+   /*$ionicPlatform.ready(function() {
      try {
        var push = new Ionic.Push({
          'debug': true,
@@ -70,7 +70,7 @@ angular.module('starter')
         console.log("Mi token:", token.token);
         push.saveToken(token);
       })
-    });
+    });*/
 
     /**
      * Setear datos del dispositivo
@@ -154,21 +154,24 @@ angular.module('starter')
      * @returns {*}
      */
     $scope.obtenerCategorias = function() {
-      var url = $rootScope.urls.categorias;
+      var url = $rootScope.urls.categories;
       return $http.get(url, { timeout: 100000 })
         .then(function (data) {
+          console.log(data);
+          var dataCruda = [];
           angular.forEach(data.data, function (value) {
-            $scope.dataCruda = value;
+            dataCruda.push(value);
           });
-          $scope.categorias = [];
 
-          angular.forEach($scope.dataCruda, function (valor) {
+          $scope.categorias = [];
+          angular.forEach(dataCruda, function (valor) {
             $scope.categorias.push({
-              id    : valor.id,
-              nombre: valor.nombre,
-              urlImg: valor.url_imagen
+              id    : valor._id,
+              nombre: valor.name,
+              urlImg: valor.urlImg
             });
           });
+          console.log($scope.categorias);
           $ionicLoading.hide();
           return $q.resolve();
         })

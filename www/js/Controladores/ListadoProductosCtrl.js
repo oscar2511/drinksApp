@@ -22,6 +22,7 @@ angular.module('starter')
      *
      */
     var url = $rootScope.urls.listadoProductos+categoria.id;
+    alert(url);
     $http.get(url)
       .then(function (data){
         $scope.productos =[];
@@ -30,13 +31,13 @@ angular.module('starter')
 
           console.log(valor);
           $scope.productos.push({
-            id:           valor.id,
-            precio:       valor.precio,
+            id:           valor._id,
+            precio:       valor.price,
             descripcion:  valor.descripcion,
-            nombre:       valor.nombre,
+            nombre:       valor.name,
             stock:        valor.stock,
-            idCategoria:  valor.categoria.id,
-            urlImg  :     valor.url_imagen
+            idCategoria:  valor.categoriaId,
+            urlImg  :     valor.urlImg
           });
         });
         $ionicLoading.hide();
