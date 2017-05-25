@@ -18,11 +18,10 @@ angular.module('starter')
     $scope.catUrlImg = categoria.urlImg;
 
     /**
-     * Obtener los producto de una categoria del servidor
+     * Obtener los producto de una categoria
      *
      */
     var url = $rootScope.urls.listadoProductos+categoria.id;
-    alert(url);
     $http.get(url)
       .then(function (data){
         $scope.productos =[];
@@ -35,7 +34,7 @@ angular.module('starter')
             precio:       valor.price,
             descripcion:  valor.descripcion,
             nombre:       valor.name,
-            stock:        valor.stock,
+            stock:        valor.stock ? 'Disponible' : 'Sin stock',
             idCategoria:  valor.categoriaId,
             urlImg  :     valor.urlImg
           });

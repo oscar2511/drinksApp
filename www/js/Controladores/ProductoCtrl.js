@@ -8,11 +8,11 @@ angular.module('starter')
                                        $timeout
   )
   {
+    alert(123);
     $scope.producto = angular.fromJson($stateParams.producto);
     $scope.cantidad = 1;
     $scope.pedido   = PedidoService;
 
-    console.log($scope.producto);
     /**
      *  Agregar producto al carro
      *
@@ -28,7 +28,7 @@ angular.module('starter')
       $scope.pedido.addProducto(producto, cantidad);
 
       /**
-       * Mostrar pupop cuando se agrega un producto al pedido
+       * Mostrar popup cuando se agrega un producto al pedido
        * @type {Object|*}
        */
       var alertPopup = $ionicPopup.alert({

@@ -176,7 +176,7 @@ angular.module('starter')
           return $q.resolve();
         })
         .catch(function(err){
-          alert("Error obteniendo las categorias");
+          //alert("Error obteniendo las categorias");
           $ionicLoading.hide();
          // $state.go('app.error'); //todo siempre entra al catch
         });
