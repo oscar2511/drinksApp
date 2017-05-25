@@ -157,7 +157,6 @@ angular.module('starter')
       var url = $rootScope.urls.categories;
       return $http.get(url, { timeout: 100000 })
         .then(function (data) {
-          console.log(data);
           var dataCruda = [];
           angular.forEach(data.data, function (value) {
             dataCruda.push(value);
@@ -171,7 +170,6 @@ angular.module('starter')
               urlImg: valor.urlImg
             });
           });
-          console.log($scope.categorias);
           $ionicLoading.hide();
           return $q.resolve();
         })

@@ -4,7 +4,8 @@ angular.module('starter')
                                               $stateParams,
                                               $http,
                                               $ionicLoading,
-                                              $rootScope)
+                                              $rootScope,
+                                              $base64)
   {
     $ionicLoading.show({
       template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
@@ -28,7 +29,6 @@ angular.module('starter')
         angular.forEach(data.data, function(valor, key) {
           $scope.idCategoria = valor.idCategoria;
 
-          console.log(valor);
           $scope.productos.push({
             id:           valor._id,
             precio:       valor.price,
@@ -36,11 +36,15 @@ angular.module('starter')
             nombre:       valor.name,
             stock:        valor.stock ? 'Disponible' : 'Sin stock',
             idCategoria:  valor.categoriaId,
-            urlImg  :     valor.urlImg
+            urlImg  :     $base64.encode(valor.urlImg)
           });
         });
         $ionicLoading.hide();
       });
+
+    $scope.decodeUrl = function(urlEncoded) {
+      return $base64.decode(urlEncoded)
+    }
 
 
   });

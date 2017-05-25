@@ -5,13 +5,15 @@ angular.module('starter')
                                        PedidoService,
                                        $ionicPopup,
                                        $state,
-                                       $timeout
+                                       $timeout,
+                                       $base64
   )
   {
-    alert(123);
     $scope.producto = angular.fromJson($stateParams.producto);
     $scope.cantidad = 1;
     $scope.pedido   = PedidoService;
+
+    $scope.producto.urlImg = $base64.decode($scope.producto.urlImg);
 
     /**
      *  Agregar producto al carro
