@@ -1,6 +1,6 @@
 <ion-view cache-view="false">
 
-  <ion-content ng-init="abiertoCerrado()">
+  <ion-content > <!--ng-init="abiertoCerrado()"-->
 
     <div ng-show="mostrarMapa" id="map" data-tap-disabled="true">
       <div align="center">
@@ -122,7 +122,7 @@
     <div ng-if="tieneProductos">
       <div class="list" ng-repeat="ped in pedidoActual.detalle" ng-if="$index > 0">
         <div class="item item-avatar">
-          <img src="http://23.94.249.163/appDrinks-dev/img/productos/{{ped.producto.urlImg}}">
+          <img src="{{ ped.producto.urlImg }}">
           <h2> {{ped.producto.nombre}}</h2>
           <div class="row">
             <div class="col" align="left">

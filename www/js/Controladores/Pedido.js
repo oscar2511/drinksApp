@@ -26,6 +26,8 @@ angular.module('starter')
     $scope.mapaCargado           = false;
     $scope.errorUbicacion        = false;
 
+    $rootScope.abierto = true;
+
     if($rootScope.totalProductos > 0)
       $rootScope.tieneProductos = true;
 
@@ -283,15 +285,16 @@ angular.module('starter')
       $scope.pedido.ubicacion.referencia.dir_ref = dir_ref;
       var pedido = angular.fromJson($scope.pedido);
 
-      console.log(pedido);
       // registra el pedido y envia push al admin
-      NotificacionService.registrarNuevoPedido(pedido)
+      //NotificacionService.registrarNuevoPedido(pedido)
+      $scope.pedido.registrarNuevoPedido(pedido)
         .then(function(estado) {
           if(estado == 200) {
-            NotificacionService.enviarPushNuevoPedido($scope.pedido)
+            /*NotificacionService.enviarPushNuevoPedido($scope.pedido)
               .success(function () {
 
               });
+              */
 
             var alertPopup = $ionicPopup.alert({
               title: 'Tu pedido fué enviado, te notificaremos cuando sea procesado. Salud !!',
@@ -333,4 +336,3 @@ angular.module('starter')
   };
 
 });
-

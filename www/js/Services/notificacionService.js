@@ -12,31 +12,7 @@ angular.module('starter')
            $timeout
   ) {
 
-    /**
-     * Registra un pedido en la base de datos
-     */
-    this.registrarNuevoPedido = function(pedido){
-      var config = {
-        headers : {
-          'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
-        }
-      };
-
-      var url = $rootScope.urls.pedidoNuevo;
-      console.log(pedido);
-      return $http.post(url, pedido, config)
-        .then(function (data){
-          if(data.data.estado != 200) return $q.reject();
-          $rootScope.idUltPedido = data.data.id_pedido;
-          return $q.resolve(data.data.estado);
-        })
-        .catch(function(){
-            $ionicLoading.hide();
-            $state.go('app.error');
-        });
-    };
-
-
+    
     /**
      * Envia notificación push cuando se realiza un pedido.
      */

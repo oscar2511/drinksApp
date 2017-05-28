@@ -79,6 +79,7 @@ angular.module('starter')
       });
       $http.get(url)
         .then(function (data){
+          console.log(data);
           setPedidos(data.data, estado);
           $ionicLoading.hide();
           $timeout.cancel(timer);
@@ -106,10 +107,10 @@ angular.module('starter')
           if (valor.estado.id == 3) $scope.recibidos++;
           if (valor.estado.id == 4) $scope.cancelados++;
         }
-        $scope.pedidos.push({
-          id:             valor.id,
-          numero:         valor.numero,
-          fecha:          new Date(valor.fecha),
+        /*$scope.pedidos.push({
+          id:             valor._id,
+          numero:         valor.number,
+          fecha:          new Date(valor.created),
           total:          valor.total,
           idDispositivo:  valor.dispositivo.id,
           calle:          valor.calle,
@@ -119,6 +120,15 @@ angular.module('starter')
           latitud :       valor.latitud,
           longitud :      valor.longitud,
           dirReferencia : valor.dir_referencia
+        });*/
+        $scope.pedidos.push({
+          id:             valor._id,
+          numero:         valor.number,
+          fecha:          new Date(valor.created),
+          total:          valor.total,
+          device:         valor.device,
+          address:        valor.address,
+          estado :        valor.state,
         });
       });
     };

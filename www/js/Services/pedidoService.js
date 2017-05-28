@@ -66,6 +66,7 @@ angular.module('starter')
         };
 
         pedido.detalle.push(productoPedido);
+        console.log(pedido.detalle);
         $rootScope.totalProductos = parseInt($rootScope.totalProductos) + parseInt(cantidad);
       }
     };
@@ -103,6 +104,26 @@ angular.module('starter')
       });
       return productoEnPedido;
     };
+
+    /**
+    * Save a order
+    */
+    pedido.registrarNuevoPedido = function(pedido){
+
+      var url = $rootScope.urls.pedidoNuevo;
+      return $http.post(url, pedido)
+        .then(function (data) {
+          if(data.status != 200) return $q.reject();
+          $rootScope.idUltPedido = data.data._id;
+          return $q.resolve(data.status);
+        })
+        .catch(function() {
+            $ionicLoading.hide();
+            $state.go('app.error');
+        });
+    };
+
+
 
     /**
      *
@@ -225,7 +246,5 @@ angular.module('starter')
           });
       };
 
-
       return pedido;
-
 });
