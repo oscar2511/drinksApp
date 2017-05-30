@@ -11,6 +11,7 @@ angular.module('starter')
   {
     $scope.producto = angular.fromJson($stateParams.producto);
     $scope.cantidad = 1;
+
     $scope.pedido   = PedidoService;
 
     $scope.producto.urlImg = $base64.decode($scope.producto.urlImg);
@@ -27,7 +28,7 @@ angular.module('starter')
         return 0;
       }
 
-      $scope.pedido.addProducto(producto, cantidad);
+      PedidoService.addProducto(producto, cantidad);
 
       /**
        * Mostrar popup cuando se agrega un producto al pedido
@@ -39,6 +40,7 @@ angular.module('starter')
       });
 
       $timeout(function() {
+        $scope.cantidad = 1;
         alertPopup.close();
       }, 1500);
 
@@ -56,7 +58,7 @@ angular.module('starter')
         });
 
         alertPopup.then(function(res) {
-          $scope.pedido.limpiarPedido();
+          PedidoService.limpiarPedido();
           $rootScope.totalProductos = 'pendiente';
           $rootScope.tieneProductos = 0;
           $state.go('app.pedido-pendiente');

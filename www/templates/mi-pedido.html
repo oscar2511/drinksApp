@@ -88,11 +88,11 @@
           </div>
           <div class="row">
             <div class="col col-50">Subtotal</div>
-            <div class="col">$ {{ pedido.subTotal}}</div>
+            <div class="col">$ {{ pedido.pedido.subTotal}}</div>
           </div>
           <div class="row">
             <div class="col col-50"><strong><h2>Total</h2></strong></div>
-            <div class="col"><strong><h2>$ {{ pedido.total }}</h2></strong></div>
+            <div class="col"><strong><h2>$ {{ pedido.pedido.total }}</h2></strong></div>
           </div>
           <div class="row">
             <div class="col col-25" >
@@ -120,7 +120,7 @@
       <h4 style="color: #af7550";>&nbsp;&nbsp; <i class="ion-ios-information"></i> Aún no tienes productos en tu pedido. </h4>
     </div>
     <div ng-if="tieneProductos">
-      <div class="list" ng-repeat="ped in pedidoActual.detalle" ng-if="$index > 0">
+      <div class="list" ng-repeat="ped in pedidoActual.detalle">
         <div class="item item-avatar">
           <img src="{{ ped.producto.urlImg }}">
           <h2> {{ped.producto.nombre}}</h2>

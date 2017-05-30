@@ -1,8 +1,6 @@
 angular.module('starter')
   .service('PedidoService',
-  function($q,
-           $rootScope,
-           $ionicPlatform){
+    function($q, $rootScope, $http){
 
   /**
    * Seteo los valores del json de pedio en null | 0
@@ -13,32 +11,62 @@ angular.module('starter')
     var pedido = {
       numero  : null,
       fecha   : null,
-      detalle :[{}],
+      detalle : [{}],
       total   : 0,
-      subTotal: 0
-  };
+      subTotal: 0,
+      dispositivo:{
+        'token': null,
+        'uuid' : null
+      },
+      ubicacion:{
+        coordenadas: {
+          'lat' : null,
+          'long': null
+        },
+        direccion  : {
+          'calle' : null,
+          'numero': null
+        },
+        referencia :{
+          'tel'     : null,
+          'dir_ref' : null
+        }
+      }
+    };
 
-    $rootScope.totalProductos = 0;
+    $rootScope.totalProductos  = 0;
+    $rootScope.abierto         = true;
+    $rootScope.estadoUltPedido = null;
+
+    pedido.setTotalProductos = function (){
+      $rootScope.totalProductos = 'pendiente';
+    };
+
     /**
      *
      * @param producto
      * @param cantidad
      */
     pedido.addProducto = function(producto, cantidad){
+
       if(!pedido.numero){
         pedido.numero = (Math.ceil(Math.random() * 999999999));
         pedido.fecha = new Date();
-        console.log('nuevo pedido');
+        //console.log('nuevo pedido');
       }  // checkeo si existe el mismo producto en el pedido, si no existe lo pusheo
+
       if(!pedido.checkExisteProducto(producto, cantidad)){
         var subTotalprod = parseInt(cantidad) * parseFloat(producto.precio);
-        subTotalprod =  parseFloat(subTotalprod).toFixed(2);
+        subTotalprod     =  parseFloat(subTotalprod).toFixed(2);
+
         var productoPedido = {
           producto: producto,
           cantidad: cantidad,
           subTotal: subTotalprod
         };
+
         pedido.detalle.push(productoPedido);
+        console.log(pedido.detalle);
         $rootScope.totalProductos = parseInt($rootScope.totalProductos) + parseInt(cantidad);
       }
     };
@@ -51,8 +79,9 @@ angular.module('starter')
      * @param cantidad
      */
     pedido.checkExisteProducto = function(producto, cantidad){
+
       var productoEnPedido = false;
-      angular.forEach(pedido.detalle, function(value, key) {
+      angular.forEach(pedido.detalle, function(value) {
         if(value.producto) {
           if (producto.id == value.producto.id) {
             productoEnPedido = true;
@@ -62,7 +91,7 @@ angular.module('starter')
               value.subTotal = parseFloat(value.subTotal).toFixed(2);
 
               pedido.total    = parseFloat(pedido.total) + parseFloat(cantidad * producto.precio);
-              pedido.total    =parseFloat(pedido.total).toFixed(2)
+              pedido.total    = parseFloat(pedido.total).toFixed(2)
               pedido.subTotal = pedido.total ;
 
               if(cantidad < 0)
@@ -75,6 +104,26 @@ angular.module('starter')
       });
       return productoEnPedido;
     };
+
+    /**
+    * Save a order
+    */
+    pedido.registrarNuevoPedido = function(pedido){
+
+      var url = $rootScope.urls.pedidoNuevo;
+      return $http.post(url, pedido)
+        .then(function (data) {
+          if(data.status != 200) return $q.reject();
+          $rootScope.idUltPedido = data.data._id;
+          return $q.resolve(data.status);
+        })
+        .catch(function() {
+            $ionicLoading.hide();
+            $state.go('app.error');
+        });
+    };
+
+
 
     /**
      *
@@ -143,15 +192,59 @@ angular.module('starter')
      * Limpia el pedido
      */
     pedido.limpiarPedido = function(){
-      pedido.detalle = [];
+      pedido.detalle = [{}];
       pedido.numero  = null;
       pedido.fecha   = null;
       pedido.totalProductos     = 0;
       pedido.total              = 0;
       pedido.subTotal           = 0;
       $rootScope.totalProductos = 0;
+      $rootScope.pedidoPendiente = false;
     };
 
-    return pedido;
+      /**
+       * Limpia todo
+       */
+      pedido.limpiarTodo = function(){
+        pedido.detalle = [{}];
+        pedido.numero  = null;
+        pedido.fecha   = null;
+        pedido.totalProductos      = 0;
+        pedido.total               = 0;
+        pedido.subTotal            = 0;
+        $rootScope.totalProductos  = 0;
+        $rootScope.pedidoPendiente = false;
+        $rootScope.estadoUltPedido = null;
+        $rootScope.totalUltPedido  = null;
+        $rootScope.fechaUltPedido  = null;
+        $rootScope.idUltPedido     = null;
+        $rootScope.tieneProductos  = false;
+      };
 
+
+      /**
+       * Cambiar estado de un pedido
+       * @param idPedido
+       * @param estado
+       */
+      pedido.cambiarEstado = function(idPedido, estado){
+        var config = {
+          headers : {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+          }
+        };
+        var params = {
+          idPedido: idPedido,
+            estado: estado
+        };
+        var urlCambiarEstado = $rootScope.urls.pedidoEstado;
+
+        return $http.post(urlCambiarEstado, params, config)
+          .then(function (data){
+            if(data.data.estado != 200) return $q.reject();
+            return $q.resolve(data.data.estado);
+          });
+      };
+
+      return pedido;
 });

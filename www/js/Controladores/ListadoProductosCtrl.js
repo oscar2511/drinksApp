@@ -5,7 +5,8 @@ angular.module('starter')
                                               $http,
                                               $ionicLoading,
                                               $rootScope,
-                                              $base64)
+                                              $base64,
+                                              ConstantsService)
   {
     $ionicLoading.show({
       template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
@@ -14,7 +15,6 @@ angular.module('starter')
 
 
     var categoria = angular.fromJson($stateParams.categoria);
-    console.log(categoria);
 
     $scope.catUrlImg = categoria.urlImg;
 
@@ -22,7 +22,7 @@ angular.module('starter')
      * Obtener los producto de una categoria
      *
      */
-    var url = $rootScope.urls.listadoProductos+categoria.id;
+    var url = ConstantsService.LIST_PRODUCTS + categoria.id;
     $http.get(url)
       .then(function (data){
         $scope.productos =[];

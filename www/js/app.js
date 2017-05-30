@@ -1,28 +1,23 @@
 angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.controllers','ionic.service.push', 'chart.js', 'ionicImgCache', 'base64'])
 
-.run(function($ionicPlatform, $http, $rootScope, $q, dispositivoService) {
+.run(function($ionicPlatform, $http, $rootScope, $q, dispositivoService, ConstantsService, PedidoService) {
+
 
     $rootScope.server = 'http://localhost';
     $rootScope.port = 3000;
     $rootScope.urls = {};
-    $rootScope.urls.devicesAdmin         = $rootScope.server + ':'+ $rootScope.port +'/api/devices/administrators';
-    $rootScope.urls.categories           = $rootScope.server + ':'+ $rootScope.port +'/api/categories';
-    $rootScope.urls.listadoProductos     = $rootScope.server + ':'+ $rootScope.port +'/api/products/category/';
     $rootScope.urls.estadoApertura       = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/horario';
-    $rootScope.urls.listarPedidos        = $rootScope.server + ':'+ $rootScope.port +'/api/order';
     $rootScope.urls.detallePedido        = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/pedido/';
     $rootScope.urls.pedidoEstado         = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/pedido/estado';
     $rootScope.urls.dispositivoId        = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/dispositivo/';
     $rootScope.urls.registrarDispositivo = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/dispositivo/uuid';
-    $rootScope.urls.pedidoNuevo          = $rootScope.server + ':'+ $rootScope.port +'/api/order';
     $rootScope.urls.stock                = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/productos';
     $rootScope.urls.cambiarStock         = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/producto/cambiar-stock';
     $rootScope.urls.abrirCerrar          = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/horario/abrir-cerrar';
 
-    $rootScope.urls.productos = ' https://s3-us-west-2.amazonaws.com/cavaonline/products/';
-
     $rootScope.abierto = true;
 
+    $rootScope.totalProductos = PedidoService.getTotalProductos();
 
     /**
      *  Obtengo los token de los dispositivos administradores

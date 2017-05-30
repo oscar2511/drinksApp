@@ -8,7 +8,8 @@ angular.module('starter')
     $state,
     $timeout,
     $ionicActionSheet,
-    $rootScope
+    $rootScope,
+    ConstantsService
   ){
 
 
@@ -21,8 +22,6 @@ angular.module('starter')
     );
 
     var estado = null;
-    //var url = 'http://23.94.249.163/appDrinks-dev/admin/listarPedidos.php';
-    //var url = '$rootScope.urls.listarPedidos';
 
     $scope.atrasAdmin = function (){
       $state.go('app.categorias');
@@ -71,8 +70,8 @@ angular.module('starter')
       $scope.tieneFiltro = estado ? true : false;
       $scope.estadoFiltro = estado;
 
-      if(!estado) url = $rootScope.urls.listarPedidos;
-      else  url = $rootScope.urls.listarPedidos+'/'+estado;
+      if(!estado) url = ConstantsService.LIST_ORDERS;
+      else  url = ConstantsService.LIST_ORDERS + '/' + estado;
 
       $ionicLoading.show({
         template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'

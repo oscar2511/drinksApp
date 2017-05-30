@@ -16,8 +16,10 @@ angular.module('starter')
            dispositivoService
   )
   {
+
+
     $scope.pedido                = PedidoService;
-    $scope.pedidoActual          = $scope.pedido.getPedido();
+    $scope.pedidoActual          = PedidoService.getPedido();
     $scope.mostrarMapa           = false;
     $scope.mostrarTotales        = true;
     $scope.mostrarFormUbicacion  = false;
@@ -136,16 +138,11 @@ angular.module('starter')
 
           $http.get(url)
             .then(function(data){
-              $scope.direccion={
-                calle:"",
-                numero: null
-              };
 
-              $scope.direccion.calle  = data.data.results[0].address_components[1].short_name;
-              $scope.direccion.numero = data.data.results[0].address_components[0].short_name;
+              PedidoService.pedido.ubicacion.direccion.calle  = data.data.results[0].address_components[1].short_name;
+              PedidoService.pedido.ubicacion.direccion.numero = data.data.results[0].address_components[0].short_name;
 
-              $scope.pedido.ubicacion.direccion = $scope.direccion;
-              $scope.pedido.ubicacion.coordenadas = {
+              PedidoService.pedido.ubicacion.coordenadas = {
                 'lat' : latitud,
                 'long': longitud
               }
@@ -182,7 +179,7 @@ angular.module('starter')
 
         confirmPopup.then(function(res) {
           if(res) {
-            $scope.pedido.limpiarPedido();
+            PedidoService.limpiarPedido();
             $scope.tieneProductos = false;
           }
         });
@@ -196,7 +193,7 @@ angular.module('starter')
     $scope.addCantidad = function(productoPedido){
       var producto = productoPedido.producto;
       var cantidad = 1;
-      $scope.pedido.addProductoCantidad(producto, cantidad);
+      PedidoService.addProductoCantidad(producto, cantidad);
       var alertPopup = $ionicPopup.alert({
         title: 'Agregaste 1 unidad al producto',
         buttons: null
@@ -213,12 +210,11 @@ angular.module('starter')
      * @param productoPedido
      */
     $scope.restarCantidad = function(productoPedido){
-      //console.log(productoPedido);
      var producto = productoPedido.producto;
       if(productoPedido.cantidad == 1)
         return $scope.eliminarProducto(productoPedido);
      var cantidad = -1;
-     $scope.pedido.decrementarProductoCantidad(producto, cantidad);
+      PedidoService.decrementarProductoCantidad(producto, cantidad);
       var alertPopup = $ionicPopup.alert({
         title: 'Quitaste 1 unidad al producto',
         buttons: null
@@ -246,7 +242,7 @@ angular.module('starter')
       confirmPopup.then(function(res) {
         if(res) {
           var producto = productoPedido.producto;
-          $scope.pedido.eliminarProductoPedido(producto);
+          PedidoService.eliminarProductoPedido(producto);
           $scope.tieneProductos = false;
         }
       });
@@ -281,13 +277,13 @@ angular.module('starter')
         20000
       );
 
-      $scope.pedido.ubicacion.referencia.tel     = tel;
-      $scope.pedido.ubicacion.referencia.dir_ref = dir_ref;
-      var pedido = angular.fromJson($scope.pedido);
+      PedidoService.pedido.ubicacion.referencia.tel     = tel;
+      PedidoService.pedido.ubicacion.referencia.dir_ref = dir_ref;
+      var pedido = angular.fromJson(PedidoService.pedido);
 
       // registra el pedido y envia push al admin
       //NotificacionService.registrarNuevoPedido(pedido)
-      $scope.pedido.registrarNuevoPedido(pedido)
+      PedidoService.registrarNuevoPedido(pedido)
         .then(function(estado) {
           if(estado == 200) {
             /*NotificacionService.enviarPushNuevoPedido($scope.pedido)
@@ -306,8 +302,8 @@ angular.module('starter')
             alertPopup.then(function (res) {
               $rootScope.totalProductos = "pendiente";
               $rootScope.pedidoPendiente = true;
-              $rootScope.totalUltPedido = $scope.pedido.total;
-              $rootScope.fechaUltPedido = $scope.pedido.fecha;
+              $rootScope.totalUltPedido = PedidoService.pedido.total;
+              $rootScope.fechaUltPedido = PedidoService.pedido.fecha;
               $scope.mostrarMapa = false;
               $state.go('app.categorias');
             });

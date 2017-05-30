@@ -5,7 +5,8 @@ angular.module('starter')
            $q,
            $http,
            $rootScope,
-           $ionicLoading) {
+           $ionicLoading,
+           ConstantsService) {
 
 
     /**
@@ -31,7 +32,7 @@ angular.module('starter')
       * @returns {*}
      */
     this.getAdministradores = function(){
-      var urlDispAdm = $rootScope.urls.devicesAdmin;
+      var urlDispAdm = ConstantsService.DEVICES_ADMIN;
       var dispAdm = [];
       return $http.get(urlDispAdm)
         .then(function(data){

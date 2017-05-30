@@ -13,7 +13,8 @@ angular.module('starter')
            $q,
            $state,
            NotificacionService,
-           $timeout
+           $timeout,
+           ConstantsService
   ){
 
     $ionicLoading.show({
@@ -154,8 +155,7 @@ angular.module('starter')
      * @returns {*}
      */
     $scope.obtenerCategorias = function() {
-      var url = $rootScope.urls.categories;
-      return $http.get(url, { timeout: 100000 })
+      return $http.get(ConstantsService.CATEGORIES, { timeout: 100000 })
         .then(function (data) {
           var dataCruda = [];
           angular.forEach(data.data, function (value) {
