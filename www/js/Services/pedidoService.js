@@ -174,7 +174,7 @@ angular.module('starter')
       $.pedido.detalle = [];
       $.pedido.numero  = null;
       $.pedido.fecha   = null;
-      $.pedido.totalProductos     = 0;
+      $rootScope.totalProductos   = 0;
       $.pedido.total              = 0;
       $.pedido.subTotal           = 0;
       $.pedido.totalProductos = 0;
