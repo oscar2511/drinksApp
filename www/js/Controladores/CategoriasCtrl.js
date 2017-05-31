@@ -90,11 +90,7 @@ angular.module('starter')
      *
      * @param dataDispositivo
      */
-    var intentos            = 0,
-        esperaEntreIntentos = 1000,
-        maxIntentos         = 3;
-
-    var registrarDisp = function(dataDispositivo){
+    /*var registrarDisp = function(dataDispositivo){
       if(typeof(dataDispositivo.uuid) != 'undefined' && dataDispositivo.token) {
         var config = {
           headers : {
@@ -115,24 +111,12 @@ angular.module('starter')
           .catch(function(){
             alert("Error obteniendo el ultimo pedido del dispositivo y/o registrandolo");
           });
-          /*.catch(function () {
-            console.log('Error registrando el dispositivo, intento: ' + intentos);
-            if (intentos < maxIntentos) {
-              intentos++;
-              $timeout(function () {
-                registrarDisp(dataDispositivo);
-              }, esperaEntreIntentos);
-            }else{
-              $state.go('app.error');
-              $ionicLoading.hide();
-            }
-          });*/
       }else {
         console.log('No se encontró uuid o token, por favor cierra la aplicación y vuelve a iniciarla');
         $ionicLoading.hide();
         $state.go('app.error');
       }
-    };
+    };*/
 
 
 
@@ -140,14 +124,14 @@ angular.module('starter')
      * Setea los datos del ultimo pedido
      * @param data
      */
-    $scope.setDataUltPedido = function(data){
+   /* $scope.setDataUltPedido = function(data){
        $rootScope.totalProductos = 'pendiente';
        $rootScope.pedidoPendiente = true;
        $scope.pedido.setTotalProductos();
        $rootScope.idUltPedido     = data.data[0].id;
        $rootScope.totalUltPedido  = data.data[0].total;
        $rootScope.fechaUltPedido  = new Date(data.data[0].fecha);
-    };
+    };*/
 
 
     /**

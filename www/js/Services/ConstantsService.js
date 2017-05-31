@@ -17,12 +17,12 @@
       $.SERVER   = 'http://localhost';
       $.URL_API   = {};
 
-
   $.DEVICES_ADMIN         = $.SERVER + ':'+ $.API_PORT + '/api/devices/administrators';
   $.CATEGORIES            = $.SERVER + ':'+ $.API_PORT +'/api/categories';
   $.LIST_PRODUCTS         = $.SERVER + ':'+ $.API_PORT +'/api/products/category/';
   $.LIST_ORDERS           = $.SERVER + ':'+ $.API_PORT +'/api/order';
   $.PUT_ORDERS            = $.SERVER + ':'+ $.API_PORT +'/api/order';
+  $.ORDER_DETAIL          = $.SERVER + ':'+ $.API_PORT +'/api/order/';
   /*urlApi.estadoApertura       = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/horario';
   urlApi.listarPedidos        = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/pedidos';
   urlApi.detallePedido        = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/pedido/';

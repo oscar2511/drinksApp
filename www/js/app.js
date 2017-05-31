@@ -1,6 +1,6 @@
 angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.controllers','ionic.service.push', 'chart.js', 'ionicImgCache', 'base64'])
 
-.run(function($ionicPlatform, $http, $rootScope, $q, dispositivoService, ConstantsService, PedidoService) {
+.run(function($ionicPlatform, $http, $rootScope, $q, dispositivoService, ConstantsService, PedidoService, NotificacionService,  $ionicPush, $ionicUser) {
 
 
     $rootScope.server = 'http://localhost';

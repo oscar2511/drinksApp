@@ -98,13 +98,13 @@ angular.module('starter')
         $scope.cancelados = 0;
         $scope.recibidos  = 0;
       }
-        $scope.pedidos =[];
+      $scope.pedidos =[];
       angular.forEach(data, function(valor, key) {
         if(!estado) {
-          if (valor.estado.id == 1) $scope.nuevos++;
-          if (valor.estado.id == 2) $scope.enCamino++;
-          if (valor.estado.id == 3) $scope.recibidos++;
-          if (valor.estado.id == 4) $scope.cancelados++;
+          if (valor.state == 1) $scope.nuevos++;
+          if (valor.state == 2) $scope.enCamino++;
+          if (valor.state == 3) $scope.recibidos++;
+          if (valor.state == 4) $scope.cancelados++;
         }
         /*$scope.pedidos.push({
           id:             valor._id,
@@ -127,7 +127,7 @@ angular.module('starter')
           total:          valor.total,
           device:         valor.device,
           address:        valor.address,
-          estado :        valor.state,
+          state :         valor.state,
         });
       });
     };

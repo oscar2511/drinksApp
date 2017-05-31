@@ -171,7 +171,7 @@ angular.module('starter')
      * Limpia el pedido
      */
     $.limpiarPedido = function(){
-      $.pedido.detalle = [{}];
+      $.pedido.detalle = [];
       $.pedido.numero  = null;
       $.pedido.fecha   = null;
       $.pedido.totalProductos     = 0;
@@ -185,13 +185,13 @@ angular.module('starter')
      * Limpia todo
      */
     $.limpiarTodo = function(){
-      $.pedido.detalle = [{}];
+      $.pedido.detalle = [];
       $.pedido.numero  = null;
       $.pedido.fecha   = null;
-      $.pedido.totalProductos      = 0;
-      $.pedido.total               = 0;
-      $.pedido.subTotal            = 0;
-      $.totalProductos  = 0;
+      $.pedido.totalProductos    = 0;
+      $.pedido.total             = 0;
+      $.pedido.subTotal          = 0;
+      $rootScope.totalProductos  = 0;
       $rootScope.pedidoPendiente = false;
       $rootScope.estadoUltPedido = null;
       $rootScope.totalUltPedido  = null;

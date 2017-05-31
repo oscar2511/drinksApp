@@ -12,7 +12,8 @@ angular.module('starter')
     $timeout,
     mapaService,
     PedidoService,
-    $rootScope
+    $rootScope,
+    ConstantsService
   ){
 
     $ionicLoading.show({
@@ -22,37 +23,22 @@ angular.module('starter')
     $scope.pedidoService = PedidoService;
 
     $scope.pedido       = angular.fromJson($stateParams.pedido);
+
     $scope.pedido.fecha = new Date($scope.pedido.fecha);
     var idPedido        = $scope.pedido.id;
     $scope.mostrarMapa = false;
     $scope.claseBtn    = 'button button-balanced button-outline iconleft ion-chevron-down';
 
-
-    console.log($scope.pedido);
     /**
      * Obtener el detalle de un pedido
      *
      */
     $scope.getDetallePedido = function(){
-      var url = $rootScope.urls.detallePedido+idPedido;
+      var url = ConstantsService.ORDER_DETAIL + idPedido;
       $http.get(url)
         .then(function (data){
-          $scope.pedidoDetalle =[];
-          angular.forEach(data.data, function(valor, key) {
-            $scope.pedidoDetalle.push({
-              id:             $scope.pedido.id,
-              producto:       valor.producto.id,
-              pedido:         valor.id_pedido,
-              cantidad:       valor.cantidad,
-              subtotal:       valor.sub_total,
-              nombreProducto: valor.producto.nombre,
-              token:          valor.pedido.dispositivo.token,
-              telefono:       valor.pedido.telefono,
-              dirRef:         valor.pedido.dir_referencia
-            });
-          });
+          $scope.pedidoDetalle = data.data.detail;
           $ionicLoading.hide();
-          console.log( $scope.pedidoDetalle);
         })
         .catch(function(){
           $ionicLoading.hide();

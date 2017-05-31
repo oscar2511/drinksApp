@@ -23,10 +23,11 @@ angular.module('starter')
      * @param cantidad
      */
     $scope.addAlCarro = function(producto, cantidad){
-      if($rootScope.totalProductos == 'pendiente') {
+     /* if($rootScope.totalProductos == 'pendiente') {
         $scope.tienePedidoPendiente();
         return 0;
       }
+      */
 
       PedidoService.addProducto(producto, cantidad);
 

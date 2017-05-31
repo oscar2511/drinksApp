@@ -53,7 +53,7 @@
         <br>
         <div class="row">
           <div class="col">
-            <strong>Nro. Pedido:</strong> {{pedido.id}}
+            <strong>Nro. Pedido:</strong> {{pedido.numero}}
           </div>
           <div class="col">
             <strong>Fecha:</strong> {{pedido.fecha | date:'dd-MM-yyyy' }}  {{pedido.fecha | date:'HH:mm' }}
@@ -64,7 +64,7 @@
             <strong>Dirección:</strong>
           </div>
           <div class="col">
-            {{pedido.calle}} , {{pedido.nro}}
+            {{ pedido.address.direccion.calle }} , {{ pedido.address.direccion.numero }}
           </div>
         </div>
         <div class="row">
@@ -80,7 +80,7 @@
             <strong>Tel: </strong>
           </div>
           <div class="col">
-            {{pedido.telefono}}
+            {{ pedido.address.referencia.tel }}
           </div>
         </div>
         <div class="row">
@@ -88,7 +88,7 @@
             <strong>Referencia: </strong>
           </div>
           <div class="col">
-            {{pedido.dirReferencia}}
+            {{ pedido.address.referencia.dir_ref }}
           </div>
         </div>
       </div>
@@ -115,14 +115,14 @@
     </div>
 
     <ion-list>
-      <ion-item ng-repeat="pedidoDetalle in pedidoDetalle">
-        <h2> {{pedidoDetalle.nombreProducto}}</h2>
+      <ion-item ng-repeat="detalle in pedidoDetalle">
+        <h2> {{ detalle.producto.nombre }}</h2>
         <div class="row">
           <div class="col" align="left">
-            <strong>Cant.  {{pedidoDetalle.cantidad}}</strong>
+            <strong>Cant.  {{ detalle.cantidad }}</strong>
           </div>
           <div class="col" align="left">
-            Subt. $ {{pedidoDetalle.subtotal}}
+            Subt. $ {{ detalle.subTotal }}
           </div>
         </div>
       </ion-item>

@@ -300,11 +300,14 @@ angular.module('starter')
               }]
             });
             alertPopup.then(function (res) {
-              $rootScope.totalProductos = "pendiente";
+              /*$rootScope.totalProductos = "pendiente";
               $rootScope.pedidoPendiente = true;
               $rootScope.totalUltPedido = PedidoService.pedido.total;
               $rootScope.fechaUltPedido = PedidoService.pedido.fecha;
+              $scope.mostrarMapa = false;*/
               $scope.mostrarMapa = false;
+              PedidoService.limpiarTodo();
+
               $state.go('app.categorias');
             });
             $ionicLoading.hide();
