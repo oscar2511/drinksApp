@@ -25,14 +25,15 @@ angular.module('starter')
     var url = ConstantsService.LIST_PRODUCTS + categoria.id;
     $http.get(url)
       .then(function (data){
-        $scope.productos =[];
+        $scope.productos = [];
         angular.forEach(data.data, function(valor, key) {
           $scope.idCategoria = valor.idCategoria;
 
+          console.log(valor);
           $scope.productos.push({
             id:           valor._id,
             precio:       valor.price,
-            descripcion:  valor.descripcion,
+            descripcion:  valor.description,
             nombre:       valor.name,
             stock:        valor.stock ? 'Disponible' : 'Sin stock',
             idCategoria:  valor.categoriaId,

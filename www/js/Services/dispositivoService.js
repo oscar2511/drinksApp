@@ -39,7 +39,6 @@ angular.module('starter')
           angular.forEach(data.data, function (value) {
              dispAdm.push(value);
           });
-          console.log(dispAdm);
           return $q.resolve(dispAdm);
         })
         .catch(function(e) {
