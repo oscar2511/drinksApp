@@ -6,7 +6,8 @@ angular.module('starter')
     $ionicLoading,
     $timeout,
     $ionicPopup,
-    $rootScope
+    $rootScope,
+    ConstantsService
   ) {
 
     $ionicLoading.show({
@@ -25,29 +26,13 @@ angular.module('starter')
       20000
     );
 
-    var url = $rootScope.urls.stock;
-
     /**
      * Obtener los productos
      */
     $scope.getProductos = function(){
-      $http.get(url)
+      $http.get(ConstantsService.STOCK)
         .then(function(data){
-          angular.forEach(data.data, function (value) {
-            $scope.dataCruda = value;
-          });
-          $scope.productos = [];
-          angular.forEach($scope.dataCruda, function (valor) {
-            $scope.productos.push({
-              id:          valor.id,
-              idCategoria: valor.id_categoria,
-              nombre:      valor.nombre,
-              precio:      valor.precio,
-              stock:       valor.stock,
-              urlImg:      valor.url_img,
-              estado:      valor.estado
-            });
-          });
+          $scope.productos = data.data;
           $timeout.cancel(timer);
           $ionicLoading.hide();
         })
@@ -58,27 +43,24 @@ angular.module('starter')
      * @param idProducto
      * @param stockCambio
      */
-    $scope.cambiarStock = function(idProducto, stockCambio){
+    $scope.cambiarStock = function(idProducto, stockCambio) {
       $ionicLoading.show({
         template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
       });
 
-      var config = {
-        headers : {
-          'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
-        }
-      };
-      var urlCambio = $rootScope.urls.cambiarStock;
       var nuevoStock;
-      if(stockCambio == 'Stock') nuevoStock = 'Sin stock';
-      if(stockCambio == 'Sin stock') nuevoStock = 'Stock';
+
+      if(stockCambio)  nuevoStock = false;
+      if(!stockCambio) nuevoStock = true;
 
       var params = {
-        idProducto : idProducto,
-        stockCambio: nuevoStock
+        id         : idProducto,
+        newStock   : nuevoStock
       };
-      $http.post(urlCambio, params, config)
-        .then(function(data){
+
+      console.log(ConstantsService.STOCK_CHANGE);
+      $http.put(ConstantsService.STOCK_CHANGE, params)
+        .then(function(data) {
           if(data.data.estado == 200) {
             $ionicLoading.hide();
             var alertPopup = $ionicPopup.alert({
@@ -102,9 +84,10 @@ angular.module('starter')
 
         $scope.getProductos();
       })
-      .catch(function(){
+     /* .catch(function(){
         alert('error');//$state.go('app.error');
       });
+      */
 
     };
 
