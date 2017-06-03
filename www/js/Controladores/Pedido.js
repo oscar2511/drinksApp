@@ -76,9 +76,9 @@ angular.module('starter')
     /**
      * Muestra el mapa
      */
-    var verUbicacion = function(){
+    var verUbicacion = function() {
 
-      var timer = $timeout(
+    var timer = $timeout(
         function() {
           $scope.errorUbicacion = true;
         },
@@ -110,8 +110,9 @@ angular.module('starter')
 
       $scope.mostrarTotales = false;
       var options = {timeout: 10000, enableHighAccuracy: true};
-      $cordovaGeolocation.getCurrentPosition(options)
-        .then(function(position){
+      //$cordovaGeolocation.getCurrentPosition(options)
+        navigator.geolocation.getCurrentPosition(function(positio) {
+        //.then(function(position){
           var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
           var latitud = position.coords.latitude;
@@ -158,10 +159,9 @@ angular.module('starter')
       $scope.mostrarFormUbicacion= true;
     };
 
-    $scope.verUbicacion = function(){
-
+$scope.verUbicacion = function() {
     verUbicacion();
-    };
+};
 
     //*******************************************************************************************************************
 
