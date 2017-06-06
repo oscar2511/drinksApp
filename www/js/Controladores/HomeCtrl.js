@@ -4,7 +4,7 @@ angular.module('starter')
 
 
 /////////////////////////////////// mapa   test
-alert(123);
+
 google.maps.event.addDomListener(window, 'load', function() {
         var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
         var mapOptions = {

@@ -14,7 +14,7 @@
   var $ = this;
 
   $.API_PORT = 3000;
-  //chrome$.SERVER   = 'http://localhost';
+  //$.SERVER   = 'http://localhost';
   $.SERVER   = "http://ec2-34-209-45-170.us-west-2.compute.amazonaws.com";
   $.URL_API   = {};
 

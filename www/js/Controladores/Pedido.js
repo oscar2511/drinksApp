@@ -110,12 +110,11 @@ angular.module('starter')
 
       $scope.mostrarTotales = false;
       var options = {timeout: 10000, enableHighAccuracy: true};
-      //$cordovaGeolocation.getCurrentPosition(options)
-        navigator.geolocation.getCurrentPosition(function(positio) {
-        //.then(function(position){
+      $cordovaGeolocation.getCurrentPosition(options)
+        .then(function(position){
           var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
-          var latitud = position.coords.latitude;
+          var latitud  = position.coords.latitude;
           var longitud = position.coords.longitude;
 
           var mapOptions = {
@@ -161,6 +160,7 @@ angular.module('starter')
 
 $scope.verUbicacion = function() {
     verUbicacion();
+    console.log($scope.pedido);
 };
 
     //*******************************************************************************************************************

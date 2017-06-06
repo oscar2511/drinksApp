@@ -29,7 +29,6 @@ angular.module('starter')
         angular.forEach(data.data, function(valor, key) {
           $scope.idCategoria = valor.idCategoria;
 
-          console.log(valor);
           $scope.productos.push({
             id:           valor._id,
             precio:       valor.price,

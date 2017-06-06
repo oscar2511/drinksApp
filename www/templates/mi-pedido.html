@@ -13,7 +13,7 @@
       <div class="list list-inset">
         <div class="item" align="center">
            <h2> <i class="ion-ios-location"></i> Ubicación detectada</h2>
-          <h2 style="color: #28a54c; text-decoration: underline;">{{direccion.calle}}, {{direccion.numero}}</h2>
+          <h2 style="color: #28a54c; text-decoration: underline;">{{ pedido.pedido.ubicacion.direccion.calle }}, {{pedido.pedido.ubicacion.direccion.numero}}</h2>
           <div ng-show="errorUbicacion">
             <p  style="color: #d3ced2;">Ubicación no encontrada</p>
           </div>
