@@ -10,6 +10,7 @@ angular.module('starter')
   )
   {
     $scope.producto = angular.fromJson($stateParams.producto);
+    console.log($scope.producto);
     $scope.cantidad = 1;
 
     $scope.pedido   = PedidoService;

@@ -13,7 +13,7 @@
           <!--<img align="center" ion-img-cache ng-src="{{urls.productos}}{{producto.urlImg}}">-->
         </div>
 
-        <p><h2 style="color:grey;">{{producto.descripcion}}</h3></p>
+        <p><h2 style="color:grey;">{{producto.descripcion}}</h2></p>
         <div align="left"><h1>$ {{producto.precio}}</h1></div>
 
         <div class="row" align="center">
@@ -30,11 +30,11 @@
             <h3><font color="red"> La cantidad no puede exceder 100</font></h3>
           </span>
           <div ng-show="producto.stock">
-            <button ng-if="abierto" ng-click="addAlCarro(producto, cantidad)" class="button  button-block icon-center ion-plus-circled button-positive">
+            <button ng-if="abierto" ng-disabled="producto.stock != 'Disponible'" ng-click="addAlCarro(producto, cantidad)" class="button  button-block icon-center ion-plus-circled button-positive">
               Agregar
             </button>
           </div>
-          <div ng-show="producto.stock=='Sin stock'">
+          <div ng-show="producto.stock == 'Sin stock'">
             <span>
               <h2><font color="#951d1d"><i class="ion-alert-circled"></i> Producto sin Stock</font></h2>
             </span>

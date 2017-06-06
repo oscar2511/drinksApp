@@ -58,36 +58,30 @@ angular.module('starter')
         newStock   : nuevoStock
       };
 
-      console.log(ConstantsService.STOCK_CHANGE);
       $http.put(ConstantsService.STOCK_CHANGE, params)
         .then(function(data) {
-          if(data.data.estado == 200) {
             $ionicLoading.hide();
             var alertPopup = $ionicPopup.alert({
               title: 'Se cambió el estado de stock!',
               buttons: null
             });
-
             $timeout(function () {
               alertPopup.close();
             }, 1500);
-          }else{
             $ionicLoading.hide();
-            var alertPopupError = $ionicPopup.alert({
-              title: 'Error cambiando estado de stock',
-              buttons: null
-            });
-            $timeout(function () {
-              alertPopupError.close();
-            }, 1500);
-          }
 
         $scope.getProductos();
       })
-     /* .catch(function(){
-        alert('error');//$state.go('app.error');
+      .catch(function(){
+        var alertPopupError = $ionicPopup.alert({
+          title: 'Error cambiando estado de stock',
+          buttons: null
+        });
+        $timeout(function () {
+          alertPopupError.close();
+        }, 1500);
       });
-      */
+
 
     };
 

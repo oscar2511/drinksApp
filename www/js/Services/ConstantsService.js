@@ -14,8 +14,8 @@
   var $ = this;
 
   $.API_PORT = 3000;
-  //$.SERVER   = 'http://localhost';
-  $.SERVER   = "http://ec2-34-209-45-170.us-west-2.compute.amazonaws.com";
+  $.SERVER   = 'http://localhost';
+  //$.SERVER   = "http://ec2-34-209-45-170.us-west-2.compute.amazonaws.com";
   $.URL_API   = {};
 
   $.DEVICES_ADMIN         = $.SERVER + ':'+ $.API_PORT + '/api/devices/administrators';
@@ -25,7 +25,7 @@
   $.PUT_ORDERS            = $.SERVER + ':'+ $.API_PORT +'/api/order';
   $.ORDER_DETAIL          = $.SERVER + ':'+ $.API_PORT +'/api/order/';
   $.STOCK                 = $.SERVER + ':'+ $.API_PORT +'/api/products';
-  $.STOCK_CHANGE          = $.SERVER + ':'+ $.API_PORT +'/api/products/change-stock';
+  $.STOCK_CHANGE          = $.SERVER + ':'+ $.API_PORT +'/api/product/change-stock';
      // urlApi.cambiarStock         = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/producto/cambiar-stock';
   /*urlApi.estadoApertura       = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/horario';
   urlApi.listarPedidos        = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/pedidos';

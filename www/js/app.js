@@ -40,6 +40,25 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
 
     getTokenAdmins();
 
+    /*$ionicPlatform.ready(function() {
+     try {
+     var push = new Ionic.Push({
+     'debug': true,
+     'onNotification': function (notificacion) {
+     NotificacionService.postNotificacion(notificacion);
+     }
+     });
+     } catch (e) {
+     alert(e);
+     }
+
+     push.register(function(token) {
+     setDataDispositivo(token.token);
+     console.log("Mi token:", token.token);
+     push.saveToken(token);
+     })
+     });*/
+
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
