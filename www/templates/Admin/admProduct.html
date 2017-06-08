@@ -1,0 +1,58 @@
+<ion-view cache-view="false" view-title="">
+
+  <ion-nav-bar class="bar-dark">
+    <ion-nav-buttons side="left">
+      <button ng-click="atrasEst()" class="button back-button buttons button-clear header-item">
+        <i class="icon ion-ios-arrow-back"></i> Atrás </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+      <button class="button icon-rigth button-icon ion-more" ng-click="popover.show($event)"></button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+
+  <ion-content>
+    <div class="img-stock-logo sombra-categ">
+    </div>
+    <div class="item item-divider">
+      <font color="#696969">
+        <i class="ion-clipboard"></i>
+        Administración de productos
+      </font>
+    </div>
+    <br>
+    <div class="card">
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Nombre</span>
+          <input type="text" placeholder="" ng-model="tel" ng-change="habilitarBtnPedido(tel,'tel')">
+        </label>
+        <div class="list">
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Descripción</span>
+            <input type="text" placeholder='' ng-model="dir_ref" ng-change="habilitarBtnPedido(dir_ref,'dir_ref')">
+          </label>
+        </div>
+        <div class="list">
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Precio</span>
+            <input type="text" placeholder='Ej. 299.89' ng-model="dir_ref" ng-change="habilitarBtnPedido(dir_ref,'dir_ref')">
+          </label>
+        </div>
+        <div class="list">
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Categoría</span>
+            <input type="text" placeholder='' ng-model="dir_ref" ng-change="habilitarBtnPedido(dir_ref,'dir_ref')">
+          </label>
+        </div>
+        <div class="list">
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Stock</span>
+            <input type="text" placeholder='Ej. 299.89' ng-model="dir_ref" ng-change="habilitarBtnPedido(dir_ref,'dir_ref')">
+          </label>
+        </div>
+        <label class="item item-input item-stacked-label">
+          <input type="file" placeholder="Bild"/>
+        </label>
+    </div>
+
+  </ion-content>
+</ion-view>

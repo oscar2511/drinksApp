@@ -101,6 +101,16 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
     }
   })
 
+  .state('app.admProduct', {
+    url: '/admin/adm-product',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/Admin/admProduct.html',
+        controller: 'admProductCtrl'
+      }
+    }
+  })
+
     .state('app.promociones', {
       url: '/promociones',
       views: {
