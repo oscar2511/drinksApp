@@ -4,6 +4,8 @@
 node_modules/
 platforms/
 plugins/
-.idea
+.idea/*
 /.idea
 www/js/Services/ConstantsService.js
+/www/js/Services/ConstantsService.js
+
