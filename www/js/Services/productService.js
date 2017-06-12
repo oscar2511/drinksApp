@@ -5,7 +5,7 @@ angular.module('starter')
     var $ = this;
 
     AWS.config.region = 'us-west-2';
-    AWS.config.update({ accessKeyId: 'AKIAIO7FKAKEHHD4I26A', secretAccessKey: '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' });
+    AWS.config.update({ accessKeyId: 'my_access_Id', secretAccessKey: 'secret_id' });
 
     var bucket = new AWS.S3({ params: { Bucket: 'cavaonline', maxRetries: 10 }, httpOptions: { timeout: 360000 } });
 
