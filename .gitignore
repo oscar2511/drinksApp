@@ -6,3 +6,4 @@ platforms/
 plugins/
 .idea
 /.idea
+www/js/Services/ConstantsService.js
