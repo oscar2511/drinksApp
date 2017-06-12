@@ -1,4 +1,4 @@
-angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.controllers','ionic.service.push', 'chart.js', 'ionicImgCache', 'base64'])
+angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.controllers','ionic.service.push', 'chart.js', 'ionicImgCache', 'base64', 'ngFileUpload'])
 
 .run(function($ionicPlatform, $http, $rootScope, $q, dispositivoService, ConstantsService, PedidoService, NotificacionService,  $ionicPush, $ionicUser) {
 

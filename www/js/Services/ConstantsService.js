@@ -26,6 +26,7 @@
   $.ORDER_DETAIL          = $.SERVER + ':'+ $.API_PORT +'/api/order/';
   $.STOCK                 = $.SERVER + ':'+ $.API_PORT +'/api/products';
   $.STOCK_CHANGE          = $.SERVER + ':'+ $.API_PORT +'/api/product/change-stock';
+  $.PUT_PRODUCT           = $.SERVER + ':'+ $.API_PORT +'/api/products';
      // urlApi.cambiarStock         = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/producto/cambiar-stock';
   /*urlApi.estadoApertura       = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/horario';
   urlApi.listarPedidos        = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/pedidos';

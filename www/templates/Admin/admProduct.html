@@ -16,42 +16,58 @@
     <div class="item item-divider">
       <font color="#696969">
         <i class="ion-clipboard"></i>
-        Administración de productos
+        Nuevo producto
       </font>
     </div>
     <br>
     <div class="card">
-        <label class="item item-input item-stacked-label">
-          <span class="input-label">Nombre</span>
-          <input type="text" placeholder="" ng-model="tel" ng-change="habilitarBtnPedido(tel,'tel')">
+      <form name="productForm">
+        <label class="list">
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Nombre</span>
+            <input type="text" placeholder="Ingrese nombre" ng-model="product.name" ng-change="habilitarBtnPedido(tel,'tel')" required>
+             <span ng-show="productForm.product.name.$error.required">Name is required.</span>
+          </label>
         </label>
         <div class="list">
           <label class="item item-input item-stacked-label">
             <span class="input-label">Descripción</span>
-            <input type="text" placeholder='' ng-model="dir_ref" ng-change="habilitarBtnPedido(dir_ref,'dir_ref')">
+            <input type="text" placeholder='Ingrese descripción' ng-model="product.description">
           </label>
         </div>
         <div class="list">
           <label class="item item-input item-stacked-label">
             <span class="input-label">Precio</span>
-            <input type="text" placeholder='Ej. 299.89' ng-model="dir_ref" ng-change="habilitarBtnPedido(dir_ref,'dir_ref')">
+            <input type="text" placeholder='Ej. 299.89' ng-model="product.price">
           </label>
         </div>
         <div class="list">
           <label class="item item-input item-stacked-label">
             <span class="input-label">Categoría</span>
-            <input type="text" placeholder='' ng-model="dir_ref" ng-change="habilitarBtnPedido(dir_ref,'dir_ref')">
+            <input type="text" placeholder='Seleccione categoría' ng-model="product.category">
           </label>
         </div>
         <div class="list">
-          <label class="item item-input item-stacked-label">
-            <span class="input-label">Stock</span>
-            <input type="text" placeholder='Ej. 299.89' ng-model="dir_ref" ng-change="habilitarBtnPedido(dir_ref,'dir_ref')">
-          </label>
+
+          <label class="item item-input item-select">
+              <div class="input-label">
+                Stock
+              </div>
+              <select ng-model="product.stock">
+                <option>No</option>
+                <option selected>Si</option>
+              </select>
+            </label>
+
         </div>
         <label class="item item-input item-stacked-label">
-          <input type="file" placeholder="Bild"/>
+          <input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>
         </label>
+        <div class="button" ngf-select ng-model="product.file" name="file">Select</div>
+        <button ng-disabled="!productForm.$valid" ng-click="save(product)" class="button  button-block icon-center ion-plus-circled button-positive">
+          Crear
+        </button>
+      <form>
     </div>
 
   </ion-content>
