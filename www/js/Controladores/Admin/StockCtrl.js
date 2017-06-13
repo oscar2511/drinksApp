@@ -39,7 +39,6 @@ angular.module('starter')
     };
 
     /**
-     *
      * @param idProducto
      * @param stockCambio
      */
@@ -81,8 +80,6 @@ angular.module('starter')
           alertPopupError.close();
         }, 1500);
       });
-
-
     };
 
     $scope.getProductos();

@@ -14,15 +14,83 @@
     <div class="img-stock-logo sombra-categ">
     </div>
 
-    <ul class="list" ng-show = shouldShowCategories>
-      <li class="item item-button-right" ng-repeat="category in categories">
-
+    <div class="list" ng-show ="shouldShowCategories" ng-repeat="category in categories">
+      <a ng-click="showProductFromCategory(category)" class="item item-icon-left item item-icon-right">
+        <i class="icon ion-record"></i>
           {{category.nombre}}
-          <button ng-click="showProductFromCategory(category)" class="button button-positive">
-            <i class="icon ion-edit"></i>
+        <i class="icon ion-ios-arrow-right"></i>
+      </a>
+    </div>
+
+    <section ng-show ="shouldShowProducts"><!-- show products -->
+      <div class="list" ng-repeat="producto in productos">
+        <a ng-click="showEditProduct(producto)" class="item item-thumbnail-left">
+          <img class="list-prod" src={{decodeUrl(producto.urlImg)}}>
+          <h2> {{producto.nombre}}</h2>
+          <p>$ {{producto.precio}}</p>
+        </a>
+      </div>
+    </section>
+
+    <section ng-show="shouldShowEditProduct"><!-- show edit product-->
+      <form name="productForm">
+        <div class="list">
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Nombre</span>
+            <input type="text" placeholder="Ingrese nombre" ng-model="productToEdit.nombre">
+            <span ng-show="productForm.product.name.$error.required">El nombre es requirido.</span>
+          </label>
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Precio</span>
+            <input type="text" placeholder="Fromato 152.99" ng-model="productToEdit.precio">
+          </label>
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Descripción</span>
+            <input type="text" placeholder="Ingrese descripción" ng-model="productToEdit.descripcion">
+          </label>
+          <label class="item item-input item-select">
+            <div class="input-label">
+              Categoría
+            </div>
+            <select ng-model="productToEdit.category">
+              <option ng-selected="productToEdit.idCategoria == category.id" ng-repeat="category in categories" value="{{ category.id }}">
+                {{category.nombre}}
+              </option>
+            </select>
+          </label>
+          <label class="item item-input item-select">
+            <div class="input-label">
+              Stock
+            </div>
+
+            <select ng-model = "productToEdit.stock">
+              <option value="1" ng-if="productToEdit.stock == 1" selected>Si</option>
+              <option value="1" ng-if="productToEdit.stock != 1">Si</option>
+              <option value="0" ng-if="productToEdit.stock == 0" selected>No</option>
+              <option value="0" ng-if="productToEdit.stock != 0" >No</option>
+            </select>
+          </label>
+        </div>&nbsp;&nbsp;
+        <button ngf-select ng-model="productToEdit.file" name="file" class="button button-outline button-positive">
+          Seleccione imagen
+        </button>
+        <div class="row">
+          <div class="col col-25">
+            <button ng-click="showListProducts()" class="button button-full button-default">
+              Atrás
+            </button>
+          </div>
+          <br>
+          <div class="col">
+          <button  class="button button-full button-positive" ng-disabled="" ng-click="save(productToEdit)">
+            Guardar
           </button>
-      </li>
-    </ul>
+
+          </div>
+      </form>
+    </section>
+
+
 
 
 
