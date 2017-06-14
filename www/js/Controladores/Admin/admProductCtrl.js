@@ -44,6 +44,7 @@ angular.module('starter')
               urlImg: valor.urlImg
             });
           });
+          console.log($scope.categories);
           $ionicLoading.hide();
           return $q.resolve();
         })
@@ -81,31 +82,56 @@ angular.module('starter')
 
     $scope.showEditProduct = function(product) {
       $scope.productToEdit = product;
+      if(angular.isUndefined(product)) {
+        $scope.newProduct = true;
+      } else $scope.newProduct = false;
+
       $scope.shouldShowEditProduct = true;
       $scope.shouldShowProducts = false;
-    }
+    };
 
     $scope.showListProducts = function() {
       $scope.shouldShowEditProduct = false;
       $scope.shouldShowProducts = true;
-    }
+    };
 
-    getCategories();
+    $scope.decodeUrl = function(urlEncoded) {
+      return $base64.decode(urlEncoded)
+    };
+
+    $scope.toAdmin = function (){
+      $state.go('app.admin');
+    };
+
+
+      getCategories();
 
     $scope.product = {};
 
     $scope.save = function(product) {
-      if(product.nombre != '' && product.precio != '')
-        ProductService.save(product)
-          .then(function(response) {
-            alert('carga exitosa');
+      $ionicLoading.show({
+        template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
+      });
+
+      if(product.nombre != '' && product.precio != '') {
+        console.log(product);
+       /* ProductService.save(product)
+          .then(function (response) {
+            console.log(response);
+            $ionicLoading.hide();
+            alert('Producto editado!');
+          })
+          .catch(function (err) {
+            $ionicLoading.hide();
+            alert('Error editando el producto');
           });
-      else
-          alert('Verifique si el nombre y/o la descripción están en blanco')
-      /*ProductService.Upload($scope.file)
-        .then(function(response) {
-          alert('carga exitosa');
-        });*/
+          */
+      }
+      else {
+        $ionicLoading.hide();
+        alert('Verifique si el nombre y/o la descripción están en blanco');
+      }
+
     }
 
 

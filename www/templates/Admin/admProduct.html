@@ -2,8 +2,8 @@
 
   <ion-nav-bar class="bar-dark">
     <ion-nav-buttons side="left">
-      <button ng-click="atrasEst()" class="button back-button buttons button-clear header-item">
-        <i class="icon ion-ios-arrow-back"></i> Atrás </button>
+      <button ng-click="toAdmin()" class="button back-button buttons button-clear header-item">
+        <i class="icon ion-ios-arrow-back"></i> Admin home </button>
     </ion-nav-buttons>
     <ion-nav-buttons side="right">
       <button class="button icon-rigth button-icon ion-more" ng-click="popover.show($event)"></button>
@@ -16,13 +16,27 @@
 
     <div class="list" ng-show ="shouldShowCategories" ng-repeat="category in categories">
       <a ng-click="showProductFromCategory(category)" class="item item-icon-left item item-icon-right">
-        <i class="icon ion-record"></i>
+        <i class="icon ion-ios-circle-outline"></i>
           {{category.nombre}}
         <i class="icon ion-ios-arrow-right"></i>
       </a>
     </div>
 
     <section ng-show ="shouldShowProducts"><!-- show products -->
+      <div class="row">
+        <div class="col col-25">
+          <button ng-click="showCategories()" class="button button-full button-default">
+            Atrás
+          </button>
+        </div>
+        <br>
+        <div class="col">
+          <button  class="button button-full button-positive" ng-click="showEditProduct()">
+            Nuevo producto
+          </button>
+
+        </div>
+      </div>
       <div class="list" ng-repeat="producto in productos">
         <a ng-click="showEditProduct(producto)" class="item item-thumbnail-left">
           <img class="list-prod" src={{decodeUrl(producto.urlImg)}}>
@@ -62,7 +76,6 @@
             <div class="input-label">
               Stock
             </div>
-
             <select ng-model = "productToEdit.stock">
               <option value="1" ng-if="productToEdit.stock == 1" selected>Si</option>
               <option value="1" ng-if="productToEdit.stock != 1">Si</option>
@@ -82,11 +95,14 @@
           </div>
           <br>
           <div class="col">
-          <button  class="button button-full button-positive" ng-disabled="" ng-click="save(productToEdit)">
-            Guardar
-          </button>
-
+            <button ng-if="!newProduct"  class="button button-full button-positive" ng-disabled="" ng-click="save(productToEdit)">
+              Editar
+            </button>
+            <button ng-if="newProduct"  class="button button-full button-positive" ng-disabled="" ng-click="save(productToEdit)">
+              Crear
+            </button>
           </div>
+        </div>
       </form>
     </section>
 

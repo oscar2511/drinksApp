@@ -1,17 +1,17 @@
 angular.module('starter')
   .service('ProductService',
-  function($q, $rootScope, $http, ConstantsService, Upload){
+  function($q, $http, ConstantsService, $base64){
 
     var $ = this;
 
     AWS.config.region = 'us-west-2';
-    AWS.config.update({ accessKeyId: 'my_access_Id', secretAccessKey: 'secret_id' });
+    AWS.config.update({ accessKeyId: 'access_key', secretAccessKey: 'secret_key' });
 
     var bucket = new AWS.S3({ params: { Bucket: 'cavaonline', maxRetries: 10 }, httpOptions: { timeout: 360000 } });
 
     this.Upload = function (file) {
         var deferred = $q.defer();
-        var params   = { Bucket: 'cavaonline', Key: 'products/' + file.name, ContentType: file.type, Body: file };
+        var params   = { Bucket: 'cavaonline', Key: 'products/'+ $base64.encode(file.name), ContentType: file.type, Body: file };
         var options  = {
             partSize: 10 * 1024 * 1024,
             queueSize: 1,
@@ -19,25 +19,52 @@ angular.module('starter')
         };
       bucket.upload(params, options, function (err, data) {
             if (err) {
+              console.error(err);
                 deferred.reject(err);
             }
-            deferred.resolve();
+            deferred.resolve(data);
         });
 
         return deferred.promise;
     };
 
     this.save = function(product) {
-      console.log(product);
-      alert(123);
-      /*
-      this.Upload(product.file)
-        .then(function(response) {
-          alert('exito');
+      if(!angular.isUndefined(product.file)) {
+        return this.Upload(product.file)
+          .then(function (response) {
+            product.urlImg = response.Location;
+            $.saveProductData(product)
+              .then(function(response) {
+                return $q.resolve(response)
+              });
+          })
+          .catch(function (err) {
+            console.log(err);
+            alert('error editando el producto')
+          });
+      } else {
+        return $.saveProductData(product)
+          .then(function(response) {
+            return $q.resolve(response)
+          })
+          .catch(function (err) {
+            console.log(err);
+            alert('error editando el producto')
+          });
+      }
+    };
+
+    this.saveProductData = function(dataProduct) {
+      var url = ConstantsService.EDIT_PRODUCT + dataProduct.id;
+      return $http.put(url, dataProduct)
+        .then(function (data) {
+          if(data.status != 200) return $q.reject();
+          return $q.resolve(data.status);
         })
-        .catch(function(err) {
-          alert('error editando el producto')
-        })*/
+        .catch(function() {
+          $ionicLoading.hide();
+          $state.go('app.error');
+        });
     }
 
 
