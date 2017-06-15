@@ -5,7 +5,7 @@ angular.module('starter')
     var $ = this;
 
     AWS.config.region = 'us-west-2';
-    AWS.config.update({ accessKeyId: 'access_key', secretAccessKey: 'secret_key' });
+    AWS.config.update({ accessKeyId: 'my_key', secretAccessKey: 'secret_key' });
 
     var bucket = new AWS.S3({ params: { Bucket: 'cavaonline', maxRetries: 10 }, httpOptions: { timeout: 360000 } });
 
@@ -28,12 +28,12 @@ angular.module('starter')
         return deferred.promise;
     };
 
-    this.save = function(product) {
+    this.save = function(product, isNew) {
       if(!angular.isUndefined(product.file)) {
         return this.Upload(product.file)
           .then(function (response) {
             product.urlImg = response.Location;
-            $.saveProductData(product)
+            $.saveProductData(product, isNew)
               .then(function(response) {
                 return $q.resolve(response)
               });
@@ -43,7 +43,8 @@ angular.module('starter')
             alert('error editando el producto')
           });
       } else {
-        return $.saveProductData(product)
+        product.urlImg = $base64.decode(product.urlImg);
+        return $.saveProductData(product, isNew)
           .then(function(response) {
             return $q.resolve(response)
           })
@@ -54,7 +55,26 @@ angular.module('starter')
       }
     };
 
-    this.saveProductData = function(dataProduct) {
+    this.saveProductData = function(dataProduct, isNew) {
+      if(isNew) return this.saveNewProduct(dataProduct);
+      else return this.saveEditProduct(dataProduct);
+    };
+
+
+    this.saveNewProduct = function(dataProduct) {
+      var url = ConstantsService.NEW_PRODUCT;
+      return $http.post(url, dataProduct)
+        .then(function (data) {
+          if(data.status != 200) return $q.reject();
+          return $q.resolve(data.status);
+        })
+        .catch(function() {
+          $ionicLoading.hide();
+          $state.go('app.error');
+        });
+    };
+
+    this.saveEditProduct = function(dataProduct) {
       var url = ConstantsService.EDIT_PRODUCT + dataProduct.id;
       return $http.put(url, dataProduct)
         .then(function (data) {
