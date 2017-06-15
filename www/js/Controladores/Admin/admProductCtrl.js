@@ -160,7 +160,6 @@ angular.module('starter')
     $scope.product = {};
 
     $scope.save = function(product) {
-
       $ionicLoading.show({
         template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
       });
@@ -168,10 +167,9 @@ angular.module('starter')
       if(product.nombre != '' && product.precio != '') {
         ProductService.save(product, $scope.newProduct)
           .then(function (response) {
-            console.log(response);
             $ionicLoading.hide();
             clearProductToEdit();
-            alert('Producto editado!');
+            alert('Producto editado/creado!');
             $scope.toCategories();
           })
           .catch(function (err) {
