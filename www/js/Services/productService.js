@@ -5,7 +5,10 @@ angular.module('starter')
     var $ = this;
 
     AWS.config.region = 'us-west-2';
-    AWS.config.update({ accessKeyId: 'my_key', secretAccessKey: 'secret' });
+    AWS.config.update({
+      accessKeyId: 'key',
+      secretAccessKey: 'secret',
+      correctClockSkew: true });
 
     var bucket = new AWS.S3({ params: { Bucket: 'cavaonline', maxRetries: 10 }, httpOptions: { timeout: 360000 } });
 
@@ -40,7 +43,9 @@ angular.module('starter')
           })
           .catch(function (err) {
             console.log(err);
-            alert('error editando el producto')
+            alert('Error subiendo imagen');
+            alert(err);
+            return $q.reject(err);
           });
       } else {
         product.urlImg = $base64.decode(product.urlImg);

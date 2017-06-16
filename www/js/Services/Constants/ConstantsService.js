@@ -14,8 +14,8 @@
   var $ = this;
 
   $.API_PORT = 3000;
-  $.SERVER   = 'http://localhost';
-  //$.SERVER   = "MY_SERVER";
+  //$.SERVER   = 'http://localhost';
+  $.SERVER   = "MY_SERVER";
   $.URL_API   = {};
 
   $.DEVICES_ADMIN         = $.SERVER + ':'+ $.API_PORT + '/api/devices/administrators';

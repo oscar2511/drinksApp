@@ -74,8 +74,7 @@
                 </button>
               </div>
               <div class="col">
-                <br>
-                Actual: {{productToEdit.categoriaNombre}}
+                <h4 style="color=grey;">Actual: {{productToEdit.categoriaNombre}} <h4>
               </div>
             </div>
 
@@ -97,8 +96,9 @@
           Cambiar imagen
         </button>
         <button ng-if="!productToEdit.urlImg" ngf-select ng-model="productToEdit.file" name="file" class="button button-outline button-positive">
-          Seleccione imagen
+          Seleccionar imagen
         </button>
+        <p style="color:grey;">&nbsp;&nbsp; {{ productToEdit.file.name }} </p>
         <div class="row">
           <div class="col col-25">
             <button ng-click="showListProducts()" class="button button-full button-default">

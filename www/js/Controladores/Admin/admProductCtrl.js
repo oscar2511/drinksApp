@@ -174,7 +174,7 @@ angular.module('starter')
           })
           .catch(function (err) {
             $ionicLoading.hide();
-            alert('Error editando el producto');
+            alert('Error en la acción');
           });
 
       }
