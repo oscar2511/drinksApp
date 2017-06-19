@@ -29,13 +29,13 @@
     <section ng-show ="shouldShowProducts"><!-- show products -->
       <div class="row">
         <div class="col col-25">
-          <button ng-click="toCategories()" class="button button-full button-default">
+          <button ng-click="toCategories()" class="button icon-left ion-ios-arrow-left button-full button-default">
             Atrás
           </button>
         </div>
         <br>
         <div class="col">
-          <button  class="button button-full button-positive" ng-click="showEditProduct()">
+          <button  class="button icon-center ion-plus-circled button-full button-positive" ng-click="showEditProduct()">
             Nuevo producto
           </button>
 
@@ -54,13 +54,14 @@
       <form name="productForm">
         <div class="list">
           <label class="item item-input item-stacked-label">
-            <span class="input-label">Nombre</span>
+            <span class="input-label"> Nombre</span>
             <input type="text" placeholder="Ingrese nombre" ng-model="productToEdit.nombre">
             <span ng-show="productForm.product.name.$error.required">El nombre es requirido.</span>
           </label>
           <label class="item item-input item-stacked-label">
-            <span class="input-label">Precio</span>
-            <input type="text" placeholder="Fromato 152.99" ng-model="productToEdit.precio">
+            <span class="input-label"> Precio</span>
+            <input type="text" name="price" placeholder="Fromato 152.99" ng-change="validatePrice(productToEdit.precio)" ng-model="productToEdit.precio">
+            <span ng-show="formInvalid" class="help-block"> <p style="color:red;">Formato de precio incorrecto</p></span>
           </label>
           <label class="item item-input item-stacked-label">
             <span class="input-label">Descripción</span>
@@ -78,7 +79,6 @@
               </div>
             </div>
 
-
           <li class="item item-toggle">
             Stock
             <label class="toggle toggle-balanced">
@@ -91,26 +91,32 @@
           </li>
 
 
-        </div>&nbsp;&nbsp;
-        <button ng-if="productToEdit.urlImg" ngf-select ng-model="productToEdit.file" name="file" class="button button-outline button-positive">
-          Cambiar imagen
-        </button>
-        <button ng-if="!productToEdit.urlImg" ngf-select ng-model="productToEdit.file" name="file" class="button button-outline button-positive">
-          Seleccionar imagen
-        </button>
+        <div class="row">
+          <div class="col col-50">
+            <button ng-if="productToEdit.urlImg" ngf-select ng-model="productToEdit.file" name="file" class="button icon-left ion-image button-outline button-positive">
+              Camb.imagen
+            </button>
+             <button ng-if="!productToEdit.urlImg" ngf-select ng-model="productToEdit.file" name="file" class="button icon-left ion-image button-outline button-positive">
+              Selec. imagen
+            </button>
+          </div>
+          <div class="col">
+          </div>
+        </div>
         <p style="color:grey;">&nbsp;&nbsp; {{ productToEdit.file.name }} </p>
+
         <div class="row">
           <div class="col col-25">
-            <button ng-click="showListProducts()" class="button button-full button-default">
+            <button ng-click="showListProducts()" class="button icon-left ion-ios-arrow-left button-full button-default">
               Atrás
             </button>
           </div>
           <br>
           <div class="col">
-            <button ng-if="!newProduct"  class="button button-full button-positive" ng-disabled="" ng-click="save(productToEdit)">
+            <button ng-disabled="formInvalid" ng-if="!newProduct"  class="button icon-center ion-android-checkbox-outline button-full button-positive" ng-disabled="" ng-click="save(productToEdit)">
               Editar
             </button>
-            <button ng-if="newProduct"  class="button button-full button-positive" ng-disabled="" ng-click="save(productToEdit)">
+            <button ng-disabled="formInvalid" ng-if="newProduct"  class="button icon-center ion-android-checkbox-outline button-full button-positive" ng-disabled="" ng-click="save(productToEdit)">
               Crear
             </button>
           </div>

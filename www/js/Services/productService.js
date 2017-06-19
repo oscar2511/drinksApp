@@ -4,17 +4,16 @@ angular.module('starter')
 
     var $ = this;
 
-    AWS.config.region = 'us-west-2';
     AWS.config.update({
-      accessKeyId: 'key',
-      secretAccessKey: 'secret',
+      accessKeyId: 'acc_key',
+      secretAccessKey: 'my_secret',
       correctClockSkew: true });
 
-    var bucket = new AWS.S3({ params: { Bucket: 'cavaonline', maxRetries: 10 }, httpOptions: { timeout: 360000 } });
+    var bucket = new AWS.S3({ params: { Bucket: 'cavaonline-app', maxRetries: 10 }, httpOptions: { timeout: 360000 } });
 
     this.Upload = function (file) {
         var deferred = $q.defer();
-        var params   = { Bucket: 'cavaonline', Key: 'products/'+ $base64.encode(file.name), ContentType: file.type, Body: file };
+        var params   = { Bucket: 'cavaonline-app', Key: 'products/'+ $base64.encode(file.name), ContentType: file.type, Body: file };
         var options  = {
             partSize: 10 * 1024 * 1024,
             queueSize: 1,

@@ -15,7 +15,7 @@
 
   $.API_PORT = 3000;
   //$.SERVER   = 'http://localhost';
-  $.SERVER   = "MY_SERVER";
+  $.SERVER   = "http://ec2-34-212-76-213.us-west-2.compute.amazonaws.com";
   $.URL_API   = {};
 
   $.DEVICES_ADMIN         = $.SERVER + ':'+ $.API_PORT + '/api/devices/administrators';

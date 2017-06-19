@@ -92,7 +92,11 @@ angular.module('starter')
       if(angular.isUndefined(product)) {
         $scope.productToEdit = {};
         $scope.newProduct = true;
-      } else $scope.newProduct = false;
+        $scope.formInvalid = true;
+      } else  {
+        $scope.newProduct = false;
+        $scope.formInvalid = false;
+      }
 
       $scope.shouldShowEditProduct = true;
       $scope.shouldShowProducts = false;
@@ -164,25 +168,37 @@ angular.module('starter')
         template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
       });
 
-      if(product.nombre != '' && product.precio != '') {
+      if(!angular.isUndefined(product.nombre)
+        && !angular.isUndefined(product.precio)
+        && !angular.isUndefined(product.idCategoria)
+        && (!angular.isUndefined(product.file) || !$scope.newProduct)) {
+          product.precio = product.precio.trim();
         ProductService.save(product, $scope.newProduct)
           .then(function (response) {
             $ionicLoading.hide();
             clearProductToEdit();
-            alert('Producto editado/creado!');
+            alert('La acción se completó con éxito!');
             $scope.toCategories();
           })
           .catch(function (err) {
             $ionicLoading.hide();
             alert('Error en la acción');
           });
-
       }
       else {
         $ionicLoading.hide();
-        alert('Verifique si el nombre y/o la descripción están en blanco');
+        alert('Los siguientes campos son requeridos: nombre/precio/imagen/categoría ');
       }
     };
+
+    $scope.validatePrice = function(price) {
+        var re = new RegExp("^[0-9]+([.][0-9]*)?$");
+        if (re.test(price)) {
+            $scope.formInvalid = false;
+        } else {
+            $scope.formInvalid = true;
+        }
+    }
 
     function clearProductToEdit() {
       $scope.productToEdit = {};
