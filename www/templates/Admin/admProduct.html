@@ -10,12 +10,18 @@
     </ion-nav-buttons>
   </ion-nav-bar>
 
-  <ion-content ng-cloak="">
+  <ion-content ng-cloak>
     <div class="img-stock-logo sombra-categ">
     </div>
 
+
     <section ng-show = "shouldShowCategories">
-      <h4 style="color: grey;">&nbsp;&nbsp; <i class="icon ion-edit"></i> Seleccione categoría</h4>
+      <div class="item item-divider" ng-show = "shouldShowCategories">
+        <font color="#696969">
+          <i class="ion-clipboard"></i>
+          Seleccione categoría
+        </font>
+      </div>
       <br>
       <div class="list" ng-repeat="category in categories">
         <a ng-click="showProductFromCategory(category)" class="item item-icon-left item item-icon-right">

@@ -137,11 +137,11 @@
         <ion-content>
           <div class="card">
             <div class="item item-text-wrap">
-              <ion-list ng-init="estado=pedido.estado.id">
-                <ion-radio ng-model="estado" ng-value="1" style="color: #33CD5F;" ng-disabled="pedido.state == 3 || pedido.state == 4" ng-change="cambiarEstado(pedido.id, 1)">Nuevo</ion-radio>
-                <ion-radio ng-model="estado" ng-value="2" style="color: #FFC900;" ng-disabled="pedido.state == 3 || pedido.state == 4" ng-click="cambiarEstado(pedido.id, 2)">En proceso</ion-radio>
-                <ion-radio ng-model="estado" ng-value="3" style="color: #387EF5;" ng-disabled="pedido.state == 4" ng-click="cambiarEstado(pedido.id, 3)">Cerrado</ion-radio>
-                <ion-radio ng-model="estado" ng-value="4" style="color: #EF473A;" ng-disabled="pedido.state == 3" ng-click="cambiarEstado(pedido.id, 4)">Cancelado</ion-radio>
+              <ion-list ng-init="estado = pedido.state">
+                <ion-radio ng-model = "estado" ng-value="1" style="color: #33CD5F;" ng-disabled="pedido.state == 3 || pedido.state == 4" ng-change="cambiarEstado(pedido.id, 1)">Nuevo</ion-radio>
+                <ion-radio ng-model = "estado" ng-value="2" style="color: #FFC900;" ng-disabled="pedido.state == 3 || pedido.state == 4" ng-click="cambiarEstado(pedido.id, 2)">En proceso</ion-radio>
+                <ion-radio ng-model = "estado" ng-value="3" style="color: #387EF5;" ng-disabled="pedido.state == 4" ng-click="cambiarEstado(pedido.id, 3)">Cerrado</ion-radio>
+                <ion-radio ng-model = "estado" ng-value="4" style="color: #EF473A;" ng-disabled="pedido.state == 3" ng-click="cambiarEstado(pedido.id, 4)">Cancelado</ion-radio>
               </ion-list>
             </div>
           </div>
