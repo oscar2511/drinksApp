@@ -5,8 +5,8 @@ angular.module('starter')
     var $ = this;
 
     AWS.config.update({
-      accessKeyId: 'acc_key',
-      secretAccessKey: 'my_secret',
+      accessKeyId: 'MY-ACCESS-ID',
+      secretAccessKey: 'MY-SECRET-ID',
       correctClockSkew: true });
 
     var bucket = new AWS.S3({ params: { Bucket: 'cavaonline-app', maxRetries: 10 }, httpOptions: { timeout: 360000 } });
