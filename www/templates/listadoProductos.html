@@ -1,13 +1,13 @@
 <ion-view view-title="">
   <ion-content>
-    <img class="{{ catUrlImg }}">
-    <div class="list" ng-repeat="producto in productos" href="#/app/producto/producto-detalle/{{producto}}">
-      <a class="item item-thumbnail-left" href="#/app/producto/producto-detalle/{{producto}}">
-        <!--<img class="{{producto.urlImg}}">-->
-        <img src="http://oscarnr.16mb.com/appDrinks/img/productos/{{producto.urlImg}}">
+    <img class=" {{ catUrlImg }} sombra-categ" >
+    <div class="list" ng-repeat="producto in productos">
+      <a href="#/app/producto/producto-detalle/{{producto}}" class="item item-thumbnail-left">
+        <!--<img class="list-prod" ion-img-cache ng-src="http://23.94.249.163/appDrinks-dev/img/productos/{{producto.urlImg}}">-->
+        <img class="list-prod" src={{decode(producto.urlImg)}}>
         <h2> {{producto.nombre}}</h2>
         <p>$ {{producto.precio}}</p>
-        <button class="button button-small button-outline icon-center ion-record button-dark"> {{producto.stock}}</button>
+        <button class="button button-small button-clear icon-center ion-record button-dark"> {{producto.stock}}</button>
       </a>
     </div>
 

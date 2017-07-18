@@ -1,0 +1,40 @@
+<ion-view view-title="">
+  <ion-content>
+    <div class="card">
+      <div class="item item-text-wrap">
+        <h2 style="color:#1e6ed1";> <i class="ion-ios-information"></i> Tienes un pedido pendiente</h2>
+        <p>Para hacer un nuevo pedido no debes tener uno pendiente.</p>
+      </div>
+    </div>
+
+    <ul class="list">
+      <div class="item item-divider">
+        Fecha
+      </div>
+      <li class="item">
+        {{fechaUltPedido | date:'dd-MM-yyyy' }} | Hora: {{fechaUltPedido | date:'HH:mm' }}
+      </li>
+      <div class="item item-divider">
+        Total
+      </div>
+      <li class="item">
+        $ {{ totalUltPedido }}
+      </li>
+    </ul>
+
+    <div class="row">
+      <div class="col col-25">
+        <button ng-click="cambiarEstado(4)" class="button button-clear button-assertive">
+          Cancelar
+        </button>
+      </div>
+      <div class="col col-50">
+        <button ng-click="cambiarEstado(3)" class="button icon-left ion-checkmark button-block button-positive">
+          Recibido
+        </button>
+      </div>
+      <div class="col"></div>
+    </div>
+
+  </ion-content>
+</ion-view>

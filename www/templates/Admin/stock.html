@@ -1,0 +1,48 @@
+<ion-view cache-view="false" view-title="">
+
+  <ion-nav-bar class="bar-dark">
+    <ion-nav-buttons side="left">
+      <button ng-click="atrasEst()" class="button back-button buttons button-clear header-item">
+        <i class="icon ion-ios-arrow-back"></i> Atrás </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+      <button class="button icon-rigth button-icon ion-more" ng-click="popover.show($event)"></button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+
+  <ion-content>
+    <div class="img-stock-logo sombra-categ">
+    </div>
+    <div class="item item-divider">
+      <font color="#696969">
+        <i class="ion-clipboard"></i>
+        Stock de productos
+      </font>
+    </div>
+    <br>
+    <div class="list" ng-repeat="producto in productos" >
+      <div class="item item-thumbnail-left">
+        <img class="list-prod" ion-img-cache ng-src="{{ producto.urlImg }}">
+        <h2> {{producto.name}}</h2>
+        <p>$ {{producto.price}}</p>
+        <div class="row">
+          <div class="col.25">
+          </div>
+          <div class="col.25">
+          </div>
+          <div class="col.25">
+          </div>
+          <div class="col.25" >
+            <label  class="toggle toggle-balanced">
+              <input ng-if="producto.stock == 1" ng-click="cambiarStock(producto._id, producto.stock)" type="checkbox" checked>
+              <input ng-if="producto.stock == 0" ng-click="cambiarStock(producto._id, producto.stock)" type="checkbox">
+              <div class="track">
+                <div class="handle"></div>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

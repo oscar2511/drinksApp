@@ -3,42 +3,54 @@ angular.module('starter')
                                               $scope,
                                               $stateParams,
                                               $http,
-                                              $ionicLoading)
+                                              $ionicLoading,
+                                              $rootScope,
+                                              ConstantsService,
+                                              UtilitiesService)
   {
     $ionicLoading.show({
       template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
     });
-    $scope.imgCategoria = null;
-    var url = 'http://oscarnr.16mb.com/appDrinks/listadoProductos/listarProductos.php';
+    $scope.imgCategoria = null; //todo revisar si es está al dope
+
 
     var categoria = angular.fromJson($stateParams.categoria);
 
     $scope.catUrlImg = categoria.urlImg;
 
     /**
-     * Obtener los producto de una categoria del servidor
+     * Obtener los producto de una categoria
      *
      */
-    $http.post(url, categoria, {headers: { 'Content-Type': 'application/json'}})
+    var url = ConstantsService.LIST_PRODUCTS + categoria.id;
+    $http.get(url)
       .then(function (data){
-        angular.forEach(data.data, function(value) {
-          $scope.dataCruda = value;
-        });
-        $scope.productos =[];
-          angular.forEach($scope.dataCruda, function(valor, key) {
-            $scope.idCategoria = valor.idCategoria;
-            $scope.productos.push({
-              id:           valor.id,
-              precio:       valor.precio,
-              descripcion:  valor.descripcion,
-              nombre:       valor.nombre,
-              stock:        valor.stock,
-              idCategoria:  valor.idCategoria,
-              urlImg  :     valor.urlImg
-            });
-          });
+        $scope.productos = [];
+        angular.forEach(data.data, function(valor, key) {
+          $scope.idCategoria = valor.idCategoria;
 
+          $scope.productos.push({
+            id:           valor._id,
+            precio:       valor.price,
+            descripcion:  UtilitiesService.encode(valor.description),
+            nombre:       valor.name,
+            stock:        valor.stock ? 'Disponible' : 'Sin stock',
+            idCategoria:  valor.categoriaId,
+            urlImg  :     UtilitiesService.encode(valor.urlImg)
+          });
+        });
         $ionicLoading.hide();
       });
+
+
+    /**
+     * Decode url
+     * @param urlEncoded
+     * @returns {*}
+     */
+    $scope.decode = function(urlEncoded) {
+      return UtilitiesService.decode(urlEncoded)
+    };
+
 
   });

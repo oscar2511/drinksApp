@@ -1,29 +1,64 @@
-angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.controllers','ionic.service.push'])
+angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.controllers','ionic.service.push', 'chart.js', 'ionicImgCache', 'base64', 'ngFileUpload'])
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-   /* if (window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      cordova.plugins.Keyboard.disableScroll(true);
+.run(function($ionicPlatform, $http, $rootScope, $q, dispositivoService, ConstantsService, PedidoService, NotificacionService,  $ionicPush, $ionicUser) {
 
-    }if (window.StatusBar) {
-      StatusBar.styleDefault();
-    }*/
 
-    ///////////  notificaciones push
-    var push = new Ionic.Push({
-      "debug": true
-    });
+    $rootScope.server = 'http://localhost';
+    $rootScope.port = 3000;
+    $rootScope.urls = {};
+    $rootScope.urls.estadoApertura       = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/horario';
+    $rootScope.urls.detallePedido        = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/pedido/';
+    $rootScope.urls.pedidoEstado         = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/pedido/estado';
+    $rootScope.urls.dispositivoId        = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/dispositivo/';
+    $rootScope.urls.registrarDispositivo = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/dispositivo/uuid';
+    $rootScope.urls.stock                = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/productos';
+    $rootScope.urls.cambiarStock         = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/producto/cambiar-stock';
+    $rootScope.urls.abrirCerrar          = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/horario/abrir-cerrar';
 
-    push.register(function(token) { alert(123);
-      console.log("My Device token:",token.token);
-      push.saveToken(token);  // persist the token in the Ionic Platform
-    });
-    //////////////
+    $rootScope.abierto = true;
 
+    $rootScope.totalProductos = PedidoService.getTotalProductos();
+
+    $ionicPlatform.ready(function() {
+     try {
+       var push = new Ionic.Push({
+         'debug': true
+        // 'onNotification': function (notificacion) {
+         //NotificacionService.postNotificacion(notificacion);
+       //}
+       });
+     } catch (e) {
+        alert(e);
+      }
+
+     push.register(function(token) {
+       //alert(token.token);
+       //console.log("Mi token:", token.token);
+       push.saveToken(token);
+     })
   });
+
+    /**
+     *  Obtengo los token de los dispositivos administradores
+     *
+     */
+    var getTokenAdmins = function(){
+      var tokenAdmins = [];
+      dispositivoService.getAdministradores()
+        .then(function(dispAdm){
+          angular.forEach(dispAdm, function (device) {
+            tokenAdmins.push(device.token) ;
+          });
+          $rootScope.tokenAdm = tokenAdmins;
+        })
+        .catch(function (){
+          alert("No se pudo obtener los dispositivos administradores");
+        });
+
+    };
+
+    getTokenAdmins();
+
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -35,33 +70,6 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
     templateUrl: 'templates/menu.html',
     controller: 'AppCtrl'
   })
-
-  .state('app.search', {
-    url: '/search',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/search.html'
-      }
-    }
-  })
-
-  .state('app.browse', {
-      url: '/browse',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/browse.html'
-        }
-      }
-    })
-    .state('app.playlists', {
-      url: '/playlists',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/playlists.html',
-          controller: 'PlaylistsCtrl'
-        }
-      }
-    })
 
   .state('app.categorias', {
       url: '/categorias',
@@ -93,6 +101,16 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
     }
   })
 
+  .state('app.admProduct', {
+    url: '/admin/adm-product',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/Admin/admProduct.html',
+        controller: 'admProductCtrl'
+      }
+    }
+  })
+
     .state('app.promociones', {
       url: '/promociones',
       views: {
@@ -109,6 +127,55 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
         'menuContent': {
           templateUrl: 'templates/contacto.html',
           controller: 'contactoCtrl'
+        }
+      }
+    })
+
+    .state('app.admin', {
+      url: '/admin',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/Admin/home.html',
+          controller: 'adminCtrl'
+        }
+      }
+    })
+
+    .state('app.pedDet', {
+      url: '/admin/pedido/:pedido',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/Admin/pedido-detalle.html',
+          controller: 'pedidoDetalleCtrl'
+        }
+      }
+    })
+
+    .state('app.estadistica', {
+      url: '/estadistica',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/Admin/estadistica.html',
+          controller: 'estadisticaCtrl'
+        }
+      }
+    })
+
+    .state('app.stock', {
+      url: '/stock',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/Admin/stock.html',
+          controller: 'stockCtrl'
+        }
+      }
+    })
+
+    .state('app.error', {
+      url: '/error',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/error.html'
         }
       }
     })
@@ -133,6 +200,16 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
       }
     })
 
+    .state('app.pedido-pendiente', {
+      url: '/pedido-pendiente',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/pedido-pendiente.html',
+          controller: 'pedidoPendienteCtrl'
+        }
+      }
+    })
+
     .state('app.producto', {
       url: '/producto/producto-detalle/:producto',
       views: {
@@ -141,9 +218,17 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
           controller: 'productoCtrl'
         }
       }
+    })
+
+    .state('app.configuracion', {
+      url: '/configuracion',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/Admin/configuracion.html',
+          controller: 'configuracionCtrl'
+        }
+      }
     });
 
   $urlRouterProvider.otherwise('/app/categorias');
 });
-
-

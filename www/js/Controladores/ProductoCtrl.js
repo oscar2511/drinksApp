@@ -3,11 +3,16 @@ angular.module('starter')
                                        $stateParams,
                                        $rootScope,
                                        PedidoService,
-                                       $ionicPopup)
+                                       $ionicPopup,
+                                       $state,
+                                       $timeout,
+                                       UtilitiesService
+  )
   {
     $scope.producto = angular.fromJson($stateParams.producto);
     $scope.cantidad = 1;
-    $scope.pedido   = PedidoService;
+
+    $scope.producto.urlImg = UtilitiesService.decode($scope.producto.urlImg);
 
     /**
      *  Agregar producto al carro
@@ -16,24 +21,71 @@ angular.module('starter')
      * @param cantidad
      */
     $scope.addAlCarro = function(producto, cantidad){
-      $scope.pedido.addProducto(producto, cantidad);
+     /* if($rootScope.totalProductos == 'pendiente') {
+        $scope.tienePedidoPendiente();
+        return 0;
+      }
+      */
+
+      PedidoService.addProducto(producto, cantidad);
 
       /**
-       * Mostrar pupop cuando se agrega un producto al pedido
+       * Mostrar popup cuando se agrega un producto al pedido
        * @type {Object|*}
        */
       var alertPopup = $ionicPopup.alert({
-        title:   'Producto añadido correctamente',
-        buttons: [{
-          text: 'Seguir comprando',
-          type: 'button button-positive'
-        }]
+        title: 'Producto agregado!',
+        buttons: null
       });
 
-      alertPopup.then(function(res) {
+      $timeout(function() {
+        $scope.cantidad = 1;
+        alertPopup.close();
+      }, 1500);
 
-      });
 
+      /**
+       * Redirige a pedido si intenta agregar producto y tiene uno pendiente
+       */
+      $scope.tienePedidoPendiente = function(){
+        var alertPopup = $ionicPopup.alert({
+          title:   'Tienes un pedido pendiente',
+          buttons: [{
+            text: 'Aceptar',
+            type: 'button button-outline button-positive'
+          }]
+        });
+
+        alertPopup.then(function(res) {
+          PedidoService.limpiarPedido();
+          $rootScope.totalProductos = 'pendiente';
+          $rootScope.tieneProductos = 0;
+          $state.go('app.pedido-pendiente');
+        });
+      }
+    };
+
+    /**
+     *
+     */
+    $scope.sumarCantidad = function(){
+      $scope.cantidad = $scope.cantidad + 1;
+    };
+
+    /**
+     *
+     */
+    $scope.restarCantidad = function(){
+      $scope.cantidad = $scope.cantidad - 1;
+    };
+
+    /**
+     * Decode url
+     * @param urlEncoded
+     * @returns {*}
+     */
+    $scope.decode = function(urlEncoded) {
+      return UtilitiesService.decode(urlEncoded)
     };
 
   });

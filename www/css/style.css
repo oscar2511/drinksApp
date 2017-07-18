@@ -4,85 +4,188 @@
 background: #ececee;
 }
 
-.img_categoria{
+/*.img_categoria{
   width: 100% !important;
-  height: 220px;!important;
-  /*background-image: url("../img/categorias/vinos.jpg")!important;*/
+  height: 170px;!important;
+  *//*background-image: url("../img/categorias/vinos.jpg")!important;*//*
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
 
-}
+}*/
 
 /* categorias *********************************************************************/
 .vinos{
-  width: 100% !important;
-  height: 220px!important;
+  width: 101% !important;
+  height: 165px!important;
   background-image: url("../img/categorias/vinos.jpg")!important;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
+  margin-bottom: -20px;
+  padding-left: 100%;
 }
 
 .cervezas{
-  width: 100% !important;
-  height: 220px!important;
+  width: 101% !important;
+  height: 170px!important;
   background-image: url("../img/categorias/cerveza.jpg")!important;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
+  margin-bottom: -20px;
+  padding-left: 100%;
 }
 
 .fernets{
-  width: 100% !important;
-  height: 220px!important;
+  width: 101% !important;
+  height: 170px!important;
   background-image: url("../img/categorias/fernet.jpg")!important;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
+  margin-bottom: -20px;
+  padding-left: 100%;
 }
 
 .whiskies{
-  width: 100% !important;
-  height: 220px!important;
+  width: 101% !important;
+  height: 170px!important;
   background-image: url("../img/categorias/whiskies.jpg")!important;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
+  margin-bottom: -20px;
+  padding-left: 100%;
 }
 
 .promociones{
-  width: 100% !important;
-  height: 250px!important;
+  width: 320px !important;
+  height: 170px!important;
   background-image: url("../img/categorias/promociones.jpg")!important;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
+  padding-left: 100%;
+  margin-bottom: -50px;
+
 }
 
 .vodkas{
   width: 100% !important;
-  height: 220px!important;
+  height: 170px!important;
   background-image: url("../img/categorias/vodkas-licores.jpg")!important;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
+  padding-left: 500px;
+  margin-left: -5px;
 }
 /* /categorias *********************************************************************/
 
-/*
-.img-menu{
-}
-*/
-.menu-header{
-  /*background-image: url("../img/categorias/menuImg.png")!important;*/
-  background-color: #111111;
+.bar-custom{
+  /*background-color: #050404;*/
+  background-image: url("../img/black.jpg");
   background-repeat: no-repeat;
-  background-position: center center;
   background-size: cover;
-  height:6%;
-  width: 100%;
+  background-position: center center;
 }
+
+.img-error{
+  width: 100% !important;
+  height: 260px !important;
+  background-image: url("../img/copaRota.png")!important;
+  background-repeat: no-repeat;
+  box-shadow: 2px 2px 5px #999;
+  background-position: center center;
+  /*background-size: cover;*/
+}
+
+.img-det-prod{
+  width: 190px !important;
+  height: 200px!important;
+  margin: auto;
+  position: relative;
+  /*background-position: center center;*/
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 35px;
+  box-shadow: 2px 2px 5px #999;
+}
+
+.list-prod{
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 100%;
+  border: solid 0px #9A9A9C;
+  /*box-shadow: 1px 1px 1px 1px #000000;*/
+}
+
+.sombra-categ{
+  box-shadow: 2px 2px 5px #999!important;
+  margin-bottom: 20px;
+}
+
+.img-pago-logo{
+  width: 100% !important;
+  height: 120px!important;
+  background-image: url("../img/pago-logo.jpeg")!important;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 2px 2px 5px #999;
+}
+
+
+.img-config-logo{
+  width: 100% !important;
+  height: 120px!important;
+  background-image: url("../img/configuracion.jpg")!important;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.img-pago-contact{
+  width: 90% !important;
+  height: 200px!important;
+  background-image: url("../img/logoNew.png")!important;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 2px 2px 5px #999;
+}
+
+.img-stock-logo{
+  width: 100% !important;
+  height: 120px!important;
+  background-image: url("../img/stock.jpg")!important;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 2px 2px 5px #999;
+}
+
+.img-cerrado-logo{
+  width: 100% !important;
+  height: 220px!important;
+  background-image: url("../img/categorias/cerrado.png")!important;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 2px 2px 5px #999;
+}
+
+.img-admin-logo{
+  width: 100% !important;
+  height: 120px!important;
+  background-image: url("../img/pedidos-admin.jpg")!important;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 2px 2px 5px #999;
+}
+
 
 /*custom is class added to ion-content*/
 
@@ -90,7 +193,7 @@ background: #ececee;
   background-color: #3f4041 !important; /* This sets the background color*/
   background-image: url(../img/categorias/imgMenu4.jpg);
   background-repeat: no-repeat;
-  opacity: 0.9;
+  /*opacity: 0.9;*/
 }
 
 /*Set the background to transparent for ion-item*/
@@ -100,6 +203,15 @@ background: #ececee;
   /*border-top: 1px solid;*/   /*Top Border for each menu item*/
   border-bottom: 0px solid;   /*Bottom border for each menu item*/
   /*border-color: #ffc5d1;*/   /*Sets colors for top and bottom border*/
+  color: #ffffff;    /*Text color for each item*/
+}
+
+.item-promociones{
+  background-color: transparent;
+  border:none;   /*Removes all borders*/
+  /*border-top: 1px solid;*/   /*Top Border for each menu item*/
+  border-bottom: 1px solid;   /*Bottom border for each menu item*/
+  border-color: #ffc5d1;   /*Sets colors for top and bottom border*/
   color: #ffffff;    /*Text color for each item*/
 }
 
@@ -160,6 +272,12 @@ ion-item.item:hover a {
 .ion-close-circled{
   font-size: 20px!important;
 }
+.ion-stats-bars{
+  font-size: 20px!important;
+}
+.ion-clipboard{
+  font-size: 20px!important;
+}
 
 /* boton eliminar producto de pedido*/
 .ion-trash-a{
@@ -181,7 +299,7 @@ ion-item.item:hover a {
 
 #map {
     width: 100%;
-    height: 35%;
+    height: 30%;
     border-bottom: solid 4px lightblue;
     border-left: solid 10px #ffffff;
     border-right: solid 10px #ffffff;
@@ -189,3 +307,14 @@ ion-item.item:hover a {
 }
 
 /***************************************/
+
+.popover {
+    height: auto !important;
+}
+.popover ion-header-bar {
+    position: relative;
+}
+.popover ion-content {
+    top: 0;
+    position: relative;
+}

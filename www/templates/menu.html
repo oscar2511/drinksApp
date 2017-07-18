@@ -1,6 +1,6 @@
 <ion-side-menus enable-menu-with-back-views="true">
   <ion-side-menu-content edge-drag-threshold="250" drag-content="true">
-    <ion-nav-bar class="bar-dark" >
+    <ion-nav-bar class="bar-custom" ng-style="{'background-color': 'black'}" >
       <ion-nav-back-button>
         Atrás
       </ion-nav-back-button>
@@ -9,8 +9,12 @@
         </button>
       </ion-nav-buttons>
       <ion-nav-buttons side="right">
-        <span class="badge badge-assertive ">{{ totalProductos }}</span>
-        <a href="#/app/mi-pedido" class="button button-clear  pull-rigth">
+        <span ng-if="!pedidoPendiente" class="badge badge-positive ">{{ totalProductos }}</span>
+        <a ng-if="!pedidoPendiente" href="#/app/mi-pedido" class="button button-clear  pull-rigth">
+          <i class="ion-ios-cart"></i>
+        </a>
+        <span ng-if="pedidoPendiente" class="badge badge-assertive">{{ totalProductos }}</span>
+        <a ng-if="pedidoPendiente" href="#/app/pedido-pendiente" class="button button-clear  pull-rigth">
           <i class="ion-ios-cart"></i>
         </a>
       </ion-nav-buttons>
@@ -31,10 +35,10 @@
           <i class="ion-wineglass"></i>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Categorias
         </ion-item>
-        <ion-item menu-close href="#/app/promociones">
+        <!--<ion-item menu-close href="#/app/promociones">
           <i class="ion-android-bar"></i>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Promociones
-        </ion-item>
+        </ion-item>-->
         <ion-item menu-close href="#/app/mi-pedido">
           <i class="ion-ios-cart"></i>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mi pedido
@@ -43,7 +47,11 @@
           <i class="ion-android-mail"></i>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contacto
         </ion-item>
-        <ion-item menu-close href="#/app/salir">
+        <ion-item menu-close href="#/app/admin">
+          <i class="ion-clipboard"></i>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin
+        </ion-item>
+        <ion-item menu-close ng-click="salir()">
           <i class="ion-close-circled"></i>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Salir
         </ion-item>

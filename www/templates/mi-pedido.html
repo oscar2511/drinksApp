@@ -1,31 +1,37 @@
-<ion-view view-title="">
+<ion-view cache-view="false">
 
-  <ion-content>
+  <ion-content > <!--ng-init="abiertoCerrado()"-->
 
     <div ng-show="mostrarMapa" id="map" data-tap-disabled="true">
+      <div align="center">
+        <span ng-if="errorUbicacion"><p  style="color:#ff6f75;">Error detectando la ubicación. Tu pedido se enviará en la dirección que ingreses en el formulario.</p></span>
+        <ion-spinner ng-if="!errorUbicacion" icon="lines"></ion-spinner>
+      </div>
     </div>
 
     <section ng-show="mostrarFormUbicacion">
       <div class="list list-inset">
         <div class="item" align="center">
-          <i class="ion-ios-location"></i> <h2>Ubicación detectada</h2>
-          <h2 style="color: #28a54c; text-decoration: underline;">{{direccion.calle}}, {{direccion.numero}}</h2>
-          <p align="left" style="color: darkgrey;">
-            Mejora la exactitud de la dirección<br>
-            ingresando datos de referencia.
-          </p>
+           <h2> <i class="ion-ios-location"></i> Ubicación detectada</h2>
+          <h2 style="color: #28a54c; text-decoration: underline;">{{ pedido.pedido.ubicacion.direccion.calle }}, {{pedido.pedido.ubicacion.direccion.numero}}</h2>
+          <div ng-show="errorUbicacion">
+            <p  style="color: #d3ced2;">Ubicación no encontrada</p>
+          </div>
         </div>
       </div>
-      <div class="list">
-        <label class="item item-input item-stacked-label">
-          <span class="input-label">Nro de teléfono</span>
-          <input type="text" placeholder="Teléfono">
-        </label>
-        <div class="list">
+      <div class="card">
+        <p align="left" style="color: #31a8dd; padding-top: 4px; padding-left: 4px; padding-bottom: 0px">Para facilitar la entrega es necesario que ingreses los siguientes datos (obligatorios):</p>
+        <div class="card">
           <label class="item item-input item-stacked-label">
-            <span class="input-label">Referencia</span>
-            <input type="text" placeholder='Dir. exacta, piso, dpto, "frente a..."'>
+            <span class="input-label">Nro de teléfono</span>
+            <input type="text" placeholder="Teléfono" ng-model="tel" ng-change="habilitarBtnPedido(tel,'tel')">
           </label>
+          <div class="list">
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">Referencia</span>
+              <input type="text" placeholder='Dir. exacta, piso, dpto, "frente a..."' ng-model="dir_ref" ng-change="habilitarBtnPedido(dir_ref,'dir_ref')">
+            </label>
+          </div>
         </div>
       </div>
       <div class="row">
@@ -36,76 +42,115 @@
         </div>
         <br>
         <div class="col">
-          <button class="button button-full button-positive">
-            Confirmar pedido
-          </button>
+
+        <button ng-disabled="!mapaCargado" class="button button-full button-positive" ng-click="confirmarPedido(tel, dir_ref)">
+          Confirmar pedido
+        </button>
+
         </div>
       </div>
-
     </section>
 
-    <section ng-show=" mostrarTotales ">
-      <div class="card">
-        <div class="item item-divider">
-          <div class="row">
-            <div class="col col-50">Subtotal</div>
-            <div class="col">$ {{ pedido.subTotal}}</div>
-          </div>
-          <div class="row">
-            <div class="col col-50"><strong>Total</strong></div>
-            <div class="col"><strong>$ {{ pedido.total }}</strong></div>
+    <section ng-if="!abierto">
+      <div class="list card">
+        <div class="item" align="center">
+          <h2>En estos momentos no estamos atendiendo</h2>
+        </div>
+        <div class="item item-body">
+          <img class="full-image img-cerrado-logo">
+          <h2>
+            Nuestro horario es de Jueves a Domingos de hs 22:00 a hs 6:00.
+            Puedes recorrer nuestra carta de bebidas para conocer nuestros productos.
+          </h2>
+          <div align="center">
+            <a href="#/app/categorias">
+              <button class="button button-large button-positive">
+                Ir a categorias
+              </button>
+            </a>
           </div>
         </div>
+      </div>
+    </section >
 
+
+    <section ng-if="abierto" ng-show=" mostrarTotales ">
+      <!--<img width="100%" height="120px" src="http://23.94.249.163/appDrinks/img/pago-logo.jpeg">-->
+      <img class="img-pago-logo">
+        <br>
+        <br>
         <div class="item">
+          <div class="item item-divider">
+            <font color="#696969">
+              <i class="ion-cash"></i>
+              Info. de tu pedido
+            </font>
+          </div>
+          <div class="row">
+            <div class="col col-50">Subtotal</div>
+            <div class="col">$ {{ pedido.pedido.subTotal}}</div>
+          </div>
+          <div class="row">
+            <div class="col col-50"><strong><h2>Total</h2></strong></div>
+            <div class="col"><strong><h2>$ {{ pedido.pedido.total }}</h2></strong></div>
+          </div>
           <div class="row">
             <div class="col col-25" >
-              <button ng-click="limpiarCarro()" class="button button-full button-default">
+              <button ng-disabled="!tieneProductos" ng-click="limpiarCarro()" class="button button-full button-default">
                 <i class="ion-trash-a"></i>
               </button>
             </div>
             <div class="col">
-              <button ng-click="verUbicacion()" class="button button-full button-positive">Finalizar compra</button>
+              <button ng-disabled="!tieneProductos"  ng-click="verUbicacion()" class="button button-full button-positive">Finalizar compra</button>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <div ng-if="abierto" class="list">
+      <div class="item item-divider">
+        <font color="#696969">
+          <i class="ion-clipboard"></i>
+           Detalle de tu pedido
+        </font>
+      </div>
+
+    <br>
+    <div ng-if="!tieneProductos">
+      <h4 style="color: #af7550";>&nbsp;&nbsp; <i class="ion-ios-information"></i> Aún no tienes productos en tu pedido. </h4>
+    </div>
+    <div ng-if="tieneProductos">
+      <div class="list" ng-repeat="ped in pedidoActual.detalle">
+        <div class="item item-avatar">
+          <img src="{{ ped.producto.urlImg }}">
+          <h2> {{ped.producto.nombre}}</h2>
+          <div class="row">
+            <div class="col" align="left">
+              <strong> {{ped.cantidad}}</strong>
+            </div>
+            <div class="col" align="left">
+              c/u $ {{ped.producto.precio}}
+            </div>
+            <div class="col col-75" align="left">
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <button ng-disabled="bloquearBtns" ng-click="addCantidad(ped)" class="button button-outline button-small ion-plus button-balanced"></button>
+            </div>
+            <div class="col">
+              &nbsp;<button ng-disabled="bloquearBtns" ng-click="restarCantidad(ped)" class="button button-outline button-small ion-minus button-assertive"></button>
+            </div>
+            <div class="col col-75">
+              &nbsp;<button ng-disabled="bloquearBtns" ng-click="eliminarProducto(ped)" class="button button-small button-assertive ion-trash-a assertive">
+              </button>
+              <strong>&nbsp;Subt. $ {{ ped.subTotal }}</strong>
             </div>
           </div>
         </div>
       </div>
-    </section>
-
-    <div class="list">
-      <div class="item item-divider" align="left">
-         <h2 style="color: #007aff;">Detalle de tu pedido</h2>
-      </div>
     </div>
-    <div class="list" ng-repeat="ped in pedidoActual.detalle" ng-if="$index > 0">
-      <div class="item item-avatar">
-        <img src="http://oscarnr.16mb.com/appDrinks/img/productos/{{ped.producto.urlImg}}">
-        <h2> {{ped.producto.nombre}}</h2>
-        <div class="row">
-          <div class="col" align="left">
-            <strong> {{ped.cantidad}}</strong>
-          </div>
-          <div class="col" align="left">
-            c/u $ {{ped.producto.precio}}
-          </div>
-          <div class="col col-75" align="left">
-
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <button ng-disabled="bloquearBtns" ng-click="addCantidad(ped)" class="button button-outline button-small ion-plus button-balanced"></button>
-          </div>
-          <div class="col">
-            &nbsp;<button ng-disabled="bloquearBtns" ng-click="restarCantidad(ped)" class="button button-outline button-small ion-minus button-assertive"></button>
-          </div>
-          <div class="col col-75">
-            &nbsp;<button ng-disabled="bloquearBtns" ng-click="eliminarProducto(ped)" class="button button-small button-assertive ion-trash-a assertive">
-            </button>
-            <strong>&nbsp;Subt. $ {{ ped.subTotal }}</strong>
-          </div>
-        </div>
-      </div>
     </div>
   </ion-content>
 </ion-view>

@@ -1,0 +1,247 @@
+<ion-view cache-view="false" view-title="">
+  <ion-content>
+
+
+    <div class="card">
+      <div class="item item-divider">
+        <font color="#696969">
+          <i class="ion-gear-a"></i>
+          Acciones
+        </font>
+      </div>
+      <div class="item item-text-wrap">
+        <div class="row">
+          <div class="col">
+            <button class="button button-royal button-outline icon ion-ios-paperplane" ng-click="openModalNotif()"></button>
+          </div>
+          <div class="col">
+            <button class={{claseBtn}}
+                    ng-class="{claseBtnMapaAb: mostrarMapa == true}"
+                    ng-click="verMapa(mostrarMapa)"> Mapa</button>
+          </div>
+          <div class="col.50">
+            <button class="button button-clear icon-left ion-flash button-calm" ng-click="openModal()">Estado</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <section ng-show="!mostrarMapa">
+    <div class="card">
+      <div class="item item-divider">
+        <font color="#696969">
+          <i class="ion-information-circled"></i>
+          Inf. del pedido
+        </font>
+      </div>
+      <div class="col">
+
+      </h2>
+      <div class="item item-text-wrap">
+        <div class="row">
+             <section ng-switch="pedido.state">
+              <span class="badge badge-left badge-balanced" ng-switch-when="1">Nuevo</span>
+              <span class="badge badge-left badge-energized" ng-switch-when="2">En proceso</span>
+              <span class="badge badge-left badge-positive" ng-switch-when="3">Cerrado</span>
+              <span class="badge badge-left badge-assertive" ng-switch-when="4">Cancelado</span>
+            </section>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col">
+            <strong>Nro. Pedido:</strong> {{pedido.numero}}
+          </div>
+          <div class="col">
+            <strong>Fecha:</strong> {{pedido.fecha | date:'dd-MM-yyyy' }}  {{pedido.fecha | date:'HH:mm' }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <strong>Dirección:</strong>
+          </div>
+          <div class="col">
+            {{ pedido.address.direccion.calle }} , {{ pedido.address.direccion.numero }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <strong>Total:</strong>
+          </div>
+          <div class="col">
+            $ {{pedido.total}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <strong>Tel: </strong>
+          </div>
+          <div class="col">
+            {{ pedido.address.referencia.tel }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <strong>Referencia: </strong>
+          </div>
+          <div class="col">
+            {{ pedido.address.referencia.dir_ref }}
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+
+
+    <section ng-show="mostrarMapa">
+      <div class="card">
+        <div id="maps" data-tap-disabled="true" style="width: 100%; padding: 10px; height: 250px;">
+          <div align="center" >
+            <ion-spinner icon="lines"></ion-spinner>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <div class="item item-divider">
+      <font color="#696969">
+        <i class="ion-paperclip"></i>
+        Productos
+      </font>
+    </div>
+
+    <ion-list>
+      <ion-item ng-repeat="detalle in pedidoDetalle">
+        <h2> {{ detalle.producto.nombre }}</h2>
+        <div class="row">
+          <div class="col" align="left">
+            <strong>Cant.  {{ detalle.cantidad }}</strong>
+          </div>
+          <div class="col" align="left">
+            Subt. $ {{ detalle.subTotal }}
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+
+
+
+    <!-- modal estado-->
+    <script id="modal-estado.html" type="text/ng-template">
+      <ion-modal-view cache-view="false" style="width: 100%; height: 50%;margin-top: 40px; ">
+        <ion-header-bar>
+          <h1 class="title">Estado del pedido</h1><button class="button button-outline button-assertive"  ng-click="closeModal()">Cerrar</button>
+        </ion-header-bar>
+        <ion-content>
+          <div class="card">
+            <div class="item item-text-wrap">
+              <ion-list ng-init="estado = pedido.state">
+                <ion-radio ng-model = "estado" ng-value="1" style="color: #33CD5F;" ng-disabled="pedido.state == 3 || pedido.state == 4" ng-change="cambiarEstado(pedido.id, 1)">Nuevo</ion-radio>
+                <ion-radio ng-model = "estado" ng-value="2" style="color: #FFC900;" ng-disabled="pedido.state == 3 || pedido.state == 4" ng-click="cambiarEstado(pedido.id, 2)">En proceso</ion-radio>
+                <ion-radio ng-model = "estado" ng-value="3" style="color: #387EF5;" ng-disabled="pedido.state == 4" ng-click="cambiarEstado(pedido.id, 3)">Cerrado</ion-radio>
+                <ion-radio ng-model = "estado" ng-value="4" style="color: #EF473A;" ng-disabled="pedido.state == 3" ng-click="cambiarEstado(pedido.id, 4)">Cancelado</ion-radio>
+              </ion-list>
+            </div>
+          </div>
+
+        </ion-content>
+      </ion-modal-view>
+    </script>
+
+    <!-- modal notificacion -->
+    <script id="modal-notificacion.html" type="text/ng-template">
+      <ion-modal-view style="width: 100%; height: 50%;margin-top: 40px;">
+        <ion-header-bar>
+          <h1 class="title">Enviar notificación </h1><button class="button button-outline button-assertive"  ng-click="closeModalNotif()">Cerrar</button>
+        </ion-header-bar>
+        <ion-content>
+          <div class="card">
+            <form name="notificacion">
+              <div class="list">
+                <label class="item item-input item-floating-label">
+                  <span class="input-label">Título</span>
+                  <input ng-model="titulo" name="titulo" type="text" placeholder="Título de la notificación" ng-maxlength="25" required>
+                  <span ng-show="notificacion.titulo.$error.maxlength">
+                    <h3><font color="red"> Los caracteres no pueden exceder los 25</font></h3>
+                  </span>
+                </label>
+
+                <label class="item item-input item-floating-label">
+                  <span class="input-label">Mensaje</span>
+                  <input ng-model="contenido" name="contenido" type="text" placeholder="Mensaje a enviar" ng-maxlength="100" required>
+                  <span ng-show="notificacion.contenido.$error.maxlength">
+                  <h3><font color="red"> Los caracteres no pueden exceder los 100</font></h3>
+                </span>
+                </label>
+                <div style="padding: 15px;">
+                  <button ng-disabled="notificacion.$invalid" ng-click="enviarPushUsuario(titulo, contenido)" class="button button-block button-balanced  icon ion-ios-paperplane">
+                    Enviar notificación
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="card">
+            <p style="color:#B8B9BC;">* Máx. carateres para el título: 25</p>
+            <p style="color:#B8B9BC;">* Máx. carateres para el cuerpo del mensaje: 100</p>
+          </div>
+        </ion-content>
+      </ion-modal-view>
+    </script>
+
+
+
+    <!-- modal mapa-->
+    <script id="modal-mapa.html" type="text/ng-template">
+      <ion-modal-view style="width: 100%; height: 50%;margin-top: 40px;">
+        <ion-header-bar>
+          <h1 class="title">Ubicación</h1><button class="button button-outline button-assertive"  ng-click="closeModalMapa()">Cerrar</button>
+        </ion-header-bar>
+        <ion-content>
+          <div class="card">
+            <h2 style="color:#1e6ed1; font-size: 18px;">
+              &nbsp;Detalle de la ubicación
+            </h2>
+            <div class="item item-text-wrap">
+              <div class="row">
+                <div class="col">
+                  <strong>Calle: </strong> {{pedido.calle}}
+                </div>
+                <div class="col">
+                  <strong>Número: </strong> {{pedido.nro}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <strong>Teléfono: </strong>{{pedido.telefono}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <strong>Referencia: </strong>{{pedido.dirReferencia}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div ng-include src="'templates/Admin/mapa-detalle.html'"></div>
+          </div>
+        </ion-content>
+      </ion-modal-view>
+    </script>
+
+
+
+
+
+  </ion-content>
+</ion-view>
+<!--<div class="bar bar-footer bar-light" >
+  <button ng-click="limpiarCarro()" class="button button-positive">
+    Finalizar la compra
+  </button>
+  Limpiar carro<a href="#/app/mi-pedido" class="button button-clear pull-rigth"><i class="icon ion-ios-cart"></i></a>
+</div>
+-->

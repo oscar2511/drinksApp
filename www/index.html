@@ -12,9 +12,11 @@
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
 
+    <!-- material -->
+
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
-<script src="lib/ionic-platform-web-client/dist/ionic.io.bundle.min.js"></script>
+    <script src="lib/ionic-platform-web-client/dist/ionic.io.bundle.min.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="lib/ngCordova/dist/ng-cordova.js"></script>
@@ -24,6 +26,23 @@
     <script src="lib/ngCordova/dist/ng-cordova.js"></script>
     <!-- Cordova is bootstrapped by ionic-platform-web-client, uncomment this if you remove ionic-platform-web-client... -->
 <!-- <script src="cordova.js"></script> -->
+    <script src="lib/angular-base64/angular-base64.js"></script>
+
+    <!-- chart -->
+    <link rel="stylesheet" href="lib/angular-chart.js/dist/angular-chart.css">
+    <script src="lib/Chart.js/Chart.js"></script>
+    <script src="lib/angular-chart.js/dist/angular-chart.min.js"></script>
+
+    <!-- img cache -->
+    <script src="lib/imgcache.js/js/imgcache.js"></script>
+    <script src="lib/ionic-img-cache/ionic-img-cache.min.js"></script>
+
+    <!--file upload-->
+    <script src="lib/ng-file-upload/dist/ng-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
+    <script src="lib/ng-file-upload/dist/ng-file-upload.min.js"></script>
+
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.7.20.min.js"></script>
+
 
     <!-- your app's js -->
     <script src="js/app.js"></script>
@@ -35,9 +54,23 @@
     <script src="js/Controladores/SalirCtrl.js"></script>
     <script src="js/Controladores/HomeCtrl.js"></script>
     <script src="js/Controladores/ContactoCtrl.js"></script>
+    <script src="js/Controladores/Admin/EstadisticaCtrl.js"></script>
+    <script src="js/Controladores/Admin/PedidoDetalleCtrl.js"></script>
+    <script src="js/Controladores/Admin/Admin.js"></script>
+    <script src="js/Controladores/Admin/admProductCtrl.js"></script>
+    <script src="js/Controladores/Admin/Configuracion.js"></script>
+    <script src="js/Controladores/Admin/StockCtrl.js"></script>
     <script src="js/Controladores/ProductoCtrl.js"></script>
     <script src="js/Services/pedidoService.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDM7IL8Ep6r1jUoMXZUo0fDGNuigfX-GU" type="text/javascript"></script>
+    <script src="js/Services/mapaService.js"></script>
+    <script src="js/Services/productService.js"></script>
+    <script src="js/Services/notificacionService.js"></script>
+    <script src="js/Services/dispositivoService.js"></script>
+    <script src="js/Controladores/PedidoPendiente.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmxROw57-pjoEDqN4JTnDr6VMPqAx088Y" type="text/javascript"></script>
+
+    <script src="js/Services/Constants/ConstantsService.js"></script>
+    <script src="js/Services/UtilitiesService.js"></script>
   </head>
 
   <body ng-app="starter">

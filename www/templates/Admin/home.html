@@ -1,0 +1,90 @@
+<ion-view cache-view="false" view-title="" ng-cloak>
+  <ion-nav-bar class="bar-custom">
+    <ion-nav-buttons side="left">
+      <button ng-click="atrasAdmin()" class="button back-button buttons button-clear header-item">
+      <i class="icon ion-ios-arrow-back"></i> Atrás </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+      <button class="button button-assertive icon-rigth button-icon ion-android-more-vertical" ng-click="popover.show($event)"></button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+
+  <ion-content>
+    <ion-refresher
+      pulling-text="Suelta para refrescar..."
+      on-refresh="getPedidos()">
+    </ion-refresher>
+    <img class="img-admin-logo">
+    </br></br>
+
+    <div class="item">
+      <table align="center" style="width: 100%;">
+        <tr>
+          <td ng-click="getPedidos()"><i class="ion-asterisk"></i> <filtro ng-show="!tieneFiltro"><u>Todos</u></filtro><filtro ng-show="tieneFiltro">Todos</filtro></td>
+          <td ng-click="getPedidos(1)"><i class="ion-speakerphone balanced"></i> <filtro ng-show="tieneFiltro && estadoFiltro == 1"><u>{{nuevos}}</u></filtro><filtro ng-show="estadoFiltro !=1">{{nuevos}}</filtro></td>
+          <td ng-click="getPedidos(2)"> <i class="ion-clock energized"></i> <filtro ng-show="tieneFiltro && estadoFiltro == 2"><u>{{enCamino}}</u></filtro><filtro ng-show="estadoFiltro !=2">{{enCamino}}</filtro></td>
+          <td ng-click="getPedidos(4)"> <i class="ion-close assertive"></i> <filtro ng-show="tieneFiltro && estadoFiltro == 4"><u>{{cancelados}}</u></filtro><filtro ng-show="estadoFiltro !=4 ">{{cancelados}}</filtro></td>
+          <td ng-click="getPedidos(3)"><i class="ion-checkmark positive"></i> <filtro ng-show="tieneFiltro && estadoFiltro == 3"><u>{{recibidos}}</u></filtro><filtro ng-show="estadoFiltro !=3 ">{{recibidos}}</filtro></td>
+        </tr>
+      </table>
+    </div>
+    <div class="item item-divider">
+      <font color="#696969">
+        <i class="ion-clipboard"></i>
+        Listado de pedidos
+      </font>
+    </div>
+    <div class="list" ng-repeat="pedido in pedidos">
+      <a class="item" href="#/app/admin/pedido/{{pedido}}">
+        <div class="row">
+          <div class="col.25">
+            <span align="left" ng-if="pedido.state == 1" class="badge badge-balanced">Nuevo</span>
+            <span ng-if="pedido.state == 2" class="badge badge-energized">En proceso</span>
+            <span ng-if="pedido.state == 3" class="badge badge-positive">Cerrado</span>
+            <span ng-if="pedido.state == 4" class="badge badge-assertive">Cancelado</span>
+          </div>
+          <div class="col">
+            <p> <strong>Nro.: </strong><b> {{pedido.numero}}</b></p>
+            <p> <strong>Fecha : </strong> {{pedido.fecha | date:'dd-MM-yyyy' }} {{pedido.fecha | date:'HH:mm' }}</p>
+            <p> <strong>Monto: </strong> $ {{pedido.total}}</p>
+            <p> <strong>Dirección: </strong> {{pedido.address.direccion.calle}} {{pedido.address.direccion.numero}}</p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+  </ion-content>
+
+
+  <script id="templates/popover.html" type="text/ng-template">
+    <ion-popover-view>
+      <ion-content>
+        <div class="list">
+          <a ng-click="closePopover()" class="item" href="#/app/estadistica" target="_blank">
+            <font color="#1e6ed1"><i class="ion-pie-graph"></i>&nbsp;&nbsp; Estadísticas</font>
+          </a>
+          <!--
+          <a ng-click="closePopover()" class="item" href="#" target="_blank">
+            <font color="#1e6ed1"><i class="ion-calculator"></i>&nbsp;&nbsp; Reportes</font>
+          </a>
+          -->
+          <a ng-click="closePopover()" class="item" href="#/app/stock" target="_blank">
+            <font color="#1e6ed1"><i class="ion-podium"></i>&nbsp;&nbsp; Stock </font>
+          </a>
+          <a ng-click="closePopover()" class="item" href="#/app/admin/adm-product" target="_blank">
+            <font color="#1e6ed1"><i class="ion-gear-b"></i>&nbsp;&nbsp; Adm productos </font>
+          </a>
+          <!--
+          <a ng-click="closePopover()" class="item" href="#/app/configuracion" target="_blank">
+            <font color="#1e6ed1"><i class="ion-gear-b"></i>&nbsp;&nbsp; Configuración </font>
+          </a>
+          -->
+        </div>
+      </ion-content>
+    </ion-popover-view>
+  </script>
+
+
+
+
+</ion-view>
