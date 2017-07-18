@@ -13,7 +13,7 @@
           <!--<img align="center" ion-img-cache ng-src="{{urls.productos}}{{producto.urlImg}}">-->
         </div>
 
-        <p><h2 style="color:grey;">{{producto.descripcion}}</h2></p>
+        <p><h2 style="color:grey;">{{ decode(producto.descripcion) }}</h2></p>
         <div align="left"><h2>$ {{producto.precio}}</h2></div>
 
         <div class="row" align="center">

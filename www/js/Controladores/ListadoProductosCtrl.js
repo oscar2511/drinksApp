@@ -5,8 +5,8 @@ angular.module('starter')
                                               $http,
                                               $ionicLoading,
                                               $rootScope,
-                                              $base64,
-                                              ConstantsService)
+                                              ConstantsService,
+                                              UtilitiesService)
   {
     $ionicLoading.show({
       template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
@@ -32,19 +32,25 @@ angular.module('starter')
           $scope.productos.push({
             id:           valor._id,
             precio:       valor.price,
-            descripcion:  valor.description,
+            descripcion:  UtilitiesService.encode(valor.description),
             nombre:       valor.name,
             stock:        valor.stock ? 'Disponible' : 'Sin stock',
             idCategoria:  valor.categoriaId,
-            urlImg  :     $base64.encode(valor.urlImg)
+            urlImg  :     UtilitiesService.encode(valor.urlImg)
           });
         });
         $ionicLoading.hide();
       });
 
-    $scope.decodeUrl = function(urlEncoded) {
-      return $base64.decode(urlEncoded)
-    }
+
+    /**
+     * Decode url
+     * @param urlEncoded
+     * @returns {*}
+     */
+    $scope.decode = function(urlEncoded) {
+      return UtilitiesService.decode(urlEncoded)
+    };
 
 
   });

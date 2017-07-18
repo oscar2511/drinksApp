@@ -6,16 +6,13 @@ angular.module('starter')
                                        $ionicPopup,
                                        $state,
                                        $timeout,
-                                       $base64
+                                       UtilitiesService
   )
   {
     $scope.producto = angular.fromJson($stateParams.producto);
-    console.log($scope.producto);
     $scope.cantidad = 1;
 
-    $scope.pedido   = PedidoService;
-
-    $scope.producto.urlImg = $base64.decode($scope.producto.urlImg);
+    $scope.producto.urlImg = UtilitiesService.decode($scope.producto.urlImg);
 
     /**
      *  Agregar producto al carro
@@ -82,5 +79,13 @@ angular.module('starter')
       $scope.cantidad = $scope.cantidad - 1;
     };
 
+    /**
+     * Decode url
+     * @param urlEncoded
+     * @returns {*}
+     */
+    $scope.decode = function(urlEncoded) {
+      return UtilitiesService.decode(urlEncoded)
+    };
 
   });
