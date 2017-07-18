@@ -2,7 +2,6 @@ angular.module('starter')
   .service('mapaService',
     function($q, $rootScope, $cordovaGeolocation) {
 
-
   this.verMapa = function(lat, long) {
     var styles = [
       {
@@ -53,9 +52,6 @@ angular.module('starter')
 
       });
   }
-
-
-
 
 
   });

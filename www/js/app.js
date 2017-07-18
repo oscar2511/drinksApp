@@ -1,4 +1,4 @@
-angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.controllers','ionic.service.push', 'chart.js', 'ionicImgCache', 'base64'])
+angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.controllers','ionic.service.push', 'chart.js', 'ionicImgCache', 'base64', 'ngFileUpload'])
 
 .run(function($ionicPlatform, $http, $rootScope, $q, dispositivoService, ConstantsService, PedidoService, NotificacionService,  $ionicPush, $ionicUser) {
 
@@ -18,6 +18,25 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
     $rootScope.abierto = true;
 
     $rootScope.totalProductos = PedidoService.getTotalProductos();
+
+    $ionicPlatform.ready(function() {
+     try {
+       var push = new Ionic.Push({
+         'debug': true
+        // 'onNotification': function (notificacion) {
+         //NotificacionService.postNotificacion(notificacion);
+       //}
+       });
+     } catch (e) {
+        alert(e);
+      }
+
+     push.register(function(token) {
+       //alert(token.token);
+       //console.log("Mi token:", token.token);
+       push.saveToken(token);
+     })
+  });
 
     /**
      *  Obtengo los token de los dispositivos administradores
@@ -78,6 +97,16 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
       'menuContent': {
         templateUrl: 'templates/listadoProductos.html',
         controller: 'listadoProductosCtrl'
+      }
+    }
+  })
+
+  .state('app.admProduct', {
+    url: '/admin/adm-product',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/Admin/admProduct.html',
+        controller: 'admProductCtrl'
       }
     }
   })

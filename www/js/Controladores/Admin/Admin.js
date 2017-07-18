@@ -18,7 +18,7 @@ angular.module('starter')
         $ionicLoading.hide();
         $state.go('app.error');
       },
-      20000
+      10000
     );
 
     var estado = null;
@@ -55,7 +55,6 @@ angular.module('starter')
     });
 
     $scope.verDetallePedido = function(pedido){
-      console.log(pedido);
       $state.go('app.pedDet',{pedido : pedido});
 
     };
@@ -64,21 +63,19 @@ angular.module('starter')
      * Obtener los pedidos del servidor
      *
      */
-    $scope.getPedidos = function(estado){
-
-      var url ='';
+    $scope.getPedidos = function(estado) {
+      var url = '';
       $scope.tieneFiltro = estado ? true : false;
       $scope.estadoFiltro = estado;
 
       if(!estado) url = ConstantsService.LIST_ORDERS;
-      else  url = ConstantsService.LIST_ORDERS + '/' + estado;
+      else  url = ConstantsService.LIST_ORDERS_BY_STATE + estado;
 
       $ionicLoading.show({
         template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
       });
       $http.get(url)
-        .then(function (data){
-          console.log(data);
+        .then(function (data) {
           setPedidos(data.data, estado);
           $ionicLoading.hide();
           $timeout.cancel(timer);

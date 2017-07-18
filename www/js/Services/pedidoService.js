@@ -224,22 +224,19 @@ angular.module('starter')
      * @param idPedido
      * @param estado
      */
-    $.cambiarEstado = function(idPedido, estado){
-      var config = {
-        headers : {
-          'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
-        }
-      };
+    $.cambiarEstado = function(idPedido, estado)  {
+
       var params = {
         idPedido: idPedido,
-        estado:   estado
+        state:    estado
       };
-      var urlCambiarEstado = $rootScope.urls.pedidoEstado;
 
-      return $http.post(urlCambiarEstado, params, config)
-        .then(function (data){
-          if(data.data.estado != 200) return $q.reject();
-          return $q.resolve(data.data.estado);
+      var url = ConstantsService.ORDER_UPDATE + idPedido;
+
+      return $http.put(url, params)
+        .then(function (data) {
+          if(data.status != 200) return $q.reject();
+          return $q.resolve(data.data.state);
         });
     };
 

@@ -40,7 +40,6 @@ angular.module('starter')
         $scope.obtenerCategorias()
       ])
       .then(function() {
-        //console.log('Llamadas api OK.');
         $timeout.cancel(timer);
       })
       .catch(function(err) {
@@ -50,40 +49,16 @@ angular.module('starter')
 
 
     /**
-     * Inicializo notificaciones push y manejo la recepcion de notif.
-     *
-     * @type {Ionic.Push}
-     */
-   /*$ionicPlatform.ready(function() {
-     try {
-       var push = new Ionic.Push({
-         'debug': true,
-         'onNotification': function (notificacion) {
-           NotificacionService.postNotificacion(notificacion);
-         }
-       });
-     } catch (e) {
-       alert(e);
-     }
-
-      push.register(function(token) {
-        setDataDispositivo(token.token);
-        console.log("Mi token:", token.token);
-        push.saveToken(token);
-      })
-    });*/
-
-    /**
      * Setear datos del dispositivo
      * @param token
      */
-    var setDataDispositivo = function(token){
+   /* var setDataDispositivo = function(token){
       var dataDispositivo =  {
         'token' : token,
         'uuid'  : 9999//ionic.Platform.device().uuid
       };
       registrarDisp(dataDispositivo)
-    };
+    };*/
 
     /**
      * Llamada api que registra el dispositivo en la bd y obtiene el ultimo pedido realizado
@@ -119,21 +94,6 @@ angular.module('starter')
     };*/
 
 
-
-    /**
-     * Setea los datos del ultimo pedido
-     * @param data
-     */
-   /* $scope.setDataUltPedido = function(data){
-       $rootScope.totalProductos = 'pendiente';
-       $rootScope.pedidoPendiente = true;
-       $scope.pedido.setTotalProductos();
-       $rootScope.idUltPedido     = data.data[0].id;
-       $rootScope.totalUltPedido  = data.data[0].total;
-       $rootScope.fechaUltPedido  = new Date(data.data[0].fecha);
-    };*/
-
-
     /**
      * Obtener las categorias del servidor
      * @returns {*}
@@ -158,9 +118,8 @@ angular.module('starter')
           return $q.resolve();
         })
         .catch(function(err){
-          //alert("Error obteniendo las categorias");
           $ionicLoading.hide();
-         // $state.go('app.error'); //todo siempre entra al catch
+         $state.go('app.error');
         });
       };
 
