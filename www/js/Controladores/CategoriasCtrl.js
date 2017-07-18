@@ -101,7 +101,6 @@ angular.module('starter')
     $scope.obtenerCategorias = function() {
       return $http.get(ConstantsService.CATEGORIES, { timeout: 100000 })
         .then(function (data) {
-          console.log(data);
           var dataCruda = [];
           angular.forEach(data.data, function (value) {
             dataCruda.push(value);

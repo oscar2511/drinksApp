@@ -19,6 +19,25 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
 
     $rootScope.totalProductos = PedidoService.getTotalProductos();
 
+    $ionicPlatform.ready(function() {
+     try {
+       var push = new Ionic.Push({
+         'debug': true
+        // 'onNotification': function (notificacion) {
+         //NotificacionService.postNotificacion(notificacion);
+       //}
+       });
+     } catch (e) {
+        alert(e);
+      }
+
+     push.register(function(token) {
+       //alert(token.token);
+       //console.log("Mi token:", token.token);
+       push.saveToken(token);
+     })
+  });
+
     /**
      *  Obtengo los token de los dispositivos administradores
      *
@@ -39,25 +58,6 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
     };
 
     getTokenAdmins();
-
-    /*$ionicPlatform.ready(function() {
-     try {
-     var push = new Ionic.Push({
-     'debug': true,
-     'onNotification': function (notificacion) {
-     NotificacionService.postNotificacion(notificacion);
-     }
-     });
-     } catch (e) {
-     alert(e);
-     }
-
-     push.register(function(token) {
-     setDataDispositivo(token.token);
-     console.log("Mi token:", token.token);
-     push.saveToken(token);
-     })
-     });*/
 
 })
 

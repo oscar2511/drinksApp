@@ -14,7 +14,8 @@
   var $ = this;
 
   $.API_PORT = 3000;
-  $.SERVER   = 'http://localhost';
+  //$.SERVER   = 'http://localhost';
+  $.SERVER   = "http://34.211.93.96";
 
   $.DEVICES_ADMIN         = $.SERVER + ':'+ $.API_PORT + '/api/devices/administrators';
   $.CATEGORIES            = $.SERVER + ':'+ $.API_PORT +'/api/categories';
