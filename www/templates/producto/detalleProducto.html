@@ -3,23 +3,23 @@
   <ion-content>
     <div class="list card">
       <div class="item item-avatar">
-        <img ion-img-cache ng-src="{{urls.productos}}{{producto.urlImg}}">
+        <img src="{{producto.urlImg}}">
         <h2>{{producto.nombre}}</h2>
         <p>$ {{producto.precio}}</p>
       </div>
 
       <div class="item item-body">
-        <div class="img-det-prod" style=" background-image: url('{{urls.productos}}{{producto.urlImg}}')">
+        <div class="img-det-prod" style=" background-image: url('{{producto.urlImg}}')">
           <!--<img align="center" ion-img-cache ng-src="{{urls.productos}}{{producto.urlImg}}">-->
         </div>
 
-        <p>{{producto.descripcion}}</p>
-        <div align="left"><h1>$ {{producto.precio}}</h1></div>
+        <p><h2 style="color:grey;">{{ decode(producto.descripcion) }}</h2></p>
+        <div align="left"><h2>$ {{producto.precio}}</h2></div>
 
         <div class="row" align="center">
           <div class="col" align="center">
             <button ng-disabled="cantidad < 2" ng-click="restarCantidad(ped)" class="button button-outline button-small ion-minus button-assertive"></button>
-            &nbsp;&nbsp; <span style="font-size: 22px;">{{cantidad}}</span> &nbsp;&nbsp;
+            &nbsp;&nbsp; <span style="font-size: 22px;"> {{ cantidad }} </span> &nbsp;&nbsp;
             <button ng-disabled="cantidad > 99" ng-click="sumarCantidad(ped)" class="button button-outline button-small ion-plus button-balanced"></button>
           </div>
         </div>
@@ -29,12 +29,12 @@
           <span ng-show="addPedido.cantidad.$error.max">
             <h3><font color="red"> La cantidad no puede exceder 100</font></h3>
           </span>
-          <div ng-show="!pedidoPendiente && producto.stock=='Stock'">
-            <button ng-if="abierto" ng-click="addAlCarro(producto, cantidad)" class="button  button-block icon-center ion-plus-circled button-positive">
+          <div ng-show="producto.stock">
+            <button ng-if="abierto" ng-disabled="producto.stock != 'Disponible'" ng-click="addAlCarro(producto, cantidad)" class="button  button-block icon-center ion-plus-circled button-positive">
               Agregar
             </button>
           </div>
-          <div ng-show="producto.stock=='Sin stock'">
+          <div ng-show="producto.stock == 'Sin stock'">
             <span>
               <h2><font color="#951d1d"><i class="ion-alert-circled"></i> Producto sin Stock</font></h2>
             </span>

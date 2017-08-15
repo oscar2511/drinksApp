@@ -13,7 +13,8 @@ angular.module('starter')
            $q,
            $state,
            NotificacionService,
-           $timeout
+           $timeout,
+           ConstantsService
   ){
 
     $ionicLoading.show({
@@ -39,7 +40,6 @@ angular.module('starter')
         $scope.obtenerCategorias()
       ])
       .then(function() {
-        //console.log('Llamadas api OK.');
         $timeout.cancel(timer);
       })
       .catch(function(err) {
@@ -49,49 +49,23 @@ angular.module('starter')
 
 
     /**
-     * Inicializo notificaciones push y manejo la recepcion de notif.
-     *
-     * @type {Ionic.Push}
-     */
-   $ionicPlatform.ready(function() {
-      var push = new Ionic.Push({
-        'debug': true,
-        'onNotification': function (notificacion) {
-          NotificacionService.postNotificacion(notificacion);
-        }
-      });
-
-      push.register(function(token) {
-        setDataDispositivo(token.token);
-        alert("token:" + token.token);
-        console.log("Mi token:", token.token);
-        push.saveToken(token);
-      })
-    });
-
-    /**
      * Setear datos del dispositivo
      * @param token
      */
-    var setDataDispositivo = function(token){
+   /* var setDataDispositivo = function(token){
       var dataDispositivo =  {
         'token' : token,
-        'uuid'  : ionic.Platform.device().uuid
+        'uuid'  : 9999//ionic.Platform.device().uuid
       };
-      alert("uuid: " + ionic.Platform.device().uuid);
       registrarDisp(dataDispositivo)
-    };
+    };*/
 
     /**
      * Llamada api que registra el dispositivo en la bd y obtiene el ultimo pedido realizado
      *
      * @param dataDispositivo
      */
-    var intentos            = 0,
-        esperaEntreIntentos = 1000,
-        maxIntentos         = 3;
-
-    var registrarDisp = function(dataDispositivo){
+    /*var registrarDisp = function(dataDispositivo){
       if(typeof(dataDispositivo.uuid) != 'undefined' && dataDispositivo.token) {
         var config = {
           headers : {
@@ -100,6 +74,7 @@ angular.module('starter')
         };
         $scope.pedido.dispositivo.uuid  = dataDispositivo.uuid;
         $scope.pedido.dispositivo.token = dataDispositivo.token;
+
         var urlDispositivo = $rootScope.urls.registrarDispositivo;
         $http.post(urlDispositivo, dataDispositivo, config)
           .then(function (data) {
@@ -111,39 +86,12 @@ angular.module('starter')
           .catch(function(){
             alert("Error obteniendo el ultimo pedido del dispositivo y/o registrandolo");
           });
-          /*.catch(function () {
-            console.log('Error registrando el dispositivo, intento: ' + intentos);
-            if (intentos < maxIntentos) {
-              intentos++;
-              $timeout(function () {
-                registrarDisp(dataDispositivo);
-              }, esperaEntreIntentos);
-            }else{
-              $state.go('app.error');
-              $ionicLoading.hide();
-            }
-          });*/
       }else {
         console.log('No se encontró uuid o token, por favor cierra la aplicación y vuelve a iniciarla');
         $ionicLoading.hide();
         $state.go('app.error');
       }
-    };
-
-
-
-    /**
-     * Setea los datos del ultimo pedido
-     * @param data
-     */
-    $scope.setDataUltPedido = function(data){
-       $rootScope.totalProductos = 'pendiente';
-       $rootScope.pedidoPendiente = true;
-       $scope.pedido.setTotalProductos();
-       $rootScope.idUltPedido     = data.data[0].id;
-       $rootScope.totalUltPedido  = data.data[0].total;
-       $rootScope.fechaUltPedido  = new Date(data.data[0].fecha);
-    };
+    };*/
 
 
     /**
@@ -151,28 +99,27 @@ angular.module('starter')
      * @returns {*}
      */
     $scope.obtenerCategorias = function() {
-      var url = $rootScope.urls.categorias;
-      return $http.get(url, { timeout: 100000 })
+      return $http.get(ConstantsService.CATEGORIES, { timeout: 100000 })
         .then(function (data) {
+          var dataCruda = [];
           angular.forEach(data.data, function (value) {
-            $scope.dataCruda = value;
+            dataCruda.push(value);
           });
-          $scope.categorias = [];
 
-          angular.forEach($scope.dataCruda, function (valor) {
+          $scope.categorias = [];
+          angular.forEach(dataCruda, function (valor) {
             $scope.categorias.push({
-              id    : valor.id,
-              nombre: valor.nombre,
-              urlImg: valor.url_imagen
+              id    : valor._id,
+              nombre: valor.name,
+              urlImg: valor.urlImg
             });
           });
           $ionicLoading.hide();
           return $q.resolve();
         })
         .catch(function(err){
-          alert("Error obteniendo las categorias");
           $ionicLoading.hide();
-         // $state.go('app.error'); //todo siempre entra al catch
+         $state.go('app.error');
         });
       };
 

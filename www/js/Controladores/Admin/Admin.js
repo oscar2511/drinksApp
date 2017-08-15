@@ -8,7 +8,8 @@ angular.module('starter')
     $state,
     $timeout,
     $ionicActionSheet,
-    $rootScope
+    $rootScope,
+    ConstantsService
   ){
 
 
@@ -17,12 +18,10 @@ angular.module('starter')
         $ionicLoading.hide();
         $state.go('app.error');
       },
-      20000
+      10000
     );
 
     var estado = null;
-    //var url = 'http://23.94.249.163/appDrinks-dev/admin/listarPedidos.php';
-    //var url = '$rootScope.urls.listarPedidos';
 
     $scope.atrasAdmin = function (){
       $state.go('app.categorias');
@@ -56,7 +55,6 @@ angular.module('starter')
     });
 
     $scope.verDetallePedido = function(pedido){
-      console.log(pedido);
       $state.go('app.pedDet',{pedido : pedido});
 
     };
@@ -65,20 +63,19 @@ angular.module('starter')
      * Obtener los pedidos del servidor
      *
      */
-    $scope.getPedidos = function(estado){
-
-      var url ='';
+    $scope.getPedidos = function(estado) {
+      var url = '';
       $scope.tieneFiltro = estado ? true : false;
       $scope.estadoFiltro = estado;
 
-      if(!estado) url = $rootScope.urls.listarPedidos;
-      else  url = $rootScope.urls.listarPedidos+'/'+estado;
+      if(!estado) url = ConstantsService.LIST_ORDERS;
+      else  url = ConstantsService.LIST_ORDERS_BY_STATE + estado;
 
       $ionicLoading.show({
         template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
       });
       $http.get(url)
-        .then(function (data){
+        .then(function (data) {
           setPedidos(data.data, estado);
           $ionicLoading.hide();
           $timeout.cancel(timer);
@@ -98,18 +95,18 @@ angular.module('starter')
         $scope.cancelados = 0;
         $scope.recibidos  = 0;
       }
-        $scope.pedidos =[];
+      $scope.pedidos =[];
       angular.forEach(data, function(valor, key) {
         if(!estado) {
-          if (valor.estado.id == 1) $scope.nuevos++;
-          if (valor.estado.id == 2) $scope.enCamino++;
-          if (valor.estado.id == 3) $scope.recibidos++;
-          if (valor.estado.id == 4) $scope.cancelados++;
+          if (valor.state == 1) $scope.nuevos++;
+          if (valor.state == 2) $scope.enCamino++;
+          if (valor.state == 3) $scope.recibidos++;
+          if (valor.state == 4) $scope.cancelados++;
         }
-        $scope.pedidos.push({
-          id:             valor.id,
-          numero:         valor.numero,
-          fecha:          new Date(valor.fecha),
+        /*$scope.pedidos.push({
+          id:             valor._id,
+          numero:         valor.number,
+          fecha:          new Date(valor.created),
           total:          valor.total,
           idDispositivo:  valor.dispositivo.id,
           calle:          valor.calle,
@@ -119,6 +116,15 @@ angular.module('starter')
           latitud :       valor.latitud,
           longitud :      valor.longitud,
           dirReferencia : valor.dir_referencia
+        });*/
+        $scope.pedidos.push({
+          id:             valor._id,
+          numero:         valor.number,
+          fecha:          new Date(valor.created),
+          total:          valor.total,
+          device:         valor.device,
+          address:        valor.address,
+          state :         valor.state,
         });
       });
     };

@@ -16,8 +16,10 @@ angular.module('starter')
            dispositivoService
   )
   {
+
+
     $scope.pedido                = PedidoService;
-    $scope.pedidoActual          = $scope.pedido.getPedido();
+    $scope.pedidoActual          = PedidoService.getPedido();
     $scope.mostrarMapa           = false;
     $scope.mostrarTotales        = true;
     $scope.mostrarFormUbicacion  = false;
@@ -25,6 +27,8 @@ angular.module('starter')
     $rootScope.tieneProductos    = false;
     $scope.mapaCargado           = false;
     $scope.errorUbicacion        = false;
+
+    $rootScope.abierto = true;
 
     if($rootScope.totalProductos > 0)
       $rootScope.tieneProductos = true;
@@ -72,9 +76,9 @@ angular.module('starter')
     /**
      * Muestra el mapa
      */
-    var verUbicacion = function(){
+    var verUbicacion = function() {
 
-      var timer = $timeout(
+    var timer = $timeout(
         function() {
           $scope.errorUbicacion = true;
         },
@@ -110,7 +114,7 @@ angular.module('starter')
         .then(function(position){
           var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
-          var latitud = position.coords.latitude;
+          var latitud  = position.coords.latitude;
           var longitud = position.coords.longitude;
 
           var mapOptions = {
@@ -134,16 +138,11 @@ angular.module('starter')
 
           $http.get(url)
             .then(function(data){
-              $scope.direccion={
-                calle:"",
-                numero: null
-              };
 
-              $scope.direccion.calle  = data.data.results[0].address_components[1].short_name;
-              $scope.direccion.numero = data.data.results[0].address_components[0].short_name;
+              PedidoService.pedido.ubicacion.direccion.calle  = data.data.results[0].address_components[1].short_name;
+              PedidoService.pedido.ubicacion.direccion.numero = data.data.results[0].address_components[0].short_name;
 
-              $scope.pedido.ubicacion.direccion = $scope.direccion;
-              $scope.pedido.ubicacion.coordenadas = {
+              PedidoService.pedido.ubicacion.coordenadas = {
                 'lat' : latitud,
                 'long': longitud
               }
@@ -159,10 +158,10 @@ angular.module('starter')
       $scope.mostrarFormUbicacion= true;
     };
 
-    $scope.verUbicacion = function(){
-
+$scope.verUbicacion = function() {
     verUbicacion();
-    };
+    console.log($scope.pedido);
+};
 
     //*******************************************************************************************************************
 
@@ -180,7 +179,7 @@ angular.module('starter')
 
         confirmPopup.then(function(res) {
           if(res) {
-            $scope.pedido.limpiarPedido();
+            PedidoService.limpiarPedido();
             $scope.tieneProductos = false;
           }
         });
@@ -192,10 +191,9 @@ angular.module('starter')
      * @param productoPedido
      */
     $scope.addCantidad = function(productoPedido){
-      //console.log(ionic.Platform.device());
       var producto = productoPedido.producto;
       var cantidad = 1;
-      $scope.pedido.addProductoCantidad(producto, cantidad);
+      PedidoService.addProductoCantidad(producto, cantidad);
       var alertPopup = $ionicPopup.alert({
         title: 'Agregaste 1 unidad al producto',
         buttons: null
@@ -212,12 +210,11 @@ angular.module('starter')
      * @param productoPedido
      */
     $scope.restarCantidad = function(productoPedido){
-      //console.log(productoPedido);
      var producto = productoPedido.producto;
       if(productoPedido.cantidad == 1)
         return $scope.eliminarProducto(productoPedido);
      var cantidad = -1;
-     $scope.pedido.decrementarProductoCantidad(producto, cantidad);
+      PedidoService.decrementarProductoCantidad(producto, cantidad);
       var alertPopup = $ionicPopup.alert({
         title: 'Quitaste 1 unidad al producto',
         buttons: null
@@ -245,7 +242,7 @@ angular.module('starter')
       confirmPopup.then(function(res) {
         if(res) {
           var producto = productoPedido.producto;
-          $scope.pedido.eliminarProductoPedido(producto);
+          PedidoService.eliminarProductoPedido(producto);
           $scope.tieneProductos = false;
         }
       });
@@ -280,17 +277,20 @@ angular.module('starter')
         20000
       );
 
-      $scope.pedido.ubicacion.referencia.tel     = tel;
-      $scope.pedido.ubicacion.referencia.dir_ref = dir_ref;
-      var pedido = angular.fromJson($scope.pedido);
+      PedidoService.pedido.ubicacion.referencia.tel     = tel;
+      PedidoService.pedido.ubicacion.referencia.dir_ref = dir_ref;
+      var pedido = angular.fromJson(PedidoService.pedido);
+
       // registra el pedido y envia push al admin
-      NotificacionService.registrarNuevoPedido(pedido)
+      //NotificacionService.registrarNuevoPedido(pedido)
+      PedidoService.registrarNuevoPedido(pedido)
         .then(function(estado) {
           if(estado == 200) {
-            NotificacionService.enviarPushNuevoPedido($scope.pedido)
+            /*NotificacionService.enviarPushNuevoPedido($scope.pedido)
               .success(function () {
 
               });
+              */
 
             var alertPopup = $ionicPopup.alert({
               title: 'Tu pedido fué enviado, te notificaremos cuando sea procesado. Salud !!',
@@ -300,11 +300,14 @@ angular.module('starter')
               }]
             });
             alertPopup.then(function (res) {
-              $rootScope.totalProductos = "pendiente";
+              /*$rootScope.totalProductos = "pendiente";
               $rootScope.pedidoPendiente = true;
-              $rootScope.totalUltPedido = $scope.pedido.total;
-              $rootScope.fechaUltPedido = $scope.pedido.fecha;
+              $rootScope.totalUltPedido = PedidoService.pedido.total;
+              $rootScope.fechaUltPedido = PedidoService.pedido.fecha;
+              $scope.mostrarMapa = false;*/
               $scope.mostrarMapa = false;
+              PedidoService.limpiarTodo();
+
               $state.go('app.categorias');
             });
             $ionicLoading.hide();
@@ -332,4 +335,3 @@ angular.module('starter')
   };
 
 });
-

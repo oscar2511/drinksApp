@@ -1,0 +1,162 @@
+<ion-view cache-view="false" view-title="">
+
+  <ion-nav-bar class="bar-dark">
+    <ion-nav-buttons side="left">
+      <button ng-click="toAdmin()" class="button back-button buttons button-clear header-item">
+        <i class="icon ion-ios-arrow-back"></i> Admin home </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+      <button class="button icon-rigth button-icon ion-more" ng-click="popover.show($event)"></button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+
+  <ion-content ng-cloak>
+    <div class="img-stock-logo sombra-categ">
+    </div>
+
+
+    <section ng-show = "shouldShowCategories">
+      <div class="item item-divider" ng-show = "shouldShowCategories">
+        <font color="#696969">
+          <i class="ion-clipboard"></i>
+          Seleccione categoría
+        </font>
+      </div>
+      <br>
+      <div class="list" ng-repeat="category in categories">
+        <a ng-click="showProductFromCategory(category)" class="item item-icon-left item item-icon-right">
+          <i class="icon ion-pin"></i>
+            <h2 style="color:#808080;">{{category.nombre}}</h2>
+          <i class="icon ion-ios-arrow-right"></i>
+        </a>
+      </div>
+    </section>
+
+    <section ng-show ="shouldShowProducts"><!-- show products -->
+      <div class="row">
+        <div class="col col-25">
+          <button ng-click="toCategories()" class="button icon-left ion-ios-arrow-left button-full button-default">
+            Atrás
+          </button>
+        </div>
+        <br>
+        <div class="col">
+          <button  class="button icon-center ion-plus-circled button-full button-positive" ng-click="showEditProduct()">
+            Nuevo producto
+          </button>
+
+        </div>
+      </div>
+      <div class="list" ng-repeat="producto in productos">
+        <a ng-click="showEditProduct(producto)" class="item item-thumbnail-left">
+          <img class="list-prod" src={{decodeUrl(producto.urlImg)}}>
+          <h2> {{producto.nombre}}</h2>
+          <p>$ {{producto.precio}}</p>
+        </a>
+      </div>
+    </section>
+
+    <section ng-show="shouldShowEditProduct"><!-- show edit product-->
+      <form name="productForm">
+        <div class="list">
+          <label class="item item-input item-stacked-label">
+            <span class="input-label"> Nombre</span>
+            <input type="text" placeholder="Ingrese nombre" ng-model="productToEdit.nombre">
+            <span ng-show="productForm.product.name.$error.required">El nombre es requirido.</span>
+          </label>
+          <label class="item item-input item-stacked-label">
+            <span class="input-label"> Precio</span>
+            <input type="text" name="price" placeholder="Fromato 152.99" ng-change="validatePrice(productToEdit.precio)" ng-model="productToEdit.precio">
+            <span ng-show="formInvalid" class="help-block"> <p style="color:red;">Formato de precio incorrecto</p></span>
+          </label>
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Descripción</span>
+            <input type="text" placeholder="Ingrese descripción" ng-model="productToEdit.descripcion">
+          </label>
+
+            <div class="row">
+              <div class="col col-50">
+                <button ng-click="openModalCategory()" class="button button-outline button-calm">
+                  Sel. Categoría
+                </button>
+              </div>
+              <div class="col">
+                <h4 style="color=grey;">Actual: {{productToEdit.categoriaNombre}} <h4>
+              </div>
+            </div>
+
+          <li class="item item-toggle">
+            Stock
+            <label class="toggle toggle-balanced">
+              <input ng-if="productToEdit.stock == 1" ng-click="cambiarStock(productToEdit.stock)" type="checkbox" checked>
+              <input ng-if="productToEdit.stock == 0" ng-click="cambiarStock(productToEdit.stock)" type="checkbox">
+              <div class="track">
+                <div class="handle"></div>
+              </div>
+            </label>
+          </li>
+
+
+        <div class="row">
+          <div class="col col-50">
+            <button ng-if="productToEdit.urlImg" ngf-select ng-model="productToEdit.file" name="file" class="button icon-left ion-image button-outline button-positive">
+              Camb.imagen
+            </button>
+             <button ng-if="!productToEdit.urlImg" ngf-select ng-model="productToEdit.file" name="file" class="button icon-left ion-image button-outline button-positive">
+              Selec. imagen
+            </button>
+          </div>
+          <div class="col">
+          </div>
+        </div>
+        <p style="color:grey;">&nbsp;&nbsp; {{ productToEdit.file.name }} </p>
+
+        <div class="row">
+          <div class="col col-25">
+            <button ng-click="showListProducts()" class="button icon-left ion-ios-arrow-left button-full button-default">
+              Atrás
+            </button>
+          </div>
+          <br>
+          <div class="col">
+            <button ng-disabled="formInvalid" ng-if="!newProduct"  class="button icon-center ion-android-checkbox-outline button-full button-positive" ng-disabled="" ng-click="save(productToEdit)">
+              Editar
+            </button>
+            <button ng-disabled="formInvalid" ng-if="newProduct"  class="button icon-center ion-android-checkbox-outline button-full button-positive" ng-disabled="" ng-click="save(productToEdit)">
+              Crear
+            </button>
+          </div>
+        </div>
+      </form>
+    </section>
+
+
+<!------------------------------ modal choose category --------------------------------------------------------->
+    <script id="modal-category.html" type="text/ng-template">
+      <ion-modal-view cache-view="false" style="width: 100%; height: 50%;margin-top: 40px; ">
+        <ion-header-bar>
+          <h1 class="title">Seleccione categoría</h1><button class="button button-outline button-assertive"  ng-click="closeModal()">Cerrar</button>
+        </ion-header-bar>
+        <ion-content>
+          <div class="card">
+            <div class="item item-text-wrap">
+              <ion-list ng-repeat="category in categories">
+                <ion-radio ng-model="estado" ng-value="category.id" ng-change="SelectCategory(category)">
+                  <i class="icon ion-android-arrow-dropright"></i>
+                  &nbsp;&nbsp;{{category.nombre}}
+                </ion-radio>
+              </ion-list>
+            </div>
+          </div>
+
+        </ion-content>
+      </ion-modal-view>
+    </script>
+<!------------------------------ --------------------------------------------------------->
+
+
+
+
+
+  </ion-content>
+</ion-view>

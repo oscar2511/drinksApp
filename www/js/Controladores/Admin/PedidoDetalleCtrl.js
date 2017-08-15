@@ -12,47 +12,31 @@ angular.module('starter')
     $timeout,
     mapaService,
     PedidoService,
-    $rootScope
+    $rootScope,
+    ConstantsService
   ){
 
     $ionicLoading.show({
       template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
     });
 
-    $scope.pedidoService = PedidoService;
+    $scope.pedido = angular.fromJson($stateParams.pedido);
 
-    $scope.pedido       = angular.fromJson($stateParams.pedido);
     $scope.pedido.fecha = new Date($scope.pedido.fecha);
     var idPedido        = $scope.pedido.id;
     $scope.mostrarMapa = false;
     $scope.claseBtn    = 'button button-balanced button-outline iconleft ion-chevron-down';
 
-
-    console.log($scope.pedido);
     /**
      * Obtener el detalle de un pedido
      *
      */
     $scope.getDetallePedido = function(){
-      var url = $rootScope.urls.detallePedido+idPedido;
+      var url = ConstantsService.ORDER_DETAIL + idPedido;
       $http.get(url)
         .then(function (data){
-          $scope.pedidoDetalle =[];
-          angular.forEach(data.data, function(valor, key) {
-            $scope.pedidoDetalle.push({
-              id:             $scope.pedido.id,
-              producto:       valor.producto.id,
-              pedido:         valor.id_pedido,
-              cantidad:       valor.cantidad,
-              subtotal:       valor.sub_total,
-              nombreProducto: valor.producto.nombre,
-              token:          valor.pedido.dispositivo.token,
-              telefono:       valor.pedido.telefono,
-              dirRef:         valor.pedido.dir_referencia
-            });
-          });
+          $scope.pedidoDetalle = data.data.detail;
           $ionicLoading.hide();
-          console.log( $scope.pedidoDetalle);
         })
         .catch(function(){
           $ionicLoading.hide();
@@ -93,7 +77,6 @@ angular.module('starter')
 
     $scope.crearModal();
 
-
     //notificacion
     $ionicModal.fromTemplateUrl('modal-notificacion.html', {
       scope: $scope,
@@ -109,7 +92,6 @@ angular.module('starter')
     };
 
 
-
     /**
      * Mostrar mapa
      */
@@ -122,7 +104,7 @@ angular.module('starter')
         $scope.mostrarMapa = true;
         $scope.claseBtn    = 'button button-balanced button-outline iconleft ion-chevron-up';
       }
-      mapaService.verMapa($scope.pedido.latitud, $scope.pedido.longitud);
+      mapaService.verMapa($scope.pedido.address.coordenadas.lat, $scope.pedido.address.coordenadas.long);
     };
 
     /**
@@ -173,7 +155,7 @@ angular.module('starter')
      * @param idPedido
      * @param estado
      */
-    $scope.cambiarEstado = function(idPedido, estado){
+    $scope.cambiarEstado = function(idPedido, estado) {
       var msj = '';
       var msjPush = '';
       if(estado == 2) {
@@ -187,7 +169,7 @@ angular.module('starter')
 */
       var confirmPopup = $ionicPopup.confirm({
         title:      'Confirmar acción',
-        template:   'Realmente quieres cambiar el estado del pedido? '+msj,
+        template:   'Realmente quieres cambiar el estado del pedido? '+ msj,
         cancelText: 'Cancelar',
         okText:     'Confirmar'
       });
@@ -197,10 +179,10 @@ angular.module('starter')
           $ionicLoading.show({
             template: 'Cambiando estado<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
           });
-          $scope.pedidoService.cambiarEstado(idPedido, estado)
-            .then(function(data){
-              if(data == 200) {
-                $scope.pedido.estado.id = estado;
+          PedidoService.cambiarEstado(idPedido, estado)
+            .then(function(data) {
+
+                $scope.pedido.state = estado;
                 $ionicLoading.hide();
                 var alertPopup = $ionicPopup.alert({
                   title: 'Cambio de estado exitoso',
@@ -210,17 +192,8 @@ angular.module('starter')
                   alertPopup.close();
                   $scope.closeModal();
                 }, 2000);
-              }else{
-                var alertPopupError = $ionicPopup.alert({
-                  title: 'Error cambiando estado de pedido',
-                  buttons: null
-                });
-                $timeout(function () {
-                  alertPopupError.close();
-                  $scope.closeModal();
-                }, 2000);
-              }
 
+              /*
               if(estado == 2) {
                 var mensaje = {
                   'titulo': msjPush,
@@ -244,21 +217,23 @@ angular.module('starter')
                 };
                 NotificacionService.pushSilencioso(mensajeSilencioso2, $scope.pedido.idDispositivo, estado);
               }
-
-
-            });
+                */
+            })
+            .catch(function(err) {
+              var alertPopupError = $ionicPopup.alert({
+                title: 'Error cambiando estado de pedido',
+                buttons: null
+              });
+              $timeout(function () {
+                alertPopupError.close();
+                $scope.closeModal();
+              }, 2000);
+            })
         } else{
             $scope.modal.remove();
             $scope.crearModal();
         }
-
       });
-
-
-
     }
-
-
-
 
   });

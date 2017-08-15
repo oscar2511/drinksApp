@@ -1,16 +1,16 @@
 <ion-view view-title="Home">
   <ion-content>
-    <h1>Home</h1>
 
-<button ng-click="obtenerCategorias()">categorias</button>
-    <button ng-click="obtenerDispositivos()">dispositivos</button>
-    <button ng-click="getAdministradores()">dispositivos admin</button>
-    <button ng-click="productos()">productos</button>
-    <button ng-click="abiertoCerrado()">abierto/cerrado</button>
+    <label class="item item-input item-select">
+      <div class="input-label">
+        Lightsaber
+      </div>
+      <select>
+        <option>Blue</option>
+        <option selected>Green</option>
+        <option>Red</option>
+      </select>
+    </label>
 
-
-    <a  href="#/app/categorias/{{categoria}}" ng-repeat="categoria in categorias" style="padding-bottom: 0px!important;">
-      <img class="{{categoria.urlImg}}">
-    </a>
   </ion-content>
 </ion-view>

@@ -4,7 +4,9 @@ angular.module('starter')
                                               $stateParams,
                                               $http,
                                               $ionicLoading,
-                                              $rootScope)
+                                              $rootScope,
+                                              ConstantsService,
+                                              UtilitiesService)
   {
     $ionicLoading.show({
       template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
@@ -13,34 +15,42 @@ angular.module('starter')
 
 
     var categoria = angular.fromJson($stateParams.categoria);
-    console.log(categoria);
 
     $scope.catUrlImg = categoria.urlImg;
 
     /**
-     * Obtener los producto de una categoria del servidor
+     * Obtener los producto de una categoria
      *
      */
-    var url = $rootScope.urls.listadoProductos+categoria.id;
+    var url = ConstantsService.LIST_PRODUCTS + categoria.id;
     $http.get(url)
       .then(function (data){
-        $scope.productos =[];
+        $scope.productos = [];
         angular.forEach(data.data, function(valor, key) {
           $scope.idCategoria = valor.idCategoria;
 
-          console.log(valor);
           $scope.productos.push({
-            id:           valor.id,
-            precio:       valor.precio,
-            descripcion:  valor.descripcion,
-            nombre:       valor.nombre,
-            stock:        valor.stock,
-            idCategoria:  valor.categoria.id,
-            urlImg  :     valor.url_imagen
+            id:           valor._id,
+            precio:       valor.price,
+            descripcion:  UtilitiesService.encode(valor.description),
+            nombre:       valor.name,
+            stock:        valor.stock ? 'Disponible' : 'Sin stock',
+            idCategoria:  valor.categoriaId,
+            urlImg  :     UtilitiesService.encode(valor.urlImg)
           });
         });
         $ionicLoading.hide();
       });
+
+
+    /**
+     * Decode url
+     * @param urlEncoded
+     * @returns {*}
+     */
+    $scope.decode = function(urlEncoded) {
+      return UtilitiesService.decode(urlEncoded)
+    };
 
 
   });

@@ -38,16 +38,16 @@
       <a class="item" href="#/app/admin/pedido/{{pedido}}">
         <div class="row">
           <div class="col.25">
-            <span align="left" ng-if="pedido.estado.id==1" class="badge badge-balanced">Nuevo</span>
-            <span ng-if="pedido.estado.id==2" class="badge badge-energized">En Camino</span>
-            <span ng-if="pedido.estado.id==3" class="badge badge-positive">Cerrado</span>
-            <span ng-if="pedido.estado.id==4" class="badge badge-assertive">Cancelado</span>
+            <span align="left" ng-if="pedido.state == 1" class="badge badge-balanced">Nuevo</span>
+            <span ng-if="pedido.state == 2" class="badge badge-energized">En proceso</span>
+            <span ng-if="pedido.state == 3" class="badge badge-positive">Cerrado</span>
+            <span ng-if="pedido.state == 4" class="badge badge-assertive">Cancelado</span>
           </div>
           <div class="col">
-            <p> <strong>Nro.: </strong><b> {{pedido.id}}</b></p>
+            <p> <strong>Nro.: </strong><b> {{pedido.numero}}</b></p>
             <p> <strong>Fecha : </strong> {{pedido.fecha | date:'dd-MM-yyyy' }} {{pedido.fecha | date:'HH:mm' }}</p>
             <p> <strong>Monto: </strong> $ {{pedido.total}}</p>
-            <p> <strong>Dirección: </strong> {{pedido.calle}} {{pedido.nro}}</p>
+            <p> <strong>Dirección: </strong> {{pedido.address.direccion.calle}} {{pedido.address.direccion.numero}}</p>
           </div>
         </div>
       </a>
@@ -63,15 +63,22 @@
           <a ng-click="closePopover()" class="item" href="#/app/estadistica" target="_blank">
             <font color="#1e6ed1"><i class="ion-pie-graph"></i>&nbsp;&nbsp; Estadísticas</font>
           </a>
+          <!--
           <a ng-click="closePopover()" class="item" href="#" target="_blank">
             <font color="#1e6ed1"><i class="ion-calculator"></i>&nbsp;&nbsp; Reportes</font>
           </a>
+          -->
           <a ng-click="closePopover()" class="item" href="#/app/stock" target="_blank">
             <font color="#1e6ed1"><i class="ion-podium"></i>&nbsp;&nbsp; Stock </font>
           </a>
+          <a ng-click="closePopover()" class="item" href="#/app/admin/adm-product" target="_blank">
+            <font color="#1e6ed1"><i class="ion-gear-b"></i>&nbsp;&nbsp; Adm productos </font>
+          </a>
+          <!--
           <a ng-click="closePopover()" class="item" href="#/app/configuracion" target="_blank">
             <font color="#1e6ed1"><i class="ion-gear-b"></i>&nbsp;&nbsp; Configuración </font>
           </a>
+          -->
         </div>
       </ion-content>
     </ion-popover-view>
@@ -81,5 +88,3 @@
 
 
 </ion-view>
-
-

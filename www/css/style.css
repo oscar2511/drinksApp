@@ -16,7 +16,7 @@ background: #ececee;
 
 /* categorias *********************************************************************/
 .vinos{
-  width: 100% !important;
+  width: 101% !important;
   height: 165px!important;
   background-image: url("../img/categorias/vinos.jpg")!important;
   background-repeat: no-repeat;
@@ -27,7 +27,7 @@ background: #ececee;
 }
 
 .cervezas{
-  width: 100% !important;
+  width: 101% !important;
   height: 170px!important;
   background-image: url("../img/categorias/cerveza.jpg")!important;
   background-repeat: no-repeat;
@@ -38,7 +38,7 @@ background: #ececee;
 }
 
 .fernets{
-  width: 100% !important;
+  width: 101% !important;
   height: 170px!important;
   background-image: url("../img/categorias/fernet.jpg")!important;
   background-repeat: no-repeat;
@@ -49,7 +49,7 @@ background: #ececee;
 }
 
 .whiskies{
-  width: 100% !important;
+  width: 101% !important;
   height: 170px!important;
   background-image: url("../img/categorias/whiskies.jpg")!important;
   background-repeat: no-repeat;
@@ -60,24 +60,24 @@ background: #ececee;
 }
 
 .promociones{
-  width: 100% !important;
+  width: 320px !important;
   height: 170px!important;
   background-image: url("../img/categorias/promociones.jpg")!important;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
   padding-left: 100%;
-  margin-bottom: -20px;
+  margin-bottom: -50px;
+
 }
 
 .vodkas{
-  width: 300px !important;
+  width: 100% !important;
   height: 170px!important;
   background-image: url("../img/categorias/vodkas-licores.jpg")!important;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  margin-bottom: -20px;
   padding-left: 500px;
   margin-left: -5px;
 }
@@ -106,9 +106,9 @@ background: #ececee;
   height: 200px!important;
   margin: auto;
   position: relative;
-  background-position: center center;
+  /*background-position: center center;*/
   background-repeat: no-repeat;
-
+  background-size: cover;
   border-radius: 35px;
   box-shadow: 2px 2px 5px #999;
 }
@@ -307,3 +307,14 @@ ion-item.item:hover a {
 }
 
 /***************************************/
+
+.popover {
+    height: auto !important;
+}
+.popover ion-header-bar {
+    position: relative;
+}
+.popover ion-content {
+    top: 0;
+    position: relative;
+}

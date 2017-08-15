@@ -5,14 +5,15 @@ angular.module('starter')
                                        PedidoService,
                                        $ionicPopup,
                                        $state,
-                                       $timeout
+                                       $timeout,
+                                       UtilitiesService
   )
   {
     $scope.producto = angular.fromJson($stateParams.producto);
     $scope.cantidad = 1;
-    $scope.pedido   = PedidoService;
 
-    console.log($scope.producto);
+    $scope.producto.urlImg = UtilitiesService.decode($scope.producto.urlImg);
+
     /**
      *  Agregar producto al carro
      *
@@ -20,15 +21,16 @@ angular.module('starter')
      * @param cantidad
      */
     $scope.addAlCarro = function(producto, cantidad){
-      if($rootScope.totalProductos == 'pendiente') {
+     /* if($rootScope.totalProductos == 'pendiente') {
         $scope.tienePedidoPendiente();
         return 0;
       }
+      */
 
-      $scope.pedido.addProducto(producto, cantidad);
+      PedidoService.addProducto(producto, cantidad);
 
       /**
-       * Mostrar pupop cuando se agrega un producto al pedido
+       * Mostrar popup cuando se agrega un producto al pedido
        * @type {Object|*}
        */
       var alertPopup = $ionicPopup.alert({
@@ -37,6 +39,7 @@ angular.module('starter')
       });
 
       $timeout(function() {
+        $scope.cantidad = 1;
         alertPopup.close();
       }, 1500);
 
@@ -54,7 +57,7 @@ angular.module('starter')
         });
 
         alertPopup.then(function(res) {
-          $scope.pedido.limpiarPedido();
+          PedidoService.limpiarPedido();
           $rootScope.totalProductos = 'pendiente';
           $rootScope.tieneProductos = 0;
           $state.go('app.pedido-pendiente');
@@ -76,5 +79,13 @@ angular.module('starter')
       $scope.cantidad = $scope.cantidad - 1;
     };
 
+    /**
+     * Decode url
+     * @param urlEncoded
+     * @returns {*}
+     */
+    $scope.decode = function(urlEncoded) {
+      return UtilitiesService.decode(urlEncoded)
+    };
 
   });

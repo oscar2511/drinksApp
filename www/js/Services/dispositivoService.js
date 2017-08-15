@@ -6,19 +6,18 @@ angular.module('starter')
            $http,
            $rootScope,
            $ionicLoading,
-           $state) {
+           ConstantsService) {
 
 
     /**
      *
-     * @param integer $idDispositivo
+     * @param {Number} id
      * @returns {*}
      */
     this.getTokenDispositivo = function(id){
       var url = $rootScope.urls.dispositivoId+id;
       return $http.get(url)
         .then(function (data){
-          console.log(data);
           if(!data) return $q.reject();
           return $q.resolve(data);
         }).catch(function(){
@@ -33,14 +32,17 @@ angular.module('starter')
       * @returns {*}
      */
     this.getAdministradores = function(){
-      var urlDispAdm = $rootScope.urls.dispositivo;
-      var dispAdm;
+      var urlDispAdm = ConstantsService.DEVICES_ADMIN;
+      var dispAdm = [];
       return $http.get(urlDispAdm)
         .then(function(data){
           angular.forEach(data.data, function (value) {
-             dispAdm = value;
+             dispAdm.push(value);
           });
           return $q.resolve(dispAdm);
+        })
+        .catch(function(e) {
+            console.log(e);
         })
     };
 

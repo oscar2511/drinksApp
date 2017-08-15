@@ -22,9 +22,9 @@
     <br>
     <div class="list" ng-repeat="producto in productos" >
       <div class="item item-thumbnail-left">
-        <img class="list-prod" ion-img-cache ng-src="http://23.94.249.163/appDrinks-dev/img/productos/{{producto.urlImg}}">
-        <h2> {{producto.nombre}}</h2>
-        <p>$ {{producto.precio}}</p>
+        <img class="list-prod" ion-img-cache ng-src="{{ producto.urlImg }}">
+        <h2> {{producto.name}}</h2>
+        <p>$ {{producto.price}}</p>
         <div class="row">
           <div class="col.25">
           </div>
@@ -34,8 +34,8 @@
           </div>
           <div class="col.25" >
             <label  class="toggle toggle-balanced">
-              <input ng-if="producto.stock=='Stock'" ng-click="cambiarStock(producto.id, producto.stock)" type="checkbox" checked>
-              <input ng-if="producto.stock=='Sin stock'" ng-click="cambiarStock(producto.id, producto.stock)" type="checkbox">
+              <input ng-if="producto.stock == 1" ng-click="cambiarStock(producto._id, producto.stock)" type="checkbox" checked>
+              <input ng-if="producto.stock == 0" ng-click="cambiarStock(producto._id, producto.stock)" type="checkbox">
               <div class="track">
                 <div class="handle"></div>
               </div>

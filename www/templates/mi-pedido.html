@@ -1,6 +1,6 @@
 <ion-view cache-view="false">
 
-  <ion-content ng-init="abiertoCerrado()">
+  <ion-content > <!--ng-init="abiertoCerrado()"-->
 
     <div ng-show="mostrarMapa" id="map" data-tap-disabled="true">
       <div align="center">
@@ -13,7 +13,7 @@
       <div class="list list-inset">
         <div class="item" align="center">
            <h2> <i class="ion-ios-location"></i> Ubicación detectada</h2>
-          <h2 style="color: #28a54c; text-decoration: underline;">{{direccion.calle}}, {{direccion.numero}}</h2>
+          <h2 style="color: #28a54c; text-decoration: underline;">{{ pedido.pedido.ubicacion.direccion.calle }}, {{pedido.pedido.ubicacion.direccion.numero}}</h2>
           <div ng-show="errorUbicacion">
             <p  style="color: #d3ced2;">Ubicación no encontrada</p>
           </div>
@@ -88,11 +88,11 @@
           </div>
           <div class="row">
             <div class="col col-50">Subtotal</div>
-            <div class="col">$ {{ pedido.subTotal}}</div>
+            <div class="col">$ {{ pedido.pedido.subTotal}}</div>
           </div>
           <div class="row">
             <div class="col col-50"><strong><h2>Total</h2></strong></div>
-            <div class="col"><strong><h2>$ {{ pedido.total }}</h2></strong></div>
+            <div class="col"><strong><h2>$ {{ pedido.pedido.total }}</h2></strong></div>
           </div>
           <div class="row">
             <div class="col col-25" >
@@ -120,9 +120,9 @@
       <h4 style="color: #af7550";>&nbsp;&nbsp; <i class="ion-ios-information"></i> Aún no tienes productos en tu pedido. </h4>
     </div>
     <div ng-if="tieneProductos">
-      <div class="list" ng-repeat="ped in pedidoActual.detalle" ng-if="$index > 0">
+      <div class="list" ng-repeat="ped in pedidoActual.detalle">
         <div class="item item-avatar">
-          <img src="http://23.94.249.163/appDrinks-dev/img/productos/{{ped.producto.urlImg}}">
+          <img src="{{ ped.producto.urlImg }}">
           <h2> {{ped.producto.nombre}}</h2>
           <div class="row">
             <div class="col" align="left">

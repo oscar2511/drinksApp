@@ -18,7 +18,7 @@ angular.module('starter')
     $scope.labelProductos = ["Cerveza", "Promo Fernet", "Vinos"];
     $scope.dataProductos = [300, 500, 100];
 
-    $scope.labelsEstado = ["Nuevo", "En Camino", "Cancelado", "Recibido"];
+    $scope.labelsEstado = ["Nuevo", "En proceso", "Cancelado", "Recibido"];
     //$scope.seriesEstado = ['Series A', 'Series B','Series c'];
     $scope.dataEstado = [18,35 ,9 , 67];
    /* $scope.colorEstado =  [{

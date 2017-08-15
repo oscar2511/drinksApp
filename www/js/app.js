@@ -1,28 +1,42 @@
-angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.controllers','ionic.service.push', 'chart.js', 'ionicImgCache'])
+angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.controllers','ionic.service.push', 'chart.js', 'ionicImgCache', 'base64', 'ngFileUpload'])
 
-.run(function($ionicPlatform, $http, $rootScope, $q, dispositivoService) {
+.run(function($ionicPlatform, $http, $rootScope, $q, dispositivoService, ConstantsService, PedidoService, NotificacionService,  $ionicPush, $ionicUser) {
 
-    $rootScope.server = '23.94.249.163';
-    $rootScope.env = 'app_dev.php';
-    $rootScope.urls={};
-    $rootScope.urls.dispositivo          = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/dispositivo/administradores';
-    $rootScope.urls.categorias           = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/categorias';
-    $rootScope.urls.listadoProductos     = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/producto/';
+
+    $rootScope.server = 'http://localhost';
+    $rootScope.port = 3000;
+    $rootScope.urls = {};
     $rootScope.urls.estadoApertura       = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/horario';
-    $rootScope.urls.listarPedidos        = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/pedidos';
     $rootScope.urls.detallePedido        = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/pedido/';
     $rootScope.urls.pedidoEstado         = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/pedido/estado';
     $rootScope.urls.dispositivoId        = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/dispositivo/';
     $rootScope.urls.registrarDispositivo = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/dispositivo/uuid';
-    $rootScope.urls.pedidoNuevo          = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/pedido/nuevo';
     $rootScope.urls.stock                = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/productos';
     $rootScope.urls.cambiarStock         = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/producto/cambiar-stock';
     $rootScope.urls.abrirCerrar          = 'http://'+$rootScope.server+'/app-drink/web/'+ $rootScope.env +'/api/horario/abrir-cerrar';
 
-    $rootScope.urls.productos = 'http://'+$rootScope.server+'/app-drink/web/img/productos/';
+    $rootScope.abierto = true;
 
+    $rootScope.totalProductos = PedidoService.getTotalProductos();
 
+    $ionicPlatform.ready(function() {
+     try {
+       var push = new Ionic.Push({
+         'debug': true
+        // 'onNotification': function (notificacion) {
+         //NotificacionService.postNotificacion(notificacion);
+       //}
+       });
+     } catch (e) {
+        alert(e);
+      }
 
+     push.register(function(token) {
+       //alert(token.token);
+       //console.log("Mi token:", token.token);
+       push.saveToken(token);
+     })
+  });
 
     /**
      *  Obtengo los token de los dispositivos administradores
@@ -32,8 +46,8 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
       var tokenAdmins = [];
       dispositivoService.getAdministradores()
         .then(function(dispAdm){
-          angular.forEach(dispAdm, function (valor) {
-            tokenAdmins.push(valor.token) ;
+          angular.forEach(dispAdm, function (device) {
+            tokenAdmins.push(device.token) ;
           });
           $rootScope.tokenAdm = tokenAdmins;
         })
@@ -83,6 +97,16 @@ angular.module('starter', ['ionic','ionic.service.core','ngCordova', 'starter.co
       'menuContent': {
         templateUrl: 'templates/listadoProductos.html',
         controller: 'listadoProductosCtrl'
+      }
+    }
+  })
+
+  .state('app.admProduct', {
+    url: '/admin/adm-product',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/Admin/admProduct.html',
+        controller: 'admProductCtrl'
       }
     }
   })
