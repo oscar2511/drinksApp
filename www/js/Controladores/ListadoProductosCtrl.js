@@ -11,12 +11,27 @@ angular.module('starter')
     $ionicLoading.show({
       template: 'Cargando<br><ion-spinner icon="lines" class="spinner-calm"></ion-spinner>'
     });
+
     $scope.imgCategoria = null; //todo revisar si es está al dope
 
 
     var categoria = angular.fromJson($stateParams.categoria);
 
-    $scope.catUrlImg = categoria.urlImg;
+    $scope.categoria = categoria;
+    $scope.showProducts = false;
+
+    var getSubcategory = function()
+    {
+      switch (categoria.nombre) {
+        case 'Vinos':
+              //todo: obtener las bodegas por api
+              $scope.cellars = ['bodega1', 'bodega2'];
+              break;
+        case 'Cervezas':
+              //todo: obtener los paises api
+              break;
+      }
+    };
 
     /**
      * Obtener los producto de una categoria
@@ -42,6 +57,8 @@ angular.module('starter')
         $ionicLoading.hide();
       });
 
+
+    getSubcategory();
 
     /**
      * Decode url
