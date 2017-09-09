@@ -18,20 +18,41 @@ angular.module('starter')
     var categoria = angular.fromJson($stateParams.categoria);
 
     $scope.categoria = categoria;
-    $scope.showProducts = false;
+    $scope.showBySubCategory = false;
+    $scope.showAll = false;
 
-    var getSubcategory = function()
-    {
+    var getSubcategory = function() {
       switch (categoria.nombre) {
         case 'Vinos':
               //todo: obtener las bodegas por api
-              $scope.cellars = ['bodega1', 'bodega2'];
+              $scope.cellars = [{'id': 1, 'name': 'Bodega 1'}, {'id':2,'name': 'Bodega 2'}];
               break;
         case 'Cervezas':
               //todo: obtener los paises api
+              $scope.paises = [{'id':3, 'name': "Holanda"}, {'id':4, 'name': "Alemania"} ];
               break;
       }
     };
+
+
+    $scope.showProductsBySubCategory = function(subCategory) {
+      $scope.subCategory = subCategory;
+      $scope.showBySubCategory = true;
+      $scope.showAll = false;
+      console.log($scope.subCategory);
+    }
+
+    $scope.backToSubcategory = function() {
+      $scope.subCategory = null;
+      $scope.showBySubCategory = false;
+      $scope.showAll = false;
+    }
+
+    $scope.showAllProducts = function() {
+      $scope.subCategory = null;
+      $scope.showBySubCategory = false;
+      $scope.showAll = true;
+    }
 
     /**
      * Obtener los producto de una categoria
@@ -51,6 +72,7 @@ angular.module('starter')
             nombre:       valor.name,
             stock:        valor.stock ? 'Disponible' : 'Sin stock',
             idCategoria:  valor.categoriaId,
+            subCategoryId: valor.subCategoryId ? valor.subCategoryId : null,
             urlImg  :     UtilitiesService.encode(valor.urlImg)
           });
         });

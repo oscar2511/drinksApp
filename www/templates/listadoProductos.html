@@ -4,19 +4,34 @@
 
     <section ng-switch="categoria.nombre">
 
-      <section ng-show="!showProducts"  ng-switch-when="Vinos">
+      <section ng-show="!showBySubCategory && !showAll"  ng-switch-when="Vinos">
         <div class="list" ng-repeat="cellar in cellars">
-          <a href="#/app/producto/producto-detalle/{{producto}}" class="item item-thumbnail-left">
-            <h2> {{ cellar }}</h2>
+          <a ng-click=showProductsBySubCategory(cellar.id) class="item item-thumbnail-left">
+              {{cellar.name}}
           </a>
         </div>
       </section>
 
       <section ng-show="!showProducts" ng-switch-when="Cervezas">
-        Mostrar paises
+        <div class="list" ng-repeat="country in countries">
+          <a ng-click=showProductsBySubCategory(country.id) class="item item-thumbnail-left">
+            <h2> {{country.name }}</h2>
+          </a>
+        </div>
       </section>
 
-      <div class="list" ng-repeat="producto in productos">
+      <!-- *********   SHOW ALL PRODUCTS *********** -->
+      <div ng-if="showAll" class="list" ng-repeat="producto in productos ">
+        <a href="#/app/producto/producto-detalle/{{producto}}" class="item item-thumbnail-left">
+          <img class="list-prod" src={{decode(producto.urlImg)}}>
+          <h2> {{producto.nombre}}</h2>
+          <p>$ {{producto.precio}}</p>
+          <button class="button button-small button-clear icon-center ion-record button-dark"> {{producto.stock}}</button>
+        </a>
+      </div>
+
+      <!-- *********   SHOW BY SUBCATEGORY *********** -->
+      <div ng-if="showBySubCategory" class="list" ng-repeat="producto in productos | filter: {subCategoryId: subCategory} ">
         <a href="#/app/producto/producto-detalle/{{producto}}" class="item item-thumbnail-left">
           <img class="list-prod" src={{decode(producto.urlImg)}}>
           <h2> {{producto.nombre}}</h2>
@@ -25,7 +40,13 @@
         </a>
       </div>
     </section>
-
-
   </ion-content>
+  <div class="bar bar-footer bar-ligth">
+    <button ng-if="showBySubCategory || showAll" ng-click="backToSubcategory()" class="button button-block button-dark">
+        <i class="ion-chevron-left"> Atrás</i>
+    </button>
+    <button ng-if="!showBySubCategory && !showAll" ng-click="showAllProducts()" class="button button-block button-dark">
+        <i class="ion-eye"> Ver todos los productos</i>
+    </button>
+  </div>
 </ion-view>
