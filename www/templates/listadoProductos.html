@@ -1,5 +1,5 @@
 <ion-view view-title="">
-  <ion-content>
+  <ion-content style="margin-bottom: 50px;">
     <img class=" {{ categoria.urlImg }} sombra-categ" >
 
     <section ng-switch="categoria.nombre">
@@ -7,7 +7,11 @@
       <section ng-show="!showBySubCategory && !showAll"  ng-switch-when="Vinos">
         <div class="list" ng-repeat="cellar in cellars">
           <a ng-click=showProductsBySubCategory(cellar.id) class="item item-thumbnail-left">
-              {{cellar.name}}
+            <img src={{cellar.urlImg}}>
+            <br>
+            <h2>{{cellar.name}}</h2>
+            <p>Procedencia: Mendoza, Argentina</p>
+            <p></p>
           </a>
         </div>
       </section>
@@ -41,11 +45,11 @@
       </div>
     </section>
   </ion-content>
-  <div class="bar bar-footer bar-ligth">
+  <div class="bar bar-footer bar-dark" style="margin-bottom: 0px; margin-left:1px;">
     <button ng-if="showBySubCategory || showAll" ng-click="backToSubcategory()" class="button button-block button-dark">
         <i class="ion-chevron-left"> Atrás</i>
     </button>
-    <button ng-if="!showBySubCategory && !showAll" ng-click="showAllProducts()" class="button button-block button-dark">
+    <button ng-if="!showBySubCategory && !showAll" ng-click="showAllProducts()" class="button button-block button-clear">
         <i class="ion-eye"> Ver todos los productos</i>
     </button>
   </div>

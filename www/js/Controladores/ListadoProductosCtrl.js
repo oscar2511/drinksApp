@@ -25,7 +25,10 @@ angular.module('starter')
       switch (categoria.nombre) {
         case 'Vinos':
               //todo: obtener las bodegas por api
-              $scope.cellars = [{'id': 1, 'name': 'Bodega 1'}, {'id':2,'name': 'Bodega 2'}];
+              $scope.cellars = [
+                {'id': 1, 'name': 'Bodega Santa Helena', 'urlImg': '../img/img-subcategorias/santa-helena-logo.png'},
+                {'id':2,'name': 'Bodega San Huberto', 'urlImg': '../img/img-subcategorias/santa-helena-logo.png'}
+              ];
               break;
         case 'Cervezas':
               //todo: obtener los paises api
