@@ -27,7 +27,8 @@ angular.module('starter')
               //todo: obtener las bodegas por api
               $scope.cellars = [
                 {'id': 1, 'name': 'Bodega Santa Helena', 'urlImg': '../img/img-subcategorias/santa-helena-logo.png'},
-                {'id':2,'name': 'Bodega San Huberto', 'urlImg': '../img/img-subcategorias/santa-helena-logo.png'}
+                {'id':2,'name': 'Bodega Trapiche', 'urlImg': '../img/img-subcategorias/trapiche-logo.png'},
+                {'id':3,'name': 'Bodega Bianchi', 'urlImg': '../img/img-subcategorias/bianchi-logo.jpg'}
               ];
               break;
         case 'Cervezas':

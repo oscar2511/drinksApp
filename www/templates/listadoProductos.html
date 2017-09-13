@@ -5,8 +5,11 @@
     <section ng-switch="categoria.nombre">
 
       <section ng-show="!showBySubCategory && !showAll"  ng-switch-when="Vinos">
+        <div style="width: 100%; height: 60px; margin-bottom: 10px; background-color: #5F021F; margin-top: -25px; padding:14px;">
+          <h5 style="color: white;">Nuestras bodegas</h5>
+         </div>
         <div class="list" ng-repeat="cellar in cellars">
-          <a ng-click=showProductsBySubCategory(cellar.id) class="item item-thumbnail-left">
+          <a ng-click=showProductsBySubCategory(cellar) class="item item-thumbnail-left">
             <img src={{cellar.urlImg}}>
             <br>
             <h2>{{cellar.name}}</h2>
@@ -35,7 +38,11 @@
       </div>
 
       <!-- *********   SHOW BY SUBCATEGORY *********** -->
-      <div ng-if="showBySubCategory" class="list" ng-repeat="producto in productos | filter: {subCategoryId: subCategory} ">
+      <div ng-if="showBySubCategory" style="width: 100%; height: 60px; margin-bottom: 10px; background-color: #5F021F; margin-top: -25px; padding:14px;">
+        <h5 style="color: white;"> {{subCategory.name}}</h5>
+      </div>
+      <p ng-if="productos.length < 1 && showBySubCategory">No se encontraron productos.</p>
+      <div ng-if="showBySubCategory" class="list" ng-repeat="producto in productos | filter: {subCategoryId: subCategory.id} ">
         <a href="#/app/producto/producto-detalle/{{producto}}" class="item item-thumbnail-left">
           <img class="list-prod" src={{decode(producto.urlImg)}}>
           <h2> {{producto.nombre}}</h2>
@@ -45,12 +52,12 @@
       </div>
     </section>
   </ion-content>
-  <div class="bar bar-footer bar-dark" style="margin-bottom: 0px; margin-left:1px;">
+  <div class="bar bar-footer bar-dark" style="padding-top: 0!important;">
     <button ng-if="showBySubCategory || showAll" ng-click="backToSubcategory()" class="button button-block button-dark">
         <i class="ion-chevron-left"> Atrás</i>
     </button>
     <button ng-if="!showBySubCategory && !showAll" ng-click="showAllProducts()" class="button button-block button-clear">
-        <i class="ion-eye"> Ver todos los productos</i>
+        Ver todos los productos
     </button>
   </div>
 </ion-view>
