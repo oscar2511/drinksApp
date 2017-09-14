@@ -5,7 +5,7 @@
     <section ng-switch="categoria.nombre">
 
       <section ng-show="!showBySubCategory && !showAll"  ng-switch-when="Vinos">
-        <div style="width: 100%; height: 60px; margin-bottom: 10px; background-color: #5F021F; margin-top: -25px; padding:14px;">
+        <div class="subcategory-header">
           <h5 style="color: white;">Nuestras bodegas</h5>
          </div>
         <div class="list" ng-repeat="cellar in cellars">
@@ -19,15 +19,25 @@
         </div>
       </section>
 
-      <section ng-show="!showProducts" ng-switch-when="Cervezas">
-        <div class="list" ng-repeat="country in countries">
-          <a ng-click=showProductsBySubCategory(country.id) class="item item-thumbnail-left">
-            <h2> {{country.name }}</h2>
+      <section ng-show="!showBySubCategory && !showAll" ng-switch-when="Cervezas">
+        <div class="subcategory-header">
+          <h5 style="color: white;">Selecciona el país</h5>
+        </div>
+        <div class="list" ng-repeat="subcategory in countries">
+          <a ng-click=showProductsBySubCategory(subcategory) class="item item-thumbnail-left">
+            <img src={{subcategory.urlImg}}>
+            <br>
+            <h2>País</h2>
+            <p>{{subcategory.name}}</p>
+            <p></p>
           </a>
         </div>
       </section>
 
       <!-- *********   SHOW ALL PRODUCTS *********** -->
+      <div ng-if="showAll" class="subcategory-header">
+        <h5 style="color: white;">Todos los productos</h5>
+      </div>
       <div ng-if="showAll" class="list" ng-repeat="producto in productos ">
         <a href="#/app/producto/producto-detalle/{{producto}}" class="item item-thumbnail-left">
           <img class="list-prod" src={{decode(producto.urlImg)}}>
@@ -38,10 +48,9 @@
       </div>
 
       <!-- *********   SHOW BY SUBCATEGORY *********** -->
-      <div ng-if="showBySubCategory" style="width: 100%; height: 60px; margin-bottom: 10px; background-color: #5F021F; margin-top: -25px; padding:14px;">
+      <div ng-if="showBySubCategory" class="subcategory-header">
         <h5 style="color: white;"> {{subCategory.name}}</h5>
       </div>
-      <p ng-if="productos.length < 1 && showBySubCategory">No se encontraron productos.</p>
       <div ng-if="showBySubCategory" class="list" ng-repeat="producto in productos | filter: {subCategoryId: subCategory.id} ">
         <a href="#/app/producto/producto-detalle/{{producto}}" class="item item-thumbnail-left">
           <img class="list-prod" src={{decode(producto.urlImg)}}>
@@ -52,12 +61,12 @@
       </div>
     </section>
   </ion-content>
-  <div class="bar bar-footer bar-dark" style="padding-top: 0!important;">
+  <div class="bar bar-footer bar-light" style="padding-top: 0!important;">
     <button ng-if="showBySubCategory || showAll" ng-click="backToSubcategory()" class="button button-block button-dark">
         <i class="ion-chevron-left"> Atrás</i>
     </button>
-    <button ng-if="!showBySubCategory && !showAll" ng-click="showAllProducts()" class="button button-block button-clear">
-        Ver todos los productos
+    <button ng-if="!showBySubCategory && !showAll" ng-click="showAllProducts()" class="button  button-outline button-dark">
+        Ver todos
     </button>
   </div>
 </ion-view>

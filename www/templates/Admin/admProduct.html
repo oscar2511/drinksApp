@@ -15,12 +15,13 @@
     </div>
 
 
+
+
     <section ng-show = "shouldShowCategories">
-      <div class="item item-divider" ng-show = "shouldShowCategories">
-        <font color="#696969">
+      <div class="subcategory-header" style="margin-top: -20px; padding-top: -10px!important;" ng-show = "shouldShowCategories">
+        <h5 style="color: white">
           <i class="ion-clipboard"></i>
-          Seleccione categoría
-        </font>
+          Seleccione categoría</h5>
       </div>
       <br>
       <div class="list" ng-repeat="category in categories">
@@ -33,6 +34,11 @@
     </section>
 
     <section ng-show ="shouldShowProducts"><!-- show products -->
+      <div class="subcategory-header" style="margin-top: -20px; padding-top: -10px!important;">
+        <h5 style="color: white">
+          <i class="ion-clipboard"></i>
+          Seleccione categoría</h5>
+      </div>
       <div class="row">
         <div class="col col-25">
           <button ng-click="toCategories()" class="button icon-left ion-ios-arrow-left button-full button-default">

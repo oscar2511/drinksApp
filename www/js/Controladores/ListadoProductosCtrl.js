@@ -33,7 +33,11 @@ angular.module('starter')
               break;
         case 'Cervezas':
               //todo: obtener los paises api
-              $scope.paises = [{'id':3, 'name': "Holanda"}, {'id':4, 'name': "Alemania"} ];
+              $scope.countries = [
+                {'id':4, 'name': "Holanda", 'urlImg': '../img/img-subcategorias/Bandera-Holanda.jpg'},
+                {'id':5, 'name': "Alemania", 'urlImg': '../img/img-subcategorias/alemania.png'},
+                {'id':6, 'name': "Argentina", 'urlImg': '../img/img-subcategorias/bandera-argentina.jpg'}
+              ];
               break;
       }
     };
@@ -44,19 +48,19 @@ angular.module('starter')
       $scope.showBySubCategory = true;
       $scope.showAll = false;
       console.log($scope.subCategory);
-    }
+    };
 
     $scope.backToSubcategory = function() {
       $scope.subCategory = null;
       $scope.showBySubCategory = false;
       $scope.showAll = false;
-    }
+    };
 
     $scope.showAllProducts = function() {
       $scope.subCategory = null;
       $scope.showBySubCategory = false;
       $scope.showAll = true;
-    }
+    };
 
     /**
      * Obtener los producto de una categoria
