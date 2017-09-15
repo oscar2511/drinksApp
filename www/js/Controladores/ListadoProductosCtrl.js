@@ -47,7 +47,6 @@ angular.module('starter')
       $scope.subCategory = subCategory;
       $scope.showBySubCategory = true;
       $scope.showAll = false;
-      console.log($scope.subCategory);
     };
 
     $scope.backToSubcategory = function() {
