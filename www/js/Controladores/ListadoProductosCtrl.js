@@ -24,19 +24,19 @@ angular.module('starter')
     var getSubcategory = function() {
       switch (categoria.nombre) {
         case 'Vinos':
-              //todo: obtener las bodegas por api
+              //todo: obtener las bodegas por api https://s3-sa-east-1.amazonaws.com/cavaonline-app/subcategories/bianchi-logo.jpg
               $scope.cellars = [
-                {'id': 1, 'name': 'Bodega Santa Helena', 'urlImg': '../img/img-subcategorias/santa-helena-logo.png'},
-                {'id':2,'name': 'Bodega Trapiche', 'urlImg': '../img/img-subcategorias/trapiche-logo.png'},
-                {'id':3,'name': 'Bodega Bianchi', 'urlImg': '../img/img-subcategorias/bianchi-logo.jpg'}
+                {'id': 1, 'name': 'Bodega Santa Helena', 'urlImg': 'https://s3-sa-east-1.amazonaws.com/cavaonline-app/subcategories/santa-helena-logo.png'},
+                {'id':2,'name': 'Bodega Trapiche', 'urlImg': 'https://s3-sa-east-1.amazonaws.com/cavaonline-app/subcategories/trapiche-logo.png'},
+                {'id':3,'name': 'Bodega Bianchi', 'urlImg': 'https://s3-sa-east-1.amazonaws.com/cavaonline-app/subcategories/bianchi-logo.jpg'}
               ];
               break;
         case 'Cervezas':
               //todo: obtener los paises api
               $scope.countries = [
-                {'id':4, 'name': "Holanda", 'urlImg': '../img/img-subcategorias/Bandera-Holanda.jpg'},
-                {'id':5, 'name': "Alemania", 'urlImg': '../img/img-subcategorias/alemania.png'},
-                {'id':6, 'name': "Argentina", 'urlImg': '../img/img-subcategorias/bandera-argentina.jpg'}
+                {'id':4, 'name': "Holanda", 'urlImg': 'https://s3-sa-east-1.amazonaws.com/cavaonline-app/subcategories/Bandera-Holanda.jpg'},
+                {'id':5, 'name': "Alemania", 'urlImg': 'https://s3-sa-east-1.amazonaws.com/cavaonline-app/subcategories/alemania.png'},
+                {'id':6, 'name': "Argentina", 'urlImg': 'https://s3-sa-east-1.amazonaws.com/cavaonline-app/subcategories/bandera-argentina.jpg'}
               ];
               break;
       }
