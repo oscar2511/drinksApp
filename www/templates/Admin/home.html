@@ -16,6 +16,9 @@
     </ion-refresher>
     <img class="img-admin-logo">
     </br></br>
+    <div class="subcategory-header">
+      <h5 style="color: white"> Listado de pedidos</h5>
+    </div>
 
     <div class="item">
       <table align="center" style="width: 100%;">
@@ -28,12 +31,7 @@
         </tr>
       </table>
     </div>
-    <div class="item item-divider">
-      <font color="#696969">
-        <i class="ion-clipboard"></i>
-        Listado de pedidos
-      </font>
-    </div>
+
     <div class="list" ng-repeat="pedido in pedidos">
       <a class="item" href="#/app/admin/pedido/{{pedido}}">
         <div class="row">

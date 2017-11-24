@@ -32,7 +32,7 @@ angular.module('starter')
     );
 
     /**
-     * Ejecuta todas las funciones de inicializacion (resuelve todas las promesas)
+     * Ejecuta todas las funciones de inicializacion
      * @returns {*}
      */
     $scope.inicializar = function() {

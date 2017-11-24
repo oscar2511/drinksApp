@@ -160,7 +160,6 @@ angular.module('starter')
 
 $scope.verUbicacion = function() {
     verUbicacion();
-    console.log($scope.pedido);
 };
 
     //*******************************************************************************************************************
