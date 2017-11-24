@@ -1,15 +1,72 @@
 <ion-view view-title="">
-  <ion-content>
-    <img class=" {{ catUrlImg }} sombra-categ" >
-    <div class="list" ng-repeat="producto in productos">
-      <a href="#/app/producto/producto-detalle/{{producto}}" class="item item-thumbnail-left">
-        <!--<img class="list-prod" ion-img-cache ng-src="http://23.94.249.163/appDrinks-dev/img/productos/{{producto.urlImg}}">-->
-        <img class="list-prod" src={{decode(producto.urlImg)}}>
-        <h2> {{producto.nombre}}</h2>
-        <p>$ {{producto.precio}}</p>
-        <button class="button button-small button-clear icon-center ion-record button-dark"> {{producto.stock}}</button>
-      </a>
-    </div>
+  <ion-content style="margin-bottom: 50px;">
+    <img class=" {{ categoria.urlImg }} sombra-categ" >
 
+    <section ng-switch="categoria.nombre">
+
+      <section ng-show="!showBySubCategory && !showAll"  ng-switch-when="Vinos">
+        <div class="subcategory-header">
+          <h5 style="color: white;">Nuestras bodegas</h5>
+         </div>
+        <div class="list" ng-repeat="cellar in cellars">
+          <a ng-click=showProductsBySubCategory(cellar) class="item item-thumbnail-left">
+            <img src={{cellar.urlImg}}>
+            <br>
+            <h2>{{cellar.name}}</h2>
+            <p>Procedencia: Mendoza, Argentina</p>
+            <p></p>
+          </a>
+        </div>
+      </section>
+
+      <section ng-show="!showBySubCategory && !showAll" ng-switch-when="Cervezas">
+        <div class="subcategory-header">
+          <h5 style="color: white;">Selecciona el país</h5>
+        </div>
+        <div class="list" ng-repeat="subcategory in countries">
+          <a ng-click=showProductsBySubCategory(subcategory) class="item item-thumbnail-left">
+            <img src={{subcategory.urlImg}}>
+            <br>
+            <h2>País</h2>
+            <p>{{subcategory.name}}</p>
+            <p></p>
+          </a>
+        </div>
+      </section>
+
+      <!-- *********   SHOW ALL PRODUCTS *********** -->
+      <div ng-if="showAll" class="subcategory-header">
+        <h5 style="color: white;">Todos los productos</h5>
+      </div>
+      <div ng-if="showAll" class="list" ng-repeat="producto in productos ">
+        <a href="#/app/producto/producto-detalle/{{producto}}" class="item item-thumbnail-left">
+          <img class="list-prod" src={{decode(producto.urlImg)}}>
+          <h2> {{producto.nombre}}</h2>
+          <p>$ {{producto.precio}}</p>
+          <button class="button button-small button-clear icon-center ion-record button-dark"> {{producto.stock}}</button>
+        </a>
+      </div>
+
+      <!-- *********   SHOW BY SUBCATEGORY *********** -->
+      <div ng-if="showBySubCategory" class="subcategory-header">
+        <h5 style="color: white;"> {{subCategory.name}}</h5>
+      </div>
+      <div ng-if="showBySubCategory" class="list" ng-repeat="producto in productos | filter: {subCategoryId: subCategory.id} ">
+        <a href="#/app/producto/producto-detalle/{{producto}}" class="item item-thumbnail-left">
+          <img class="list-prod" src={{decode(producto.urlImg)}}>
+          <h2> {{producto.nombre}}</h2>
+          <p>$ {{producto.precio}}</p>
+          <button class="button button-small button-clear icon-center ion-record button-dark"> {{producto.stock}}</button>
+        </a>
+      </div>
+    </section>
   </ion-content>
+  <div class="bar bar-footer bar-light" style="padding-top: 0!important;">
+    <button ng-if="showBySubCategory || showAll" ng-click="backToSubcategory()" class="button button-block button-dark">
+        <i class="ion-chevron-left"> Atrás</i>
+    </button>
+    <button ng-if="!showBySubCategory && !showAll" ng-click="showAllProducts()" class="button  button-outline button-dark">
+        Ver todos
+    </button>
+  </div>
 </ion-view>
